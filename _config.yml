@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "      "
+title                    : "a"
 title_separator          : "-"
 name                     : &name "Rubens Longhi"
 description              : &description "personal description"
@@ -99,10 +99,10 @@ author:
   github           : "rubenslonghi"
   google_plus      :
   keybase          :
-  instagram        : "https://www.instagram.com/rubenslonghi/"
+  instagram        : "rubenslonghi"
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         : "https://www.linkedin.com/in/rubens-longhi-8a967a64/"
+  linkedin         : "rubens-longhi-8a967a64/"
   orcid            : 
   pinterest        :
   soundcloud       :
@@ -113,7 +113,7 @@ author:
   vine             :
   weibo            :
   xing             :
-  youtube          : "https://www.youtube.com/channel/UCb37uqRb37jtzzb9VbQCzeA"
+  youtube          : "UCb37uqRb37jtzzb9VbQCzeA"
   wikipedia        :
 
 
