@@ -20,8 +20,8 @@ redirect_from:
 </head>
 <body>
 <p>
-  When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
-  \[x = {-b \pm \sqrt{b^2-4ac} \over 2a}.\]
+  I truly think the following is the most beautiful equation of all mathematics.
+  \[\int_M \mathrm{d}\omega=\int_{\partial M}\omega.\]
 </p>
 </body>
 </html>
