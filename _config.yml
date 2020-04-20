@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Rubens Longhi personal Webpage"
+title                    :
 title_separator          : "-"
 name                     : &name "Rubens Longhi"
 description              : &description "personal description"
