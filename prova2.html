@@ -257,6 +257,7 @@
         headers: {
             'Content-Type': 'application/json',
         },
+	mode: 'no-cors',  // Disabilita CORS
         body: JSON.stringify(results),
     })
     .then(response => response.text())
