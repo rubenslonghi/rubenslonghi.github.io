@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test d'ingresso alla classe seconda</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .quiz-container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 28px;
+            color: #4a4a4a;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+            accent-color: #007bff; /* For modern browser support */
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #results {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #4a4a4a;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['\\(','\\)'], ['$','$']],
+                displayMath: [['\\[','\\]'], ['$$','$$']],
+                processEscapes: true
+            },
+            TeX: {
+                Macros: {
+                    noSpaceComma: "\\,",
+                }
+            },
+            "HTML-CSS": {
+                linebreaks: { automatic: true }
+            },
+            messageStyle: "none"
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Form per il nome e cognome -->
+        <div id="user-info">
+            <h1>Test d'ingresso alla classe seconda</h1>
+            <form id="info-form">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="surname">Cognome:</label>
+                <input type="text" id="surname" name="surname" required><br><br>
+                <button type="button" onclick="startQuiz()">Inizia il quiz</button>
+            </form>
+        </div>
+
+        <!-- Quiz -->
+        <div id="quiz-section" class="hidden">
+            <div id="question" class="question">Domanda sarà qui</div>
+            <ul id="options" class="options">
+                <!-- Opzioni del quiz -->
+            </ul>
+            <button onclick="submitAnswer()">Prossima</button>
+            <button onclick="skipQuestion()">Salta</button>
+            <div id="results"></div>
+        </div>
+    </div>
+    <script>
+        const quiz = [
+        	{ question: 'Converti \\( 5, 6 \\, \\text{km} \\) (chilometri) in \\( \\text{nm} \\) (nanometri). Qual è la risposta in notazione scientifica?', 
+              options: ['\\( 5,6 \\cdot 10^6 \\, \\text{nm} \\)', '\\( 5,6 \\cdot 10^{12} \\, \\text{nm} \\)', '\\( 5,6 \\cdot 10^9 \\, \\text{nm} \\)', '\\( 5,6 \\cdot 10^{-12} \\, \\text{nm} \\)'], 
+              correct: 1 
+            },
+            { question: 'Quale delle seguenti relazioni rappresenta una proporzionalità diretta?', 
+              options: ['\\(y = kx^2\\)', '\\(y = kx\\)', '\\(y = \\dfrac{k}{x}\\)', '\\(y = k\\)'], 
+              correct: 1 
+            },
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let wrongAnswers = [];
+        let userName = '';
+        let userSurname = '';
+
+        function startQuiz() {
+            userName = document.getElementById('name').value;
+            userSurname = document.getElementById('surname').value;
+            
+            if (!userName || !userSurname) {
+                alert('Inserisci nome e cognome!');
+                return;
+            }
+
+            // Mostra il quiz e nasconde il modulo di input
+            document.getElementById('user-info').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            // Carica la domanda corrente
+            document.getElementById('question').innerHTML = quiz[currentQuestion].question;
+            // Renderizza la formula LaTeX se presente
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "question"]);
+
+            const options = document.getElementById('options');
+            options.innerHTML = '';
+            quiz[currentQuestion].options.forEach((option, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `<input type="radio" name="option" value="${index}"> ${option}`;
+                options.appendChild(li);
+            });
+            
+            // Renderizza la formula LaTeX nelle opzioni
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "options"]);
+        }
+
+        function submitAnswer() {
+            // Controlla se è stata selezionata un'opzione
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (!selectedOption) {
+                alert('Seleziona una risposta!');
+                return;
+            }
+
+            const answer = parseInt(selectedOption.value);
+
+            // Controlla se la risposta è corretta
+            if (answer === quiz[currentQuestion].correct) {
+                score++;
+            } else {
+                wrongAnswers.push({
+                    question: quiz[currentQuestion].question,
+                    selected: quiz[currentQuestion].options[answer],
+                    correct: quiz[currentQuestion].options[quiz[currentQuestion].correct],
+                });
+            }
+
+            currentQuestion++;
+
+            // Se ci sono altre domande, caricale, altrimenti mostra i risultati
+            if (currentQuestion < quiz.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function skipQuestion() {
+            // Considera la domanda come errata se viene saltata
+            wrongAnswers.push({
+                question: quiz[currentQuestion].question,
+                selected: 'Nessuna risposta',
+                correct: quiz[currentQuestion].options[quiz[currentQuestion].correct],
+            });
+
+            currentQuestion++;
+
+            // Se ci sono altre domande, caricale, altrimenti mostra i risultati
+            if (currentQuestion < quiz.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            // Calcola la percentuale di successo
+            const percentage = (score / quiz.length * 100).toFixed(2);
+
+            // Mostra il punteggio finale e la percentuale
+            document.getElementById('question').innerHTML = 'Quiz completato!';
+            document.getElementById('options').innerHTML = '';
+            document.getElementById('results').innerHTML = `
+                <p>Il tuo punteggio è: ${score} su ${quiz.length} (${percentage}%)</p>
+            `;
+
+            // Mostra le risposte sbagliate, se ce ne sono
+            if (wrongAnswers.length > 0) {
+                let wrongAnswersText = '<h3>Risposte errate:</h3><ul>';
+                wrongAnswers.forEach((wrongAnswer) => {
+                    wrongAnswersText += `<li><strong>Domanda:</strong> ${wrongAnswer.question}<br><strong>La tua risposta:</strong> ${wrongAnswer.selected}<br><strong>Risposta corretta:</strong> ${wrongAnswer.correct}</li><br>`;
+                });
+                wrongAnswersText += '</ul>';
+                document.getElementById('results').innerHTML += wrongAnswersText;
+            }
+
+            // Forza il rendering di tutto il contenuto
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "results"]);
+
+            // Salva i risultati
+            saveResults();
+        }
+       function saveResults() {
+    	const results = {
+        name: userName,
+        surname: userSurname,
+        score: score,
+        wrongAnswers: wrongAnswers,
+    	};
+
+    	fetch('https://script.google.com/macros/s/AKfycbxR1z1oXVvOAn_8Xs05B6vfBqLrHE6Grv2yl17nKkpqJ_643ma2uGaRbymRvNwzpqPN/exec', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(results),
+    })
+    .then(response => response.text())
+    .then(message => {
+        alert(message); // Mostra un messaggio di conferma
+    })
+    .catch(error => {
+        console.error('Errore:', error);
+    });
+	}
+
+    </script>
+</body>
+</html>
+
