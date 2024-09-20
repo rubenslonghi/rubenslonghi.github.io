@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test d'ingresso alla classe seconda</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .quiz-container {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-size: 28px;
+            color: #4a4a4a;
+            margin-bottom: 20px;
+        }
+        .question {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .options {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options li {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+        }
+        .options input[type="radio"] {
+            margin-right: 10px;
+            accent-color: #007bff; /* For modern browser support */
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #results {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #4a4a4a;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [['\\(','\\)'], ['$','$']],
+                displayMath: [['\\[','\\]'], ['$$','$$']],
+                processEscapes: true
+            },
+            TeX: {
+                Macros: {
+                    noSpaceComma: "\\,",
+                }
+            },
+            "HTML-CSS": {
+                linebreaks: { automatic: true }
+            },
+            messageStyle: "none"
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+</head>
+<body>
+    <div class="quiz-container">
+        <!-- Form per il nome e cognome -->
+        <div id="user-info">
+            <h1>Test d'ingresso alla classe seconda</h1>
+            <form id="info-form">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="surname">Cognome:</label>
+                <input type="text" id="surname" name="surname" required><br><br>
+                <button type="button" onclick="startQuiz()">Inizia il quiz</button>
+            </form>
+        </div>
+
+        <!-- Quiz -->
+        <div id="quiz-section" class="hidden">
+            <div id="question" class="question">Domanda sarà qui</div>
+            <ul id="options" class="options">
+                <!-- Opzioni del quiz -->
+            </ul>
+            <button onclick="submitAnswer()">Prossima</button>
+            <button onclick="skipQuestion()">Salta</button>
+            <button onclick="goBack()">Precedente</button>
+            <div id="results"></div>
+        </div>
+
+        <!-- Schermata finale -->
+        <div id="final-screen" class="hidden">
+            <div id="final-results"></div>
+            <button onclick="reloadQuiz()">Ricomincia il quiz</button>
+        </div>
+    </div>
+    <script>
+        const quiz = [
+            // Proporzionalità diretta
+{ question: 'Quale delle seguenti relazioni rappresenta una proporzionalità diretta?', 
+	options: ['\\(y = kx^2\\)', '\\(y = kx\\)', '\\(y = \\dfrac{k}{x}\\)', '\\(y = k\\)'], 
+	correct: 1 
+},
+// Percentuali
+{ question: 'Se il prezzo di un prodotto aumenta del 20%, qual è il nuovo prezzo se quello originale era di 50€?', 
+	options: ['60€', '55€', '70€', '65€'], 
+	correct: 0 
+},
+// Potenze di 10
+{ question: 'Quale delle seguenti rappresenta \\(10^3\\)?', 
+	options: ['1000', '100', '10', '0,1'], 
+	correct: 0 
+},
+// Equivalenze
+{ question: 'Converti 5000 cm in metri.', 
+	options: ['0,5 metri', '50 metri', '500 metri', '5 metri'], 
+	correct: 2 
+},
+{ question: 'Converti \\( 5, 6 \\, \\text{km} \\) (chilometri) in \\( \\text{nm} \\) (nanometri). Qual è la risposta in notazione scientifica?', 
+	options: ['\\( 5,6 \\cdot 10^6 \\, \\text{nm} \\)', '\\( 5,6 \\cdot 10^{12} \\, \\text{nm} \\)', '\\( 5,6 \\cdot 10^9 \\, \\text{nm} \\)', '\\( 5,6 \\cdot 10^{-12} \\, \\text{nm} \\)'], 
+	correct: 1 
+},
+// Equazioni e formule inverse
+{ question: 'Risolvi l\'equazione: \\(2x + 5 = 15\\).', 
+	options: ['x = 10', 'x = 0', 'x = -5', 'x = 5'], 
+	correct: 3 
+},
+// Grandezze fisiche e il Sistema Internazionale
+{ question: 'Quale delle seguenti grandezze è fondamentale nel Sistema Internazionale?', 
+	options: ['La massa', 'La velocità', 'La densità', 'La forza'], 
+	correct: 0 
+},
+{ question: 'La densità di un oggetto è definita come:', 
+	options: ['massa \\(\\times\\) volume', 'massa / volume', 'massa + volume', 'volume / massa'], 
+	correct: 1 
+},
+{ question: 'Qual è la densità di un oggetto con una massa di \\( 0,2 \\, \\text{kg} \\) e un volume di \\( 50 \\, \\text{cm}^3 \\)?', 
+	options: ['0,04 \\,  \\(\\text{g/cm}^3\\)', '4 \\,  \\(\\text{g/cm}^3\\)', '400 \\,  \\(\\text{g/cm}^3\\)', '40 \\,  \\(\\text{g/cm}^3\\)'], 
+	correct: 1 
+},
+// Strumenti di misura e incertezze
+{ question: 'Quale delle seguenti affermazioni è vera riguardo l\'incertezza di misura?', 
+	options: ['Le misure perfette esistono', 'Gli errori casuali possono essere evitati', 'Ogni misura presenta un’incertezza', 'Gli errori sistematici non influiscono sui risultati'], 
+	correct: 02
+},
+{ question: 'Quale tra questi è il modo corretto di esprimere il risultato di una misura con incertezza?', 
+	options: ['\\(x = 12,5 \\, \\pm \\, 0,1\\)', 'x = 12,5', '\\(x = 12,5 \\, \\pm \\, 1\\)', '\\(x = 12,5 \\, \\pm \\, 0,5\\)'], 
+	correct: 0 
+},
+// Grandezze scalari e vettoriali
+{ question: 'Quale delle seguenti grandezze è vettoriale?', 
+	options: ['Tempo', 'Massa', 'Forza', 'Lunghezza'], 
+	correct: 2 
+},
+// Trigonometria
+{ question: 'In un triangolo rettangolo, come si calcola il seno di un angolo \\(\\theta\\)?', 
+	options: ['Cateto opposto / Ipotenusa', 'Cateto adiacente / Ipotenusa', 'Ipotenusa / Cateto opposto', 'Cateto adiacente / Cateto opposto'], 
+	correct: 0 
+},
+{ question: 'Se un vettore ha modulo 5 e angolo di 30°, qual è la sua componente orizzontale?', 
+	options: ['5 \\(\\cos(30°)\\)', '5 \\(\\sin(30°)\\)', '5 \\(\\tan(30°)\\)', '5'], 
+	correct: 0 
+},
+{ question: 'Qual è la forza-peso di un oggetto con una massa di \\( 5 \\, \\text{kg} \\)?', 
+	options: ['49 \\, \\(\\text{N}\\)', '9,8 \\, \\(\\text{N}\\)', '50 \\, \\(\\text{N}\\)', '45 \\, \\(\\text{N}\\)'], 
+	correct: 0 
+},
+// Forze e dinamometri
+{ question: 'Quale delle seguenti affermazioni è vera sulla forza-peso?', 
+	options: ['È il prodotto della massa per l’accelerazione di gravità', 'È indipendente dalla massa', 'Dipende dalla velocità dell’oggetto', 'È una forza di attrito'], 
+	correct: 0 
+},
+{ question: 'Un dinamometro misura:', 
+	options: ['La lunghezza', 'Il tempo', 'La massa', 'La forza'], 
+	correct: 2 
+},
+{ question: 'Detti \\( \\mu_s \\) il coefficiente di attrito statico e \\( F_\\perp \\) la forza perpendicolare a una superficie, se \\( \\mu_s = 0,4 \\) e la forza perpendicolare è \\( 200 \\, \\(\\text{N}\\) \\), qual è la forza di attrito radente statico?', 
+	options: ['40 \\, \\(\\text{N}\\)', '80 \\, \\(\\text{N}\\)', '20 \\, \\(\\text{N}\\)', '100 \\, \\(\\text{N}\\)'], 
+	correct: 1
+},
+{ question: 'Detto \\( \\mu_d \\) il coefficiente di attrito dinamico e \\( F_\\perp \\) è la forza perpendicolare, se \\( \\mu_d = 0,3 \\) e \\( F_\\perp = 100 \\, \\(\\text{N}\\) \\), qual è la forza di attrito radente dinamico?', 
+	options: ['30 \\, \\(\\text{N}\\)', '10 \\, \\(\\text{N}\\)', '70 \\, \\(\\text{N}\\)', '50 \\, \\(\\text{N}\\)'], 
+	correct: 0 
+},
+// Equilibrio e piano inclinato
+{ question: 'La forza-peso perpendicolare su un piano inclinato agisce:', 
+	options: ['Parallelamente alla superficie del piano', 'In direzione orizzontale', 'In direzione opposta alla gravità', 'Perpendicolarmente alla superficie del piano'], 
+	correct: 3 
+},
+// Forza elastica (legge di Hooke)
+{ question: 'Chiamiamo \\( k \\) la costante elastica della molla e \\( \\Delta x \\) l\'allungamento o la compressione rispetto alla posizione di riposo. Se \\( k = 150 \\, \\text{N/m} \\) e la molla è allungata di \\( 0,2 \\, \\text{m} \\), qual è la forza elastica?', 
+	options: ['30 \\, \\(\\text{N}\\)', '15 \\, \\(\\text{N}\\)', '50 \\, \\(\\text{N}\\)', '75 \\, \\(\\text{N}\\)'], 
+	correct: 0 
+},
+// Forza risultante
+{ question: 'Se due forze \\( F_1 = 50 \\, \\(\\text{N}\\) \\) e \\( F_2 = 30 \\, \\(\\text{N}\\) \\) agiscono nella stessa direzione su un oggetto, quale può essere l\'intensità della forza risultante?', 
+	options: ['40 \\, \\(\\text{N}\\)', '50 \\, \\(\\text{N}\\)','80 \\, \\(\\text{N}\\)', '30 \\, \\(\\text{N}\\)'], 
+	correct: 02
+},
+// Piano inclinato
+{ question: 'Se un oggetto di massa \\( 10 \\, \\text{kg} \\) è su un piano inclinato con un angolo di \\( 30° \\), qual è l\'intensità della forza peso parallela al piano?', 
+	options: ['98 \\, \\(\\text{N}\\)', '100 \\, \\(\\text{N}\\)', '25 \\, \\(\\text{N}\\)', '49 \\, \\(\\text{N}\\)'], 
+	correct: 3
+},
+// Momento di una forza
+{ question: 'Il momento di una forza rispetto a un punto è dato da:', 
+	options: ['Forza \\(\\times\\) distanza', 'Massa \\(\\times\\) accelerazione', 'Forza \\(\\times\\) braccio', 'Massa \\(\\times\\) braccio'], 
+	correct: 0 
+},
+// Errori e incertezze
+{ question: 'Gli errori sistematici in una misura sono:', 
+	options: ['Errori casuali', 'Errori che si ripetono con costanza', 'Errori dovuti a strumenti difettosi', 'Errori che si verificano una volta sola'], 
+	correct: 1 
+},
+// Le leve
+//{ question: 'Una leva di primo genere ha il fulcro:', 
+//	options: ['Tra la forza applicata e il carico', 'All\'estremità della leva', 'Vicino al carico', 'Non ha un fulcro'], 
+//	correct: 0 
+//}
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let wrongAnswers = [];
+        let userName = '';
+        let userSurname = '';
+        let selectedAnswers = Array(quiz.length).fill(null); // Inizializza l'array con null
+
+        function startQuiz() {
+            userName = document.getElementById('name').value;
+            userSurname = document.getElementById('surname').value;
+            
+            if (!userName || !userSurname) {
+                alert('Inserisci nome e cognome!');
+                return;
+            }
+
+            // Mostra il quiz e nasconde il modulo di input
+            document.getElementById('user-info').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
+
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            // Carica la domanda corrente
+            document.getElementById('question').innerHTML = quiz[currentQuestion].question;
+            // Renderizza la formula LaTeX se presente
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "question"]);
+
+            const options = document.getElementById('options');
+            options.innerHTML = '';
+            quiz[currentQuestion].options.forEach((option, index) => {
+                const checked = selectedAnswers[currentQuestion] === index ? 'checked' : '';
+                const li = document.createElement('li');
+                li.innerHTML = `<input type="radio" name="option" value="${index}" ${checked}> ${option}`;
+                options.appendChild(li);
+            });
+            
+            // Renderizza la formula LaTeX nelle opzioni
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "options"]);
+        }
+
+        function submitAnswer() {
+            const selectedOption = document.querySelector('input[name="option"]:checked');
+            if (!selectedOption) {
+                alert('Seleziona una risposta!');
+                return;
+            }
+
+            const answer = parseInt(selectedOption.value);
+            selectedAnswers[currentQuestion] = answer; // Memorizza la risposta selezionata
+
+            // Reset punteggio
+            score = 0; 
+            wrongAnswers = [];
+
+            // Controlla le risposte
+            selectedAnswers.forEach((ans, index) => {
+                if (ans === quiz[index].correct) {
+                    score++;
+                } else {
+                    wrongAnswers.push({
+                        question: quiz[index].question,
+                        selected: quiz[index].options[ans],
+                        correct: quiz[index].options[quiz[index].correct],
+                    });
+                }
+            });
+
+            currentQuestion++;
+
+            // Se ci sono altre domande, caricale, altrimenti mostra i risultati
+            if (currentQuestion < quiz.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function goBack() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function skipQuestion() {
+            // Considera la domanda come errata se viene saltata
+            wrongAnswers.push({
+                question: quiz[currentQuestion].question,
+                selected: 'Nessuna risposta',
+                correct: quiz[currentQuestion].options[quiz[currentQuestion].correct],
+            });
+
+            currentQuestion++;
+
+            // Se ci sono altre domande, caricale, altrimenti mostra i risultati
+            if (currentQuestion < quiz.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            // Calcola la percentuale di successo
+            const percentage = (score / quiz.length * 100).toFixed(2);
+
+            // Mostra il punteggio finale e la percentuale
+            document.getElementById('quiz-section').classList.add('hidden');
+            document.getElementById('final-screen').classList.remove('hidden');
+            document.getElementById('final-results').innerHTML = `
+                <p>Il tuo punteggio è: ${score} su ${quiz.length} (${percentage}%)</p>
+            `;
+
+            // Mostra le risposte sbagliate, se ce ne sono
+            if (wrongAnswers.length > 0) {
+                let wrongAnswersText = '<h3>Risposte errate:</h3><ul>';
+                wrongAnswers.forEach((wrongAnswer) => {
+                    wrongAnswersText += `<li><strong>Domanda:</strong> ${wrongAnswer.question}<br><strong>La tua risposta:</strong> ${wrongAnswer.selected}<br><strong>Risposta corretta:</strong> ${wrongAnswer.correct}</li><br>`;
+                });
+                wrongAnswersText += '</ul>';
+                document.getElementById('final-results').innerHTML += wrongAnswersText;
+            }
+
+            // Forza il rendering di tutto il contenuto
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub, "final-results"]);
+        }
+
+        function reloadQuiz() {
+            // Ricarica la pagina per ricominciare il quiz
+            location.reload();
+        }
+
+        function saveResults() {
+            const results = {
+                name: userName,
+                surname: userSurname,
+                score: score,
+                wrongAnswers: wrongAnswers,
+            };
+
+            fetch('https://script.google.com/macros/s/AKfycby-4Gowjt0lxZAiVZ6aBTu0y1Lc3sf-2S7bpRfdu44ZaN052nmudOLWpfljnFStRTCI/exec', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                mode: 'no-cors',  // Disabilita CORS
+                body: JSON.stringify(results),
+            })
+            .then(response => response.text())
+            .then(message => {
+                alert(message); // Mostra un messaggio di conferma
+            })
+            .catch(error => {
+                console.error('Errore:', error);
+            });
+        }
+    </script>
+</body>
+</html>
+
