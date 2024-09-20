@@ -70,6 +70,10 @@
         .hidden {
             display: none;
         }
+        #final-results {
+            max-height: 300px; /* Limita l'altezza */
+            overflow-y: auto;  /* Abilita lo scroll verticale */
+        }
     </style>
     <script type="text/x-mathjax-config">
         MathJax.Hub.Config({
@@ -164,7 +168,7 @@
 	correct: 1 
 },
 { question: 'Qual è la densità di un oggetto con una massa di \\( 0,2 \\, \\text{kg} \\) e un volume di \\( 50 \\, \\text{cm}^3 \\)?', 
-	options: ['0,04 \\,  \\(\\text{g/cm}^3\\)', '4 \\,  \\(\\text{g/cm}^3\\)', '400 \\,  \\(\\text{g/cm}^3\\)', '40 \\,  \\(\\text{g/cm}^3\\)'], 
+	options: ['0,04  \\(\\,\\text{g/cm}^3\\)', '4 \\(\\, \\text{g/cm}^3\\)', '400  \\(\\,\\text{g/cm}^3\\)', '40  \\(\\,\\text{g/cm}^3\\)'], 
 	correct: 1 
 },
 // Strumenti di misura e incertezze
@@ -173,7 +177,7 @@
 	correct: 02
 },
 { question: 'Quale tra questi è il modo corretto di esprimere il risultato di una misura con incertezza?', 
-	options: ['\\(x = 12,5 \\, \\pm \\, 0,1\\)', 'x = 12,5', '\\(x = 12,5 \\, \\pm \\, 1\\)', '\\(x = 12,5 \\, \\pm \\, 0,5\\)'], 
+	options: ['\\(x = 12,5 \\, \\pm \\, 0,1\\)', '\\(x = 12,5\\)', '\\(x = 12,5 \\, \\pm \\, 1\\)', '\\(x = 12,5 \\, \\pm \\, 0,5\\)'], 
 	correct: 0 
 },
 // Grandezze scalari e vettoriali
@@ -187,11 +191,11 @@
 	correct: 0 
 },
 { question: 'Se un vettore ha modulo 5 e angolo di 30°, qual è la sua componente orizzontale?', 
-	options: ['5 \\(\\cos(30°)\\)', '5 \\(\\sin(30°)\\)', '5 \\(\\tan(30°)\\)', '5'], 
+	options: ['5 \\(\\,\\cos(30°)\\)', '5 \\(\\,\\sin(30°)\\)', '5 \\(\\,\\tan(30°)\\)', '5'], 
 	correct: 0 
 },
 { question: 'Qual è la forza-peso di un oggetto con una massa di \\( 5 \\, \\text{kg} \\)?', 
-	options: ['49 \\, \\(\\text{N}\\)', '9,8 \\, \\(\\text{N}\\)', '50 \\, \\(\\text{N}\\)', '45 \\, \\(\\text{N}\\)'], 
+	options: ['49 \\( \\,\\text{N}\\)', '9,8 \\( \\,\\text{N}\\)', '50 \\( \\,\\text{N}\\)', '45 \\( \\,\\text{N}\\)'], 
 	correct: 0 
 },
 // Forze e dinamometri
@@ -203,12 +207,12 @@
 	options: ['La lunghezza', 'Il tempo', 'La massa', 'La forza'], 
 	correct: 2 
 },
-{ question: 'Detti \\( \\mu_s \\) il coefficiente di attrito statico e \\( F_\\perp \\) la forza perpendicolare a una superficie, se \\( \\mu_s = 0,4 \\) e la forza perpendicolare è \\( 200 \\, \\(\\text{N}\\) \\), qual è la forza di attrito radente statico?', 
-	options: ['40 \\, \\(\\text{N}\\)', '80 \\, \\(\\text{N}\\)', '20 \\, \\(\\text{N}\\)', '100 \\, \\(\\text{N}\\)'], 
+{ question: 'Detti \\( \\mu_s \\) il coefficiente di attrito statico e \\( F_\\perp \\) la forza perpendicolare a una superficie, se \\( \\mu_s = 0,4 \\) e la forza perpendicolare è \\( 200 \\,\\text{N}\\), qual è la forza di attrito radente statico?', 
+	options: ['40 \\( \\,\\text{N}\\)', '80 \\( \\,\\text{N}\\)', '20 \\( \\,\\text{N}\\)', '100 \\( \\,\\text{N}\\)'], 
 	correct: 1
 },
-{ question: 'Detto \\( \\mu_d \\) il coefficiente di attrito dinamico e \\( F_\\perp \\) è la forza perpendicolare, se \\( \\mu_d = 0,3 \\) e \\( F_\\perp = 100 \\, \\(\\text{N}\\) \\), qual è la forza di attrito radente dinamico?', 
-	options: ['30 \\, \\(\\text{N}\\)', '10 \\, \\(\\text{N}\\)', '70 \\, \\(\\text{N}\\)', '50 \\, \\(\\text{N}\\)'], 
+{ question: 'Detto \\( \\mu_d \\) il coefficiente di attrito dinamico e \\( F_\\perp \\) è la forza perpendicolare, se \\( \\mu_d = 0,3 \\) e \\( F_\\perp = 100 \\,\\text{N} \\), qual è la forza di attrito radente dinamico?', 
+	options: ['30 \\( \\,\\text{N}\\)', '10 \\( \\,\\text{N}\\)', '70 \\( \\,\\text{N}\\)', '50 \\( \\,\\text{N}\\)'], 
 	correct: 0 
 },
 // Equilibrio e piano inclinato
@@ -218,17 +222,17 @@
 },
 // Forza elastica (legge di Hooke)
 { question: 'Chiamiamo \\( k \\) la costante elastica della molla e \\( \\Delta x \\) l\'allungamento o la compressione rispetto alla posizione di riposo. Se \\( k = 150 \\, \\text{N/m} \\) e la molla è allungata di \\( 0,2 \\, \\text{m} \\), qual è la forza elastica?', 
-	options: ['30 \\, \\(\\text{N}\\)', '15 \\, \\(\\text{N}\\)', '50 \\, \\(\\text{N}\\)', '75 \\, \\(\\text{N}\\)'], 
+	options: ['30 \\( \\,\\text{N}\\)', '15 \\( \\,\\text{N}\\)', '50 \\( \\,\\text{N}\\)', '75 \\( \\,\\text{N}\\)'], 
 	correct: 0 
 },
 // Forza risultante
-{ question: 'Se due forze \\( F_1 = 50 \\, \\(\\text{N}\\) \\) e \\( F_2 = 30 \\, \\(\\text{N}\\) \\) agiscono nella stessa direzione su un oggetto, quale può essere l\'intensità della forza risultante?', 
-	options: ['40 \\, \\(\\text{N}\\)', '50 \\, \\(\\text{N}\\)','80 \\, \\(\\text{N}\\)', '30 \\, \\(\\text{N}\\)'], 
+{ question: 'Se due forze \\( F_1 = 50 \\,\\text{N} \\) e \\( F_2 = 30\\,\\text{N} \\) agiscono nella stessa direzione su un oggetto, quale può essere l\'intensità della forza risultante?', 
+	options: ['40 \\( \\,\\text{N}\\)', '50 \\( \\,\\text{N}\\)','80 \\( \\,\\text{N}\\)', '30 \\( \\,\\text{N}\\)'], 
 	correct: 02
 },
 // Piano inclinato
 { question: 'Se un oggetto di massa \\( 10 \\, \\text{kg} \\) è su un piano inclinato con un angolo di \\( 30° \\), qual è l\'intensità della forza peso parallela al piano?', 
-	options: ['98 \\, \\(\\text{N}\\)', '100 \\, \\(\\text{N}\\)', '25 \\, \\(\\text{N}\\)', '49 \\, \\(\\text{N}\\)'], 
+	options: ['98 \\( \\,\\text{N}\\)', '100 \\( \\,\\text{N}\\)', '25 \\( \\,\\text{N}\\)', '49 \\( \\,\\text{N}\\)'], 
 	correct: 3
 },
 // Momento di una forza
@@ -243,12 +247,12 @@
 },
 // Le leve
 //{ question: 'Una leva di primo genere ha il fulcro:', 
-//	options: ['Tra la forza applicata e il carico', 'All\'estremità della leva', 'Vicino al carico', 'Non ha un fulcro'], 
-//	correct: 0 
-//}
+	//	options: ['Tra la forza applicata e il carico', 'All\'estremità della leva', 'Vicino al carico', 'Non ha un fulcro'], 
+	//	correct: 0 
+	//}
         ];
 
-        let currentQuestion = 0;
+let currentQuestion = 0;
         let score = 0;
         let wrongAnswers = [];
         let userName = '';
@@ -357,21 +361,23 @@
             const percentage = (score / quiz.length * 100).toFixed(2);
 
             // Mostra il punteggio finale e la percentuale
-            document.getElementById('quiz-section').classList.add('hidden');
-            document.getElementById('final-screen').classList.remove('hidden');
             document.getElementById('final-results').innerHTML = `
                 <p>Il tuo punteggio è: ${score} su ${quiz.length} (${percentage}%)</p>
             `;
 
             // Mostra le risposte sbagliate, se ce ne sono
             if (wrongAnswers.length > 0) {
-                let wrongAnswersText = '<h3>Risposte errate:</h3><ul>';
+                let wrongAnswersText = '<h3>Risposte errate:</h3><div id="final-results">';
                 wrongAnswers.forEach((wrongAnswer) => {
                     wrongAnswersText += `<li><strong>Domanda:</strong> ${wrongAnswer.question}<br><strong>La tua risposta:</strong> ${wrongAnswer.selected}<br><strong>Risposta corretta:</strong> ${wrongAnswer.correct}</li><br>`;
                 });
-                wrongAnswersText += '</ul>';
+                wrongAnswersText += '</div>';
                 document.getElementById('final-results').innerHTML += wrongAnswersText;
             }
+
+            // Mostra la schermata finale e nascondi il quiz
+            document.getElementById('quiz-section').classList.add('hidden');
+            document.getElementById('final-screen').classList.remove('hidden');
 
             // Forza il rendering di tutto il contenuto
             MathJax.Hub.Queue(["Typeset", MathJax.Hub, "final-results"]);
@@ -409,4 +415,3 @@
     </script>
 </body>
 </html>
-
