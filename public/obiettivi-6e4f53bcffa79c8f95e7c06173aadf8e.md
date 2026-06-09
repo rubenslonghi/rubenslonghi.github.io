@@ -1,0 +1,175 @@
+# Obiettivi della prima parte: limiti e continuità
+
+```{admonition} Cosa impareremo in questo percorso?
+:class: important
+Studieremo il comportamento delle funzioni vicino a un punto e all'infinito, usando tabelle, grafici e linguaggio naturale prima della formalizzazione simbolica.
+```
+
+## Competenze dell'asse matematico
+
+In questa prima parte del lavoro l'obiettivo non è soltanto "calcolare limiti", ma soprattutto imparare a leggere e interpretare il comportamento delle funzioni.
+
+- **Analizzare** dati e interpretarli, sviluppando ragionamenti anche attraverso rappresentazioni grafiche.
+- **Individuare** strategie appropriate per la soluzione di problemi.
+- **Confrontare** e analizzare grafici, individuando relazioni, regolarità e comportamenti invarianti.
+
+## Il nostro approccio
+
+::::{grid} 1 1 3 3
+:::{card} Intuitivo
+:class-card: sd-shadow-sm
+Osserveremo **tabelle numeriche** e **grafici** per costruire il significato dei concetti prima delle definizioni formali.
+:::
+
+:::{card} Dinamico
+:class-card: sd-shadow-sm
+Interpreteremo il limite come **movimento** e **tendenza**: che cosa accade a una variabile mentre l'altra si avvicina a un certo valore?
+:::
+
+:::{card} Qualitativo
+:class-card: sd-shadow-sm
+Cercheremo di capire il **comportamento** della funzione, non solo di applicare regole di calcolo.
+:::
+::::
+
+## Obiettivo 1: il limite come movimento
+
+```{admonition} Cosa impareremo
+:class: note
+Comprendere il limite come un **processo dinamico**: *che cosa fa la variabile dipendente mentre la variabile indipendente si avvicina a un certo valore?*
+```
+
+::::{grid} 1 1 2 2
+:::{card} Sapremo leggere
+- Il simbolo $\infty$ come crescita illimitata o “esplosione”.
+- La scrittura $x \to x_0$ come indicazione di movimento.
+- La differenza tra stabilizzazione verso un valore finito e crescita senza limite.
+:::
+
+:::{card} Sapremo fare
+- Verbalizzare il comportamento di una funzione con frasi corrette.
+- Prevedere qualitativamente un limite a partire da una tabella numerica.
+- Distinguere i casi in cui il limite è finito dai casi in cui è infinito.
+:::
+::::
+
+```{important}
+**Focus della sezione:** capire il concetto prima delle formule.
+```
+
+## Obiettivo 2: leggere e interrogare i grafici
+
+```{admonition} Cosa impareremo
+:class: note
+Svilupperemo la capacità di **interrogare un grafico** per ricavare informazioni sul comportamento di una funzione.
+```
+
+::::{grid} 1 1 2 2
+:::{card} Sapremo leggere
+- Se una funzione presenta una rottura, un salto o una discontinuità.
+- Gli asintoti verticali come “barriere” del grafico.
+- La differenza tra $f(x_0)$ e $\lim_{x \to x_0} f(x)$.
+:::
+
+:::{card} Sapremo fare
+- Dedurre il valore del limite seguendo l'andamento della curva.
+- Tracciare schizzi qualitativi di grafici a partire da descrizioni verbali.
+- Spiegare con parole semplici un comportamento asintotico.
+:::
+::::
+
+```{tip}
+Il grafico sarà uno dei nostri strumenti principali: una vera **mappa del comportamento** delle funzioni.
+```
+
+## Obiettivo 3: limiti laterali e regola d'oro
+
+```{admonition} Cosa impareremo
+:class: note
+Capiremo che ci si può avvicinare a un punto da **sinistra** o da **destra**, e che il limite esiste solo quando i due comportamenti sono compatibili.
+```
+
+::::{grid} 1 1 2 2
+:::{card} Sapremo leggere
+- La differenza tra $\lim_{x \to x_0^-} f(x)$ e $\lim_{x \to x_0^+} f(x)$.
+- Situazioni di conflitto: salti, asintoti di segno opposto, comportamenti incompatibili.
+- La regola fondamentale: il limite esiste solo se i due limiti laterali concordano.
+:::
+
+:::{card} Sapremo fare
+- Verificare l'esistenza del limite confrontando il comportamento laterale.
+- Argomentare perché un limite può non esistere.
+- Classificare qualitativamente alcune discontinuità.
+:::
+::::
+
+```{warning}
+Avvicinarsi a un punto **non** significa automaticamente che il limite esista.
+```
+
+## Competenze trasversali
+
+```{admonition} Perché studiare i limiti anche in un percorso non puramente tecnico?
+:class: seealso
+Il lavoro sui limiti sviluppa competenze utili anche oltre la matematica: interpretazione, argomentazione, modellizzazione, lettura critica dei dati.
+```
+
+### 1. Competenza argomentativa
+
+- Tradurre il linguaggio simbolico in linguaggio naturale.
+- Costruire spiegazioni coerenti a partire da tabelle, grafici e osservazioni.
+
+### 2. Modellizzazione della realtà
+
+- Riconoscere che il concetto di limite descrive fenomeni reali: saturazione, crescita, decadimento, stabilizzazione.
+- Comprendere che la matematica è uno strumento per leggere e interpretare il mondo.
+
+### 3. Pensiero critico
+
+- Usare tabelle e grafici come **indizi** interpretativi, senza confonderli con una dimostrazione.
+- Valutare la coerenza tra rappresentazione numerica, grafica e simbolica.
+
+## Come saremo valutati
+
+```{admonition} Valutazione formativa
+:class: important
+La valutazione sarà centrata soprattutto sul **processo di apprendimento**: osservazione, interpretazione, verbalizzazione, collegamento tra rappresentazioni.
+```
+
+::::{grid} 1 1 3 3
+:::{card} Livello base
+- Leggere grafici individuando limiti evidenti.
+- Completare tabelle numeriche significative.
+- Riconoscere la presenza di asintoti verticali.
+:::
+
+:::{card} Livello intermedio
+- Distinguere limite destro e limite sinistro.
+- Descrivere verbalmente il comportamento di una funzione.
+- Riconoscere quando un limite non esiste.
+:::
+
+:::{card} Livello avanzato
+- Collegare tabelle, grafici e simboli.
+- Costruire schizzi qualitativi di grafici.
+- Argomentare in modo chiaro nei casi problematici.
+:::
+::::
+
+### Strumenti di autovalutazione
+
+- Schede di riflessione metacognitiva.
+- Domande guida durante le attività.
+- Feedback continuo nel lavoro individuale e di gruppo.
+
+## Metodo di lavoro
+
+Seguirà una struttura ricorrente:
+
+1. **Osservazione** di esempi concreti, tabelle, grafici e situazioni reali.
+2. **Esplorazione** guidata, spesso in coppia o in piccolo gruppo.
+3. **Formalizzazione** del linguaggio matematico solo dopo la comprensione intuitiva.
+4. **Applicazione** del concetto a situazioni e problemi.
+5. **Riflessione** finale per chiarire dubbi e consolidare il significato.
+
+
