@@ -1,0 +1,21 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  id: cf00e816-af7e-4ba6-8fb1-d617dd8279c4
+  # title: "Matematica: Classe Quarta, Istituto Tecnico"
+  description: "Materiali di matematica per la classe quarta dell'istituto tecnico"
+  keywords: [matematica, classe quarta, istituto tecnico]
+  # authors: "Rubens Longhi"
+  # github:
+  # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
+    
+site:
+  template: book-theme
+  title: Strumenti di Analisi e Probabilità
+  parts:
+    primary_sidebar_footer: "Rubens Longhi - 2026"
+  options:
+    style: ./custom.css
+  #   favicon: favicon.ico
+  #   logo: site_logo.png
+  #  myst_title_to_header: true

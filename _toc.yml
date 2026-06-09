@@ -1,0 +1,17 @@
+format: jb-book
+root: index
+
+parts:
+  - caption: Funzioni e Limiti
+    numbered: true
+    chapters:
+      - file: analisi/obiettivi
+      - file: analisi/intervalli
+      - file: analisi/dominio_funzioni
+      - file: analisi/limite_finito_x_valore_finito
+        subsection:
+        #  - file: analisi/esercizi_x_limite_finito_x_valore_finito
+
+  - caption: Calcolo Combinatorio e Probabilità
+    numbered: true
+    chapters:

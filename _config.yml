@@ -1,0 +1,5 @@
+sphinx:
+  extra_extensions:
+    - sphinxcontrib.tikz
+  config:
+    tikz_proc_suite: 'pdf2svg'  # Questo rende le immagini perfette per il web
