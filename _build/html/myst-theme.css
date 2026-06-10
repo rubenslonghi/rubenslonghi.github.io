@@ -1,0 +1,23 @@
+/* User Provided Stylesheet */
+
+/* Nasconde il testo originale */
+a.myst-home-link span {
+  display: none;
+}
+
+/* Inserisce il titolo personalizzato */
+a.myst-home-link::after {
+  content: "Matematica 4 GC-INFO";
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: inherit;
+  display: inline-block;
+}
+
+/* Versione leggermente più compatta su schermi piccoli */
+@media (max-width: 640px) {
+  a.myst-home-link::after {
+    font-size: 1rem;
+  }
+}
