@@ -11,3 +11,6 @@ details > :not(summary) { margin-left: 1rem; margin-right: 1rem; }
 summary:focus-visible, a:focus-visible { outline: 3px solid #2486bb; outline-offset: 4px; }
 article table { display: block; overflow-x: auto; }
 @media(max-width: 640px) { article { line-height: 1.65; } }
+
+/* Firma del sito: il nome è configurato nella barra superiore. */
+.myst-made-with-myst { display: none; }

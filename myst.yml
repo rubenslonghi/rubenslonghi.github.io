@@ -139,6 +139,7 @@ site:
   template: "https://github.com/jupyter-book/myst-theme/releases/download/myst-to-react%401.4.1/book-theme.zip"
   title: "Matematica · Liceo scientifico"
   options:
+    logo_text: "Rubens Longhi"
     favicon: favicon.ico
     folders: true
     style: "./custom.css"
