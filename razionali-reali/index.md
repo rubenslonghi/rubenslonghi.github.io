@@ -2,6 +2,15 @@
 title: "Frazioni, numeri razionali e proporzioni"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [19 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-19) — Preparazione alla verifica su interi e razionali.
+- [22 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-22) — Riepilogo su interi e razionali.
+- [23 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-23) — Verifica su interi e razionali.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 *Per richiamare le idee già viste:* [Numeri interi: descrivere due versi](../numeri-naturali-interi/numeri-interi-descrivere-due-versi.md) · [MCD e mcm](../numeri-naturali-interi/mcd-e-mcm.md).
 
 

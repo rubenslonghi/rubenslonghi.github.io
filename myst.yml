@@ -9,6 +9,7 @@ project:
   github: "https://github.com/rubenslonghi/rubenslonghi.github.io"
   toc:
     - file: "index.md"
+    - file: "cronologia-1sp.md"
     - title: "Numeri, insiemi e relazioni · 1 SP"
       children:
         - file: "numeri-naturali-interi/index.md"

@@ -2,6 +2,13 @@
 title: "Le espressioni: scegliere l'ordine corretto"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [25 settembre 2026](../cronologia-1sp.md#giorno-2026-09-25) — Potenze ed espressioni.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 (r-sec-espressioni)=
 
 :::{admonition} Attività — Due risultati per la stessa riga?

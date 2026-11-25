@@ -2,6 +2,15 @@
 title: "Numeri naturali e numeri interi"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [2 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-02) — Preparazione alla verifica sui naturali.
+- [3 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-03) — Preparazione alla verifica sui naturali.
+- [5 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-05) — Verifica sui numeri naturali.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 (r-cap-naturali-interi)=
 
 :::{admonition} Attività — Prima dei simboli: quali numeri usiamo?

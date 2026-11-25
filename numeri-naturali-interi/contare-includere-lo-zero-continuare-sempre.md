@@ -2,6 +2,13 @@
 title: "Contare, includere lo zero, continuare sempre"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [17 settembre 2026](../cronologia-1sp.md#giorno-2026-09-17) — Test d’ingresso e numeri naturali.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 (r-sec-contare)=
 
 *Lezione: 17 settembre*

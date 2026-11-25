@@ -2,6 +2,14 @@
 title: "Dalle relazioni ai grafi"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [20 novembre 2026](../cronologia-1sp.md#giorno-2026-11-20) — Relazioni, grafi e ponti di Königsberg.
+- [21 novembre 2026](../cronologia-1sp.md#giorno-2026-11-21) — Esercizi sui grafi percorribili.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 *Per richiamare le idee già viste:* [Prodotto cartesiano e principio di moltiplicazione](../insiemi-logica/prodotto-cartesiano-e-principio-di-moltiplicazione.md) · [Che cos'è un insieme?](../insiemi-logica/che-cos-e-un-insieme.md).
 
 

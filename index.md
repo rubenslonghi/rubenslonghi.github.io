@@ -7,6 +7,16 @@ Un libro che cresce con il lavoro in classe: spiegazioni, attività, diagrammi, 
 
 **Prima prova, poi confronta.** Gli esercizi sono raccolti in una sottosezione di ogni lezione. Le soluzioni sono inizialmente chiuse: si aprono soltanto quando scegli **Mostra la soluzione**. I fascicoli e i giochi sono file scaricabili collegati nelle lezioni, senza occupare voci nell'indice.
 
+## Il percorso nel tempo · 1 SP
+
+[**Apri la linea del tempo delle lezioni**](cronologia-1sp.md): ogni giornata rimanda alle pagine degli argomenti, che raccolgono anche tutte le date delle riprese.
+
+- [**Settembre**](cronologia-1sp.md#mese-settembre) · Dai numeri naturali alle potenze, alla divisibilità e a MCD e mcm.
+- [**Ottobre**](cronologia-1sp.md#mese-ottobre) · Interi e razionali, numeri reali e primi incontri con gli insiemi.
+- [**Novembre**](cronologia-1sp.md#mese-novembre) · Insiemi e logica, escape room, relazioni e grafi.
+
+**Ultima lezione:** [23 novembre — restituzione delle verifiche; riflessività e simmetria](cronologia-1sp.md#giorno-2026-11-23).
+
 ## Numeri, insiemi e relazioni · 1 SP
 
 ::::{grid} 1 1 2 2

@@ -2,6 +2,13 @@
 title: "Tre proprietà da controllare"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [23 novembre 2026](../cronologia-1sp.md#giorno-2026-11-23) — Restituzione delle verifiche e primo accenno a riflessività e simmetria.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 *Per richiamare le idee già viste:* [Prodotto cartesiano e principio di moltiplicazione](../insiemi-logica/prodotto-cartesiano-e-principio-di-moltiplicazione.md) · [Che cos'è un insieme?](../insiemi-logica/che-cos-e-un-insieme.md).
 
 

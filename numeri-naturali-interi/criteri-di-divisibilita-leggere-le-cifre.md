@@ -2,6 +2,13 @@
 title: "Criteri di divisibilità: leggere le cifre"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [26 settembre 2026](../cronologia-1sp.md#giorno-2026-09-26) — Multipli, divisori e numeri primi.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 (r-sec-criteri)=
 
 :::{admonition} Attività — Una divisione senza farla

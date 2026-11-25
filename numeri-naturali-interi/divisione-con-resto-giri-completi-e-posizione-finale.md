@@ -2,6 +2,13 @@
 title: "Divisione con resto: giri completi e posizione finale"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [24 settembre 2026](../cronologia-1sp.md#giorno-2026-09-24) — Operazioni sulla retta e divisione con resto.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 (r-sec-resto)=
 
 *Lezione: 21--24 settembre*

@@ -2,6 +2,13 @@
 title: "Potenze, decimali e frazioni generatrici"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [17 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-17) — Potenze negative, decimali e percentuali.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 *Per richiamare le idee già viste:* [Numeri interi: descrivere due versi](../numeri-naturali-interi/numeri-interi-descrivere-due-versi.md) · [MCD e mcm](../numeri-naturali-interi/mcd-e-mcm.md).
 
 

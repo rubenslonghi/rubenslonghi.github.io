@@ -2,6 +2,13 @@
 title: "Quando un prodotto è zero? Il laboratorio degli orologi"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [21 settembre 2026](../cronologia-1sp.md#giorno-2026-09-21) — Proprietà delle operazioni e laboratorio degli orologi.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 (r-sec-annullamento)=
 
 *Lezione: 21--24 settembre*

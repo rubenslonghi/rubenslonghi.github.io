@@ -2,6 +2,13 @@
 title: "MCD e mcm"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [28 settembre 2026](../cronologia-1sp.md#giorno-2026-09-28) — MCD e mcm.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 (r-sec-mcdmcm)=
 
 *Lezione: 28 settembre*

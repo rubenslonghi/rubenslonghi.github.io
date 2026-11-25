@@ -2,6 +2,13 @@
 title: "Prodotto cartesiano e principio di moltiplicazione"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [5 novembre 2026](../cronologia-1sp.md#giorno-2026-11-05) — Operazioni tra insiemi e prodotto cartesiano.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 *Per richiamare le idee già viste:* [Achille, i decimali infiniti e nuovi numeri](../razionali-reali/achille-i-decimali-infiniti-e-nuovi-numeri.md).
 
 

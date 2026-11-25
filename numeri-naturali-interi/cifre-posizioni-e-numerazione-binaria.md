@@ -2,6 +2,13 @@
 title: "Cifre, posizioni e numerazione binaria"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [24 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-24) — Calcolo mentale e numerazione binaria.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 (r-sec-base-due)=
 
 :::{admonition} Attività — Una mano, trentadue configurazioni

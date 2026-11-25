@@ -2,6 +2,13 @@
 title: "Sottrarre e dividere: che cosa resta invariato?"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [24 settembre 2026](../cronologia-1sp.md#giorno-2026-09-24) — Operazioni sulla retta e divisione con resto.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 (r-sec-invariantiva)=
 
 :::{admonition} Attività — Spostare due punti insieme

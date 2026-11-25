@@ -2,6 +2,13 @@
 title: "Lo zero nella divisione"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [19 settembre 2026](../cronologia-1sp.md#giorno-2026-09-19) — Le quattro operazioni e lo zero.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 (r-sec-zero-divisione)=
 
 *Lezione: 19 settembre*

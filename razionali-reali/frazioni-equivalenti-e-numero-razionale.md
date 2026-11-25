@@ -2,6 +2,13 @@
 title: "Frazioni equivalenti e numero razionale"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [15 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-15) — Frazioni e numeri razionali.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 *Per richiamare le idee già viste:* [Numeri interi: descrivere due versi](../numeri-naturali-interi/numeri-interi-descrivere-due-versi.md) · [MCD e mcm](../numeri-naturali-interi/mcd-e-mcm.md).
 
 

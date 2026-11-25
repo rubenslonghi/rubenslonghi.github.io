@@ -2,6 +2,15 @@
 title: "Insiemi, logica e ragionamento"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [7 novembre 2026](../cronologia-1sp.md#giorno-2026-11-07) — Esercizi sugli insiemi.
+- [14 novembre 2026](../cronologia-1sp.md#giorno-2026-11-14) — Preparazione alla verifica di insiemi e logica.
+- [16 novembre 2026](../cronologia-1sp.md#giorno-2026-11-16) — Verifica di insiemi e logica.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 *Per richiamare le idee già viste:* [Achille, i decimali infiniti e nuovi numeri](../razionali-reali/achille-i-decimali-infiniti-e-nuovi-numeri.md).
 
 

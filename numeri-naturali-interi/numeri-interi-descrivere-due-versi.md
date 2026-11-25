@@ -2,6 +2,19 @@
 title: "Numeri interi: descrivere due versi"
 ---
 
+:::{note} Nel percorso della 1 SP
+
+- [8 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-08) — Numeri interi, valore assoluto e potenze.
+- [9 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-09) — Calcolare con interi e valori assoluti.
+- [10 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-10) — Potenze a base intera: lavoro nei due gruppi.
+- [12 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-12) — Restituzione delle verifiche ed espressioni con interi.
+- [19 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-19) — Preparazione alla verifica su interi e razionali.
+- [22 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-22) — Riepilogo su interi e razionali.
+- [23 ottobre 2026](../cronologia-1sp.md#giorno-2026-10-23) — Verifica su interi e razionali.
+
+[Apri tutta la linea del tempo](../cronologia-1sp.md).
+:::
+
 (r-sec-interi-integrazione)=
 
 :::{admonition} Attività — Spostamenti e saldo
