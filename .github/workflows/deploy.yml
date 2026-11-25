@@ -5,6 +5,7 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 concurrency:
@@ -35,6 +36,8 @@ jobs:
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _build/html
+      - name: Attendi la disponibilità del pacchetto
+        run: sleep 20
       - name: Pubblica
         id: deployment
         uses: actions/deploy-pages@v4
