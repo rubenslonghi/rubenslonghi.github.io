@@ -1,0 +1,310 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[margin=2cm]{geometry}
+\usepackage{tikz}
+\usepackage{xstring}
+\usepackage{amsmath}
+\usetikzlibrary{calc}
+
+% ============================================================
+% MANO BINARIA DESTRA, VISTA DAL PALMO
+%
+% \binaryhand{10110}
+%
+% Ordine dei bit:
+% pollice, indice, medio, anulare, mignolo
+%
+% 1 = dito disteso
+% 0 = dito ripiegato
+%
+% La scrittura 10110 rappresenta 13.
+% ATTENZIONE: non e' la scrittura binaria convenzionale!
+% In notazione standard 13 = 01101_2.
+% ============================================================
+
+\definecolor{skin}{RGB}{247,205,169}
+\definecolor{skinlight}{RGB}{255,226,197}
+\definecolor{skinshadow}{RGB}{222,158,123}
+\definecolor{handline}{RGB}{145,88,70}
+
+\newcommand{\binaryhand}[1]{%
+\begingroup
+
+\StrChar{#1}{1}[\bThumb]
+\StrChar{#1}{2}[\bIndex]
+\StrChar{#1}{3}[\bMiddle]
+\StrChar{#1}{4}[\bRing]
+\StrChar{#1}{5}[\bLittle]
+
+\begin{tikzpicture}[
+    x=1cm,y=1cm,
+    line cap=round,
+    line join=round,
+    hand/.style={
+        draw=handline,
+        line width=1.15pt,
+        fill=skin
+    },
+    crease/.style={
+        draw=handline,
+        opacity=.48,
+        line width=.65pt
+    },
+    digit/.style={
+        font=\small\sffamily,
+        text=black
+    }
+]
+
+% ------------------------------------------------------------
+% POLSO E PALMO
+% ------------------------------------------------------------
+
+% Polso
+\path[hand]
+    (1.15,0.8)
+    .. controls (1.20,0.25) and (1.08,-0.35) ..
+    (1.05,-0.75)
+    -- (3.15,-0.75)
+    .. controls (3.10,-0.15) and (3.05,0.35) ..
+    (3.35,0.95)
+    -- cycle;
+
+% Corpo del palmo
+\path[hand]
+    (0.85,1.05)
+    .. controls (0.70,1.65) and (0.72,2.75) ..
+    (0.78,3.65)
+    .. controls (0.80,4.10) and (1.10,4.35) ..
+    (1.45,4.38)
+    -- (3.10,4.38)
+    .. controls (3.45,4.30) and (3.62,4.05) ..
+    (3.65,3.55)
+    .. controls (3.73,2.90) and (4.05,2.55) ..
+    (4.08,2.05)
+    .. controls (4.08,1.55) and (3.62,1.10) ..
+    (3.25,0.85)
+    .. controls (2.35,0.50) and (1.45,0.65) ..
+    (0.85,1.05)
+    -- cycle;
+
+% ------------------------------------------------------------
+% QUATTRO DITA
+% Mignolo a sinistra, indice a destra
+% ------------------------------------------------------------
+
+% MIGNOLO (2^4)
+\ifnum\bLittle=1
+    \path[hand]
+        (0.82,3.65)
+        -- (0.75,5.60)
+        .. controls (0.75,6.05) and (1.35,6.08) ..
+        (1.39,5.62)
+        -- (1.48,3.70)
+        -- cycle;
+    \draw[crease] (0.87,4.85) .. controls
+        (1.04,4.92) .. (1.28,4.85);
+    \draw[crease] (0.87,5.05) .. controls
+        (1.04,5.12) .. (1.28,5.05);
+\else
+    \path[hand]
+        (0.80,3.65)
+        .. controls (0.60,3.98) and (0.75,4.30) ..
+        (1.12,4.33)
+        .. controls (1.43,4.33) and (1.49,4.04) ..
+        (1.46,3.70)
+        -- cycle;
+    \draw[crease] (0.87,3.91) -- (1.27,3.91);
+\fi
+
+% ANULARE (2^3)
+\ifnum\bRing=1
+    \path[hand]
+        (1.48,3.85)
+        -- (1.45,6.40)
+        .. controls (1.45,6.91) and (2.15,6.92) ..
+        (2.16,6.40)
+        -- (2.19,3.85)
+        -- cycle;
+    \draw[crease] (1.56,5.15) -- (2.06,5.15);
+    \draw[crease] (1.56,5.35) -- (2.06,5.35);
+\else
+    \path[hand]
+        (1.47,3.85)
+        .. controls (1.37,4.25) and (1.56,4.52) ..
+        (1.83,4.53)
+        .. controls (2.15,4.53) and (2.27,4.23) ..
+        (2.18,3.85)
+        -- cycle;
+    \draw[crease] (1.60,4.08) -- (2.04,4.08);
+\fi
+
+% MEDIO (2^2)
+\ifnum\bMiddle=1
+    \path[hand]
+        (2.20,3.90)
+        -- (2.20,6.75)
+        .. controls (2.20,7.28) and (2.94,7.28) ..
+        (2.94,6.75)
+        -- (2.94,3.90)
+        -- cycle;
+    \draw[crease] (2.32,5.35) -- (2.82,5.35);
+    \draw[crease] (2.32,5.55) -- (2.82,5.55);
+\else
+    \path[hand]
+        (2.20,3.90)
+        .. controls (2.11,4.35) and (2.28,4.62) ..
+        (2.57,4.63)
+        .. controls (2.88,4.63) and (3.05,4.33) ..
+        (2.94,3.90)
+        -- cycle;
+    \draw[crease] (2.32,4.15) -- (2.82,4.15);
+\fi
+
+% INDICE (2^1)
+\ifnum\bIndex=1
+    \path[hand]
+        (2.98,3.80)
+        -- (3.02,6.30)
+        .. controls (3.03,6.82) and (3.77,6.82) ..
+        (3.78,6.30)
+        -- (3.72,3.80)
+        -- cycle;
+    \draw[crease] (3.14,5.12) -- (3.65,5.12);
+    \draw[crease] (3.14,5.32) -- (3.65,5.32);
+\else
+    \path[hand]
+        (2.98,3.80)
+        .. controls (2.89,4.20) and (3.05,4.49) ..
+        (3.39,4.50)
+        .. controls (3.73,4.50) and (3.86,4.17) ..
+        (3.72,3.80)
+        -- cycle;
+    \draw[crease] (3.12,4.05) -- (3.60,4.05);
+\fi
+
+% ------------------------------------------------------------
+% POLLICE (2^0), A DESTRA
+% ------------------------------------------------------------
+
+\ifnum\bThumb=1
+    % Pollice aperto verso destra
+    \path[hand]
+        (3.40,2.90)
+        .. controls (3.90,3.25) and (4.25,3.65) ..
+        (4.75,4.15)
+        .. controls (5.12,4.52) and (5.60,4.05) ..
+        (5.32,3.66)
+        .. controls (4.85,3.04) and (4.40,2.38) ..
+        (4.05,1.88)
+        .. controls (3.70,1.80) and (3.35,2.30) ..
+        (3.40,2.90)
+        -- cycle;
+    \draw[crease]
+        (4.28,2.82) .. controls
+        (4.50,3.00) and (4.63,3.16) ..
+        (4.70,3.31);
+\else
+    % Pollice ripiegato sopra il palmo
+    \path[hand]
+        (3.63,2.45)
+        .. controls (3.45,2.80) and (3.08,3.10) ..
+        (2.65,3.24)
+        .. controls (2.12,3.40) and (1.94,2.88) ..
+        (2.34,2.60)
+        .. controls (2.78,2.30) and (3.10,2.02) ..
+        (3.38,1.75)
+        .. controls (3.75,1.85) and (3.85,2.13) ..
+        (3.63,2.45)
+        -- cycle;
+    \draw[crease]
+        (3.10,2.28) .. controls
+        (3.25,2.38) .. (3.36,2.55);
+\fi
+
+% ------------------------------------------------------------
+% PIEGHE DEL PALMO
+% ------------------------------------------------------------
+
+\draw[crease]
+    (1.18,3.15)
+    .. controls (1.95,3.00) and (2.65,3.12) ..
+    (3.28,3.48);
+
+\draw[crease]
+    (1.10,2.35)
+    .. controls (1.85,2.50) and (2.35,2.25) ..
+    (2.90,1.95);
+
+\draw[crease]
+    (1.48,1.35)
+    .. controls (2.10,1.18) and (2.45,1.25) ..
+    (2.85,1.50);
+
+\draw[crease]
+    (3.25,3.05)
+    .. controls (3.00,2.65) and (3.00,2.20) ..
+    (3.32,1.75);
+
+% ------------------------------------------------------------
+% ETICHETTE: VALORI POSIZIONALI
+% ------------------------------------------------------------
+
+\node[digit] at (1.07,7.65) {$2^4=16$};
+\node[digit] at (1.82,8.15) {$2^3=8$};
+\node[digit] at (2.58,8.65) {$2^2=4$};
+\node[digit] at (3.40,7.65) {$2^1=2$};
+\node[digit,anchor=west] at (5.55,3.85) {$2^0=1$};
+
+% Stato dei bit, vicino al polso
+\node[digit,align=center] at (2.15,-1.30)
+    {\texttt{#1}};
+
+\end{tikzpicture}
+
+\endgroup
+}
+
+% ============================================================
+% DOCUMENTO DI ESEMPIO
+% ============================================================
+
+\begin{document}
+
+\begin{center}
+
+{\LARGE\bfseries Contare con una mano}
+
+\vspace{0.4cm}
+
+{\large Il sistema binario e il valore posizionale}
+
+\vspace{0.6cm}
+
+\binaryhand{10110}
+
+\vspace{0.5cm}
+
+\[
+\begin{aligned}
+N &=
+1\cdot 2^0+
+0\cdot 2^1+
+1\cdot 2^2+
+1\cdot 2^3+
+0\cdot 2^4\\[4pt]
+&=1+0+4+8+0\\[4pt]
+&=\boxed{13}
+\end{aligned}
+\]
+
+\vspace{0.3cm}
+
+\textbf{Scrittura binaria convenzionale:}
+\[
+\boxed{13_{10}=01101_2}
+\]
+
+\end{center}
+
+\end{document}

@@ -1,0 +1,60 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[margin=25mm]{geometry}
+
+\setlength{\parindent}{0pt}
+
+\begin{document}
+
+\section*{Equazione frazionaria: svolgimento da revisionare}
+Nome e cognome: \rule{8cm}{0.4pt}
+
+\subsection*{Equazione di partenza}
+\[
+\frac{x+6}{6x^2+4x}-\frac{10}{9x^2-4}
+=\frac{2}{3x}-\frac{3x+2}{6x^2-4x}.
+\]
+
+\subsection*{1. Condizioni di esistenza}
+Scompongo i denominatori:
+\begin{align*}
+6x^2+4x &= 2x(3x+2),\\
+9x^2-4  &= (3x-2)(3x+2),\\
+6x^2-4x &= 2x(3x-2).
+\end{align*}
+Perciò impongo
+\[
+x\ne 0 \qquad \text{e} \qquad x\ne \frac{2}{3}.
+\]
+
+\subsection*{2. Eliminazione dei denominatori}
+Scelgo come minimo comune denominatore \(6x(3x+2)(3x-2)\).
+Moltiplico entrambi i membri per questa espressione e ottengo
+\begin{equation}
+3\left[(x+6)(3x-2)\right)-6x
+=4(3x+2)(3x-2)-3(3x+2)^2.
+\label{eq:senza-denominatori}
+\end{equation}
+
+\subsection*{3. Calcoli e conclusione}
+Nella \eqref{eq:sviluppo} sviluppo i prodotti e raccolgo i termini simili:
+\begin{align*}
+9x^2+48x-36-6x &=36x^2-16-3(9x^2+6x+4)\\
+9x^2+42x-36 ={}&9x^2-18x-28\\
+&60x=-8\\
+x&=-\frac{2}{15}.
+\end{align*}
+I denominatori dell'equazione di partenza sono tutti diversi da zero
+per il valore trovato. Quindi l'uguaglianza è verificata.
+\[
+\text{S = (-2/15)}.
+\]
+
+\subsection*{Nota di revisione}
+% Riassumi qui gli errori che hai corretto e i controlli che hai fatto.
+% Se hai chiesto un indizio a Gemini, indica quale e come l'hai verificato.
+
+\end{document}
+

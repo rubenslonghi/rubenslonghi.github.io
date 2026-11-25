@@ -1,21 +1,13 @@
-/* Nasconde il testo originale */
-a.myst-home-link span {
-  display: none;
-}
-
-/* Inserisce il titolo personalizzato */
-a.myst-home-link::after {
-  content: "Matematica 4 GC-INFO";
-  font-size: 1.25rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: inherit;
-  display: inline-block;
-}
-
-/* Versione leggermente più compatta su schermi piccoli */
-@media (max-width: 640px) {
-  a.myst-home-link::after {
-    font-size: 1rem;
-  }
-}
+/* Il libro: lettura, formule e controllo esplicito delle soluzioni. */
+html { font-size: 16px; }
+article { line-height: 1.7; }
+article h1, article h2, article h3 { text-wrap: balance; }
+article img, article svg, video { max-width: 100%; height: auto; }
+article img[src$=".svg"] { background: white; padding: .5rem; border-radius: .3rem; }
+details { border: 1px solid #73899b70; border-radius: .4rem; margin: 1.1rem 0; }
+details > summary { cursor: pointer; padding: .85rem 1rem; font-weight: 650; }
+details[open] > summary { border-bottom: 1px solid #73899b55; }
+details > :not(summary) { margin-left: 1rem; margin-right: 1rem; }
+summary:focus-visible, a:focus-visible { outline: 3px solid #2486bb; outline-offset: 4px; }
+article table { display: block; overflow-x: auto; }
+@media(max-width: 640px) { article { line-height: 1.65; } }

@@ -1,0 +1,146 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern,amsmath,amssymb,microtype}
+\usepackage[a4paper,top=1.55cm,bottom=1.55cm,left=1.65cm,right=1.65cm]{geometry}
+\usepackage{xcolor,enumitem,fancyhdr,needspace}
+\usepackage[hidelinks]{hyperref}
+\definecolor{blu}{RGB}{30,62,92}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\headheight}{14pt}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{4pt}
+\setlength{\belowdisplayshortskip}{4pt}
+\setlength{\jot}{2.5pt}
+\everymath{\displaystyle}
+\everydisplay{\displaystyle}
+\setlist[enumerate]{leftmargin=*,itemsep=2pt,topsep=3pt}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Classe 2 BS | Equazioni della fila A}
+\fancyhead[R]{\small Anno scolastico 2026/27}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\newcommand{\R}{\mathbb R}
+\newcommand{\tit}[1]{{\Large\bfseries\color{blu}#1}\par\smallskip}
+\newcommand{\sott}[1]{\par\medskip{\large\bfseries\color{blu}#1}\par\smallskip}
+\newcommand{\nota}[1]{\par\smallskip\noindent\colorbox{blu!6}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}\par\smallskip}
+\begin{document}
+\tit{Trova i tre errori}
+\textbf{Nome e cognome:} \hrulefill\quad\textbf{Data:} \rule{2.6cm}{0.4pt}\par
+In ogni svolgimento ci sono \textbf{esattamente tre errori}, distribuiti tra le righe.
+Alcuni passaggi sono corretti. Lavora sul quaderno, nell’ordine seguente:
+\begin{enumerate}
+\item Controlla nell’equazione originale la conclusione proposta sull’insieme $S$.
+      Se un valore funziona, chiediti anche se l’insieme contiene tutte le soluzioni.
+\item Per ciascuno dei tre errori indica \textbf{tra quali righe nasce}, spiega la regola
+      violata e scrivi il passaggio corretto.
+\item Risolvi di nuovo l’equazione originale e scrivi l’insieme completo delle soluzioni.
+\end{enumerate}
+\textbf{Attenzione:} un dato sbagliato riportato coerentemente nelle righe successive è una
+conseguenza del primo errore, non un nuovo errore. Una conclusione corretta non garantisce
+che lo svolgimento sia corretto.
+\sott{Esercizio 2a}
+\textbf{Riga 0: equazione originale.}
+\[
+\frac{2x-1}{\displaystyle\frac12+\frac13}-\frac{x+2}{\displaystyle\frac34-\frac14}=\frac{x-4}{\displaystyle1-\frac16}
+\]
+\textbf{Svolgimento da esaminare.}
+\[\begin{aligned}
+\text{(1)}\quad & \frac{2x-1}{\displaystyle\frac25}-\frac{x+2}{\displaystyle\frac12}=\frac{x-4}{\displaystyle\frac56}\\
+\text{(2)}\quad & \frac52(2x-1)-2(x+2)=\frac65(x-4)\\
+\text{(3)}\quad & 25(2x-1)-20(x+2)=12(x-4)\\
+\text{(4)}\quad & 50x-25-20x+40=12x-48\\
+\text{(5)}\quad & 30x+15=12x-48\\
+\text{(6)}\quad & 18x+15=-48\\
+\text{(7)}\quad & 18x=-48+15\\
+\text{(8)}\quad & 18x=-33\\
+\text{(9)}\quad & x=-\frac{11}{6}\\
+\text{(10)}\quad & \text{Determinata:}\quad S=\left\{-\frac{11}{6}\right\}.
+\end{aligned}\]
+\sott{Esercizio 2b}
+\textbf{Riga 0: equazione originale.}
+\[
+(2x-1)^2-(x+2)(x-2)=3x(x-2)+2x+5
+\]
+\textbf{Svolgimento da esaminare.}
+\[\begin{aligned}
+\text{(1)}\quad & 4x^2+1-(x^2-4)=3x(x-2)+2x+5\\
+\text{(2)}\quad & 4x^2+1-(x^2-4)=3x^2-6x+2x+5\\
+\text{(3)}\quad & 4x^2+1-x^2-4=3x^2-6x+2x+5\\
+\text{(4)}\quad & 3x^2-3=3x^2-4x+5\\
+\text{(5)}\quad & -3=-4x+5\\
+\text{(6)}\quad & -8=-4x\\
+\text{(7)}\quad & x=\frac{-8}{4}\\
+\text{(8)}\quad & x=-2\\
+\text{(9)}\quad & \text{Determinata:}\quad S=\{-2\}.
+\end{aligned}\]
+\clearpage\tit{Trova i tre errori | continua}
+\sott{Esercizio 2c}
+\textbf{Riga 0: equazione originale.}
+\[
+\frac{(3x-1)^2-(3x+1)(3x-1)}{2}=-3(x+1)+\frac52
+\]
+\textbf{Svolgimento da esaminare.}
+\[\begin{aligned}
+\text{(1)}\quad & \frac{9x^2-6x+1-(9x^2-1)}{2}=-3(x+1)+\frac52\\
+\text{(2)}\quad & \frac{9x^2-6x+1-9x^2-1}{2}=-3(x+1)+\frac52\\
+\text{(3)}\quad & \frac{-6x}{2}=-3(x+1)+\frac52\\
+\text{(4)}\quad & -3x=-3x-3+\frac52\\
+\text{(5)}\quad & -6x=-6x-3+5\\
+\text{(6)}\quad & -6x+6x=-3+5\\
+\text{(7)}\quad & 0=-3+5\\
+\text{(8)}\quad & 0=8\\
+\text{(9)}\quad & \text{Impossibile:}\quad S=\varnothing.
+\end{aligned}\]
+\sott{Esercizio 2d}
+\textbf{Riga 0: equazione originale.}
+\[
+(x^2+x-2)^2+(2x-1)(2x+1)=x^2(x+1)^2+4x+1
+\]
+\textbf{Svolgimento da esaminare.}
+\[\begin{aligned}
+\text{(1)}\quad & x^4+2x^3-3x^2+4+(2x-1)(2x+1)=x^2(x+1)^2+4x+1\\
+\text{(2)}\quad & x^4+2x^3-3x^2+4+(2x-1)(2x+1)=x^2(x^2+2x+1)+4x+1\\
+\text{(3)}\quad & x^4+2x^3-3x^2+4+(2x-1)(2x+1)=x^4+2x^3+x^2+4x+1\\
+\text{(4)}\quad & x^4+2x^3-3x^2+4+4x^2+1=x^4+2x^3+x^2+4x+1\\
+\text{(5)}\quad & x^4+2x^3+x^2+5=x^4+2x^3+x^2+4x+1\\
+\text{(6)}\quad & 5=4x+1\\
+\text{(7)}\quad & 4=4x\\
+\text{(8)}\quad & x=4\cdot4\\
+\text{(9)}\quad & x=16\\
+\text{(10)}\quad & \text{Determinata:}\quad S=\{16\}.
+\end{aligned}\]
+\clearpage\tit{Trova i tre errori | continua}
+\sott{Esercizio 4a}
+\textbf{Riga 0: equazione originale.}
+\[
+x^2-7x+6=0
+\]
+\textbf{Svolgimento da esaminare.}
+\[\begin{aligned}
+\text{(1)}\quad & (x+7)(x-1)=0\\
+\text{(2)}\quad & x+7=0\quad\text{oppure}\quad x-1=0\\
+\text{(3)}\quad & x=0-7\quad\text{oppure}\quad x=0-1\\
+\text{(4)}\quad & x=-7\quad\text{oppure}\quad x=-1\\
+\text{(5)}\quad & S=\{-1\}.
+\end{aligned}\]
+\sott{Esercizio 4c}
+\textbf{Riga 0: equazione originale.}
+\[
+x^5-2x^4-18x^3+36x^2+81x-162=0
+\]
+\textbf{Svolgimento da esaminare.}
+\[\begin{aligned}
+\text{(1)}\quad & x^4(x-2)-18x^2(x-2)+81(x-2)=0\\
+\text{(2)}\quad & x(x-2)(x^4-18x^2+81)=0\\
+\text{(3)}\quad & x(x-2)(x^2-9)^2=0\\
+\text{(4)}\quad & x(x-2)(x-9)^2(x+9)^2=0\\
+\text{(5)}\quad & x(x-2)[(x-9)(x+9)]^2=0\\
+\text{(6)}\quad & \begin{cases}x=0\\x-2=0\\x-9=0\\x+9=0\end{cases}\\
+\text{(7)}\quad & x=0\quad\text{e}\quad x=2\quad\text{e}\quad x=9\quad\text{e}\quad x=-9\\
+\text{(8)}\quad & \text{Impossibile:}\quad S=\varnothing.
+\end{aligned}\]
+\end{document}

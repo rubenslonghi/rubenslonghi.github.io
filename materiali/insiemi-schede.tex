@@ -1,0 +1,452 @@
+\documentclass[11pt, a4paper]{article}
+\usepackage[a4paper, margin=1.5cm, bottom=1.8cm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{booktabs}
+\usepackage{fancyhdr}
+\usepackage{hyperref}
+
+% Palette cromatica per Liceo Sportivo
+\definecolor{primary}{RGB}{15, 76, 129}   % Blu sportivo
+\definecolor{secondary}{RGB}{211, 84, 0}   % Arancio energico
+\definecolor{accent}{RGB}{39, 174, 96}     % Verde
+\definecolor{bglight}{RGB}{248, 249, 250}  % Grigio chiarissimo per i box
+
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\cfoot{\small\color{gray} Liceo Scientifico ad Indirizzo Sportivo -- Laboratorio di Matematica: Teoria degli Insiemi}
+
+\setlist[enumerate]{leftmargin=*, topsep=2pt, itemsep=2pt, parsep=0pt}
+\setlist[itemize]{leftmargin=*, topsep=2pt, itemsep=2pt, parsep=0pt}
+
+\tcbset{
+  colback=bglight,
+  colframe=primary,
+  fonttitle=\bfseries\color{white},
+  boxrule=0.8pt,
+  arc=3pt,
+  top=4pt, bottom=4pt, left=6pt, right=6pt
+}
+
+\begin{document}
+
+% ==============================================================================
+% SQUADRA ALPHA - FACCIATA 1
+% ==============================================================================
+
+\begin{tcolorbox}[colframe=primary, title=\Large\bfseries SFIDA A SQUADRE: DAI PROBLEMI AGLI INSIEMI -- SQUADRA ALPHA]
+\small
+\textbf{Classe:} I Liceo Scientifico Sportivo \hfill \textbf{Tipologia Scheda:} ALPHA (Squadre 1, 2, 3, 4) \\
+\textbf{Nome Squadra:} \dotfill \hfill \textbf{Data:} \dotfill \\
+\textbf{Componenti e Ruoli:} 1. \dotfill (Capitano) -- 2. \dotfill (Scriba) \\
+3. \dotfill (Revisore) -- 4. \dotfill (Relatore) [-- 5. \dotfill (Analista)]
+\end{tcolorbox}
+
+\vspace{-2mm}
+\section*{Parte 1: Risoluzione di Problemi Pratici}
+\textit{Lavorate in gruppo per risolvere gli 8 problemi sottostanti. Utilizzate diagrammi, schemi, tabelle o ragionamenti intuitivi per giustificare le risposte.}
+
+\subsection*{Categoria A: Problemi su Insiemi e Frequenze}
+\begin{enumerate}
+    \item \textbf{Frequentatori della Palestra e del Centro Atletico:} Un'indagine condotta su un gruppo di studenti del liceo sportivo rileva che:
+    \begin{itemize}
+        \item 50 studenti frequentano la palestra scolastica e, fra questi, 42 \textbf{non} frequentano il centro atletico comunale;
+        \item 60 studenti frequentano il centro atletico comunale;
+        \item 18 studenti non frequentano né la palestra scolastica né il centro atletico comunale.
+    \end{itemize}
+    \textbf{Quesito:} Quanti studenti costituiscono complessivamente il gruppo intervistato? Disegnate un diagramma a cerchi (Euler-Venn) per rappresentare visivamente la situazione e mostrare i calcoli.
+    
+    \vspace{1.5cm}
+
+    \item \textbf{Calcio e Tennis a Scuola:} In una scuola di 400 studenti, 150 praticano il calcio, 100 praticano il tennis e 30 praticano entrambe le attività sportive.
+    \textbf{Quesito:} Quanti sono gli studenti della scuola che non praticano né il calcio né il tennis?
+    
+    \vspace{1.2cm}
+\end{enumerate}
+
+\subsection*{Categoria B: Combinatoria e Conteggi}
+\begin{enumerate}[resume]
+    \item \textbf{Il Menu dell'Atleta:} Il menu della mensa dello sportivo comprende: 4 antipasti energetici, 3 primi piatti proteici e 3 secondi piatti. In quanti modi distinti un atleta può comporre il proprio pranzo scegliendo esattamente un antipasto, un primo e un secondo?
+    
+    \vspace{1cm}
+
+    \item \textbf{Strette di Mano al Torneo:} Al termine di una competizione, 6 atleti si incontrano e ciascuno stringe la mano una e una sola volta a tutti gli altri. Quante strette di mano si scambieranno complessivamente in tutto? Spiegate la regola seguita.
+    
+    \vspace{1cm}
+\end{enumerate}
+
+\subsection*{Categoria C: Ragionamento e Deduzioni Logiche}
+\begin{enumerate}[resume]
+    \item \textbf{Allenamento e Palestra:} Stabilite se il seguente ragionamento è valido o errato, motivando la risposta:
+    \begin{quote}
+    \textit{«Se Paolo fa parte della squadra di pallavolo, allora si allena tutti i giorni. Se Paolo si allena tutti i giorni, allora si reca tutti i giorni in palestra. Paolo non si reca tutti i giorni in palestra. Quindi: Paolo non fa parte della squadra di pallavolo.»}
+    \end{quote}
+    
+    \vspace{1cm}
+
+    \item \textbf{Erbivori e Dinosauri:} Stabilite se il seguente ragionamento è valido o errato, spiegando l'eventuale errore:
+    \begin{quote}
+    \textit{«Alcuni dinosauri sono erbivori. Otto è un erbivoro. Quindi: Otto è un dinosauro.»}
+    \end{quote}
+    
+    \vspace{1cm}
+\end{enumerate}
+
+\subsection*{Categoria D: Negazioni e Quantificatori Logici}
+\begin{enumerate}[resume]
+    \item \textbf{Gli Asini Volanti:} La negazione logica corretta dell'affermazione «\textit{Esiste un asino che vola}» è:
+    \begin{quote}
+    A) Esiste un asino che cammina \quad B) Nessun asino vola \quad C) Esistono più asini che volano \\
+    D) Tutti gli asini camminano \quad E) Esiste un asino che non vola
+    \end{quote}
+    \textbf{Scelta e motivazione:} \dotfill
+
+    \vspace{0.8cm}
+
+    \item \textbf{Oggetti d'Avorio:} La negazione logica corretta dell'affermazione «\textit{Ogni oggetto d'avorio è bianco}» è:
+    \begin{quote}
+    A) Ogni oggetto d'avorio è nero \quad B) Nessun oggetto d'avorio è bianco \quad C) Esiste un oggetto d'avorio che è nero \\
+    D) Ogni oggetto d'avorio non è bianco \quad E) Esiste un oggetto d me d'avorio che non è bianco
+    \end{quote}
+    \textbf{Scelta e motivazione:} \dotfill
+\end{enumerate}
+
+\clearpage
+
+% ==============================================================================
+% SQUADRA ALPHA - FACCIATA 2
+% ==============================================================================
+
+\begin{tcolorbox}[colframe=secondary, title=\Large\bfseries PARTE 2: LABORATORIO DI FORMALIZZAZIONE (SQUADRA ALPHA)]
+\textbf{Obiettivo:} Senza consultare il libro di testo, usate gli esercizi risolti nella Facciata 1 per completare in autonomia le definizioni matematiche formali degli insiemi.
+\end{tcolorbox}
+
+\vspace{-1mm}
+
+\section*{1. Concetto di INTERSEZIONE ($\cap$)}
+\begin{itemize}
+    \item \textbf{Completate la definizione:} Dati due insiemi $A$ e $B$, l'insieme \textbf{Intersezione} (simbolo $A \cap B$) è l'insieme formato da tutti gli elementi che appartengono ad $A$ \textbf{\dots\dots\dots\dots} ad $B$ (\textit{inserire la congiunzione logica corretta: "e" oppure "o"}).
+    \item \textbf{Collegamento all'Esercizio 2:} Nell'Esercizio 2 sul Calcio ($C$) e Tennis ($T$), quale numero rappresenta il numero di elementi dell'intersezione $C \cap T$? Risposta: \dotfill
+\end{itemize}
+
+\vspace{-1mm}
+
+\section*{2. Concetto di UNIONE ($\cup$)}
+\begin{itemize}
+    \item \textbf{Completate la definizione:} Dati due insiemi $A$ e $B$, l'insieme \textbf{Unione} (simbolo $A \cup B$) è l'insieme formato da tutti gli elementi che appartengono ad $A$ \textbf{\dots\dots\dots\dots} ad $B$ (o a entrambi).
+    \item \textbf{Collegamento all'Esercizio 2:} Quanti studenti praticano almeno uno tra il calcio e il tennis (cioè appartengono all'unione $C \cup T$)? Mostrate come si calcola questo numero partendo dai dati dell'esercizio:
+    \begin{quote}
+    $|C \cup T| = |C| + |T| - |C \cap T| = $ \dots\dots\dots\dots\dots\dots\dots\dots\dots\dots\dots\dots
+    \end{quote}
+\end{itemize}
+
+\vspace{-1mm}
+
+\section*{3. Concetto di DIFFERENZA tra Insiemi ($A \setminus B$)}
+\begin{itemize}
+    \item \textbf{Completate la definizione:} Dati due insiemi $A$ e $B$, l'insieme \textbf{Differenza} $A \setminus B$ (o $A - B$) è l'insieme formato dagli elementi che appartengono ad $A$ ma \textbf{\dots\dots\dots\dots\dots\dots\dots\dots} appartengono a $B$.
+    \item \textbf{Collegamento all'Esercizio 1:} Nell'Esercizio 1, quanti studenti appartengono all'insieme "Frequentano la palestra ma NOT il centro atletico"? Questo insieme corrisponde alla differenza tra quali insiemi? \dotfill
+    \item \textbf{Riflessione Logica:} La differenza $A \setminus B$ è uguale alla differenza $B \setminus A$? Spiegate portando un esempio pratico.
+    
+    \vspace{0.8cm}
+\end{itemize}
+
+\vspace{-1mm}
+
+\section*{4. Concetto di SOTTOINSIEME ($A \subseteq B$)}
+\begin{itemize}
+    \item \textbf{Completate la definizione:} Si dice che un insieme $A$ è \textbf{sottoinsieme} di $B$ ($A \subseteq B$) se \textbf{\dots\dots\dots\dots\dots\dots} elemento che appartiene ad $A$ appartiene anche a $B$.
+    \item \textbf{Collegamento all'Esercizio 6:} Se $D$ è l'insieme dei dinosauri ed $E$ è l'insieme degli erbivori, l'affermazione «\textit{Alcuni dinosauri sono erbivori}» significa che $D$ è sottoinsieme di $E$? Perché l'ipotesi che "Otto è un erbivoro" non ci permette di concludere con certezza che Otto sia un dinosauro?
+    
+    \vspace{0.8cm}
+\end{itemize}
+
+\vspace{-1mm}
+
+\section*{5. Concetto di INSIEME VUOTO ($\emptyset$)}
+\begin{itemize}
+    \item \textbf{Completate la definizione:} L'insieme \textbf{Vuoto} è un insieme speciale che contiene \textbf{\dots\dots\dots\dots\dots\dots} elementi. Si indica con il simbolo $\emptyset$ oppure $\{ \}$.
+    \item Se due insiemi $A$ e $B$ non hanno alcun elemento in comune, la loro intersezione è: $A \cap B = $ \dotfill
+\end{itemize}
+
+\vspace{-1mm}
+
+\section*{6. Sintesi Grafica della Squadra}
+Rappresentate con i diagrammi di Euler-Venn le seguenti operazioni, tratteggiando o colorando la regione corrispondente:
+
+\begin{center}
+\small
+\begin{tabular}{ccccc}
+\textbf{Intersezione } $A \cap B$ & \textbf{Unione } $A \cup B$ & \textbf{Differenza } $A \setminus B$ & \textbf{Differenza } $B \setminus A$ & \textbf{Sottoinsieme } $A \subseteq B$ \\[4pt]
+\begin{minipage}{3cm}
+\centering
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(40,30)
+\put(15,15){\circle{22}}
+\put(25,15){\circle{22}}
+\put(8,15){$A$}
+\put(28,15){$B$}
+\end{picture}
+\end{minipage} &
+\begin{minipage}{3cm}
+\centering
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(40,30)
+\put(15,15){\circle{22}}
+\put(25,15){\circle{22}}
+\put(8,15){$A$}
+\put(28,15){$B$}
+\end{picture}
+\end{minipage} &
+\begin{minipage}{3cm}
+\centering
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(40,30)
+\put(15,15){\circle{22}}
+\put(25,15){\circle{22}}
+\put(8,15){$A$}
+\put(28,15){$B$}
+\end{picture}
+\end{minipage} &
+\begin{minipage}{3cm}
+\centering
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(40,30)
+\put(15,15){\circle{22}}
+\put(25,15){\circle{22}}
+\put(8,15){$A$}
+\put(28,15){$B$}
+\end{picture}
+\end{minipage} &
+\begin{minipage}{3cm}
+\centering
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(40,30)
+\put(20,15){\circle{26}}
+\put(20,15){\circle{14}}
+\put(20,13){\tiny $A$}
+\put(20,24){\tiny $B$}
+\end{picture}
+\end{minipage}
+\end{tabular}
+\end{center}
+
+\clearpage
+
+% ==============================================================================
+% SQUADRA BETA - FACCIATA 1
+% ==============================================================================
+
+\begin{tcolorbox}[colframe=primary, title=\Large\bfseries SFIDA A SQUADRE: DAI PROBLEMI AGLI INSIEMI -- SQUADRA BETA]
+\small
+\textbf{Classe:} I Liceo Scientifico Sportivo \hfill \textbf{Tipologia Scheda:} BETA (Squadre 5, 6, 7, 8) \\
+\textbf{Nome Squadra:} \dotfill \hfill \textbf{Data:} \dotfill \\
+\textbf{Componenti e Ruoli:} 1. \dotfill (Capitano) -- 2. \dotfill (Scriba) \\
+3. \dotfill (Revisore) -- 4. \dotfill (Relatore) [-- 5. \dotfill (Analista)]
+\end{tcolorbox}
+
+\vspace{-2mm}
+\section*{Parte 1: Risoluzione di Problemi Pratici}
+\textit{Lavorate in gruppo per risolvere gli 8 problemi sottostanti. Utilizzate diagrammi, schemi, tabelle o ragionamenti intuitivi per giustificare le risposte.}
+
+\subsection*{Categoria A: Problemi su Insiemi e Frequenze}
+\begin{enumerate}
+    \item \textbf{Indagine sulle Lingue negli Atleti:} Da un'indagine sulla conoscenza delle lingue straniere effettuata su un gruppo di 500 atleti italiani, è emerso che:
+    \begin{itemize}
+        \item il 60\% conosce l'inglese;
+        \item il 30\% conosce il francese;
+        \item il 20\% non conosce né l'inglese né il francese.
+    \end{itemize}
+    \textbf{Quesito:} Quanti atleti conoscono sia l'inglese sia il francese? Quanti conoscono soltanto l'inglese? E quanti soltanto il francese? Disegnate il diagramma di Venn corrispondente.
+    
+    \vspace{1.5cm}
+
+    \item \textbf{Inchiesta Polisportiva a Tre Attività:} Un'indagine condotta in un liceo sportivo rileva la pratica di tre discipline: Calcio ($C$), Nuoto ($N$) e Tennis ($T$). I dati sono:
+    \begin{quote}
+    a. 200 praticano calcio; \quad b. 140 nuoto; \quad c. 110 tennis; \quad d. 30 nuoto e tennis; \\
+    e. 150 praticano calcio ma NON tennis né nuoto; \quad f. 20 praticano calcio e nuoto ma NON tennis; \\
+    g. 10 praticano calcio, nuoto e tennis; \quad h. 40 non praticano nessuno dei tre sport.
+    \end{quote}
+    \textbf{Quesito:} Quanti sono complessivamente gli studenti della scuola?
+    
+    \vspace{1.2cm}
+\end{enumerate}
+
+\subsection*{Categoria B: Combinatoria e Conteggi}
+\begin{enumerate}[resume]
+    \item \textbf{Password degli Armadietti:} La serratura elettronica di un armadietto dello spogliatoio richiede una password di 4 caratteri.
+    \begin{enumerate}
+        \item Quante password diverse si possono generare usando unicamente le 10 cifre numeriche ($0-9$)?
+        \item Quante password diverse si possono generare combinando cifre e 26 lettere dell'alfabeto?
+    \end{enumerate}
+    
+    \vspace{1cm}
+
+    \item \textbf{Il Guardaroba dello Sportivo:} Michele sceglie la propria tenuta per l'allenamento attingendo da: 4 paia di scarpe da ginnastica, 3 pantaloni di tuta, 5 magliette tecniche. Inoltre può scegliere se indossare o meno uno dei 3 cappellini da corsa che possiede. In quanti modi possibili ed elencabili può vestirsi?
+    
+    \vspace{1cm}
+\end{enumerate}
+
+\subsection*{Categoria C: Ragionamento e Deduzioni Logiche}
+\begin{enumerate}[resume]
+    \item \textbf{La Festa di Compleanno:} Stabilite se la seguente deduzione è valida o non valida, spiegando il motivo:
+    \begin{quote}
+    \textit{«Se Maria viene alla mia festa di compleanno, allora alla festa non viene Paolo. Se alla festa viene Marco, allora viene anche Paolo. Maria viene alla mia festa di compleanno. Quindi: Alla mia festa di compleanno non viene Marco.»}
+    \end{quote}
+    
+    \vspace{1cm}
+
+    \item \textbf{Concorso Viaggio in Messico:} Stabilite se la seguente deduzione è valida o non valida, spiegando il motivo:
+    \begin{quote}
+    \textit{«Se appartieni alle prime 100 persone che prenotano il viaggio, allora partecipi al concorso. Se partecipi al concorso, allora puoi vincere il viaggio gratis. Hai vinto il viaggio gratis. Quindi: Appartieni alle prime 100 persone che hanno prenotato il viaggio.»}
+    \end{quote}
+    
+    \vspace{1cm}
+\end{enumerate}
+
+\subsection*{Categoria D: Negazioni e Quantificatori Logici}
+\begin{enumerate}[resume]
+    \item \textbf{Superamento Prova di Atletica:} Qual è la negazione logica corretta della frase «\textit{Tutti gli studenti della classe hanno superato la prova di atletica}»?
+    \begin{quote}
+    A) Nessuno studente ha superato la prova \quad B) Tutti gli studenti hanno fallito la prova \\
+    C) Esiste almeno uno studente che non ha superato la prova \quad D) La maggior parte non l'ha superata
+    \end{quote}
+    \textbf{Scelta e motivazione:} \dotfill
+
+    \vspace{0.8cm}
+
+    \item \textbf{Calciatori a Piedi Scalzi:} Qual è la negazione logica corretta della frase «\textit{Esiste almeno un calciatore che gioca a piedi scalzi}»?
+    \begin{quote}
+    A) Nessun calciatore gioca a piedi scalzi \quad B) Esiste un calciatore che gioca con le scarpe \\
+    C) Tutti i calciatori giocano a piedi scalzi \quad D) Alcuni calciatori non giocano a piedi scalzi
+    \end{quote}
+    \textbf{Scelta e motivazione:} \dotfill
+\end{enumerate}
+
+\clearpage
+
+% ==============================================================================
+% SQUADRA BETA - FACCIATA 2
+% ==============================================================================
+
+\begin{tcolorbox}[colframe=secondary, title=\Large\bfseries PARTE 2: LABORATORIO DI FORMALIZZAZIONE (SQUADRA BETA)]
+\textbf{Obiettivo:} Senza consultare il libro di testo, usate gli esercizi risolti nella Facciata 1 per completare in autonomia le definizioni matematiche formali degli insiemi.
+\end{tcolorbox}
+
+\vspace{-1mm}
+
+\section*{1. Concetto di INTERSEZIONE ($\cap$)}
+\begin{itemize}
+    \item \textbf{Completate la definizione:} Dati due insiemi $A$ e $B$, l'insieme \textbf{Intersezione} (simbolo $A \cap B$) è l'insieme formato da tutti gli elementi che appartengono ad $A$ \textbf{\dots\dots\dots\dots} ad $B$ (\textit{inserire la congiunzione logica corretta: "e" oppure "o"}).
+    \item \textbf{Collegamento all'Esercizio 1:} Nell'Esercizio 1 (Inglese $I$ e Francese $F$), quanti atleti appartengono all'intersezione $I \cap F$? Come corrisponde questa percentuale all'area sovrapposta dei cerchi? \dotfill
+\end{itemize}
+
+\vspace{-1mm}
+
+\section*{2. Concetto di UNIONE ($\cup$)}
+\begin{itemize}
+    \item \textbf{Completate la definizione:} Dati due insiemi $A$ e $B$, l'insieme \textbf{Unione} (simbolo $A \cup B$) è l'insieme formato da tutti gli elementi che appartengono ad $A$ \textbf{\dots\dots\dots\dots} ad $B$ (o a entrambi).
+    \item \textbf{Collegamento all'Esercizio 1:} Qual è la percentuale di atleti che conoscono \textbf{almeno una} tra le due lingue (cioè $I \cup F$)? Se sommiamo $60\% + 30\% = 90\%$, perché otteniamo un valore maggiore? Cosa dobbiamo sottrarre?
+    \begin{quote}
+    $\% (I \cup F) = \% I + \% F - \% (I \cap F) = $ \dots\dots\dots\dots\dots\dots\dots\dots\dots\dots\dots\dots
+    \end{quote}
+\end{itemize}
+
+\vspace{-1mm}
+
+\section*{3. Concetto di DIFFERENZA tra Insiemi ($A \setminus B$)}
+\begin{itemize}
+    \item \textbf{Completate la definizione:} Dati due insiemi $A$ e $B$, l'insieme \textbf{Differenza} $A \setminus B$ (o $A - B$) è l'insieme formato dagli elementi che appartengono ad $A$ ma \textbf{\dots\dots\dots\dots\dots\dots\dots\dots} appartengono a $B$.
+    \item \textbf{Collegamento all'Esercizio 2:} Nell'Esercizio 2, quanti studenti praticano il calcio ma non praticano né il nuoto né il tennis? Esprimete questo insieme usando le differenze.
+    \item \textbf{Riflessione Logica:} La differenza tra l'insieme di chi parla Inglese e chi parla Francese ($I \setminus F$) dà lo stesso numero rispetto a $F \setminus I$? Rispondete con i numeri dell'Esercizio 1.
+    
+    \vspace{0.8cm}
+\end{itemize}
+
+\vspace{-1mm}
+
+\section*{4. Concetto di SOTTOINSIEME ($A \subseteq B$)}
+\begin{itemize}
+    \item \textbf{Completate la definizione:} Si dice che un insieme $A$ è \textbf{sottoinsieme} di $B$ ($A \subseteq B$) se \textbf{\dots\dots\dots\dots\dots\dots} elemento che appartiene ad $A$ appartiene anche a $B$.
+    \item \textbf{Collegamento all'Esercizio 6:} Nell'Esercizio 6 (prenotazione viaggio e concorso), essere tra le prime 100 persone ($P$) significa partecipare al concorso ($C$). $P$ è sottoinsieme di $C$ ($P \subseteq C$)? Perché vincere il concorso non garantisce di essere tra le prime 100 persone prenotate?
+    
+    \vspace{0.8cm}
+\end{itemize}
+
+\vspace{-1mm}
+
+\section*{5. Concetto di INSIEME VUOTO ($\emptyset$)}
+\begin{itemize}
+    \item \textbf{Completate la definizione:} L'insieme \textbf{Vuoto} è un insieme speciale che contiene \textbf{\dots\dots\dots\dots\dots\dots} elementi. Si indica con il simbolo $\emptyset$ oppure $\{ \}$.
+    \item Se due sport non hanno alcun praticante in comune, la loro intersezione è l'insieme \dotfill
+\end{itemize}
+
+\vspace{-1mm}
+
+\section*{6. Sintesi Grafica della Squadra}
+Rappresentate con i diagrammi di Euler-Venn le seguenti operazioni, tratteggiando o colorando la regione corrispondente:
+
+\begin{center}
+\small
+\begin{tabular}{ccccc}
+\textbf{Intersezione } $A \cap B$ & \textbf{Unione } $A \cup B$ & \textbf{Differenza } $A \setminus B$ & \textbf{Differenza } $B \setminus A$ & \textbf{Sottoinsieme } $A \subseteq B$ \\[4pt]
+\begin{minipage}{3cm}
+\centering
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(40,30)
+\put(15,15){\circle{22}}
+\put(25,15){\circle{22}}
+\put(8,15){$A$}
+\put(28,15){$B$}
+\end{picture}
+\end{minipage} &
+\begin{minipage}{3cm}
+\centering
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(40,30)
+\put(15,15){\circle{22}}
+\put(25,15){\circle{22}}
+\put(8,15){$A$}
+\put(28,15){$B$}
+\end{picture}
+\end{minipage} &
+\begin{minipage}{3cm}
+\centering
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(40,30)
+\put(15,15){\circle{22}}
+\put(25,15){\circle{22}}
+\put(8,15){$A$}
+\put(28,15){$B$}
+\end{picture}
+\end{minipage} &
+\begin{minipage}{3cm}
+\centering
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(40,30)
+\put(15,15){\circle{22}}
+\put(25,15){\circle{22}}
+\put(8,15){$A$}
+\put(28,15){$B$}
+\end{picture}
+\end{minipage} &
+\begin{minipage}{3cm}
+\centering
+\setlength{\unitlength}{0.6mm}
+\begin{picture}(40,30)
+\put(20,15){\circle{26}}
+\put(20,15){\circle{14}}
+\put(20,13){\tiny $A$}
+\put(20,24){\tiny $B$}
+\end{picture}
+\end{minipage}
+\end{tabular}
+\end{center}
+
+\end{document}

@@ -1,0 +1,988 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Disequazioni a tempo · 2BS</title>
+<style>
+:root {
+  color-scheme: dark;
+  --page: #111a21; --panel: #19262f; --line: #41545e;
+  --text: #f6f5ef; --muted: #bdcbd0; --accent: #a9ead8; --warm: #ffdb9d;
+  background: var(--page); color: var(--text);
+  font-family: Inter, "Segoe UI", Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+[hidden] { display: none !important; }
+button, select { font: inherit; color: inherit; background: var(--panel); border: 1px solid var(--line); border-radius: 9px; padding: .6rem .85rem; }
+button, select { cursor: pointer; }
+button:hover, select:hover { border-color: var(--accent); }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+button:disabled { opacity: .45; cursor: default; }
+.primary { background: var(--accent); color: #102925; border-color: var(--accent); font-weight: 750; }
+.shell { max-width: 1680px; min-height: 100svh; margin: auto; padding: clamp(12px,2.2vw,38px) clamp(14px,4vw,68px); display: flex; flex-direction: column; gap: clamp(10px,1.7vh,21px); }
+.top, .toolbar, .nav, .status, .review-nav { display: flex; align-items: center; gap: .65rem; }
+.top { justify-content: space-between; border-bottom: 1px solid var(--line); padding-bottom: .8rem; flex-wrap: wrap; }
+.nav, .toolbar, .review-nav { flex-wrap: wrap; }
+.nav label { display: flex; align-items: center; gap: .45rem; color: var(--muted); font-size: .92rem; }
+.nav select { color: var(--text); max-width: min(42vw, 23rem); }
+.brand { color: var(--accent); font-size: 1.05rem; font-weight: 800; }
+.chooser { margin: auto 0; max-width: 1050px; width: 100%; align-self: center; }
+.chooser p { font-size: clamp(1.05rem,2vw,1.55rem); color: var(--muted); max-width: 58ch; }
+.paths { margin-top: 1.5rem; display: grid; grid-template-columns: repeat(auto-fit,minmax(min(100%,250px),1fr)); gap: 1rem; }
+.path { display: grid; gap: .35rem; text-align: left; padding: clamp(16px,3.3vw,38px); border-radius: 16px; font-size: clamp(1rem,1.75vw,1.45rem); }
+.path strong { color: var(--accent); font-size: clamp(1.45rem,3vw,2.7rem); }
+.path small { color: var(--muted); }
+#path-status { color: var(--accent); font-weight: 700; }
+#home-title { overflow-wrap: anywhere; }
+.home { display: grid; grid-template-columns: 1.15fr .8fr; gap: clamp(16px,4vw,64px); align-items: center; margin: auto 0; }
+h1,h2,p { margin: 0; }
+h1 { font-size: clamp(2.6rem,6vw,6rem); line-height: .96; letter-spacing: -.055em; margin-bottom: 1.35rem; }
+h2 { font-size: clamp(1.5rem,3.2vw,3rem); line-height: 1.12; }
+p { line-height: 1.42; }
+.phase-list { display: grid; gap: .45rem; }
+.phase { text-align: left; width: 100%; display: flex; justify-content: space-between; gap: .65rem; align-items: baseline; padding: .75rem 1rem; }
+.phase small, .muted { color: var(--muted); }
+.note { display: grid; justify-items: start; gap: 1rem; background: var(--panel); padding: clamp(14px,3vw,38px); border: 1px solid var(--line); border-radius: 19px; }
+.status { justify-content: space-between; min-height: 2.25rem; font-size: clamp(1rem,1.95vw,1.8rem); }
+.status small { color: var(--muted); font-size: .8em; margin-left: .5rem; }
+.clock { font-size: clamp(1.5rem,3.2vw,3.3rem); color: var(--accent); font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; white-space: nowrap; }
+.clock small { color: inherit; margin-left: .12rem; font-size: .47em; }
+.track { height: 7px; background: #31424d; border-radius: 9px; overflow: hidden; }
+.fill { width: 100%; height: 100%; background: var(--accent); transform-origin: left; }
+.clock.urgent { color: var(--warm); }
+.fill.urgent { background: var(--warm); }
+.stage { flex: 1; min-height: 60svh; background: var(--panel); border: 1px solid var(--line); border-radius: 21px; padding: clamp(17px,3vw,43px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: clamp(13px,2.4vh,32px); text-align: center; }
+.stage p { max-width: 66ch; }
+.prompt { color: var(--muted); font-size: clamp(1.05rem,2vw,1.85rem); }
+.prompt.special { color: var(--warm); background: #3b3023; border: 1px solid #a17a45; border-radius: 12px; padding: .45em .8em; font-size: clamp(1.16rem,2.5vw,2.4rem); line-height: 1.24; font-weight: 750; max-width: 55ch; }
+.formula { width: 100%; text-align: center; font-size: clamp(2.45rem,6.15vw,6.2rem); line-height: 1.1; overflow: auto; }
+.formula.dense { font-size: clamp(1.75rem,4.2vw,4.2rem); }
+.stage.answered .formula { font-size: clamp(1.8rem,4.6vw,4.6rem); }
+.stage.answered .formula.dense { font-size: clamp(1.5rem,3.55vw,3.55rem); }
+.stage .word-problem { font-size: clamp(1.18rem,2.75vw,2.6rem); }
+.solution-panel { width: 100%; border-top: 1px solid var(--line); padding-top: clamp(10px,1.8vh,23px); display: grid; justify-items: center; gap: .65rem; }
+.stage .solution, .solution { color: var(--accent); font-size: clamp(1.5rem,3.55vw,3.55rem); }
+.reason { font-size: clamp(1.05rem,1.85vw,1.7rem); }
+.tex-inline { display: inline-block; white-space: nowrap; vertical-align: baseline; }
+.tex-render { display: inline-block; max-width: 100%; vertical-align: middle; }
+.tex-render mjx-container { margin: 0 !important; }
+.tex-render > svg { display: block; max-width: 100%; height: auto; fill: currentColor; }
+.toolbar { justify-content: center; }
+.math-status { color: var(--warm); font-size: .95rem; }
+.hint { color: var(--muted); font-size: .85rem; }
+kbd { font-family: inherit; border: 1px solid var(--line); border-radius: 4px; padding: 0 .28em; }
+#review { max-width: 1100px; width: 100%; margin: 4px auto 0; }
+.review-item { border-bottom: 1px solid var(--line); display: grid; grid-template-columns: auto minmax(0,1fr); gap: 1rem; padding: .9rem 0; }
+.review-item .formula { font-size: clamp(1.15rem,2.4vw,2.25rem); text-align: left; }
+.review-item p, .review-item .formula { margin-top: .35rem; }
+.review-nav { margin-top: 1rem; }
+@media(max-width:760px) {
+  .home { grid-template-columns: 1fr; }
+  .nav label { gap: .25rem; }
+  .nav select { padding: .45rem .35rem; }
+  .stage { min-height: 53svh; }
+  .hint { display: none; }
+}
+@media(max-height:770px) and (min-width:900px) {
+  .stage { min-height: 53svh; gap: 12px; padding-block: 18px; }
+  .stage .formula.dense { font-size: clamp(1.7rem,3.8vw,3.6rem); }
+  .stage.answered .formula.dense { font-size: clamp(1.5rem,3.2vw,3.1rem); }
+}
+</style>
+<script>
+window.MathJax = {startup:{typeset:false}, svg:{fontCache:"none"}};
+</script>
+</head>
+<body>
+<main class="shell">
+  <header class="top">
+    <span class="brand">2BS · Matematica</span>
+    <nav class="nav" aria-label="Navigazione del quiz">
+      <label>Ritmo <select id="pace"><option value="0">Avvio</option><option value="1">Consolidamento</option></select></label>
+      <label>Fase <select id="phase-select" disabled></select></label>
+      <label>Quesito <select id="item-select" disabled></select></label>
+      <button id="home-button" hidden>Indice</button>
+      <button id="route-button" hidden>Cambia percorso</button>
+      <button id="fullscreen">Schermo intero</button>
+    </nav>
+  </header>
+  <p class="math-status" id="math-status" role="status">Caricamento delle formule…</p>
+  <section class="chooser" id="chooser">
+    <h1>Disequazioni a tempo</h1>
+    <p>Scegli il percorso. Con <strong>Avvio</strong> hai più tempo per scrivere i passaggi. Con <strong>Consolidamento</strong> il timer scorre con tempi più stretti.</p>
+    <div class="paths">
+      <button class="path" id="school"><strong>A scuola</strong><small>22 quesiti da svolgere in classe</small></button>
+      <button class="path" id="house"><strong>A casa</strong><small>22 quesiti da svolgere in autonomia</small></button>
+    </div>
+  </section>
+  <section class="home" id="home" hidden>
+    <div>
+      <h1 id="home-title"></h1>
+      <div class="phase-list" id="phase-list"></div>
+    </div>
+    <aside class="note">
+      <h2>Come si gioca</h2>
+      <p id="path-status"></p>
+      <p>Scegli una fase e avviala, oppure apri un quesito dal menu. Scrivi sul foglio numero e risposta. Allo scadere il quiz avanza.</p>
+      <p><strong>Mostra soluzione</strong> ferma il timer e lascia sullo schermo il quesito con la spiegazione.</p>
+      <button id="review-home">Apri la correzione</button>
+    </aside>
+  </section>
+  <div class="status" id="status" hidden>
+    <div><strong id="phase-name"></strong><small id="position"></small></div>
+    <div class="clock" id="clock"><span id="seconds"></span><small> s</small></div>
+  </div>
+  <div class="track" id="track" hidden><div class="fill" id="fill"></div></div>
+  <section class="stage" id="stage" hidden>
+    <h2 id="stage-title"></h2>
+    <p class="prompt" id="prompt"></p>
+    <div class="formula" id="formula" hidden></div>
+    <p class="word-problem" id="word-problem" hidden></p>
+    <div class="solution-panel" id="solution-panel" aria-live="polite" hidden>
+      <div class="formula solution" id="solution"></div>
+      <p class="reason" id="reason"></p>
+    </div>
+  </section>
+  <div class="toolbar" id="toolbar" hidden>
+    <button class="primary" id="start" hidden disabled>Inizia la fase</button>
+    <button id="pause" hidden>Pausa</button>
+    <button class="primary" id="reveal" hidden>Mostra soluzione</button>
+    <button id="next" hidden>Quesito successivo</button>
+    <button class="primary" id="phase-review" hidden>Correggi la fase</button>
+    <button id="next-phase" hidden>Fase successiva</button>
+    <span class="hint" id="hint" hidden><kbd>Spazio</kbd> pausa · <kbd>S</kbd> soluzione · <kbd>→</kbd> avanti</span>
+  </div>
+  <section id="review" hidden>
+    <h2 id="review-title"></h2>
+    <div id="answers"></div>
+    <div class="review-nav">
+      <button id="review-prev">Fase precedente</button>
+      <button id="review-next">Fase successiva</button>
+    </div>
+  </section>
+</main>
+<script>
+"use strict";
+const banks = [
+  {
+    "title": "Primo grado",
+    "pairs": [
+      [
+        [
+          23,
+          17
+        ],
+        [
+          "",
+          "-3x\\ge12",
+          "x\\le-4",
+          "Dividi per \\(-3\\) e inverti il verso."
+        ],
+        [
+          "",
+          "-4x\\le20",
+          "x\\ge-5",
+          "Dividi per \\(-4\\) e inverti il verso."
+        ]
+      ],
+      [
+        [
+          38,
+          28
+        ],
+        [
+          "In quale caso x = 2 è una soluzione?",
+          "\\begin{aligned}\n\\text{A.}\\;&3x-6>0 & \\text{B.}\\;&7-3x<0\\\\\n\\text{C.}\\;&(x-2)^2>0 & \\text{D.}\\;&1-\\frac{x}{4}>0\n\\end{aligned}",
+          "\\text{D}",
+          "Sostituendo \\(x=2\\) in D si ottiene \\(1-\\frac24=\\frac12>0\\). A e C danno \\(0>0\\), B dà \\(1<0\\)."
+        ],
+        [
+          "In quale caso x = −2 è una soluzione?",
+          "\\begin{aligned}\n\\text{A.}\\;&2x+4>0 & \\text{B.}\\;&1+\\frac{x}{3}>0\\\\\n\\text{C.}\\;&(x+2)^2>0 & \\text{D.}\\;&5+2x<0\n\\end{aligned}",
+          "\\text{B}",
+          "Per \\(x=-2\\) la B dà \\(1-\\frac23=\\frac13>0\\). La A e la C danno \\(0>0\\), la D dà \\(1<0\\)."
+        ]
+      ],
+      [
+        [
+          28,
+          20
+        ],
+        [
+          "Quante soluzioni ci sono?",
+          "3(x-2)<3x-6",
+          "S=\\varnothing",
+          "I termini in \\(x\\) si eliminano. Rimane \\(-6<-6\\), che è falsa."
+        ],
+        [
+          "Quante soluzioni ci sono?",
+          "4(x+1)\\ge4x+4",
+          "S=\\mathbb{R}",
+          "I termini in \\(x\\) si eliminano. Rimane \\(4\\ge4\\), che è vera."
+        ]
+      ],
+      [
+        [
+          60,
+          45
+        ],
+        [
+          "",
+          "\\frac{x-5}{2}<\\frac{2-x}{3}",
+          "x<\\frac{19}{5}",
+          "Moltiplicando per \\(6>0\\), si ottiene \\(3x-15<4-2x\\), quindi \\(5x<19\\)."
+        ],
+        [
+          "",
+          "\\frac{x-4}{3}\\ge\\frac{1-x}{2}",
+          "x\\ge\\frac{11}{5}",
+          "Moltiplicando per \\(6>0\\), si ottiene \\(2x-8\\ge3-3x\\), quindi \\(5x\\ge11\\)."
+        ]
+      ],
+      [
+        [
+          78,
+          60
+        ],
+        [
+          "",
+          "(x-4)^2\\le(x+2)^2+x",
+          "x\\ge\\frac{12}{13}",
+          "Sviluppando i quadrati, i termini in \\(x^2\\) si cancellano. Si ottiene \\(12\\le13x\\)."
+        ],
+        [
+          "",
+          "(x-3)^2\\le(x+1)^2+2x",
+          "x\\ge\\frac45",
+          "I termini in \\(x^2\\) si cancellano. Si ottiene \\(8\\le10x\\)."
+        ]
+      ]
+    ]
+  },
+  {
+    "title": "Sistemi di disequazioni",
+    "pairs": [
+      [
+        [
+          34,
+          25
+        ],
+        [
+          "",
+          "\\begin{cases}x\\ge-1\\\\x<3\\end{cases}",
+          "S=[-1,3)",
+          "Interseca le due semirette. \\(-1\\) è incluso, \\(3\\) è escluso."
+        ],
+        [
+          "",
+          "\\begin{cases}x>-3\\\\x\\le2\\end{cases}",
+          "S=(-3,2]",
+          "Il primo estremo è escluso dalla prima disequazione, il secondo è ammesso da entrambe."
+        ]
+      ],
+      [
+        [
+          30,
+          21
+        ],
+        [
+          "Quante soluzioni ci sono?",
+          "\\begin{cases}x\\ge2\\\\x\\le2\\end{cases}",
+          "S=\\{2\\}",
+          "I due estremi coincidono e ciascuna condizione ammette \\(2\\)."
+        ],
+        [
+          "Quante soluzioni ci sono?",
+          "\\begin{cases}x\\ge-1\\\\x<-1\\end{cases}",
+          "S=\\varnothing",
+          "La prima condizione ammette \\(-1\\), la seconda lo esclude. Le semirette non si sovrappongono."
+        ]
+      ],
+      [
+        [
+          54,
+          40
+        ],
+        [
+          "Le due condizioni sono già risolte. Scrivi l’intersezione.",
+          "\\begin{cases}x<-2\\;\\lor\\;x\\ge3\\\\-4\\le x<5\\end{cases}",
+          "S=[-4,-2)\\cup[3,5)",
+          "Interseca \\([-4,5)\\) con ciascuno dei due intervalli della prima riga."
+        ],
+        [
+          "Le due condizioni sono già risolte. Scrivi l’intersezione.",
+          "\\begin{cases}x\\le-1\\;\\lor\\;x>2\\\\-3<x\\le4\\end{cases}",
+          "S=(-3,-1]\\cup(2,4]",
+          "Interseca \\((-3,4]\\) con ciascuna delle due parti ammesse dalla prima riga."
+        ]
+      ],
+      [
+        [
+          105,
+          80
+        ],
+        [
+          "",
+          "\\begin{cases}\\dfrac{x+1}{2}-x\\le2\\\\3-2x>x-6\\\\x+2<2x+4\\end{cases}",
+          "S=(-2,3)",
+          "Le tre condizioni diventano \\(x\\ge-3\\), \\(x<3\\) e \\(x>-2\\)."
+        ],
+        [
+          "",
+          "\\begin{cases}\\dfrac{x+3}{2}-x\\le2\\\\5-2x>x-7\\\\x+1<2x+4\\end{cases}",
+          "S=[-1,4)",
+          "Si ottengono \\(x\\ge-1\\), \\(x<4\\) e \\(x>-3\\). La terza condizione non restringe ulteriormente l’intersezione."
+        ]
+      ]
+    ]
+  },
+  {
+    "title": "Disequazioni prodotto",
+    "pairs": [
+      [
+        [
+          30,
+          22
+        ],
+        [
+          "Vero o falso? Se il prodotto è positivo, entrambi i fattori sono positivi.",
+          "(x-2)(x+1)>0",
+          "\\text{Falso}",
+          "Prendi \\(x=-2\\). I fattori valgono \\(-4\\) e \\(-1\\), quindi il prodotto è positivo."
+        ],
+        [
+          "Vero o falso? Se il prodotto è positivo, entrambi i fattori sono positivi.",
+          "(x+2)(x-5)>0",
+          "\\text{Falso}",
+          "Per \\(x=-3\\) i fattori valgono \\(-1\\) e \\(-8\\). Il prodotto vale \\(8>0\\)."
+        ]
+      ],
+      [
+        [
+          58,
+          44
+        ],
+        [
+          "",
+          "(2-x)(x+3)>0",
+          "S=(-3,2)",
+          "\\(2-x\\) è positivo a sinistra di \\(2\\). \\(x+3\\) è positivo a destra di \\(-3\\). Gli zeri restano esclusi."
+        ],
+        [
+          "",
+          "(3-x)(x+2)\\ge0",
+          "S=[-2,3]",
+          "I fattori sono entrambi positivi tra \\(-2\\) e \\(3\\). I due zeri sono inclusi."
+        ]
+      ],
+      [
+        [
+          65,
+          50
+        ],
+        [
+          "",
+          "(x-4)(x+1)^2\\ge0",
+          "S=\\{-1\\}\\cup[4,+\\infty)",
+          "Il quadrato è positivo su entrambi i lati di \\(-1\\). In \\(-1\\) il prodotto è zero, quindi quel punto isolato è incluso."
+        ],
+        [
+          "",
+          "(x-3)(x+2)^2\\ge0",
+          "S=\\{-2\\}\\cup[3,+\\infty)",
+          "Il quadrato è positivo su entrambi i lati di \\(-2\\), dove vale zero. Il fattore \\(x-3\\) dà la semiretta \\(x\\ge3\\)."
+        ]
+      ],
+      [
+        [
+          105,
+          80
+        ],
+        [
+          "",
+          "(x^2-9)(x+1)\\le0",
+          "S=(-\\infty,-3]\\cup[-1,3]",
+          "Scomponi \\(x^2-9=(x-3)(x+3)\\). Da sinistra i segni sono \\(-,+,-,+\\). Includi tutti e tre gli zeri."
+        ],
+        [
+          "",
+          "(x^2-16)(x-2)\\le0",
+          "S=(-\\infty,-4]\\cup[2,4]",
+          "Scomponi \\(x^2-16=(x-4)(x+4)\\). I segni da sinistra sono \\(-,+,-,+\\). Gli zeri sono \\(-4,2,4\\)."
+        ]
+      ]
+    ]
+  },
+  {
+    "title": "Disequazioni frazionarie",
+    "pairs": [
+      [
+        [
+          42,
+          32
+        ],
+        [
+          "La conclusione è valida? Se è falsa, trova un controesempio.",
+          "\\frac{x+1}{x}>0\\quad\\Rightarrow\\quad x+1>0",
+          "\\text{Falsa. Per esempio, }x=-2.",
+          "Per \\(x=-2\\), il rapporto vale \\(\\frac12\\) e il numeratore vale \\(-1\\). Moltiplicare per \\(x\\) senza controllarne il segno può cambiare l’insieme delle soluzioni."
+        ],
+        [
+          "La conclusione è valida? Se è falsa, trova un controesempio.",
+          "\\frac{x+2}{x}>0\\quad\\Rightarrow\\quad x+2>0",
+          "\\text{Falsa. Per esempio, }x=-3.",
+          "Per \\(x=-3\\) il rapporto vale \\(\\frac13>0\\) e il numeratore vale \\(-1\\). Il segno del denominatore va considerato."
+        ]
+      ],
+      [
+        [
+          68,
+          50
+        ],
+        [
+          "Decidi quali estremi includere e scrivi le soluzioni.",
+          "\\frac{x-2}{x+1}\\ge0",
+          "S=(-\\infty,-1)\\cup[2,+\\infty)",
+          "Il rapporto è positivo nei due intervalli esterni. \\(2\\) annulla il numeratore, \\(-1\\) annulla il denominatore."
+        ],
+        [
+          "Decidi quali estremi includere e scrivi le soluzioni.",
+          "\\frac{x-3}{x+2}\\le0",
+          "S=(-2,3]",
+          "Tra \\(-2\\) e \\(3\\) i fattori hanno segni opposti. \\(-2\\) annulla il denominatore. \\(3\\) annulla il numeratore ed è compreso."
+        ]
+      ],
+      [
+        [
+          108,
+          82
+        ],
+        [
+          "",
+          "x-\\frac{6}{x}\\ge1",
+          "S=[-2,0)\\cup[3,+\\infty)",
+          "La forma normale è \\(\\frac{(x+2)(x-3)}{x}\\ge0\\). Gli zeri del numeratore sono inclusi. \\(0\\) è escluso."
+        ],
+        [
+          "",
+          "x-\\frac{8}{x}\\ge2",
+          "S=[-2,0)\\cup[4,+\\infty)",
+          "La forma normale è \\(\\frac{(x+2)(x-4)}{x}\\ge0\\). Gli zeri del numeratore sono inclusi. \\(0\\) è escluso."
+        ]
+      ],
+      [
+        [
+          135,
+          105
+        ],
+        [
+          "",
+          "\\frac{3}{x-2}\\ge\\frac{1}{x+2}",
+          "S=[-4,-2)\\cup(2,+\\infty)",
+          "La differenza ha numeratore \\(2(x+4)\\) e denominatore \\((x-2)(x+2)\\). I segni, da sinistra, sono \\(-,+,-,+\\)."
+        ],
+        [
+          "",
+          "\\frac{3}{x-1}\\ge\\frac{1}{x+3}",
+          "S=[-5,-3)\\cup(1,+\\infty)",
+          "La differenza è \\(\\frac{2(x+5)}{(x-1)(x+3)}\\). Da sinistra i segni sono \\(-,+,-,+\\). Includi \\(-5\\) ed escludi \\(-3\\) e \\(1\\)."
+        ]
+      ]
+    ]
+  },
+  {
+    "title": "Semplificazioni, sistemi frazionari e problemi",
+    "pairs": [
+      [
+        [
+          44,
+          32
+        ],
+        [
+          "Le due disequazioni hanno le stesse soluzioni?",
+          "\\frac{(x-4)(x+2)}{x-4}>0\\qquad\\text{e}\\qquad x+2>0",
+          "\\text{No: manca }x=4\\text{ nella prima.}",
+          "Scrivi \\(x\\ne4\\) prima di semplificare. La disequazione ridotta ammetterebbe \\(4\\), quindi devi toglierlo."
+        ],
+        [
+          "Le due disequazioni hanno le stesse soluzioni?",
+          "\\frac{(x-5)(x+1)}{x-5}<0\\qquad\\text{e}\\qquad x+1<0",
+          "\\text{Sì.}\\quad x<-1",
+          "La prima richiede \\(x\\ne5\\). Il valore \\(5\\) è già fuori dalle soluzioni della disequazione ridotta."
+        ]
+      ],
+      [
+        [
+          76,
+          58
+        ],
+        [
+          "Scrivi le C.E. prima di semplificare. Poi risolvi.",
+          "\\frac{x^2-9}{x-3}\\ge0",
+          "S=[-3,3)\\cup(3,+\\infty)",
+          "Con \\(x\\ne3\\), semplifica \\((x-3)(x+3)\\) con \\(x-3\\). Rimane \\(x+3\\ge0\\), da cui devi escludere \\(3\\)."
+        ],
+        [
+          "Scrivi le C.E. prima di semplificare. Poi risolvi.",
+          "\\frac{x^2-16}{x-4}\\ge0",
+          "S=[-4,4)\\cup(4,+\\infty)",
+          "Con \\(x\\ne4\\), semplifica \\(x-4\\). Rimane \\(x+4\\ge0\\), da cui devi escludere \\(4\\)."
+        ]
+      ],
+      [
+        [
+          150,
+          115
+        ],
+        [
+          "Semplifica dove possibile e risolvi.",
+          "\\frac{x^2-16}{x^2-3x-4}-\\frac{2}{x+1}\\ge0",
+          "S=(-\\infty,-2]\\cup(-1,4)\\cup(4,+\\infty)",
+          "C.E. \\(x\\ne-1,4\\). Semplifica \\(x-4\\) nella prima frazione. La differenza diventa \\(\\frac{x+2}{x+1}\\). Includi \\(-2\\) ed escludi ancora \\(4\\)."
+        ],
+        [
+          "Semplifica dove possibile e risolvi.",
+          "\\frac{x^2-25}{x^2-3x-10}-\\frac{2}{x+2}\\ge0",
+          "S=(-\\infty,-3]\\cup(-2,5)\\cup(5,+\\infty)",
+          "C.E. \\(x\\ne-2,5\\). Il primo denominatore è \\((x-5)(x+2)\\). Dopo aver semplificato \\(x-5\\), la differenza è \\(\\frac{x+3}{x+2}\\). Escludi ancora \\(5\\)."
+        ]
+      ],
+      [
+        [
+          205,
+          165
+        ],
+        [
+          "",
+          "\\begin{cases}\\dfrac23>\\dfrac{x+1}{x+3}\\\\[8pt]\\dfrac{x+6}{2x}+1>0\\end{cases}",
+          "S=(-3,-2)\\cup(0,3)",
+          "Le forme normali sono \\(\\frac{3-x}{3(x+3)}>0\\) e \\(\\frac{3x+6}{2x}>0\\). I singoli insiemi sono \\((-3,3)\\) e \\((-\\infty,-2)\\cup(0,+\\infty)\\)."
+        ],
+        [
+          "",
+          "\\begin{cases}\\dfrac23>\\dfrac{x+2}{x+5}\\\\[8pt]\\dfrac{x+9}{2x}+1>0\\end{cases}",
+          "S=(-5,-3)\\cup(0,4)",
+          "Le forme normali sono \\(\\frac{4-x}{3(x+5)}>0\\) e \\(\\frac{3x+9}{2x}>0\\). I singoli insiemi sono \\((-5,4)\\) e \\((-\\infty,-3)\\cup(0,+\\infty)\\)."
+        ]
+      ],
+      [
+        [
+          170,
+          135
+        ],
+        [
+          "Modella i vincoli e indica dove si può tagliare.",
+          "",
+          "6\\le x\\le14",
+          "Con \\(x=AP\\) in centimetri si ha \\(PB=18-x\\) e \\(0<x<18\\). Siccome \\(18-x>0\\), \\(\\frac{x}{18-x}\\ge\\frac12\\) equivale a \\(x\\ge6\\). Da \\(PB\\ge4\\) segue \\(x\\le14\\).",
+          "Una barra \\(AB\\) è lunga 18 cm. Il rapporto \\(\\frac{AP}{PB}\\) deve essere almeno \\(\\frac12\\) e \\(PB\\) deve misurare almeno 4 cm. A quali distanze da \\(A\\) si può tagliare?"
+        ],
+        [
+          "Modella i vincoli e indica dove si può tagliare.",
+          "",
+          "7\\le x\\le15",
+          "Con \\(x=AP\\) in centimetri, \\(PB=21-x>0\\). Il rapporto \\(\\frac{x}{21-x}\\ge\\frac12\\) dà \\(x\\ge7\\). Da \\(PB\\ge6\\) segue \\(x\\le15\\). Gli estremi sono inclusi.",
+          "Una barra \\(AB\\) è lunga 21 cm. Il rapporto \\(\\frac{AP}{PB}\\) deve essere almeno \\(\\frac12\\) e \\(PB\\) deve misurare almeno 6 cm. A quali distanze da \\(A\\) si può tagliare?"
+        ]
+      ]
+    ]
+  }
+];
+let phases = [];
+const $ = id => document.getElementById(id);
+const show = (id, visible) => { $(id).hidden = !visible; };
+const put = (id, value) => { $(id).textContent = value; show(id, Boolean(value)); };
+let mode = "choose";
+let route = null;
+let pace = 0;
+const routeNames = ["A scuola","A casa"];
+const paceNames = ["Avvio","Consolidamento"];
+let phaseIndex = 0;
+let itemIndex = 0;
+let frame = 0;
+let deadline = 0;
+let duration = 0;
+let remaining = 0;
+let pausedFrom = "";
+let revealedDuringRun = false;
+let mathJaxReady = false;
+
+const phase = () => phases[phaseIndex];
+const current = () => phase().items[itemIndex];
+const total = phase => phase.items.reduce((sum,item) => sum + item[0], 0);
+const minutes = seconds => Math.floor(seconds / 60) + ":" + String(seconds % 60).padStart(2, "0");
+const timedQuestion = () => mode === "question" || (mode === "paused" && pausedFrom === "question");
+
+function enhance(host) {
+  if (!mathJaxReady || host.dataset.mathJax) return;
+  host.dataset.mathJax = "pending";
+  const tex = host.dataset.tex;
+  MathJax.tex2svgPromise(tex, {display: host.dataset.display === "true"}).then(node => {
+    const svg = node.querySelector("svg");
+    if (!svg || svg.querySelector('[data-mml-node="merror"]')) {
+      host.dataset.mathJax = "error";
+      return;
+    }
+    if (host.isConnected) {
+      svg.setAttribute("role", "img");
+      svg.setAttribute("aria-label", tex);
+      svg.removeAttribute("aria-hidden");
+      svg.setAttribute("focusable", "false");
+      // Attach only the visual output. The wrapper can also contain an assistive MathML copy.
+      host.replaceChildren(svg);
+    }
+    host.dataset.mathJax = "ready";
+  }).catch(() => { host.dataset.mathJax = "error"; });
+}
+function formulaNode(tex, display) {
+  const host = document.createElement("span");
+  host.className = display ? "tex-render" : "tex-render tex-inline";
+  host.dataset.tex = tex;
+  host.dataset.display = String(display);
+  return host;
+}
+function renderMath(node, tex) {
+  node.replaceChildren();
+  if (!tex) return;
+  const host = formulaNode(tex, true);
+  node.append(host);
+  enhance(host);
+}
+function renderText(node, value) {
+  node.replaceChildren();
+  const parts = value.split(/\\\((.*?)\\\)/gs);
+  parts.forEach((part,i) => {
+    if (i % 2 === 0) {
+      node.append(document.createTextNode(part));
+    } else {
+      const host = formulaNode(part, false);
+      node.append(host);
+      enhance(host);
+    }
+  });
+}
+function loadMathJax() {
+  const script = document.createElement("script");
+  script.src = "https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg.js";
+  script.async = true;
+  const failed = () => put("math-status", "Impossibile caricare MathJax. Ricarica la pagina per riprovare.");
+  script.onerror = failed;
+  script.onload = async () => {
+    try {
+      await MathJax.startup.promise;
+      mathJaxReady = typeof MathJax.tex2svgPromise === "function";
+      if (!mathJaxReady) {
+        failed();
+        return;
+      }
+      $("start").disabled = false;
+      show("math-status", false);
+      document.querySelectorAll(".tex-render").forEach(enhance);
+    } catch {
+      failed();
+    }
+  };
+  document.head.append(script);
+}
+function buildItems() {
+  const items = phase().items.map(([seconds], index) =>
+    new Option("Quesito " + (index + 1) + " · " + seconds + " s", index));
+  $("item-select").replaceChildren(new Option("Scegli quesito", ""), ...items);
+}
+function syncSelects() {
+  $("phase-select").disabled = route === null;
+  $("phase-select").value = mode === "home" || mode === "choose" ? "" : String(phaseIndex);
+  $("item-select").disabled = mode === "home" || mode === "choose";
+  $("item-select").value = (["preview","question","revealed"].includes(mode) ||
+    (mode === "paused" && pausedFrom === "question")) ? String(itemIndex) : "";
+}
+function view(next) {
+  mode = next;
+  const run = ["count","question","paused"].includes(next);
+  const item = timedQuestion() || next === "preview";
+  show("chooser", next === "choose");
+  show("route-button", next !== "choose");
+  show("home", next === "home");
+  show("home-button", !["choose","home"].includes(next));
+  show("review", next === "review");
+  const stageVisible = !["choose","home","review"].includes(next);
+  show("stage", stageVisible);
+  show("toolbar", stageVisible);
+  $("pace").disabled = run;
+  show("status", run || next === "preview" || next === "revealed");
+  show("track", run);
+  show("clock", run);
+  show("start", next === "ready" || next === "preview");
+  show("pause", run);
+  show("reveal", item);
+  show("next", item || next === "revealed");
+  show("phase-review", next === "finish");
+  show("next-phase", next === "finish" && phaseIndex < phases.length - 1);
+  show("hint", item);
+  $("pause").textContent = next === "paused" ? "Riprendi" : "Pausa";
+  $("start").textContent = next === "preview" ? "Avvia timer" : "Inizia la fase";
+  syncSelects();
+}
+function stage(title = "", prompt = "", tex = "", prose = "", special = false) {
+  put("stage-title", title);
+  put("prompt", prompt);
+  $("prompt").classList.toggle("special", special);
+  $("stage").classList.remove("answered");
+  $("formula").classList.toggle("dense", tex.length > 67);
+  renderMath($("formula"), tex);
+  show("formula", Boolean(tex));
+  renderText($("word-problem"), prose);
+  show("word-problem", Boolean(prose));
+  renderMath($("solution"), "");
+  $("reason").replaceChildren();
+  show("solution-panel", false);
+}
+function status(position) {
+  put("phase-name", routeNames[route] + " · " + phase().title);
+  put("position", position);
+}
+function stopClock() {
+  if (frame) cancelAnimationFrame(frame);
+  frame = 0;
+}
+function home() {
+  stopClock();
+  view("home");
+}
+function chooseRoute() {
+  stopClock();
+  route = null;
+  view("choose");
+}
+function rebuildPhases() {
+  phases = banks.map(bank => ({
+    title: bank.title,
+    items: bank.pairs.map(([times, school, house]) => [times[pace], ...(route === 0 ? school : house)])
+  }));
+  const seconds = phases.reduce((sum, entry) => sum + total(entry), 0);
+  put("home-title", routeNames[route]);
+  put("path-status", paceNames[pace] + " · 22 quesiti · " + minutes(seconds) + " di timer");
+  const buttons = phases.map((entry,index) => {
+    const button = document.createElement("button");
+    button.className = "phase";
+    const title = document.createElement("strong");
+    title.textContent = entry.title;
+    const detail = document.createElement("small");
+    detail.textContent = entry.items.length + " quesiti · " + minutes(total(entry));
+    button.append(title,detail);
+    button.onclick = () => ready(index);
+    return button;
+  });
+  $("phase-list").replaceChildren(...buttons);
+}
+function selectRoute(index) {
+  route = index;
+  rebuildPhases();
+  home();
+}
+function changePace(index) {
+  pace = index;
+  if (route === null) return;
+  rebuildPhases();
+  if (mode === "ready") ready(phaseIndex);
+  else if (mode === "preview") preview(phaseIndex,itemIndex);
+  else if (mode === "review") review(phaseIndex);
+  else if (mode === "revealed" || mode === "finish") {
+    buildItems();
+    syncSelects();
+  }
+}
+function ready(index) {
+  stopClock();
+  phaseIndex = index;
+  itemIndex = 0;
+  buildItems();
+  view("ready");
+  stage(phase().title, phase().items.length + " quesiti · " + minutes(total(phase())) + " di timer");
+}
+function countdown() {
+  view("count");
+  status("Preparati per il primo quesito");
+  stage("Pronti?");
+  startClock(3000);
+}
+function displayQuestion(timed) {
+  const [seconds,prompt,tex,,,prose = ""] = current();
+  view(timed ? "question" : "preview");
+  status("Quesito " + (itemIndex + 1) + " / " + phase().items.length + (timed ? "" : " · " + seconds + " s"));
+  stage("", prompt || "Risolvi.", tex, prose, Boolean(prompt));
+  if (timed) startClock(seconds * 1000);
+}
+function preview(index, item) {
+  stopClock();
+  phaseIndex = index;
+  itemIndex = item;
+  buildItems();
+  displayQuestion(false);
+}
+function advance() {
+  const run = timedQuestion() || (mode === "revealed" && revealedDuringRun);
+  stopClock();
+  itemIndex += 1;
+  if (itemIndex < phase().items.length) {
+    displayQuestion(run);
+  } else {
+    view("finish");
+    stage("Fase conclusa", phase().title);
+  }
+}
+function drawClock() {
+  put("seconds", String(Math.ceil(remaining / 1000)));
+  $("clock").classList.toggle("urgent", remaining <= 5000);
+  $("fill").classList.toggle("urgent", remaining <= 5000);
+  $("fill").style.transform = "scaleX(" + remaining / duration + ")";
+}
+function tick() {
+  frame = 0;
+  remaining = Math.max(0, deadline - performance.now());
+  drawClock();
+  if (remaining > 0) {
+    frame = requestAnimationFrame(tick);
+  } else if (mode === "count") {
+    displayQuestion(true);
+  } else if (mode === "question") {
+    advance();
+  }
+}
+function startClock(milliseconds) {
+  stopClock();
+  duration = milliseconds;
+  deadline = performance.now() + milliseconds;
+  tick();
+}
+function togglePause() {
+  if (mode === "paused") {
+    view(pausedFrom);
+    deadline = performance.now() + remaining;
+    tick();
+  } else if (mode === "count" || mode === "question") {
+    remaining = Math.max(0, deadline - performance.now());
+    stopClock();
+    drawClock();
+    pausedFrom = mode;
+    view("paused");
+  }
+}
+function reveal() {
+  revealedDuringRun = timedQuestion();
+  stopClock();
+  view("revealed");
+  const [,,,answer,reason] = current();
+  $("stage").classList.add("answered");
+  renderMath($("solution"), answer);
+  renderText($("reason"), reason);
+  show("solution-panel", true);
+  $("next").focus();
+}
+function review(index) {
+  stopClock();
+  phaseIndex = index;
+  buildItems();
+  view("review");
+  put("review-title", "Correzione · " + routeNames[route] + " · " + phase().title);
+  const rows = phase().items.map(([seconds,prompt,tex,answer,reason,prose], i) => {
+    const row = document.createElement("article");
+    row.className = "review-item";
+    const number = document.createElement("button");
+    number.textContent = String(i + 1).padStart(2,"0");
+    number.setAttribute("aria-label", "Apri il quesito " + (i + 1));
+    number.onclick = () => preview(index,i);
+    const body = document.createElement("div");
+    const label = document.createElement("p");
+    label.className = "muted";
+    label.textContent = (prompt || "Risolvi.") + " · " + seconds + " s";
+    body.append(label);
+    if (tex) {
+      const expression = document.createElement("div");
+      expression.className = "formula";
+      renderMath(expression, tex);
+      body.append(expression);
+    }
+    if (prose) {
+      const statement = document.createElement("p");
+      renderText(statement, prose);
+      body.append(statement);
+    }
+    const result = document.createElement("div");
+    result.className = "solution formula";
+    renderMath(result, answer);
+    const explanation = document.createElement("p");
+    renderText(explanation, reason);
+    body.append(result, explanation);
+    row.append(number, body);
+    return row;
+  });
+  $("answers").replaceChildren(...rows);
+  if (mathJaxReady) $("answers").querySelectorAll(".tex-render").forEach(enhance);
+  $("review-prev").disabled = index === 0;
+  $("review-next").disabled = index === phases.length - 1;
+  window.scrollTo(0,0);
+}
+async function toggleFullscreen() {
+  try {
+    if (document.fullscreenElement) await document.exitFullscreen();
+    else await document.documentElement.requestFullscreen();
+  } catch {
+    $("fullscreen").disabled = true;
+    $("fullscreen").textContent = "Schermo intero non disponibile";
+  }
+}
+document.addEventListener("fullscreenchange", () => {
+  $("fullscreen").textContent = document.fullscreenElement ? "Esci da schermo intero" : "Schermo intero";
+});
+document.addEventListener("keydown", event => {
+  if (event.repeat || event.altKey || event.ctrlKey || event.metaKey || event.target.tagName === "SELECT") return;
+  const questionVisible = timedQuestion() || mode === "preview";
+  if (event.code === "Space" && ["count","question","paused"].includes(mode) && event.target.tagName !== "BUTTON") {
+    event.preventDefault();
+    togglePause();
+  } else if (event.key.toLowerCase() === "s" && questionVisible) {
+    reveal();
+  } else if (event.key === "ArrowRight" && (questionVisible || mode === "revealed")) {
+    event.preventDefault();
+    advance();
+  }
+});
+$("phase-select").replaceChildren(new Option("Scegli fase", ""), ...banks.map((entry,index) => new Option(entry.title,index)));
+$("item-select").replaceChildren(new Option("Scegli quesito", ""));
+$("phase-select").onchange = event => {
+  const index = event.target.value;
+  if (index === "") home();
+  else if (mode === "review") review(Number(index));
+  else ready(Number(index));
+};
+$("item-select").onchange = event => {
+  if (event.target.value === "") ready(phaseIndex);
+  else preview(phaseIndex,Number(event.target.value));
+};
+$("home-button").onclick = home;
+$("route-button").onclick = chooseRoute;
+$("school").onclick = () => selectRoute(0);
+$("house").onclick = () => selectRoute(1);
+$("pace").onchange = event => changePace(Number(event.target.value));
+$("fullscreen").onclick = toggleFullscreen;
+$("review-home").onclick = () => review(0);
+$("phase-review").onclick = () => review(phaseIndex);
+$("review-prev").onclick = () => review(phaseIndex - 1);
+$("review-next").onclick = () => review(phaseIndex + 1);
+$("next-phase").onclick = () => ready(phaseIndex + 1);
+$("start").onclick = () => {
+  if (!mathJaxReady) return;
+  if (mode === "preview") displayQuestion(true);
+  else countdown();
+};
+$("pause").onclick = togglePause;
+$("reveal").onclick = reveal;
+$("next").onclick = advance;
+view("choose");
+loadMathJax();
+</script>
+</body>
+</html>

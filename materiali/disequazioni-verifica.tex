@@ -1,0 +1,452 @@
+% =====================================================================
+% VERIFICA DI MATEMATICA - 2BS
+% File A e B: 75 minuti e 30 punti per fila.
+% Punteggi per fila: 4 + 4 + 4 + 10 + 6 + 2 = 30.
+% Compilare almeno due volte con pdfLaTeX.
+% Per mostrare le soluzioni: decommentare \printanswers.
+% =====================================================================
+
+\documentclass[11pt,a4paper,addpoints]{exam}
+
+% ---------- Lingua e codifica ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ---------- Matematica e impaginazione ----------
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{array,tabularx}
+\usepackage[
+  a4paper,
+  top=2cm,
+  bottom=2.2cm,
+  left=2cm,
+  right=2.2cm,
+  headheight=30pt,
+  headsep=12pt
+]{geometry}
+
+% ---------- Soluzioni ----------
+%\printanswers
+\ifdefined\CORRETTORE
+  \printanswers
+\fi
+\cancelspace
+\unframedsolutions
+\renewcommand{\solutiontitle}{%
+  \noindent\textbf{Soluzione.}\enspace
+}
+\SolutionEmphasis{\color{blue!60!black}}
+
+% ---------- Dati della prova ----------
+\newcommand{\materia}{Matematica}
+\newcommand{\classe}{2BS}
+\newcommand{\indirizzo}{Liceo Scientifico}
+\newcommand{\tipoprova}{Verifica di matematica}
+\newcommand{\argomento}{Disequazioni e sistemi di disequazioni}
+\newcommand{\durata}{75 minuti}
+\newcommand{\annoscolastico}{2026/2027}
+\newcommand{\docente}{Prof. Rubens Longhi}
+\newcommand{\fila}{A}
+
+\newcommand{\indicazioni}{%
+  Svolgi sul foglio a protocollo e mostra i passaggi.
+  Per ogni disequazione o sistema scrivi l'insieme delle soluzioni.
+  Lavora in $\mathbb{R}$, senza calcolatrice.
+}
+
+% ---------- Macro matematiche ----------
+\newcommand{\R}{\mathbb{R}}
+
+% ---------- Intestazioni e piè di pagina ----------
+\pagestyle{headandfoot}
+\firstpageheader
+  {%
+    \scriptsize\textsc{IIS David Maria Turoldo}\\[-1pt]
+    \scriptsize Via Ronco 11 -- 24019 Zogno (BG)
+  }
+  {}
+  {%
+    \scriptsize A.S.\ \annoscolastico\\[-1pt]
+    \scriptsize \docente
+  }
+\firstpageheadrule
+\runningheader
+  {\small\materia\ -- \classe}
+  {\small\tipoprova}
+  {\small Fila \fila}
+\runningheadrule
+\newcommand{\paginefila}{\pageref{fine@fila@\fila}}
+\firstpagefooter{}{\small Pagina \thepage\ di \paginefila}{}
+\runningfooter{}{\small Pagina \thepage\ di \paginefila}{}
+
+% ---------- Obiettivi e formato degli esercizi ----------
+\newcommand{\obiettivocorrente}{}
+\newcommand{\obiettivo}[1]{%
+  \gdef\obiettivocorrente{#1}%
+}
+\newcommand{\stampaobiettivo}{%
+  \ifx\obiettivocorrente\empty
+  \else
+    {\footnotesize\color{black!55}%
+      \textit{Obiettivo: \obiettivocorrente}}%
+  \fi
+}
+\qformat{%
+  \textbf{\thequestion.}\enspace
+  \stampaobiettivo
+  \hfill
+  {\small(\totalpoints\ \points)}%
+  \gdef\obiettivocorrente{}%
+}
+\renewcommand{\questionlabel}{}
+\renewcommand{\partlabel}{\thequestion\thepartno)}
+\renewcommand{\subpartlabel}{\thesubpart.}
+\pointpoints{punto}{punti}
+\renewcommand{\partshook}{%
+  \setlength{\itemsep}{2pt}%
+  \setlength{\rightmargin}{0.5cm}%
+}
+
+% ---------- Numerazione indipendente per ciascuna fila ----------
+\newcounter{offsetfila}
+\newcounter{totalqfila}
+\renewcommand{\thequestion}{%
+  \number\numexpr
+    \value{question}-\value{offsetfila}%
+  \relax
+}
+\newenvironment{esercizi}
+  {%
+    \begin{questions}
+    \setcounter{question}{\value{offsetfila}}%
+  }
+  {\end{questions}}
+
+% ---------- Esercizi non spezzati nella versione studenti ----------
+\newenvironment{esercizio}
+  {%
+    \par
+    \ifprintanswers\else\begin{samepage}\fi
+  }
+  {%
+    \ifprintanswers\else\end{samepage}\fi
+    \par\vspace{3pt}
+  }
+
+% ---------- Tabella dei punteggi ----------
+\hqword{\textbf{Esercizio}}
+\hpword{\textbf{Punti massimi}}
+\hsword{\textbf{Punti ottenuti}}
+\htword{\textbf{Totale}}
+
+% ---------- Inizio e fine di ciascuna fila ----------
+\newcommand{\iniziofila}[1]{%
+  \clearpage
+  \renewcommand{\fila}{#1}%
+  \setcounter{page}{1}%
+  \setcounter{offsetfila}{\value{totalqfila}}%
+  \begin{center}
+    {\small\bfseries
+      \tipoprova
+      \ifprintanswers
+        -- Soluzioni e criteri di correzione
+      \fi
+    }\\[3pt]
+    {\Large \argomento}\\[2pt]
+    {\small
+      \indirizzo\ -- Classe \classe\
+      -- Durata: \durata\
+      -- \textbf{Fila #1}
+    }
+  \end{center}
+  \vspace{4pt}
+  \noindent
+  \begin{tabularx}{\textwidth}{@{}l X l p{3cm}@{}}
+    \textbf{Nome e Cognome:} & \hrulefill
+    & \textbf{Data:} & \hrulefill\\[8pt]
+  \end{tabularx}
+  \noindent
+  \fbox{%
+    \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+      \small
+      \textbf{Indicazioni.} \indicazioni\space
+      Punteggio totale: \pointsinrange{fila#1} punti.
+    }%
+  }
+  \medskip
+  \begingradingrange{fila#1}%
+}
+\newcommand{\finefila}{%
+  \setcounter{totalqfila}{\value{question}}%
+  \endgradingrange{fila\fila}%
+  \ifprintanswers
+  \else
+    \vfill
+    \begin{center}
+      \small
+      \partialgradetable{fila\fila}[h][questions]
+    \end{center}
+    \vspace{6pt}
+    \noindent
+    {\small
+      \textbf{Voto:}\ \rule{3cm}{0.4pt}
+      \hfill
+      \textbf{Firma del docente:}\ \rule{5cm}{0.4pt}
+    }%
+  \fi
+  \label{fine@fila@\fila}%
+}
+
+\begin{document}
+\linespread{1}\selectfont
+\ifprintanswers\else
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{3pt}
+\setlength{\belowdisplayshortskip}{3pt}
+\fi
+\ifprintanswers\small\fi
+\iniziofila{A}
+\begin{esercizi}
+\begin{esercizio}
+\obiettivo{valutare proprietà e procedimenti}
+\question Indica se ogni affermazione è vera o falsa. Giustifica la risposta.
+\begin{parts}
+\part[1] È possibile risolvere la disequazione $\dfrac{x-1}{x}>\dfrac{2x-1}{x}$ moltiplicando ambo i membri per $x$.
+\begin{solution}
+Falso. Il segno di $x$ è variabile: se $x<0$ occorre invertire il verso. Infatti la disequazione iniziale si riduce a $-1>0$ nel dominio $x\ne0$ ed è impossibile, mentre la moltiplicazione senza cambio di verso darebbe erroneamente $x<0$.
+\end{solution}
+\part[1] La disequazione $(x-2)^2\ge0$ ha come insieme delle soluzioni $\mathbb{R}$.
+\begin{solution}
+Vero. Il quadrato è sempre non negativo ed è definito per ogni numero reale.
+\end{solution}
+\part[1] La disequazione $(x+1)^2+x^2\le0$ non ha soluzioni.
+\begin{solution}
+Vero. I due quadrati dovrebbero annullarsi contemporaneamente, ma il primo si annulla in $-1$ e il secondo in $0$.
+\end{solution}
+\part[1] L'insieme delle soluzioni della disequazione $\dfrac{x}{x}>0$ è $\mathbb{R}$.
+\begin{solution}
+Falso. Il rapporto vale $1$ soltanto nel dominio $x\ne0$. Quindi $S=\mathbb{R}\setminus\{0\}$.
+\end{solution}
+\end{parts}
+\begin{solution}
+\textit{Criteri per ciascuna risposta.} Mezzo punto per la scelta e mezzo punto per la giustificazione.
+\end{solution}
+\end{esercizio}
+\begin{esercizio}
+\obiettivo{risolvere una disequazione algebrica}
+\question[4] Risolvi la disequazione.
+\[\frac{(x-2)^2}{3}-\frac{(x+1)^2}{3}<2-x.\]
+\begin{solution}
+La differenza a sinistra vale $-2x+1$. Quindi $-2x+1<2-x$, da cui $x>-1$ e $S=(-1,+\infty)$.
+\par\textit{Criteri.} Sviluppi e riduzione 2 punti, risoluzione e insieme delle soluzioni 2 punti.
+\end{solution}
+\end{esercizio}
+\begin{esercizio}
+\obiettivo{risolvere un sistema di disequazioni}
+\question[4] Risolvi il sistema.
+\[\begin{cases}\dfrac{x-2}{3}+x\ge2\\[5pt]\dfrac{2x+1}{4}>x-2\end{cases}\]
+\begin{solution}
+La prima dà $4x\ge8$, quindi $x\ge2$. La seconda dà $2x+1>4x-8$, quindi $x<\frac92$. Pertanto $S=[2,\frac92)$.
+\par\textit{Criteri.} Prima disequazione 1,5 punti, seconda disequazione 1,5 punti, intersezione 1 punto.
+\end{solution}
+\end{esercizio}
+\ifprintanswers\newpage\fi
+\begin{esercizio}
+\obiettivo{risolvere disequazioni algebriche}
+\question Risolvi le disequazioni.
+\begin{parts}
+\part[5] $\displaystyle \frac{2}{x^2+x-6}-\frac{1}{x+3}\ge\frac{1}{x-2}.$
+\begin{solution}
+Scomponendo $x^2+x-6=(x+3)(x-2)$ e portando tutto a sinistra si ottiene
+$\dfrac{1-2x}{(x+3)(x-2)}\ge0$. I valori critici sono $-3,\frac12,2$.
+Da sinistra i segni del rapporto sono $+,-,+,-$. Il numeratore si annulla in $\frac12$.
+Si escludono $-3$ e $2$. Quindi $S=(-\infty,-3)\cup[\frac12,2)$.
+\par\textit{Criteri.} Riduzione a un'unica frazione 2 punti, studio dei segni 2 punti, dominio e insieme delle soluzioni 1 punto.
+\end{solution}
+
+\part[5] $\displaystyle (x^2-4)(x-1)>2(x+2)(x-1)^2.$
+\begin{solution}
+Portando a sinistra e raccogliendo $(x+2)(x-1)$, resta
+$(x+2)(x-1)[x-2-2(x-1)]>0$, cioè $-x(x+2)(x-1)>0$.
+Gli zeri sono $-2,0,1$. Da sinistra i segni del prodotto sono $+,-,+,-$.
+Quindi $S=(-\infty,-2)\cup(0,1)$.
+\par\textit{Criteri.} Riduzione alla forma fattorizzata 2 punti, studio dei segni 2 punti, insieme delle soluzioni 1 punto.
+\end{solution}
+
+\end{parts}
+\end{esercizio}
+\begin{esercizio}
+\obiettivo{risolvere un sistema di disequazioni}
+\question[6] Risolvi il sistema e rappresenta graficamente le soluzioni.
+\[
+\begin{cases}
+1\le\dfrac9{(x-1)^2}\\[6pt]
+\dfrac{1}{2x+2}<1+\dfrac{1}{x+1}
+\end{cases}
+\]
+\begin{solution}
+Per $x\ne1$ il denominatore della prima è positivo. La disequazione
+equivale a $(x-1)^2\le9$, da cui $S_1=[-2,1)\cup(1,4]$.
+La seconda si riduce a $\dfrac{2x+3}{2(x+1)}>0$. I punti critici sono
+$-\frac32$ e $-1$, entrambi esclusi. Dunque
+$S_2=(-\infty,-\frac32)\cup(-1,+\infty)$.
+Ne segue $S=[-2,-\frac32)\cup(-1,1)\cup(1,4]$.
+\begin{center}
+\begin{tikzpicture}[x=1.23cm,y=1cm]
+\draw[->,black!60] (-2.42,0)--(4.48,0) node[right] {$x$};
+\draw[blue!60!black,very thick] (-2,0)--(-1.5,0);
+\draw[blue!60!black,very thick] (-1,0)--(4,0);
+\draw[blue!60!black,thick,fill=blue!60!black] (-2,0) circle[radius=1.7pt] node[below=3pt] {$\scriptstyle -2$};
+\draw[blue!60!black,thick,fill=white] (-1.5,0) circle[radius=1.7pt] node[below=3pt] {$\scriptstyle -\frac32$};
+\draw[blue!60!black,thick,fill=white] (-1,0) circle[radius=1.7pt] node[below=3pt] {$\scriptstyle -1$};
+\draw[blue!60!black,thick,fill=white] (1,0) circle[radius=1.7pt] node[below=3pt] {$\scriptstyle 1$};
+\draw[blue!60!black,thick,fill=blue!60!black] (4,0) circle[radius=1.7pt] node[below=3pt] {$\scriptstyle 4$};
+\end{tikzpicture}
+\end{center}
+\par\textit{Criteri.} Prima disequazione 2 punti, seconda disequazione 2 punti, intersezione e grafico 2 punti.
+\end{solution}
+\end{esercizio}
+\begin{esercizio}
+\obiettivo{risolvere un problema geometrico}
+\question[2]
+
+Un'aiuola rettangolare ha perimetro $36$~m. La sua area deve essere almeno
+$80$~m$^2$ e il lato lungo deve superare il lato corto di almeno $1$~m.
+Determina quali lunghezze può avere il lato lungo.
+\begin{solution}
+Sia $x$ la lunghezza in metri del lato lungo. Il lato corto misura $18-x$,
+con $9<x<18$. Per l'area si richiede $x(18-x)\ge80$, ossia
+$(x-8)(x-10)\le0$. Quindi $8\le x\le10$.
+La differenza deve soddisfare $x-(18-x)\ge1$, cioè $x\ge\frac{19}{2}$.
+Il lato lungo può misurare da $9{,}5$ a $10$ metri, estremi compresi.
+\par\textit{Criteri.} Modellizzazione 1 punto, risoluzione e risposta 1 punto.
+\end{solution}
+\end{esercizio}
+\end{esercizi}
+\finefila
+\iniziofila{B}
+\begin{esercizi}
+\begin{esercizio}
+\obiettivo{valutare proprietà e procedimenti}
+\question Indica se ogni affermazione è vera o falsa. Giustifica la risposta.
+\begin{parts}
+\part[1] La disequazione $(x+2)^2+x^2\le0$ non ha soluzioni.
+\begin{solution}
+Vero. I due quadrati dovrebbero annullarsi contemporaneamente, ma il primo si annulla in $-2$ e il secondo in $0$.
+\end{solution}
+\part[1] L'insieme delle soluzioni della disequazione $\dfrac{2x}{2x}>0$ è $\mathbb{R}$.
+\begin{solution}
+Falso. Il rapporto vale $1$ soltanto nel dominio $x\ne0$. Quindi $S=\mathbb{R}\setminus\{0\}$.
+\end{solution}
+\part[1] È possibile risolvere la disequazione $\dfrac{x-2}{x}>\dfrac{2x-2}{x}$ moltiplicando ambo i membri per $x$.
+\begin{solution}
+Falso. Il segno di $x$ è variabile: se $x<0$ occorre invertire il verso. Nel dominio $x\ne0$ la disequazione equivale a $-1>0$, mentre la moltiplicazione senza cambio di verso darebbe erroneamente $x<0$.
+\end{solution}
+\part[1] La disequazione $(x-3)^2\ge0$ ha come insieme delle soluzioni $\mathbb{R}$.
+\begin{solution}
+Vero. Il quadrato è sempre non negativo ed è definito per ogni numero reale.
+\end{solution}
+\end{parts}
+\begin{solution}
+\textit{Criteri per ciascuna risposta.} Mezzo punto per la scelta e mezzo punto per la giustificazione.
+\end{solution}
+\end{esercizio}
+\begin{esercizio}
+\obiettivo{risolvere una disequazione algebrica}
+\question[4] Risolvi la disequazione.
+\[\frac{(x+3)^2}{3}-\frac{(x-1)^2}{3}\ge x+2.\]
+\begin{solution}
+La differenza a sinistra vale $\frac{8x+8}{3}$. Quindi $8x+8\ge3x+6$, da cui $x\ge-\frac25$ e $S=[-\frac25,+\infty)$.
+\par\textit{Criteri.} Sviluppi e riduzione 2 punti, risoluzione e insieme delle soluzioni 2 punti.
+\end{solution}
+\end{esercizio}
+\begin{esercizio}
+\obiettivo{risolvere un sistema di disequazioni}
+\question[4] Risolvi il sistema.
+\[\begin{cases}\dfrac{x+2}{3}+x\le-2\\[5pt]\dfrac{-2x+1}{4}>-x-2\end{cases}\]
+\begin{solution}
+La prima dà $4x\le-8$, quindi $x\le-2$. La seconda dà $-2x+1>-4x-8$, quindi $x>-\frac92$. Pertanto $S=(-\frac92,-2]$.
+\par\textit{Criteri.} Prima disequazione 1,5 punti, seconda disequazione 1,5 punti, intersezione 1 punto.
+\end{solution}
+\end{esercizio}
+\ifprintanswers\newpage\fi
+\begin{esercizio}
+\obiettivo{risolvere disequazioni algebriche}
+\question Risolvi le disequazioni.
+\begin{parts}
+\part[5] $\displaystyle \frac{2}{x^2+3x-4}-\frac1{x+4}\ge\frac1{x-1}.$
+\begin{solution}
+Scomponendo $x^2+3x-4=(x+4)(x-1)$ e portando tutto a sinistra si ottiene
+$\dfrac{-1-2x}{(x+4)(x-1)}\ge0$. I valori critici sono $-4,-\frac12,1$.
+Da sinistra i segni del rapporto sono $+,-,+,-$. Il numeratore si annulla in $-\frac12$.
+Si escludono $-4$ e $1$. Quindi $S=(-\infty,-4)\cup[-\frac12,1)$.
+\par\textit{Criteri.} Riduzione a un'unica frazione 2 punti, studio dei segni 2 punti, dominio e insieme delle soluzioni 1 punto.
+\end{solution}
+
+\part[5] $\displaystyle (x^2-9)(x-2)>2(x+3)(x-2)^2.$
+\begin{solution}
+Portando a sinistra e raccogliendo $(x+3)(x-2)$, resta
+$(x+3)(x-2)[x-3-2(x-2)]>0$, cioè $(x+3)(x-2)(1-x)>0$.
+Gli zeri sono $-3,1,2$. Da sinistra i segni del prodotto sono $+,-,+,-$.
+Quindi $S=(-\infty,-3)\cup(1,2)$.
+\par\textit{Criteri.} Riduzione alla forma fattorizzata 2 punti, studio dei segni 2 punti, insieme delle soluzioni 1 punto.
+\end{solution}
+
+\end{parts}
+\end{esercizio}
+\begin{esercizio}
+\obiettivo{risolvere un sistema di disequazioni}
+\question[6] Risolvi il sistema e rappresenta graficamente le soluzioni.
+\[
+\begin{cases}
+1\le\dfrac{16}{(x+1)^2}\\[6pt]
+\dfrac{1}{2x-2}<1+\dfrac{1}{x-1}
+\end{cases}
+\]
+\begin{solution}
+Per $x\ne-1$ il denominatore della prima è positivo. La disequazione
+equivale a $(x+1)^2\le16$, da cui $S_1=[-5,-1)\cup(-1,3]$.
+La seconda si riduce a $\dfrac{2x-1}{2(x-1)}>0$. I punti critici sono
+$\frac12$ e $1$, entrambi esclusi. Dunque
+$S_2=(-\infty,\frac12)\cup(1,+\infty)$.
+Ne segue $S=[-5,-1)\cup(-1,\frac12)\cup(1,3]$.
+\begin{center}
+\begin{tikzpicture}[x=1.23cm,y=1cm]
+\draw[->,black!60] (-5.43,0)--(3.49,0) node[right] {$x$};
+\draw[blue!60!black,very thick] (-5,0)--(0.5,0);
+\draw[blue!60!black,very thick] (1,0)--(3,0);
+\draw[blue!60!black,thick,fill=blue!60!black] (-5,0) circle[radius=1.7pt] node[below=3pt] {$\scriptstyle -5$};
+\draw[blue!60!black,thick,fill=white] (-1,0) circle[radius=1.7pt] node[below=3pt] {$\scriptstyle -1$};
+\draw[blue!60!black,thick,fill=white] (0.5,0) circle[radius=1.7pt] node[below=3pt] {$\scriptstyle \frac12$};
+\draw[blue!60!black,thick,fill=white] (1,0) circle[radius=1.7pt] node[below=3pt] {$\scriptstyle 1$};
+\draw[blue!60!black,thick,fill=blue!60!black] (3,0) circle[radius=1.7pt] node[below=3pt] {$\scriptstyle 3$};
+\end{tikzpicture}
+\end{center}
+\par\textit{Criteri.} Prima disequazione 2 punti, seconda disequazione 2 punti, intersezione e grafico 2 punti.
+\end{solution}
+\end{esercizio}
+\begin{esercizio}
+\obiettivo{risolvere un problema geometrico}
+\question[2]
+
+Un'aiuola rettangolare ha perimetro $44$~m. La sua area deve essere almeno
+$120$~m$^2$ e il lato lungo deve superare il lato corto di almeno $1$~m.
+Determina quali lunghezze può avere il lato lungo.
+\begin{solution}
+Sia $x$ la lunghezza in metri del lato lungo. Il lato corto misura $22-x$,
+con $11<x<22$. Per l'area si richiede $x(22-x)\ge120$, ossia
+$(x-10)(x-12)\le0$. Quindi $10\le x\le12$.
+La differenza deve soddisfare $x-(22-x)\ge1$, cioè $x\ge\frac{23}{2}$.
+Il lato lungo può misurare da $11{,}5$ a $12$ metri, estremi compresi.
+\par\textit{Criteri.} Modellizzazione 1 punto, risoluzione e risposta 1 punto.
+\end{solution}
+\end{esercizio}
+\end{esercizi}
+\finefila
+\end{document}

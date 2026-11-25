@@ -1,0 +1,372 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern,amsmath,amssymb,microtype}
+\usepackage[a4paper,top=1.7cm,bottom=1.7cm,left=1.7cm,right=1.7cm]{geometry}
+\usepackage{xcolor,enumitem,tabularx,array,fancyhdr,needspace}
+\usepackage[hidelinks]{hyperref}
+\definecolor{blu}{RGB}{30,62,92}
+\definecolor{verde}{RGB}{34,93,76}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\setlength{\headheight}{14pt}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlist[itemize]{leftmargin=*,itemsep=3pt,topsep=3pt}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small\textcolor{blu}{Classe 2 BS | Recupero delle equazioni}}
+\fancyhead[R]{\small Anno scolastico 2026/27}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\tit}[2]{\phantomsection\addcontentsline{toc}{section}{#1. #2}
+  {\Large\bfseries\color{blu}\if\relax\detokenize{#1}\relax #2\else #1. #2\fi}\par\medskip}
+\newcommand{\sott}[1]{\par\medskip{\large\bfseries\color{blu}#1}\par\smallskip}
+\newcommand{\ex}[3]{\Needspace{3\baselineskip}\par\vspace{5pt}
+  \textbf{\textcolor{blu}{#1}}\quad\textit{#2}\par\nopagebreak #3\par}
+\newcommand{\sol}[2]{\Needspace{3\baselineskip}\par\vspace{4pt}
+  \textbf{\textcolor{verde}{#1}}\quad #2\par}
+\newcommand{\nota}[1]{\par\smallskip\noindent\colorbox{blu!7}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}\par\smallskip}
+
+% Formule leggibili anche quando sono inserite nel testo.
+\everymath{\displaystyle}
+\everydisplay{\displaystyle}
+\begin{document}
+\fontsize{11}{15}\selectfont
+\tit{A}{Calcolo, segni e prodotti notevoli}
+\nota{Le soluzioni sono separate, da pagina \pageref{inizio-soluzioni}. Confrontale dopo il tuo tentativo.}
+\sott{Ripasso mirato}
+
+Un meno davanti a una parentesi moltiplica \emph{ogni} termine per $-1$.
+Nella distributiva ogni fattore si usa una sola volta; si sommano soltanto termini simili.
+Le formule da distinguere sono
+\[
+(a-b)^2=a^2-2ab+b^2,\qquad (a-b)(a+b)=a^2-b^2.
+\]
+Per un trinomio: $(a+b+c)^2=a^2+b^2+c^2+2ab+2ac+2bc$.
+Per scomporre $a^2-b^2$ si riconoscono le \emph{basi} dei quadrati:
+$x^2-4=(x-2)(x+2)$. Ricorda: $1^2=1$, $(-1)^2=1$.
+\sott{Esempio svolto}
+
+Semplificare $2(x-3)-(x-1)^2$:
+\[
+2x-6-(x^2-2x+1)=2x-6-x^2+2x-1=-x^2+4x-7.
+\]
+Il meno cambia anche il segno del termine $-2x$ e di $+1$.
+Controllo con $x=0$: l'espressione iniziale e il risultato valgono entrambi $-7$.
+\nota{Mostra lo sviluppo, la distribuzione dei segni e la riduzione dei termini simili.
+Quando scomponi, rimoltiplica per controllare. Negli esercizi di diagnosi indica il primo errore e correggilo.
+Per A13--A15 controlla anche con $x=0$ e $x=1$.}
+\sott{Primi passi | 1--6}
+\ex{A1}{Segno meno}{Semplifica $-(3x-5+2x)$.}
+\ex{A2}{Parentesi annidate}{Semplifica $4x-[2x-(x-3)]$.}
+\ex{A3}{Termini simili}{Semplifica $-4x-4x+3-7+2x$. Spiega perché i primi due termini non si annullano.}
+\ex{A4}{Un fattore, una volta}{Sviluppa $2\cdot3(x+1)$ in due modi: prima moltiplicando i numeri esterni, poi distribuendo il $3$. Confronta.}
+\ex{A5}{Distributiva}{Sviluppa e riduci $-2x(3x-4)+x(2x-1)$.}
+\ex{A6}{Quadrato di binomio}{Sviluppa $(x-1)^2$ e $(2x+3)^2$, indicando i due doppi prodotti.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{A}{Calcolo, segni e prodotti notevoli | esercizi 7--15}
+\nota{Continua sul quaderno mostrando i passaggi. Prima di leggere le soluzioni, esegui i controlli richiesti nella pagina precedente.}
+\ex{A7}{Due formule diverse}{Sviluppa separatamente $(x-4)^2$ e $(x-4)(x+4)$. Spiega perché non sono la stessa espressione.}
+\ex{A8}{Differenza di quadrati}{Scomponi $x^2-4$, $x^2-9$ e $4x^2-25$. Indica le basi dei quadrati.}
+\ex{A9}{Quadrato di trinomio}{Sviluppa $(x+y-1)^2$ scrivendo prima i tre quadrati e poi i tre doppi prodotti.}
+\ex{A10}{Trinomio con potenze}{Sviluppa $(x^2+x-2)^2$ e riduci i termini simili.}
+\ex{A11}{Correggi il segno}{Uno studente scrive $5x-(2x-3)=5x-2x-3=3x-3$. Individua il primo passaggio errato e riscrivi lo svolgimento.}
+\ex{A12}{Correggi il fattore ripetuto}{Uno studente scrive $3\cdot2(2x-1)=6(6x-3)$. Spiega quale fattore ha utilizzato due volte e correggi.}
+\ex{A13}{Quadrati e meno}{Semplifica $(2x-1)^2-(x+2)(x-2)$.}
+\ex{A14}{Riduzione immediata}{Semplifica $2(x-1)^2-2x(x-2)$.}
+\ex{A15}{Trasferimento alla verifica}{Semplifica $(x^2+x-2)^2+(2x-1)(2x+1)-x^2(x+1)^2$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{B}{Equivalenza ed equazioni}
+\sott{Ripasso mirato}
+
+Sommare o sottrarre la stessa quantità ai due membri conserva le soluzioni.
+Moltiplicare o dividere entrambi i membri per un \emph{numero non nullo} conserva le soluzioni.
+Il cambio di segno di un termine ``trasportato'' deriva da queste operazioni.
+Da $ax=b$, con $a\ne0$, segue $x=\frac{b}{a}$.
+Una divisione per una frazione usa il reciproco: $\frac{A}{\displaystyle \frac{2}{3}}=\frac{3}{2}A$.
+Calcola prima i denominatori numerici composti; poi moltiplica \emph{tutti} i termini
+dei due membri per il minimo comune multiplo. Dividere per $x$ può perdere $x=0$; moltiplicare per $x$
+può aggiungerlo: non sono operazioni sempre equivalenti.
+\sott{Esempio svolto}
+
+\[
+\frac{x-1}{\displaystyle \frac{2}{3}}=3
+\ \Longleftrightarrow\ \frac{3}{2}(x-1)=3
+\ \Longleftrightarrow\ 3(x-1)=6
+\ \Longleftrightarrow\ x=3.
+\]
+Si è moltiplicato prima per $2$ e poi diviso per $3$, su entrambi i membri.
+Controllo: $\frac{3-1}{\displaystyle \frac{2}{3}}=3$. Quindi $S=\{3\}$.
+\nota{Risolvi in $\R$ mostrando le operazioni sui due membri, poi scrivi $S$.
+Per B1--B13 indica anche se l'equazione è determinata, impossibile o indeterminata e verifica il risultato
+nell'equazione iniziale. Per B14--B15 confronta esplicitamente gli insiemi delle soluzioni.}
+\sott{Primi passi | 1--6}
+\ex{B1}{Trasporto giustificato}{$3x+5=17$. Nel primo passaggio scrivi per esteso la sottrazione sui due membri.}
+\ex{B2}{Incognita nei due membri}{$5x-7=2x+8$.}
+\ex{B3}{Coefficiente negativo}{$7-2x=15$.}
+\ex{B4}{Secondo principio}{$\frac{3}{4}x=-6$. Indica per quale numero moltiplichi entrambi i membri.}
+\ex{B5}{Minimo comune multiplo su tutti i termini}{$\frac{x}{6}-\frac{x-1}{4}=\frac{1}{3}$.}
+\ex{B6}{Denominatore frazionario}{\[\frac{2x-1}{\displaystyle \frac{1}{2}}=6\] Scrivi il reciproco prima di sviluppare.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{B}{Equivalenza ed equazioni | esercizi 7--15}
+\nota{Continua sul quaderno mostrando i passaggi. Prima di leggere le soluzioni, esegui i controlli richiesti nella pagina precedente.}
+\ex{B7}{Somma al denominatore}{\[\frac{x+1}{\displaystyle \frac{1}{2}+\frac{1}{4}}=4\]}
+\ex{B8}{Reciproci e due membri}{\[\frac{2x-1}{\displaystyle \frac{2}{3}}-\frac{x+1}{\displaystyle \frac{1}{2}}=1\]}
+\ex{B9}{Tre denominatori composti}{\[\frac{2x+1}{\displaystyle \frac{1}{2}+\frac{1}{4}}-\frac{x-1}{\displaystyle \frac{5}{6}-\frac{1}{3}}=\frac{x+2}{\displaystyle 1-\frac{1}{4}}\]}
+\ex{B10}{Identità}{$2(x-3)+4=2x-2$.}
+\ex{B11}{Contraddizione}{$3(x+1)=3x+5$.}
+\ex{B12}{Correggi l’isolamento}{Uno studente scrive $\frac{x-2}{3}=4\Rightarrow x-2=\frac{4}{3}\Rightarrow x=\frac{10}{3}$. Correggi e risolvi.}
+\ex{B13}{Sviluppa, poi classifica}{$(x-1)^2-x^2=-2x+1$.}
+\ex{B14}{Non perdere lo zero}{Risolvi $x^2=5x$ senza dividere per $x$. Confronta con $x=5$ e spiega se le equazioni sono equivalenti.}
+\ex{B15}{Non aggiungere lo zero}{Risolvi $x-3=0$ e $x(x-3)=0$. È vero che moltiplicare entrambi i membri per $x$ conserva sempre le soluzioni? Motiva.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{C}{Scomposizioni e prodotto nullo}
+\sott{Ripasso mirato}
+
+Raccogli soltanto fattori presenti in \emph{ogni} termine del gruppo:
+$3x^2+6x=3x(x+2)$, mentre $3x+6=3(x+2)$.
+Nel trinomio $x^2+sx+p$ cerchi $a,b$ con $a+b=s$ e $ab=p$, così
+$x^2+sx+p=(x+a)(x+b)$. \textbf{Non scambiare somma e prodotto; rimoltiplica sempre.}
+Usa anche $a^2-b^2=(a-b)(a+b)$ e i raccoglimenti parziali.
+La legge di annullamento del prodotto vale per un \emph{prodotto uguale a zero}:
+$AB=0\Longleftrightarrow A=0$ \emph{oppure} $B=0$.
+Da $A+B=0$ non puoi mettere a zero separatamente gli addendi.
+Una radice ripetuta si scrive una sola volta in $S$.
+\sott{Esempio svolto}
+
+Per $x^2-x-6=0$ servono due numeri di somma $-1$ e prodotto $-6$: $-3$ e $2$.
+\[
+x^2-x-6=(x-3)(x+2),\qquad (x-3)(x+2)=x^2+2x-3x-6.
+\]
+Solo ora applico la legge di annullamento del prodotto: $x-3=0$ oppure $x+2=0$, quindi $S=\{-2;3\}$.
+Controllo: $(-2)^2-(-2)-6=0$ e $3^2-3-6=0$.
+\nota{In C1--C6 scomponi e controlla rimoltiplicando; nei trinomi scrivi somma e prodotto cercati.
+In C7--C15 risolvi in $\R$: porta a zero, scomponi, scrivi le alternative della legge di annullamento del prodotto e l'insieme $S$.
+Verifica le radici nell'equazione iniziale; non dividere per $x$.}
+\sott{Primi passi | 1--6}
+\ex{C1}{Somma e prodotto positivi}{Scomponi $x^2+7x+12$.}
+\ex{C2}{Due numeri negativi}{Scomponi $x^2-7x+12$.}
+\ex{C3}{Segni diversi}{Scomponi $x^2+x-12$.}
+\ex{C4}{Correggi la regola invertita}{Per $x^2-5x+6$ uno studente cerca due numeri con somma $6$ e prodotto $-5$. Riscrivi le condizioni, trova i numeri e scomponi.}
+\ex{C5}{Raccoglimento totale}{Scomponi $6x^3-9x^2$ e $3x+6$. Spiega perché nel secondo non puoi raccogliere $x$.}
+\ex{C6}{Raccoglimento parziale}{Scomponi $x^3+2x^2-9x-18$ raggruppando prima i termini a coppie e poi completando la scomposizione.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{C}{Scomposizioni e prodotto nullo | esercizi 7--15}
+\nota{Continua sul quaderno mostrando i passaggi. Prima di leggere le soluzioni, esegui i controlli richiesti nella pagina precedente.}
+\ex{C7}{Prodotto già pronto}{$(x-2)(x+5)=0$. Scrivi ``oppure'', non ``e''.}
+\ex{C8}{Somma da trasformare}{$x^2-5x+6=0$. Spiega perché scrivere $x^2=0$, $-5x=0$, $6=0$ non è un'applicazione della legge di annullamento del prodotto.}
+\ex{C9}{Raccogli senza dividere}{$x^2-4x=0$.}
+\ex{C10}{Radice ripetuta}{$(x-3)^2=0$. Quanti elementi contiene $S$?}
+\ex{C11}{Differenza di quadrati}{$4x^2-9=0$.}
+\ex{C12}{Porta prima a zero}{$x^2+x=6$.}
+\ex{C13}{Quadrati già riconoscibili}{$(x-1)^2-4(x+2)^2=0$. Evita lo sviluppo completo dei quadrati.}
+\ex{C14}{Prima i denominatori}{\[\frac{(2x+1)^2}{\displaystyle 1-\frac{1}{4}}-\frac{(x-2)^2}{\displaystyle \frac{1}{2}-\frac{1}{6}}=0\] Calcola prima i denominatori e i reciproci, poi usa la differenza di quadrati.}
+\ex{C15}{Raccoglimenti in grado alto}{$x^5-2x^4-8x^3+16x^2+16x-32=0$. Raggruppa i termini a coppie e riconosci un quadrato in $x^2$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{D}{Formule inverse della Fisica}
+\sott{Ripasso mirato}
+
+Una formula è un'equazione: evidenzia la lettera richiesta e trattala come incognita;
+le altre lettere sono dati. Annulla le operazioni nell'ordine inverso, applicando ogni
+operazione a \emph{entrambi} i membri. Dividi l'intero membro, non un solo addendo:
+da $2s=2s_0+at^2$ segue $a=\frac{2(s-s_0)}{t^2}$.
+Se l'incognita è al denominatore, prima moltiplica per quel denominatore.
+In questa categoria si assumono \textbf{positivi i tempi, le masse, le aree, le resistenze,
+la densità, $g$ e le pressioni}; anche la corrente è assunta non nulla.
+Inoltre, dove compare $P-P_0$, si assume $P>P_0$.
+Queste ipotesi rendono lecite le divisioni richieste. Controlla sostituendo la formula ricavata.
+\sott{Esempio svolto}
+
+Isolare $S$ in $P=\frac{F}{S}$ (con $P,F,S>0$):
+\[
+P=\frac{F}{S}\quad\xrightarrow{\times S}\quad PS=F
+\quad\xrightarrow{\div P}\quad S=\frac{F}{P}.
+\]
+Controllo: $\frac{F}{\displaystyle \frac{F}{P}}=P$. Con $F=120\,\mathrm N$ e $P=30\,\mathrm{Pa}$,
+$S=4\,\mathrm{m^2}$ e $\frac{120}{4}=30$.
+\nota{Riscrivi ogni formula, evidenzia l'incognita indicata tra parentesi e mostra
+almeno un passaggio per ogni operazione inversa, nominando l'operazione sui due membri.
+Richiama le condizioni che permettono di dividere e verifica sostituendo il risultato.
+I controlli numerici richiesti sono aggiuntivi.}
+\sott{Primi passi | 1--6}
+\ex{D1}{Prodotto}{$V=RI\quad[R]$.}
+\ex{D2}{Differenza e prodotto}{$s=s_0+vt\quad[v]$.}
+\ex{D3}{Incognita al numeratore}{$a=\frac{v-v_0}{t}\quad[v]$.}
+\ex{D4}{Incognita al denominatore}{$P=\frac{F}{S}\quad[S]$. Controlla anche con $F=180\,\mathrm N$, $P=60\,\mathrm{Pa}$.}
+\ex{D5}{Pressione con termine iniziale}{$P=P_0+dgh\quad[h]$.}
+\ex{D6}{Densità}{$d=\frac{m}{\mathcal V}\quad[\mathcal V]$. Qui $\mathcal V$ indica un volume e $m,d>0$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{D}{Formule inverse della Fisica | esercizi 7--15}
+\nota{Continua sul quaderno mostrando i passaggi. Prima di leggere le soluzioni, esegui i controlli richiesti nella pagina precedente.}
+\ex{D7}{Frazione come coefficiente}{$s=s_0+\frac{1}{2}at^2\quad[a]$.}
+\ex{D8}{Forza risultante}{$F-F_r=ma\quad[a]$, con $m>0$.}
+\ex{D9}{Tempo al denominatore}{$P_{\mathrm{pot}}=\frac{L}{t}\quad[t]$, con $L,P_{\mathrm{pot}}>0$.}
+\ex{D10}{Più fattori}{$P=P_0+\frac{mg}{S}\quad[S]$, con $P>P_0$.}
+\ex{D11}{Correggi il rapporto invertito}{Uno studente ricava $S=\frac{P}{F}$ da $P=\frac{F}{S}$. Correggi mostrando i passaggi e confronta con $F=200\,\mathrm N$, $P=50\,\mathrm{Pa}$.}
+\ex{D12}{Dividi tutti gli addendi}{Uno studente scrive $2s=2s_0+at^2\Rightarrow a=\frac{2s}{t^2}-2s_0$. Correggi.}
+\ex{D13}{Differenza al numeratore}{$I=\frac{V-V_0}{R}\quad[V]$.}
+\ex{D14}{Lettera richiesta diversa}{$P=P_0+dgh\quad[d]$.}
+\ex{D15}{Formula e verifica numerica}{$s=s_0+v_0t+\frac{1}{2}at^2\quad[a]$. Poi usa $s=35\,\mathrm m$, $s_0=3\,\mathrm m$, $v_0=4\,\mathrm{m/s}$, $t=4\,\mathrm s$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{E}{Teoria, notazione e problemi}
+\sott{Ripasso mirato}
+
+Due equazioni sullo stesso dominio sono equivalenti se hanno lo stesso insieme di soluzioni.
+Il dominio $D$ contiene i valori ammessi; $S\subseteq D$ contiene quelli che rendono vera l'uguaglianza.
+Un'equazione è frazionaria rispetto a $x$ se $x$ compare in un denominatore; $\frac{x}{3}+\frac{1}{2}=2$ è intera.
+Per nessuna soluzione scrivi $S=\varnothing$; per tutti i reali $S=\R$, senza graffe esterne.
+Un quinto di $p$ è $\frac{p}{5}$; il prezzo dopo uno sconto di un quinto è $p-\frac{p}{5}=\frac{4p}{5}$.
+Per oggetti uguali: $n\cdot(\frac{4p}{5})=\frac{4}{5}np$.
+\textbf{È lecito scontare il subtotale degli articoli interessati}; non il totale che comprende
+articoli esclusi e spedizione. In un problema definisci l'incognita, indica l'unità e controlla il totale.
+\sott{Esempio svolto}
+
+Due quaderni costano $x$ euro ciascuno; un raccoglitore costa $x+2$ euro, con sconto di $\frac{1}{4}$.
+La spedizione costa $1$ euro e la spesa è $16{,}25$ euro.
+\[
+2x+\frac{3}{4}(x+2)+1=16{,}25
+\Rightarrow 8x+3(x+2)+4=65
+\Rightarrow11x=55\Rightarrow x=5.
+\]
+Un quaderno costa $5$ euro; il raccoglitore prima dello sconto costa $7$ euro.
+Controllo: $2\cdot5+\frac{3}{4}\cdot7+1=16{,}25$.
+\nota{Motiva ogni risposta teorica: una risposta vero o falso da sola non basta. Nei problemi mostra le espressioni
+dei prezzi, l'equazione, i passaggi, la risposta con unità e il controllo nella situazione descritta.
+Per E15 documenta anche l'organizzazione del lavoro: la velocità non è l'obiettivo.}
+\sott{Primi passi | 1--6}
+\ex{E1}{Equazioni equivalenti}{Vero o falso: $2(x-1)=6$ e $x+3=7$ sono equivalenti in $\R$. Risolvi entrambe e motiva.}
+\ex{E2}{Intera o frazionaria}{Classifica rispetto a $x$ e scrivi $D$: a) $\frac{x}{3}+\frac{1}{2}=2$; b) $\frac{1}{x-2}=3$; c) $\frac{2x-1}{\displaystyle \frac{3}{4}}=5$.}
+\ex{E3}{Dominio distinto da soluzioni}{Per $\frac{1}{x-2}=1$, scrivi prima $D$, poi risolvi e scrivi $S$. Spiega perché $D$ e $S$ non coincidono.}
+\ex{E4}{Impossibile o indeterminata}{Risolvi e classifica: a) $2(x+1)=2x+2$; b) $2(x+1)=2x+3$. Scrivi $S$ senza confondere $\varnothing$ e $\R$.}
+\ex{E5}{Correggi la notazione}{Correggi: a) ``nessuna soluzione: $S=\{\varnothing\}$''; b) ``ogni reale: $S=\{\R\}$''; c) ``soluzioni $-2$ e $5$: $D=\{-2;5\}$''. Spiega il ruolo delle graffe.}
+\ex{E6}{Controllare un candidato}{Per $3x+1=10$, verifica $x=2$ e $x=3$. Poi valuta: ``se la sostituzione dà $7=10$, il valore provato è una soluzione''.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{E}{Teoria, notazione e problemi | esercizi 7--15}
+\nota{Continua sul quaderno mostrando i passaggi. Prima di leggere le soluzioni, esegui i controlli richiesti nella pagina precedente.}
+\ex{E7}{Una frazione della quantità}{Calcola un quinto di $40$ euro. Poi distingui $\frac{40}{5}$, $40-\frac{1}{5}$ e $40:\frac{1}{5}$, indicando quale espressione rappresenta la frazione richiesta.}
+\ex{E8}{Sconto e prezzo pagato}{Un oggetto costa $35$ euro ed è scontato di un quinto. Calcola sconto e prezzo finale. Scrivi poi entrambe le espressioni per un prezzo iniziale $p$.}
+\ex{E9}{Traduzione con parentesi}{Scrivi: a) il doppio della somma di $x$ e $3$; b) la metà della differenza tra $x$ e $4$; c) il prezzo di tre articoli da $x+2$ euro ciascuno, tutti scontati di un quinto.}
+\ex{E10}{Dove si applica lo sconto}{Compri due quaderni a $5$ euro ciascuno e tre raccoglitori a $10$ euro ciascuno. Solo i raccoglitori hanno sconto di $\frac{1}{5}$; spedizione $2$ euro. Calcola il totale in due modi e spiega perché $\frac{4}{5}(2\cdot5+3\cdot10)+2$ è errato.}
+\ex{E11}{Problema a un prezzo}{Due articoli dello stesso prezzo iniziale $x$ sono scontati di un quinto. Con $3$ euro di spedizione paghi $35$ euro. Trova $x$ e controlla.}
+\ex{E12}{Due prezzi collegati}{Due quaderni e tre raccoglitori costano in totale $32$ euro, compresi $2$ euro di spedizione. Un raccoglitore costa $2$ euro più di un quaderno ed è scontato di un quarto; i quaderni non sono scontati. Trova i prezzi iniziali.}
+\ex{E13}{Problema e risparmio}{Quattro quaderni e due raccoglitori costano $34{,}20$ euro, compresi $3$ euro di spedizione. Un raccoglitore costa $2$ euro più di un quaderno ed è scontato di un quinto. Trova i due prezzi iniziali e il risparmio totale.}
+\ex{E14}{Correggi il modello}{Tre quaderni e due raccoglitori, con spedizione di $1$ euro, costano $24{,}20$ euro. Un raccoglitore costa $x+3$ euro, un quaderno $x$ euro. Solo i raccoglitori sono scontati di $\frac{1}{5}$. Correggi il modello $3x+2[(x+3)-\frac{1}{5}]+1=24{,}20$ e risolvi.}
+\ex{E15}{Organizzazione e controllo}{Prima di iniziare, prepara tre righe numerate e una colonna per i controlli. Svolgi: a) $2(x-3)=x+1$; b) $x^2-9=0$; c) un articolo da $x$ euro e uno da $x+2$ euro, solo il secondo scontato di $\frac{1}{5}$, più $1$ euro di spedizione, costano $13{,}40$ euro. Trova $x$. Alla fine registra tempo effettivo, eventuale punto lasciato e primo errore trovato; controlla che nessun punto sia rimasto senza risposta.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{Soluzioni A}{Calcolo, segni e prodotti notevoli}\label{inizio-soluzioni}
+\textbf{Esercizi A1--A8}\par
+\nota{Confronta i passaggi, non soltanto il risultato. Sono possibili svolgimenti diversi purché corretti e giustificati.}
+\sol{A1}{$-3x+5-2x=\boxed{-5x+5}$. Il meno agisce su tutti e tre i termini.}
+\sol{A2}{$4x-[2x-x+3]=4x-(x+3)=\boxed{3x-3}$.}
+\sol{A3}{$(-4-4+2)x+(3-7)=\boxed{-6x-4}$. In particolare $-4x-4x=-8x$: i coefficienti hanno lo stesso segno.}
+\sol{A4}{$6(x+1)=6x+6$; oppure $2(3x+3)=6x+6$. Il fattore $2$ è usato una volta in ciascun percorso.}
+\sol{A5}{$-6x^2+8x+2x^2-x=\boxed{-4x^2+7x}$.}
+\sol{A6}{$(x-1)^2=\boxed{x^2-2x+1}$, doppio prodotto $-2x$; $(2x+3)^2=\boxed{4x^2+12x+9}$, doppio prodotto $12x$.}
+\sol{A7}{$(x-4)^2=x^2-8x+16$; $(x-4)(x+4)=x^2-16$. Nel primo compaiono il doppio prodotto e il quadrato positivo di $4$.}
+\sol{A8}{Basi: $(x,2)$, $(x,3)$, $(2x,5)$. Fattori: $(x-2)(x+2)$; $(x-3)(x+3)$; $(2x-5)(2x+5)$. Rimoltiplicando si riottengono le tre differenze.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{Soluzioni A}{Calcolo, segni e prodotti notevoli}
+\textbf{Esercizi A9--A15}\par
+\nota{Confronta i passaggi, non soltanto il risultato. Sono possibili svolgimenti diversi purché corretti e giustificati.}
+\sol{A9}{$x^2+y^2+1+2xy-2x-2y$. I tre doppi prodotti sono $2xy$, $-2x$, $-2y$.}
+\sol{A10}{$x^4+x^2+4+2x^3-4x^2-4x=\boxed{x^4+2x^3-3x^2-4x+4}$.}
+\sol{A11}{Il primo errore è $-(2x-3)=-2x-3$. Correzione: $5x-2x+3=\boxed{3x+3}$.}
+\sol{A12}{Ha usato il $3$ sia nel $6$ esterno sia nella parentesi. $3\cdot2(2x-1)=6(2x-1)=\boxed{12x-6}$.}
+\sol{A13}{$4x^2-4x+1-(x^2-4)=\boxed{3x^2-4x+5}$. Per $x=0$: $5$; per $x=1$: $4$, sia prima sia dopo.}
+\sol{A14}{$2x^2-4x+2-2x^2+4x=\boxed{2}$. Per $x=0$ e $x=1$ entrambe le forme valgono $2$.}
+\sol{A15}{Usando A10: $x^4+2x^3-3x^2-4x+4+4x^2-1-(x^4+2x^3+x^2)=\boxed{-4x+3}$. Controlli: $x=0\Rightarrow3$; $x=1\Rightarrow-1$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{Soluzioni B}{Equivalenza ed equazioni}
+\textbf{Esercizi B1--B8}\par
+\nota{Confronta i passaggi, non soltanto il risultato. Sono possibili svolgimenti diversi purché corretti e giustificati.}
+\sol{B1}{$3x+5-5=17-5\Rightarrow3x=12\Rightarrow x=4$. Determinata, $S=\{4\}$; controllo $17=17$.}
+\sol{B2}{$5x-2x=8+7\Rightarrow3x=15\Rightarrow x=5$. Determinata, $S=\{5\}$; controllo $18=18$.}
+\sol{B3}{$-2x=8\Rightarrow x=\frac{8}{-2}=-4$. Determinata, $S=\{-4\}$; controllo $15=15$.}
+\sol{B4}{Moltiplico per $\frac{4}{3}$: $x=-6\cdot\frac{4}{3}=-8$. Determinata, $S=\{-8\}$; controllo $-6=-6$.}
+\sol{B5}{Minimo comune multiplo $12$: $2x-3(x-1)=4\Rightarrow-x+3=4\Rightarrow x=-1$. Determinata, $S=\{-1\}$; controllo $-\frac{1}{6}+\frac{1}{2}=\frac{1}{3}$.}
+\sol{B6}{$2(2x-1)=6\Rightarrow4x-2=6\Rightarrow x=2$. Determinata, $S=\{2\}$; controllo $\frac{3}{\displaystyle \frac{1}{2}}=6$.}
+\sol{B7}{$\frac{1}{2}+\frac{1}{4}=\frac{3}{4}$; $\frac{4}{3}(x+1)=4\Rightarrow x+1=3\Rightarrow x=2$. Determinata, $S=\{2\}$; controllo $\frac{3}{\displaystyle \frac{3}{4}}=4$.}
+\sol{B8}{$\frac{3}{2}(2x-1)-2(x+1)=1$. Per $2$: $3(2x-1)-4(x+1)=2\Rightarrow2x-7=2$. Determinata, $S=\{\frac{9}{2}\}$; controllo $12-11=1$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{Soluzioni B}{Equivalenza ed equazioni}
+\textbf{Esercizi B9--B15}\par
+\nota{Confronta i passaggi, non soltanto il risultato. Sono possibili svolgimenti diversi purché corretti e giustificati.}
+\sol{B9}{Denominatori $\frac{3}{4}$, $\frac{1}{2}$, $\frac{3}{4}$. Per $3$: $4(2x+1)-6(x-1)=4(x+2)\Rightarrow2x+10=4x+8\Rightarrow x=1$. Determinata, $S=\{1\}$; controllo $4=4$.}
+\sol{B10}{$2x-6+4=2x-2\Rightarrow0=0$. Indeterminata, $S=\R$: i membri coincidono per ogni reale.}
+\sol{B11}{$3x+3=3x+5\Rightarrow3=5$. Impossibile, $S=\varnothing$: la differenza dei membri è sempre $-2$.}
+\sol{B12}{Per eliminare la divisione per $3$ moltiplico entrambi i membri per $3$: $x-2=12\Rightarrow x=14$. Determinata, $S=\{14\}$; controllo $\frac{12}{3}=4$.}
+\sol{B13}{$x^2-2x+1-x^2=-2x+1\Rightarrow0=0$. Indeterminata, $S=\R$; i membri sono la stessa espressione.}
+\sol{B14}{$x^2-5x=x(x-5)=0\Rightarrow S=\{0;5\}$. L'equazione $x=5$ ha solo $\{5\}$: dividere per $x$ perde la soluzione $0$.}
+\sol{B15}{Prima: $S_1=\{3\}$. Dopo: $x=0$ oppure $x=3$, $S_2=\{0;3\}$. Non sono equivalenti: moltiplicare per un fattore che può annullarsi ha introdotto $0$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{Soluzioni C}{Scomposizioni e prodotto nullo}
+\textbf{Esercizi C1--C8}\par
+\nota{Confronta i passaggi, non soltanto il risultato. Sono possibili svolgimenti diversi purché corretti e giustificati.}
+\sol{C1}{Somma $7$, prodotto $12$: $3,4$. $\boxed{(x+3)(x+4)}$; sviluppo $x^2+4x+3x+12=x^2+7x+12$.}
+\sol{C2}{Somma $-7$, prodotto $12$: $-3,-4$. $\boxed{(x-3)(x-4)}$; sviluppo $x^2-4x-3x+12=x^2-7x+12$.}
+\sol{C3}{Somma $1$, prodotto $-12$: $4,-3$. $\boxed{(x+4)(x-3)}$; sviluppo $x^2-3x+4x-12=x^2+x-12$.}
+\sol{C4}{Condizioni corrette: somma $-5$, prodotto $6$. Numeri $-2,-3$. $(x-2)(x-3)=x^2-3x-2x+6=x^2-5x+6$.}
+\sol{C5}{$6x^3-9x^2=3x^2(2x-3)$; $3x+6=3(x+2)$. Nel secondo il termine $6$ non contiene $x$. Le distributive restituiscono i polinomi iniziali.}
+\sol{C6}{$x^2(x+2)-9(x+2)=(x+2)(x^2-9)=\boxed{(x+2)(x-3)(x+3)}$. Il prodotto ridiventa $x^3+2x^2-9x-18$.}
+\sol{C7}{$x-2=0$ oppure $x+5=0$; $\boxed{S=\{-5;2\}}$. Ogni valore annulla almeno un fattore.}
+\sol{C8}{È una somma, non un prodotto. $(x-2)(x-3)=0\Rightarrow x=2$ oppure $x=3$; $S=\{2;3\}$. Controlli: $4-10+6=0$, $9-15+6=0$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{Soluzioni C}{Scomposizioni e prodotto nullo}
+\textbf{Esercizi C9--C15}\par
+\nota{Confronta i passaggi, non soltanto il risultato. Sono possibili svolgimenti diversi purché corretti e giustificati.}
+\sol{C9}{$x(x-4)=0\Rightarrow x=0$ oppure $x=4$; $S=\{0;4\}$. Entrambi rendono $x^2-4x$ nullo.}
+\sol{C10}{$(x-3)(x-3)=0\Rightarrow x=3$; $S=\{3\}$. Un solo elemento, anche se il fattore è ripetuto.}
+\sol{C11}{$(2x-3)(2x+3)=0\Rightarrow x=\frac{3}{2}$ oppure $x=-\frac{3}{2}$; $S=\{-\frac{3}{2};\frac{3}{2}\}$. Per entrambi $4x^2=9$.}
+\sol{C12}{$x^2+x-6=(x+3)(x-2)=0\Rightarrow S=\{-3;2\}$. Controlli: $9-3=6$, $4+2=6$.}
+\sol{C13}{$[(x-1)-2(x+2)][(x-1)+2(x+2)]=(-x-5)(3x+3)=0$. Quindi $S=\{-5;-1\}$. Controlli dei quadrati: $36=36$ e $4=4$.}
+\sol{C14}{Denominatori $\frac{3}{4},\frac{1}{3}$; per $3$: $4(2x+1)^2-9(x-2)^2=0$. Fattori $[2(2x+1)-3(x-2)][2(2x+1)+3(x-2)]=(x+8)(7x-4)$. $S=\{-8;\frac{4}{7}\}$. Ogni radice annulla un fattore; i denominatori sono costanti non nulli.}
+\sol{C15}{$x^4(x-2)-8x^2(x-2)+16(x-2)=(x-2)(x^4-8x^2+16)=(x-2)(x^2-4)^2=(x-2)^3(x+2)^2$. Legge di annullamento del prodotto: $x=2$ oppure $x=-2$, $S=\{-2;2\}$. Le molteplicità non aumentano gli elementi di $S$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{Soluzioni D}{Formule inverse della Fisica}
+\textbf{Esercizi D1--D8}\par
+\nota{Confronta i passaggi, non soltanto il risultato. Sono possibili svolgimenti diversi purché corretti e giustificati.}
+\sol{D1}{Divido per $I\ne0$: $\frac{V}{I}=R$, cioè $\boxed{R=\frac{V}{I}}$. Sostituzione: $(\frac{V}{I})I=V$.}
+\sol{D2}{Sottraggo $s_0$: $s-s_0=vt$; divido per $t>0$: $\boxed{v=\frac{s-s_0}{t}}$. Controllo: $s_0+\frac{s-s_0}{t}t=s$.}
+\sol{D3}{Moltiplico per $t$: $at=v-v_0$; sommo $v_0$: $\boxed{v=v_0+at}$. Controllo: $\frac{(v_0+at)-v_0}{t}=a$.}
+\sol{D4}{Per $S>0$: $PS=F$; divido per $P>0$: $\boxed{S=\frac{F}{P}}$. Controllo $\frac{F}{\displaystyle \frac{F}{P}}=P$. Numericamente $S=3\,\mathrm{m^2}$ e $\frac{180}{3}=60$.}
+\sol{D5}{Sottraggo $P_0$: $P-P_0=dgh$; divido per $dg>0$: $\boxed{h=\frac{P-P_0}{dg}}$. Controllo $P_0+dg\frac{P-P_0}{dg}=P$.}
+\sol{D6}{Moltiplico per $\mathcal V>0$: $d\mathcal V=m$; divido per $d>0$: $\boxed{\mathcal V=\frac{m}{d}}$. Controllo $\frac{m}{\displaystyle \frac{m}{d}}=d$.}
+\sol{D7}{$s-s_0=\frac{at^2}{2}$; per $2$: $2(s-s_0)=at^2$; divido per $t^2>0$: $\boxed{a=\frac{2(s-s_0)}{t^2}}$. La sostituzione restituisce $s_0+s-s_0=s$.}
+\sol{D8}{Divido \emph{tutto} il membro sinistro per $m$: $\boxed{a=\frac{F-F_r}{m}}$. Controllo $m\frac{F-F_r}{m}=F-F_r$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{Soluzioni D}{Formule inverse della Fisica}
+\textbf{Esercizi D9--D15}\par
+\nota{Confronta i passaggi, non soltanto il risultato. Sono possibili svolgimenti diversi purché corretti e giustificati.}
+\sol{D9}{Per $t>0$: $P_{\mathrm{pot}}t=L$; divido per $P_{\mathrm{pot}}>0$: $\boxed{t=\frac{L}{P_{\mathrm{pot}}}}$. Controllo $\frac{L}{\displaystyle \frac{L}{P_{\mathrm{pot}}}}=P_{\mathrm{pot}}$.}
+\sol{D10}{$P-P_0=\frac{mg}{S}$; per $S>0$: $(P-P_0)S=mg$; divido per $P-P_0>0$: $\boxed{S=\frac{mg}{P-P_0}}$. Controllo $P_0+\frac{mg}{\displaystyle \frac{mg}{P-P_0}}=P$.}
+\sol{D11}{$PS=F\Rightarrow\boxed{S=\frac{F}{P}}$. Il controllo è $\frac{F}{\displaystyle \frac{F}{P}}=P$. Corretto: $S=4\,\mathrm{m^2}$; il rapporto sbagliato dà $0{,}25$ e $\frac{200}{0{,}25}=800\ne50$.}
+\sol{D12}{$2s-2s_0=at^2\Rightarrow\boxed{a=\frac{2s-2s_0}{t^2}=\frac{2s}{t^2}-\frac{2s_0}{t^2}}$. Il secondo addendo va diviso anch'esso per $t^2$. Sostituendo: $2s_0+(2s-2s_0)=2s$.}
+\sol{D13}{Per $R>0$: $IR=V-V_0$; sommo $V_0$: $\boxed{V=V_0+IR}$. Controllo $\frac{(V_0+IR)-V_0}{R}=I$.}
+\sol{D14}{$P-P_0=dgh$; divido per $gh>0$: $\boxed{d=\frac{P-P_0}{gh}}$. Qui $h>0$, perché $P>P_0$ e $d,g>0$. Controllo $P_0+\frac{P-P_0}{gh}gh=P$.}
+\sol{D15}{$s-s_0-v_0t=\frac{at^2}{2}\Rightarrow\boxed{a=\frac{2(s-s_0-v_0t)}{t^2}}$. La sostituzione restituisce $s$. Numericamente $a=\frac{2(35-3-16)}{16}=2\,\mathrm{m/s^2}$; controllo $3+4\cdot4+\frac{1}{2}\cdot2\cdot16=35$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{Soluzioni E}{Teoria, notazione e problemi}
+\textbf{Esercizi E1--E8}\par
+\nota{Confronta i passaggi, non soltanto il risultato. Sono possibili svolgimenti diversi purché corretti e giustificati.}
+\sol{E1}{Vero. La prima dà $x-1=3\Rightarrow x=4$; la seconda dà $x=4$. Hanno lo stesso dominio $\R$ e lo stesso $S=\{4\}$.}
+\sol{E2}{a) Intera, $D=\R$; b) frazionaria, $D=\R\setminus\{2\}$; c) intera, $D=\R$. In a) e c) i denominatori sono costanti non nulle.}
+\sol{E3}{$D=\R\setminus\{2\}$; per $x-2\ne0$, $1=x-2\Rightarrow x=3$; $S=\{3\}$. $D$ contiene i valori ammessi, $S$ solo quelli che verificano: $\frac{1}{3-2}=1$.}
+\sol{E4}{a) $2x+2=2x+2\Rightarrow0=0$: indeterminata, $S=\R$. b) $2=3$: impossibile, $S=\varnothing$.}
+\sol{E5}{a) $S=\varnothing$; b) $S=\R$; c) $S=\{-2;5\}$. Le graffe elencano gli elementi; $\{\varnothing\}$ e $\{\R\}$ contengono ciascuno un insieme come elemento. I valori che risolvono vanno indicati con $S$.}
+\sol{E6}{$x=2$: $7\ne10$, non è soluzione. $x=3$: $10=10$, è soluzione; $S=\{3\}$. L'affermazione è falsa: occorre un'uguaglianza vera.}
+\sol{E7}{Un quinto è $\frac{1}{5}\cdot40=\frac{40}{5}=8$ euro. Le altre operazioni danno $39{,}80$ e $200$: non rappresentano un quinto di $40$.}
+\sol{E8}{Sconto $\frac{35}{5}=7$ euro; prezzo finale $35-7=28$ euro. In generale: sconto $\frac{p}{5}$; prezzo pagato $p-\frac{p}{5}=\frac{4p}{5}$.}
+\clearpage\fontsize{11}{15}\selectfont
+\tit{Soluzioni E}{Teoria, notazione e problemi}
+\textbf{Esercizi E9--E15}\par
+\nota{Confronta i passaggi, non soltanto il risultato. Sono possibili svolgimenti diversi purché corretti e giustificati.}
+\sol{E9}{a) $2(x+3)$; b) $\frac{x-4}{2}$; c) $3\cdot\frac{4}{5}(x+2)=\frac{12}{5}(x+2)$. La frazione dello sconto agisce sull'intero prezzo unitario.}
+\sol{E10}{Per unità: $2\cdot5+3\cdot\frac{4}{5}\cdot10+2=36$ euro. Per subtotale: $10+\frac{4}{5}\cdot30+2=36$ euro. L'espressione proposta dà $34$ euro perché sconta anche i quaderni.}
+\sol{E11}{$x>0$ in euro. $2\cdot\frac{4}{5}x+3=35\Rightarrow\frac{8}{5}x=32\Rightarrow x=20$. Ogni articolo costa $16$ euro dopo lo sconto; $2\cdot16+3=35$.}
+\sol{E12}{$x=$ prezzo di un quaderno. $2x+3\cdot\frac{3}{4}(x+2)+2=32$. Per $4$: $8x+9x+18+8=128\Rightarrow17x=102\Rightarrow x=6$ euro; raccoglitore $8$ euro. Controllo: $2\cdot6+3\cdot\frac{3}{4}\cdot8+2=32$.}
+\sol{E13}{$4x+2\cdot\frac{4}{5}(x+2)+3=34{,}20\Rightarrow20x+8(x+2)+15=171\Rightarrow28x=140\Rightarrow x=5$. Raccoglitore $7$ euro. Risparmio $2\cdot\frac{7}{5}=2{,}80$ euro. Controllo: $20+11{,}20+3=34{,}20$; senza sconto $37$ euro.}
+\sol{E14}{Lo sconto è $\frac{x+3}{5}$, non $\frac{1}{5}$ euro. $3x+2\cdot\frac{4}{5}(x+3)+1=24{,}20\Rightarrow15x+8(x+3)+5=121\Rightarrow23x=92\Rightarrow x=4$ euro. Raccoglitore $7$ euro. Controllo: $3\cdot4+2\cdot\frac{4}{5}\cdot7+1=24{,}20$.}
+\sol{E15}{a) $2x-6=x+1\Rightarrow x=7$, $S=\{7\}$; controllo $8=8$. b) $(x-3)(x+3)=0$, $S=\{-3;3\}$. c) $x+\frac{4}{5}(x+2)+1=13{,}40\Rightarrow5x+4x+8+5=67\Rightarrow9x=54\Rightarrow x=6$ euro; controllo $6+6{,}40+1=13{,}40$. Il registro dei tempi e degli errori è personale e non ha una risposta unica.}
+\end{document}

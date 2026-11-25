@@ -1,0 +1,653 @@
+% =====================================================================
+%  TEMPLATE MATEMATICA -- IIS "David Maria Turoldo", Zogno (BG)
+%  Classe: exam  |  Compilazione: pdflatex (due passaggi)
+%  Soluzioni:        decommentare \printanswers
+%  Versione BES/DSA: impostare \versioneBEStrue
+%  Struttura:        \iniziofila{A} \begin{esercizi} ... \end{esercizi} \finefila
+%                    \iniziofila{B} \begin{esercizi} ... \end{esercizi} \finefila
+%  Ogni esercizio:   \begin{esercizio}
+	%                      \obiettivo{...}
+	%                      \question[punti]  (oppure \question + parts con \part[punti])
+	%                      testo ...
+	%                    \end{esercizio}
+%  Nessuno spazio per le risposte: gli studenti scrivono sul foglio a protocollo.
+% =====================================================================
+\documentclass[11pt,a4paper,addpoints]{exam}
+
+% ---------- Lingua e codifica ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ---------- Matematica, grafica, tabelle ----------
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker={,}, per-mode=symbol, group-separator={\,}}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,patterns,angles,quotes}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{array,tabularx,booktabs}
+\usepackage{xcolor}
+
+% ---------- Pagina ----------
+\usepackage[a4paper,top=2cm,bottom=2.2cm,left=2cm,right=2.2cm,
+headheight=30pt,headsep=12pt]{geometry}
+
+% ---------- Opzioni ----------
+% \printanswers                 % <-- decommentare per la versione con soluzioni
+\newif\ifversioneBES
+\versioneBESfalse              % <-- \versioneBEStrue per la versione BES/DSA
+\newif\iftabellabonus
+\tabellabonusfalse
+
+% ---------- Interlinea ----------
+%  \interlinea      : testo normale
+%  \interlineaparts : sottopunti a), b), ... (piu' ariosa, separa le equazioni)
+\newcommand{\interlinea}{1.3}
+\newcommand{\interlineaparts}{1.3}
+\ifversioneBES
+\usepackage[scaled=1.05]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\interlinea}{1.5}
+\renewcommand{\interlineaparts}{1.7}
+\fi
+%\linespread{1.5}
+
+% ---------- Dati della prova (da compilare) ----------
+\newcommand{\materia}{Matematica}
+\newcommand{\classe}{1\textsuperscript{a} SP}
+\newcommand{\indirizzo}{Liceo Scientifico a indirizzo sportivo}
+%   Liceo Scientifico | Liceo Scientifico a indirizzo sportivo | Liceo delle Scienze Umane
+\newcommand{\tipoprova}{Verifica}
+\newcommand{\argomento}{Numeri naturali, operazioni e divisibilit\`a}
+\newcommand{\durata}{60 minuti}
+\newcommand{\annoscolastico}{2026/2027}
+\newcommand{\docente}{Prof. Rubens Longhi}
+\newcommand{\fila}{A}
+\newcommand{\indicazioni}{Svolgi gli esercizi sul foglio a protocollo motivando con chiarezza i passaggi algebrici.
+	Non \`e consentito l'uso della calcolatrice\ifversioneBES, salvo quanto previsto dal PDP. Sono consentiti gli strumenti compensativi previsti dal PDP\fi.}
+
+% ---------- Intestazione e pie' di pagina ----------
+%  Ogni fila ricomincia da pagina 1: la sua prima pagina ha l'intestazione
+%  della scuola e la numerazione "Pagina x di y" e' calcolata sulla singola fila.
+\pagestyle{headandfoot}
+\firstpageheader
+{\scriptsize\textsc{IIS ``David Maria Turoldo''}\\[-1pt]
+	\scriptsize Via Ronco 11 -- 24019 Zogno (BG)}
+{}
+{\scriptsize A.S.\ \annoscolastico\\[-1pt]\scriptsize \docente}
+\firstpageheadrule
+\runningheader{\small\materia\ -- \classe}{\small\tipoprova}{\small Fila \fila}
+\runningheadrule
+\newcommand{\paginefila}{\pageref{fine@fila@\fila}}
+\firstpagefooter{}{\small Pagina \thepage\ di \paginefila}{}
+\runningfooter{}{\small Pagina \thepage\ di \paginefila}{}
+
+% ---------- Formato degli esercizi ----------
+%  Riga 1:  "1."  in grassetto + obiettivo in grigio ........ (n punti)
+%  Riga 2+: testo dell'esercizio
+% ---------- Formato degli esercizi ----------
+\newcommand{\obiettivocorrente}{}
+\newcommand{\obiettivo}[1]{%
+	\gdef\obiettivocorrente{#1}}
+\newcommand{\stampaobiettivo}{%
+	\ifx\obiettivocorrente\empty\else
+	{\footnotesize\color{black!55}\textit{Obiettivo: \obiettivocorrente}}%
+	\fi}
+\qformat{\textbf{\thequestion.}\enspace\stampaobiettivo\hfill\colonnapunti{(\totalpoints\ \points)}\gdef\obiettivocorrente{}}
+\bonusqformat{\textbf{\thequestion.}\enspace{\footnotesize\color{black!55}\textit{(facoltativo)}}\enspace\stampaobiettivo\hfill\colonnapunti{(+\totalbonuspoints\ bonus)}\gdef\obiettivocorrente{}}
+\renewcommand{\questionlabel}{}
+\renewcommand{\partlabel}{\thepartno)}
+\renewcommand{\subpartlabel}{\thesubpart.}
+\renewcommand{\choicelabel}{\thechoice)}
+\pointpoints{punto}{punti}
+\bonuspointpoints{punto bonus}{punti bonus}
+\newcommand{\colonnapunti}[1]{{\small #1}}
+\pointformat{\small(\thepoints)}
+\bonuspointformat{\small(+\thepoints)}
+
+% Sottopunti con interlinea maggiore (le soluzioni tornano all'interlinea normale)
+\renewcommand{\partshook}{\linespread{\interlineaparts}\selectfont\setlength{\itemsep}{5pt}\setlength{\rightmargin}{2.2cm}}
+
+% Numerazione degli esercizi: ogni fila riparte da 1 (esercizio 1, 2, ...);
+% il contatore interno di exam prosegue da una fila all'altra, cosi' punti,
+% totali e tabelle restano corretti. Usare l'ambiente "esercizi" al posto di "questions".
+\newcounter{offsetfila}
+\renewcommand{\thequestion}{\number\numexpr\value{question}-\value{offsetfila}\relax}
+\newenvironment{esercizi}
+{\begin{questions}\setcounter{question}{\value{offsetfila}}}
+	{\end{questions}}
+
+% ---------- Esercizi non spezzati tra due pagine ----------
+%  \begin{esercizio} ... \end{esercizio} racchiude \obiettivo + \question + parts.
+%  Se non ci sta, l'esercizio passa intero alla pagina successiva.
+%  Nella versione con soluzioni l'esercizio puo' spezzarsi (i correttori sono lunghi).
+\cancelspace   % le soluzioni nascoste non lasciano spazio ne' punti di interruzione
+\newenvironment{esercizio}
+{\par\ifprintanswers\else\addpenalty{-100}\begin{samepage}\fi}
+	{\ifprintanswers\else\end{samepage}\fi\par\vspace{6pt}}
+
+% ---------- Soluzioni e scelte multiple ----------
+\renewcommand{\solutiontitle}{\noindent\textbf{Soluzione.}\enspace}
+\unframedsolutions
+\SolutionEmphasis{\color{blue!60!black}\linespread{\interlinea}\selectfont}
+\CorrectChoiceEmphasis{\color{blue!60!black}\bfseries}
+\checkboxchar{$\square$}
+\checkedchar{$\blacksquare$}
+
+% ---------- Tabella punteggi ----------
+\hqword{\textbf{Esercizio}}
+\hpword{\textbf{Punti massimi}}
+\hsword{\textbf{Punti ottenuti}}
+\htword{\textbf{Totale}}
+\chqword{\textbf{Esercizio}}
+\chpword{\textbf{Punti massimi}}
+\chbpword{\textbf{Bonus}}
+\chsword{\textbf{Punti ottenuti}}
+\chtword{\textbf{Totale}}
+
+% ---------- Macro utili ----------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% ---------- Inizio e fine di ogni fila ----------
+%  \iniziofila{A} ... \finefila   poi   \iniziofila{B} ... \finefila
+%  \iniziofila: nuova pagina 1, intestazione scuola, titolo, nome, indicazioni.
+%  \finefila:   tabella punteggi della sola fila, voto, firma.
+\newcommand{\iniziofila}[1]{%
+	\clearpage
+	\renewcommand{\fila}{#1}%
+	\setcounter{page}{1}%
+	\setcounter{offsetfila}{\value{totalq@fila}}%
+	\begin{center}
+		{\Large \argomento}\\[2pt]
+		{\small \indirizzo\ -- Classe \classe\ -- Durata: \durata\ -- \textbf{Fila #1}}
+	\end{center}
+	\vspace{4pt}
+	\noindent
+	\begin{tabularx}{\textwidth}{@{}l X l p{3.2cm}@{}}
+		\textbf{Nome e Cognome:} & \hrulefill & \textbf{Data:} & \hrulefill \\[8pt]
+	\end{tabularx}
+	\vspace{2pt}
+	\noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\small\linespread{1.2}\selectfont
+			\textbf{Indicazioni.} \indicazioni\ Punteggio totale: \pointsinrange{fila#1} punti.}}
+	\vspace{2pt}
+	\begingradingrange{fila#1}}
+\newcounter{totalq@fila}
+\newcommand{\finefila}{%
+	\setcounter{totalq@fila}{\value{question}}%
+	\endgradingrange{fila\fila}%
+	\vfill
+	\begin{center}\small
+		\iftabellabonus
+		\partialcombinedgradetable{fila\fila}[h][questions]%
+		\else
+		\partialgradetable{fila\fila}[h][questions]%
+		\fi
+	\end{center}
+	\vspace{6pt}
+	\noindent{\small\textbf{Voto:} \rule{3cm}{0.4pt}\hfill
+		\textbf{Firma del docente:} \rule{5cm}{0.4pt}}%
+	\label{fine@fila@\fila}}
+
+% =====================================================================
+\begin{document}
+
+% Fila A -- 30 punti
+
+\iniziofila{A}
+
+\begin{esercizi}
+
+\begin{esercizio}
+    \obiettivo{usare criteri di divisibilità, precedenze e proprietà delle operazioni}
+    \question
+    \begin{parts}
+        \part[2] Nel numero $47\square2$, la casella rappresenta una cifra.
+        Determina tutte le cifre che lo rendono divisibile per $4$ e, separatamente,
+        tutte quelle che lo rendono divisibile per $9$. Giustifica le risposte.
+        \begin{solution}
+            Per $4$, le ultime due cifre devono formare un suo multiplo:
+            $12,32,52,72,92$. Le cifre ammesse sono $1,3,5,7,9$.
+            Per $9$, la somma delle cifre è $13+x$: l'unica cifra possibile
+            è $x=5$, perché $13+5=18$.
+        \end{solution}
+        \part[1] Inserisci le parentesi, senza cambiare numeri né operazioni,
+        in modo da rendere vera l'uguaglianza:
+        \[
+        36:9+3\cdot2=6.
+        \]
+        \begin{solution}
+            $36:(9+3)\cdot2=36:12\cdot2=3\cdot2=6$.
+        \end{solution}
+        \part[1] Un numero naturale è \emph{perfetto} se coincide con la somma
+        dei suoi divisori positivi, escluso il numero stesso.
+        Stabilisci se $28$ è perfetto, elencando i divisori e mostrando il calcolo.
+        \begin{solution}
+            I divisori positivi di $28$ diversi da $28$ sono $1,2,4,7,14$.
+            La loro somma è $1+2+4+7+14=28$: il numero è perfetto.
+        \end{solution}
+        \part[1] Indica, nell'ordine, le proprietà applicate nelle uguaglianze:
+        \[
+        9\cdot(12+4)=9\cdot12+9\cdot4;\qquad
+        18+7=7+18;\qquad
+        (5\cdot4)\cdot3=5\cdot(4\cdot3).
+        \]
+        \begin{solution}
+            Distributiva della moltiplicazione rispetto all'addizione;
+            commutativa dell'addizione; associativa della moltiplicazione.
+        \end{solution}
+        \part[2] Calcola in modo astuto, mostrando i passaggi e nominando
+        le proprietà utilizzate:
+        \[
+        25\cdot17\cdot4 \qquad\qquad 312-198.
+        \]
+        \begin{solution}
+            $25\cdot17\cdot4=(25\cdot4)\cdot17=100\cdot17=1700$,
+            per commutativa e associativa della moltiplicazione.
+            $312-198=(312+2)-(198+2)=314-200=114$,
+            per invariantiva della sottrazione.
+        \end{solution}
+    \end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+			\obiettivo{calcolare espressioni in $\N$ rispettando precedenze e propriet\`a delle potenze}
+			\question
+			Determina il valore di ciascuna espressione, riportando i passaggi e
+			semplificando le potenze prima di svolgere i calcoli numerici.
+			\begin{parts}
+				\part[4]
+        \[
+        \left[(2^2\cdot5^2)^3:10^4\right]
+        -\left\{\left[(9^3)^2:(3^4)^3\right]\cdot(3^7+3^6)\right\}:9^3
+        -(7\cdot2^4)^0.
+        \]
+        \begin{solution}
+            \[
+            \begin{aligned}
+                &\left[(10^2)^3:10^4\right]
+                -\left\{\left[3^{12}:3^{12}\right]\cdot
+                \left[3^6\cdot(3+1)\right]\right\}:3^6-1\\
+                &=10^{6-4}-3^6\cdot4:3^6-1\\
+                &=100-4-1=95.
+            \end{aligned}
+            \]
+            Nella somma si raccoglie $3^6$:
+            $3^7+3^6=3^6\cdot(3+1)$.
+            La proprietà del prodotto di potenze non si applica a una somma.
+        \end{solution}
+\part[4]
+				\[
+				\left\{
+				\left[(56:8)^4\cdot7^9\right]:(35:5)^{11}
+				-(35:7)^2
+				\right\}^{7}:(24^3)^2
+				-7\cdot(22^0+33^0).
+				\]
+				\begin{solution}
+					\[
+					\begin{aligned}
+						&\left\{7^4\cdot7^9:7^{11}-5^2\right\}^{7}:24^6
+						-7\cdot(1+1)\\
+						&=\left\{7^{4+9-11}-25\right\}^{7}:24^6-14\\
+						&=(49-25)^7:24^6-14\\
+						&=24^7:24^6-14\\
+						&=24-14=10.
+					\end{aligned}
+					\]
+				\end{solution}
+			\end{parts}
+		\end{esercizio}
+
+\begin{esercizio}
+			\obiettivo{riconoscere divisibilit\`a e primalit\`a, scomporre in fattori primi}
+			\question
+			\begin{parts}
+				\part[2] Considera il numero $683\,145$: scegli tra $2,3,5,9,10$
+				tutti i suoi divisori e motiva ogni scelta mediante un criterio appropriato.
+				\begin{solution}
+					Sono divisori $3,5,9$: la somma delle cifre è
+					$6+8+3+1+4+5=27$, divisibile per $3$ e per $9$,
+					e l'ultima cifra è $5$.
+					Non è divisibile per $2$ perché è dispari,
+					né per $10$ perché non termina in $0$.
+				\end{solution}
+				\part[1] Scrivi, dal più piccolo al più grande, i divisori di $48$.
+				\begin{solution}
+					I divisori richiesti sono $1,2,3,4,6,8,12,16,24,48$.
+				\end{solution}
+			\end{parts}
+		\end{esercizio}
+
+\begin{esercizio}
+			\obiettivo{eseguire divisioni con resto e ragionare con resti e congruenze}
+			\question
+			\begin{parts}
+				\part[1] Esegui la divisione con resto di $1789$ per $14$.
+				Indica il quoziente e il resto e scrivi la verifica.
+				\begin{solution}
+					Il quoziente è $127$ e il resto è $11$:
+					$1789=14\cdot127+11$ e $0\leq11<14$.
+				\end{solution}
+				\part[1] La presa della Bastiglia avvenne martedì 14 luglio 1789.
+				Napoleone fu incoronato imperatore il 2 dicembre 1804, esattamente
+				$5619$ giorni dopo. In quale giorno della settimana avvenne
+				l'incoronazione? Motiva la risposta con una divisione con resto.
+				\begin{solution}
+					$5619=7\cdot802+5$. Dopo $802$ settimane è ancora martedì;
+					avanzando di altri cinque giorni si arriva a domenica.
+					L'incoronazione avvenne quindi di domenica.
+				\end{solution}
+			\end{parts}
+		\end{esercizio}
+
+\begin{esercizio}
+    \obiettivo{calcolare MCD e mcm tramite scomposizione e applicarli a problemi}
+    \question
+    Il negozio di un museo dispone di $180$ cartoline e $324$ segnalibri.
+    Vuole confezionare mazzetti contenenti ciascuno un solo tipo di articolo,
+    tutti con lo stesso numero di pezzi, il maggiore possibile, usando l'intera
+    scorta. Nel museo, una visita guidata parte ogni $36$ minuti e una
+    dimostrazione si ripete ogni $54$ minuti; entrambe iniziano alle $14{:}40$.
+    \begin{parts}
+        \part[2] Scomponi $180$ e $324$ in fattori primi,
+        quindi determina il loro MCD e il loro mcm.
+        \begin{solution}
+            $180=2^2\cdot3^2\cdot5$ e $324=2^2\cdot3^4$.
+            $\mathrm{MCD}(180;324)=2^2\cdot3^2=36$;
+            $\mathrm{mcm}(180;324)=2^2\cdot3^4\cdot5=1620$.
+        \end{solution}
+        \part[1] Stabilisci quanti pezzi contiene ciascun mazzetto e
+        quanti mazzetti si ottengono per ognuno dei due articoli.
+        \begin{solution}
+            Ciascun mazzetto contiene $36$ pezzi:
+            $180:36=5$ mazzetti di cartoline e $324:36=9$ mazzetti di segnalibri.
+        \end{solution}
+        \part[2] Calcola dopo quanti minuti la visita e la dimostrazione
+        inizieranno di nuovo insieme per la prima volta e indica l'orario.
+        Motiva la scelta dell'operazione.
+        \begin{solution}
+            Occorre il minimo comune multiplo dei periodi:
+            $36=2^2\cdot3^2$, $54=2\cdot3^3$,
+            $\mathrm{mcm}(36;54)=2^2\cdot3^3=108$.
+            L'attesa è di $108$ minuti, cioè un'ora e $48$ minuti:
+            il nuovo inizio simultaneo è alle $16{:}28$.
+        \end{solution}
+    \end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+    \obiettivo{tradurre dal linguaggio naturale alle espressioni e modellizzare semplici problemi in $\N$}
+    \question
+    \begin{parts}
+        \part[2] Trasforma le due descrizioni in espressioni numeriche
+        e determina il risultato di ciascuna:
+        \begin{subparts}
+            \subpart Il quadrato della somma di $17$ e $14$.
+            \subpart La somma di $14$ e del quadrato di $17$.
+        \end{subparts}
+        \begin{solution}
+            $(17+14)^2=31^2=961$;
+            $14+17^2=14+289=303$.
+        \end{solution}
+        \part[3] Giulia possiede $756$ figurine. Ne cede a un'amica
+        un settimo del numero iniziale, poi ne consegna altre $156$ al fratello.
+        Infine regala a una compagna un terzo delle figurine che le sono rimaste.
+        Scrivi \textbf{un'unica espressione} che rappresenti il numero di
+        figurine conservate alla fine e calcolane il valore.
+        \begin{solution}
+            Dopo le prime due cessioni rimangono $756-756:7-156=492$ figurine.
+            Un'espressione che descrive l'intera situazione è
+            \[
+            756-756:7-156-(756-756:7-156):3.
+            \]
+            Il suo valore è
+            \[
+            756-108-156-(756-108-156):3
+            =492-492:3=492-164=328.
+            \]
+            Giulia conserva $328$ figurine.
+        \end{solution}
+    \end{parts}
+\end{esercizio}
+
+\end{esercizi}
+
+\finefila
+
+% Fila B -- 30 punti
+
+\iniziofila{B}
+
+\begin{esercizi}
+
+\begin{esercizio}
+    \obiettivo{usare criteri di divisibilità, precedenze e proprietà delle operazioni}
+    \question
+    \begin{parts}
+        \part[2] Sostituisci la casella del numero $62\square4$ con una cifra.
+        Trova tutte le cifre che rendono il numero divisibile per $4$ e,
+        separatamente, tutte quelle che lo rendono divisibile per $9$.
+        Spiega i criteri utilizzati.
+        \begin{solution}
+            Le ultime due cifre possono essere $04,24,44,64,84$:
+            per $4$ sono ammesse le cifre $0,2,4,6,8$.
+            Per $9$, la somma delle cifre è $12+x$: serve $x=6$,
+            che dà $12+6=18$.
+        \end{solution}
+        \part[1] Aggiungi soltanto le parentesi necessarie per ottenere
+        un'uguaglianza vera, lasciando invariati numeri e operazioni:
+        \[
+        48:8+4\cdot3=12.
+        \]
+        \begin{solution}
+            $48:(8+4)\cdot3=48:12\cdot3=4\cdot3=12$.
+        \end{solution}
+        \part[1] Si chiama \emph{perfetto} un numero naturale uguale alla somma
+        dei suoi divisori positivi, senza contare il numero stesso.
+        Il numero $30$ è perfetto? Scrivi i divisori e verifica con una somma.
+        \begin{solution}
+            I divisori positivi di $30$ escluso $30$ sono $1,2,3,5,6,10,15$.
+            La somma è $1+2+3+5+6+10+15=42\ne30$:
+            il numero $30$ non è perfetto.
+        \end{solution}
+        \part[1] Riconosci le proprietà utilizzate nei tre passaggi:
+        \[
+        8\cdot(15-3)=8\cdot15-8\cdot3;\qquad
+        7\cdot11=11\cdot7;\qquad
+        (13+5)+8=13+(5+8).
+        \]
+        \begin{solution}
+            Distributiva della moltiplicazione rispetto alla sottrazione;
+            commutativa della moltiplicazione; associativa dell'addizione.
+        \end{solution}
+        \part[2] Scegli una strategia di calcolo rapido e scrivi le
+        trasformazioni, indicando le proprietà che le giustificano:
+        \[
+        125\cdot13\cdot8 \qquad\qquad 421-299.
+        \]
+        \begin{solution}
+            $125\cdot13\cdot8=(125\cdot8)\cdot13=1000\cdot13=13000$,
+            per commutativa e associativa della moltiplicazione.
+            $421-299=(421+1)-(299+1)=422-300=122$,
+            per invariantiva della sottrazione.
+        \end{solution}
+    \end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+    \obiettivo{calcolare espressioni in $\N$ rispettando precedenze e proprietà delle potenze}
+    \question
+    Calcola il valore delle espressioni riportando i passaggi.
+    Applica le proprietà delle potenze per evitare calcoli inutilmente lunghi.
+    \begin{parts}
+        \part[4]
+        \[
+        \left[(3^2\cdot2^2)^3:6^4\right]
+        -\left\{\left[(4^3)^2:(2^4)^3\right]\cdot(2^7+2^6)\right\}:4^3
+        -(5\cdot3^2)^0.
+        \]
+        \begin{solution}
+            \[
+            \begin{aligned}
+                &\left[(6^2)^3:6^4\right]
+                -\left\{\left[2^{12}:2^{12}\right]\cdot
+                \left[2^6\cdot(2+1)\right]\right\}:2^6-1\\
+                &=6^{6-4}-2^6\cdot3:2^6-1\\
+                &=36-3-1=32.
+            \end{aligned}
+            \]
+            Si usa la distributiva al contrario:
+            $2^7+2^6=2^6\cdot(2+1)$.
+            Gli esponenti si sommano nel prodotto di potenze, non nella somma.
+        \end{solution}
+\part[4]
+        \[
+        \left\{
+        \left[(72:8)^3\cdot9^8\right]:(63:7)^9
+        -(48:8)^2
+        \right\}^{5}:(45^2)^2
+        -9\cdot(18^0+25^0).
+        \]
+        \begin{solution}
+            \[
+            \begin{aligned}
+                &\left\{9^3\cdot9^8:9^9-6^2\right\}^{5}:45^4-9\cdot(1+1)\\
+                &=\left\{9^{3+8-9}-36\right\}^{5}:45^4-18\\
+                &=(81-36)^5:45^4-18\\
+                &=45^5:45^4-18=45-18=27.
+            \end{aligned}
+            \]
+        \end{solution}
+    \end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+    \obiettivo{riconoscere divisibilità e primalità, scomporre in fattori primi}
+    \question
+    \begin{parts}
+        \part[2] Quali numeri tra $2,3,5,9,10$ dividono esattamente
+        $541\,230$? Giustifica sia le risposte positive sia quelle negative
+        con i criteri di divisibilità.
+        \begin{solution}
+            È divisibile per $2,3,5,10$: termina in $0$ e
+            la somma delle cifre è $5+4+1+2+3+0=15$, multiplo di $3$.
+            Non è divisibile per $9$ perché $15$ non è un multiplo di $9$.
+        \end{solution}
+        \part[1] Elenca in ordine crescente tutti i divisori positivi di $80$.
+        \begin{solution}
+            $1,2,4,5,8,10,16,20,40,80$.
+        \end{solution}
+    \end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+    \obiettivo{eseguire divisioni con resto e ragionare con resti e congruenze}
+    \question
+    \begin{parts}
+        \part[1] Dividi $1873$ per $16$ e determina quoziente e resto.
+        Controlla la risposta scrivendo l'uguaglianza di verifica.
+        \begin{solution}
+            Quoziente $117$, resto $1$:
+            $1873=16\cdot117+1$, con $0\leq1<16$.
+        \end{solution}
+        \part[1] Il 14 luglio 1789, giorno della presa della Bastiglia,
+        era martedì. La battaglia di Waterloo si svolse il 18 giugno 1815,
+        esattamente $9469$ giorni dopo. Quale giorno della settimana era?
+        Giustifica mediante una divisione con resto.
+        \begin{solution}
+            $9469=7\cdot1352+5$.
+            Dopo $1352$ settimane è ancora martedì;
+            cinque giorni più tardi è domenica.
+        \end{solution}
+    \end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+    \obiettivo{calcolare MCD e mcm tramite scomposizione e applicarli a problemi}
+    \question
+    Per una manifestazione sono disponibili $216$ spille e $360$ adesivi.
+    Si preparano confezioni contenenti un solo tipo di oggetto, tutte con
+    lo stesso numero di pezzi, il maggiore possibile, senza avanzare oggetti.
+    Una gara parte ogni $48$ minuti e un'esibizione si ripete ogni $72$ minuti;
+    la prima partenza di entrambe è alle $9{:}50$.
+    \begin{parts}
+        \part[2] Trova le scomposizioni in fattori primi di $216$ e $360$,
+        poi calcola MCD e mcm dei due numeri.
+        \begin{solution}
+            $216=2^3\cdot3^3$ e $360=2^3\cdot3^2\cdot5$.
+            $\mathrm{MCD}(216;360)=2^3\cdot3^2=72$;
+            $\mathrm{mcm}(216;360)=2^3\cdot3^3\cdot5=1080$.
+        \end{solution}
+        \part[1] Determina il numero di pezzi di ogni confezione e
+        quante confezioni di spille e di adesivi si preparano.
+        \begin{solution}
+            Ogni confezione contiene $72$ pezzi:
+            $216:72=3$ confezioni di spille e $360:72=5$ di adesivi.
+        \end{solution}
+        \part[2] Quanto tempo trascorre prima della successiva partenza
+        simultanea della gara e dell'esibizione? A quale ora avviene?
+        Spiega quale operazione serve.
+        \begin{solution}
+            Si calcola il minimo comune multiplo dei periodi:
+            $48=2^4\cdot3$, $72=2^3\cdot3^2$,
+            $\mathrm{mcm}(48;72)=2^4\cdot3^2=144$.
+            Si attendono $144$ minuti, cioè due ore e $24$ minuti:
+            la partenza simultanea avviene alle $12{:}14$.
+        \end{solution}
+    \end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+    \obiettivo{tradurre dal linguaggio naturale alle espressioni e modellizzare semplici problemi in $\N$}
+    \question
+    \begin{parts}
+        \part[2] Scrivi l'espressione corrispondente a ciascuna frase,
+        poi eseguine il calcolo:
+        \begin{subparts}
+            \subpart Il quadrato della somma di $19$ e $13$.
+            \subpart La somma di $13$ e del quadrato di $19$.
+        \end{subparts}
+        \begin{solution}
+            $(19+13)^2=32^2=1024$;
+            $13+19^2=13+361=374$.
+        \end{solution}
+        \part[3] Una biblioteca scolastica possiede $864$ libri.
+        Trasferisce a un'altra sede un sesto della dotazione iniziale,
+        poi consegna altri $186$ libri alle classi.
+        Infine destina a un laboratorio un terzo dei libri ancora rimasti.
+        Esprimi con \textbf{una sola espressione} quanti libri restano nella
+        biblioteca dopo i tre trasferimenti e calcola il risultato.
+        \begin{solution}
+            Dopo i primi due trasferimenti rimangono $864-864:6-186=534$ libri.
+            Un'espressione complessiva è
+            \[
+            864-864:6-186-(864-864:6-186):3.
+            \]
+            Calcolando:
+            \[
+            864-144-186-(864-144-186):3
+            =534-534:3=534-178=356.
+            \]
+            Nella biblioteca restano $356$ libri.
+        \end{solution}
+    \end{parts}
+\end{esercizio}
+
+\end{esercizi}
+
+\finefila
+
+\end{document}
+
+
+

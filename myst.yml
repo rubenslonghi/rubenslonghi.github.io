@@ -1,21 +1,145 @@
-# See docs at: https://mystmd.org/guide/frontmatter
 version: 1
 project:
-  id: cf00e816-af7e-4ba6-8fb1-d617dd8279c4
-  # title: "Matematica: Classe Quarta, Istituto Tecnico"
-  description: "Materiali di matematica per la classe quarta dell'istituto tecnico"
-  keywords: [matematica, classe quarta, istituto tecnico]
-  # authors: "Rubens Longhi"
-  # github:
-  # To autogenerate a Table of Contents, run "jupyter book init --write-toc"
-    
+  id: "cf00e816-af7e-4ba6-8fb1-d617dd8279c4"
+  title: "Matematica in costruzione"
+  description: "Il libro multimediale di matematica per la 1 SP e la 2BS del liceo scientifico."
+  authors:
+    - name: "Rubens Longhi"
+      id: "rubens-longhi"
+  github: "https://github.com/rubenslonghi/rubenslonghi.github.io"
+  toc:
+    - file: "index.md"
+    - title: "Numeri, insiemi e relazioni · 1 SP"
+      children:
+        - file: "numeri-naturali-interi/index.md"
+          children:
+            - file: "numeri-naturali-interi/contare-includere-lo-zero-continuare-sempre.md"
+            - file: "numeri-naturali-interi/mettere-in-ordine-e-tradurre-le-condizioni.md"
+            - file: "numeri-naturali-interi/quattro-operazioni-possiamo-restare-in-n.md"
+            - file: "numeri-naturali-interi/lo-zero-nella-divisione.md"
+            - file: "numeri-naturali-interi/cambiare-ordine-cambiare-raggruppamento.md"
+            - file: "numeri-naturali-interi/distribuire-e-raccogliere.md"
+            - file: "numeri-naturali-interi/quando-un-prodotto-e-zero-il-laboratorio-degli-orologi.md"
+            - file: "numeri-naturali-interi/sottrarre-e-dividere-che-cosa-resta-invariato.md"
+            - file: "numeri-naturali-interi/divisione-con-resto-giri-completi-e-posizione-finale.md"
+            - file: "numeri-naturali-interi/la-geometria-delle-operazioni.md"
+            - file: "numeri-naturali-interi/le-potenze-ripetere-una-moltiplicazione.md"
+            - file: "numeri-naturali-interi/le-proprieta-delle-potenze.md"
+            - file: "numeri-naturali-interi/le-espressioni-scegliere-l-ordine-corretto.md"
+            - file: "numeri-naturali-interi/multipli-e-divisori-dividere-senza-resto.md"
+            - file: "numeri-naturali-interi/criteri-di-divisibilita-leggere-le-cifre.md"
+            - file: "numeri-naturali-interi/numeri-primi-e-numeri-composti.md"
+            - file: "numeri-naturali-interi/scomporre-in-fattori-primi.md"
+            - file: "numeri-naturali-interi/mcd-e-mcm.md"
+            - file: "numeri-naturali-interi/i-numeri-primi-finiscono.md"
+            - file: "numeri-naturali-interi/cifre-posizioni-e-numerazione-binaria.md"
+            - file: "numeri-naturali-interi/numeri-interi-descrivere-due-versi.md"
+            - file: "numeri-naturali-interi/divisione-con-resto-anche-per-numeri-negativi.md"
+        - file: "razionali-reali/index.md"
+          children:
+            - file: "razionali-reali/frazioni-equivalenti-e-numero-razionale.md"
+            - file: "razionali-reali/confrontare-sommare-e-moltiplicare.md"
+            - file: "razionali-reali/proporzioni-rapporti-e-percentuali.md"
+            - file: "razionali-reali/potenze-decimali-e-frazioni-generatrici.md"
+            - file: "razionali-reali/achille-i-decimali-infiniti-e-nuovi-numeri.md"
+        - file: "insiemi-logica/index.md"
+          children:
+            - file: "insiemi-logica/che-cos-e-un-insieme.md"
+            - file: "insiemi-logica/unione-intersezione-differenza-e-complementare.md"
+            - file: "insiemi-logica/tre-insiemi-e-problemi-di-conteggio.md"
+            - file: "insiemi-logica/prodotto-cartesiano-e-principio-di-moltiplicazione.md"
+            - file: "insiemi-logica/proposizioni-connettivi-e-tavole-di-verita.md"
+            - file: "insiemi-logica/deduzioni-valide-e-controesempi.md"
+            - file: "insiemi-logica/negazioni-de-morgan-e-quantificatori.md"
+            - file: "insiemi-logica/villa-valnera-usare-gli-indizi-per-dedurre.md"
+        - file: "relazioni-grafi/index.md"
+          children:
+            - file: "relazioni-grafi/descrivere-una-relazione.md"
+            - file: "relazioni-grafi/tre-proprieta-da-controllare.md"
+            - file: "relazioni-grafi/classi-di-equivalenza-e-partizioni.md"
+            - file: "relazioni-grafi/il-quoziente-ogni-classe-diventa-un-oggetto.md"
+            - file: "relazioni-grafi/funzioni-un-uscita-per-ogni-ingresso.md"
+            - file: "relazioni-grafi/dalle-funzioni-alle-classi-e-ritorno.md"
+            - file: "relazioni-grafi/dalle-relazioni-ai-grafi.md"
+            - file: "relazioni-grafi/ponti-domino-e-percorsi-euleriani.md"
+            - file: "relazioni-grafi/visitare-vertici-cercare-percorsi-brevi.md"
+            - file: "relazioni-grafi/giochi-stati-e-invarianti.md"
+    - title: "Algebra e geometria · 2BS"
+      children:
+        - file: "algebra/index.md"
+          children:
+            - file: "algebra/termini-fattori-monomi-e-polinomi.md"
+            - file: "algebra/prodotti-notevoli-riconoscere-la-struttura.md"
+            - file: "algebra/scomporre-riscrivere-una-somma-come-prodotto.md"
+            - file: "algebra/frazioni-algebriche-prima-il-dominio.md"
+        - file: "equazioni/index.md"
+          children:
+            - file: "equazioni/equivalenza-classificazione-e-verifica.md"
+            - file: "equazioni/dal-prodotto-nullo-alle-sostituzioni-utili.md"
+            - file: "equazioni/equazioni-frazionarie-e-soluzioni-da-escludere.md"
+            - file: "equazioni/formule-inverse-e-problemi-con-grandezze.md"
+        - file: "disequazioni/index.md"
+          children:
+            - file: "disequazioni/disequazioni-di-primo-grado-e-intervalli.md"
+            - file: "disequazioni/prodotti-e-frazioni-studiare-i-segni.md"
+            - file: "disequazioni/sistemi-devono-valere-tutte-le-condizioni.md"
+            - file: "disequazioni/allenarsi-con-tempo-errori-e-correzioni.md"
+        - file: "geometria/index.md"
+          children:
+            - file: "geometria/quando-i-dati-determinano-un-triangolo.md"
+            - file: "geometria/i-criteri-di-congruenza-e-i-falsi-criteri.md"
+    - title: "Laboratori e approfondimenti"
+      children:
+        - file: "laboratori-digitali/index.md"
+          children:
+            - file: "laboratori-digitali/celle-formule-e-dati-ordinati.md"
+            - file: "laboratori-digitali/frequenze-media-mediana-e-grafici.md"
+            - file: "laboratori-digitali/proporzionalita-dispersione-e-modelli.md"
+            - file: "laboratori-digitali/indagine-conclusiva-e-verifica-al-computer.md"
+            - file: "laboratori-digitali/scrivere-matematica-con-latex.md"
+            - file: "laboratori-digitali/revisionare-gli-errori-senza-affidarsi-al-solo-pdf.md"
+        - file: "polinomi/index.md"
+          children:
+            - file: "polinomi/polinomi-e-operazioni-gli-strumenti-di-partenza.md"
+            - file: "polinomi/la-divisione-con-resto.md"
+            - file: "polinomi/divisibilita-e-teorema-del-resto.md"
+            - file: "polinomi/ruffini-radici-e-fattori.md"
+            - file: "polinomi/la-regola-di-ruffini-per-dividere.md"
+            - file: "polinomi/congruenza-modulo-un-polinomio.md"
+            - file: "polinomi/classi-di-polinomi-e-calcolo-con-i-resti.md"
+            - file: "polinomi/dai-tre-coefficienti-al-piano-dei-resti.md"
+            - file: "polinomi/numeri-complessi-la-regola-i-2-1.md"
+            - file: "polinomi/numeri-duali-la-regola-varepsilon-2-0.md"
+            - file: "polinomi/conservare-il-comportamento-vicino-a-un-punto.md"
+            - file: "polinomi/quante-coordinate-rimangono.md"
+    - title: "Materiali e informazioni"
+      children:
+        - file: "materiali-di-studio.md"
+        - file: "archivio.md"
+        - file: "fonti-e-correzioni.md"
+  exclude:
+    - "archivio/**"
+    - "materiali/**"
+    - "media/**"
+    - "tools/**"
+    - "README.md"
+  static_files:
+    - favicon.ico
+    - "materiali"
+    - "media"
+    - "archivio"
+    - "figure"
+  math:
+    "\\N": "\\mathbb{N}"
+    "\\Z": "\\mathbb{Z}"
+    "\\Q": "\\mathbb{Q}"
+    "\\R": "\\mathbb{R}"
+    "\\rispostanum": "\\boxed{\\phantom{0}}"
 site:
-  template: book-theme
-  title: Strumenti di Analisi e Probabilità
-  parts:
-    primary_sidebar_footer: "Rubens Longhi - 2026"
+  template: "https://github.com/jupyter-book/myst-theme/releases/download/myst-to-react%401.4.1/book-theme.zip"
+  title: "Matematica · Liceo scientifico"
   options:
-    style: ./custom.css
-  #   favicon: favicon.ico
-  #   logo: site_logo.png
-  #  myst_title_to_header: true
+    favicon: favicon.ico
+    folders: true
+    style: "./custom.css"
+    outline_maxdepth: 2

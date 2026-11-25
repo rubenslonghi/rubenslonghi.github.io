@@ -1,0 +1,174 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[italian]{babel}\usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}
+\usepackage{lmodern,amsmath,amssymb,tikz,enumitem,fancyhdr}
+\usepackage[margin=1.7cm,headheight=14pt]{geometry}
+\usetikzlibrary{arrows.meta}
+\definecolor{rosso}{RGB}{210,25,30}
+\definecolor{blu}{RGB}{28,91,119}
+\definecolor{verde}{RGB}{35,128,80}
+\pagestyle{fancy}\fancyhf{}\lhead{Matematica | 1SP}\rhead{Relazioni}\cfoot{\thepage}
+\setlength{\parindent}{0pt}\setlength{\parskip}{5pt}
+\setlist[enumerate]{label=\alph*),leftmargin=6mm,itemsep=3pt,topsep=4pt}
+\newcommand{\ex}[2]{\vspace{9pt}{\large\bfseries\textcolor{rosso}{#1.}\ #2}\par}
+\tikzset{v/.style={circle,fill=blu,inner sep=1.8pt},arr/.style={draw=rosso,-{Stealth[length=2.2mm]},thick}}
+\newcommand{\faccia}[2]{%
+\begin{scope}[xshift=#1cm]
+\ifnum#2=1 \fill (0,0) circle (1.6pt);\fi
+\ifnum#2=2 \fill (-.19,.19) circle (1.6pt);\fill (.19,-.19) circle (1.6pt);\fi
+\ifnum#2=3 \fill (-.19,.19) circle (1.6pt);\fill (0,0) circle (1.6pt);\fill (.19,-.19) circle (1.6pt);\fi
+\ifnum#2=4 \foreach \x in {-.19,.19}\foreach \y in {-.19,.19}\fill (\x,\y) circle (1.6pt);\fi
+\end{scope}}
+\newcommand{\tessera}[2]{\begin{tikzpicture}[baseline=-3mm]
+\draw[rounded corners=2pt,thick,fill=white] (-.37,-.36) rectangle (1.11,.36);
+\draw (.37,-.32)--(.37,.32);\faccia{0}{#1}\faccia{.74}{#2}
+\end{tikzpicture}\hspace{2mm}}
+\newcommand{\tesserina}[2]{\scalebox{.62}{\tessera{#1}{#2}}}
+\newcommand{\cappioalto}[1]{\draw[arr] (#1.center) arc[start angle=-90,end angle=270,radius=.30];}
+\newcommand{\cappiobasso}[1]{\draw[arr] (#1.center) arc[start angle=90,end angle=450,radius=.30];}
+\begin{document}
+\begin{center}{\LARGE\bfseries\textcolor{blu}{Relazioni e percorsi nei grafi}}\\[4pt] Relazioni riflessive e simmetriche, ponti e domino\end{center}
+\textbf{Consegna generale.} Svolgi sul quaderno. Quando studi una proprietà, motiva la risposta: se non vale, indica un elemento o una coppia che lo dimostri.
+
+\ex{1}{Coppie ordinate, prodotto cartesiano e grafo}
+Considera $A=\{1,2,3\}$ e la relazione su $A$:
+\[
+R=\{(1,1),(1,2),(2,1),(2,2),(3,3)\}.
+\]
+\begin{enumerate}
+\item Scrivi tutte le coppie di $A\times A$ ed evidenzia quelle che appartengono a $R$.
+\item Rappresenta $R$ con un grafo orientato: la coppia $(x,y)$ corrisponde alla freccia da $x$ a $y$. Usa il rosso per le frecce.
+\item La relazione è riflessiva? È simmetrica? Motiva.
+\end{enumerate}
+
+\ex{2}{Che cosa raccontano le frecce?}
+Ciascun grafo rappresenta una relazione $R$ sull'insieme $A=\{a,b,c,d\}$. Studia i due casi separatamente.
+\begin{center}\begin{tikzpicture}
+\node at (1.6,3.25) {\textbf{Grafo I}};
+\node[v,label=left:$a$] (a) at (0,2) {};\node[v,label=right:$b$] (b) at (3.2,2) {};\node[v,label=right:$c$] (c) at (3.2,0) {};\node[v,label=left:$d$] (d) at (0,0) {};
+\path[arr] (a) edge (b) (b) edge[bend left=16] (c) (c) edge[bend left=16] (b);
+\foreach \n in {a,b}{\cappioalto{\n}}
+\foreach \n in {c,d}{\cappiobasso{\n}}
+\begin{scope}[xshift=8.5cm]
+\node at (1.6,3.25) {\textbf{Grafo II}};
+\node[v,label=left:$a$] (e) at (0,2) {};\node[v,label=right:$b$] (f) at (3.2,2) {};\node[v,label=right:$c$] (g) at (3.2,0) {};\node[v,label=left:$d$] (h) at (0,0) {};
+\path[arr] (e) edge[bend left=16] (f) (f) edge[bend left=16] (e) (g) edge[bend left=16] (h) (h) edge[bend left=16] (g);
+\cappioalto{e}\cappiobasso{g}
+\end{scope}
+\end{tikzpicture}\end{center}
+\begin{enumerate}
+\item Scrivi $R$ come insieme di coppie ordinate, per ciascun grafo.
+\item Stabilisci se $R$ è riflessiva e se è simmetrica.
+\item Quali frecce devi aggiungere, al minimo, perché $R$ diventi sia riflessiva sia simmetrica? Elenca le coppie corrispondenti e conta le aggiunte.
+\end{enumerate}
+
+\ex{3}{Nella stessa classe}
+Considera $A=\{\text{Anna},\text{Luca},\text{Marta},\text{Omar}\}$. Anna e Luca frequentano la 1SP, Marta la 1BS e Omar la 1AU. La relazione $R$ è definita da:
+\[
+x\,R\,y\quad\text{se e solo se $x$ frequenta la stessa classe di $y$.}
+\]
+\begin{enumerate}
+\item Scrivi tutte le coppie di $R$ e disegna il grafo orientato.
+\item $R$ è riflessiva? È simmetrica? Spiega usando il significato della relazione.
+\item «Omar non frequenta la classe di nessun altro elemento di $A$: quindi dal suo vertice non parte alcuna freccia». Questa affermazione è corretta? Motiva.
+\end{enumerate}
+\newpage
+\ex{4}{Relazioni in famiglia}
+Paolo e Sara sono i genitori di Luca ed Emma. Luca ed Emma sono fratello e sorella. Paolo e Sara non sono fratelli; non ci sono altri rapporti di genitorialità o di fratellanza tra le quattro persone.
+
+Lavora sull'insieme $A=\{\text{Paolo},\text{Sara},\text{Luca},\text{Emma}\}$. In ognuno dei due casi seguenti chiama la relazione $R$ e studiala separatamente.
+
+\textbf{Caso I: essere fratello o sorella.}
+\[
+x\,R\,y\quad\text{se e solo se $x$ è fratello o sorella di $y$.}
+\]
+\begin{enumerate}
+\item Elenca le coppie di $R$ e disegna il grafo, includendo tutti i vertici di $A$.
+\item $R$ è riflessiva? È simmetrica? Motiva facendo riferimento alle persone.
+\end{enumerate}
+
+\textbf{Caso II: essere genitore.}
+\[
+x\,R\,y\quad\text{se e solo se $x$ è genitore di $y$.}
+\]
+\begin{enumerate}[resume]
+\item Elenca le coppie di $R$ e disegna il grafo. Fai attenzione al verso delle frecce.
+\item $R$ è riflessiva? È simmetrica? Motiva facendo riferimento alle persone.
+\item Se aggiungi le frecce inverse a tutte quelle presenti, ottieni una relazione simmetrica? Ottieni anche una relazione riflessiva? Spiega entrambe le risposte.
+\end{enumerate}
+
+\ex{5}{Dalla regola al piano cartesiano}
+Considera $A=\{-1,0,1\}$. La relazione $R$ su $A$ è definita da:
+\[
+x\,R\,y\quad\text{se e solo se }x+y=0.
+\]
+\begin{enumerate}
+\item Scrivi tutte le coppie di $A\times A$ e seleziona quelle di $R$.
+\item Rappresenta $R$ nel piano cartesiano qui sotto: per ogni coppia $(x,y)\in R$, segna un punto rosso. La prima coordinata va sull'asse orizzontale, la seconda su quello verticale.
+\item Disegna anche il grafo orientato di $R$, usando gli elementi di $A$ come vertici. Spiega che cosa rappresenta una coppia ordinata nelle due rappresentazioni.
+\item $R$ è riflessiva? È simmetrica? Motiva.
+\item Quali coppie devi aggiungere, al minimo, per rendere $R$ riflessiva? La relazione ottenuta rimane simmetrica? Quante coppie contiene in tutto?
+\end{enumerate}
+\begin{center}\begin{tikzpicture}[scale=1.2]
+\draw[step=.5,cyan!20,very thin] (-1.5,-1.5) grid (1.5,1.5);
+\draw[-{Stealth},semithick] (-1.65,0)--(1.8,0) node[right] {$x$};
+\draw[-{Stealth},semithick] (0,-1.65)--(0,1.8) node[above] {$y$};
+\foreach \x in {-1,1}{\draw (\x,.05)--(\x,-.05);\node[below=3pt] at (\x,0) {$\x$};}
+\foreach \y in {-1,1}{\draw (.05,\y)--(-.05,\y);\node[left=3pt] at (0,\y) {$\y$};}
+\node[below left=2pt] at (0,0) {$0$};
+\end{tikzpicture}\end{center}
+\newpage
+\begingroup\small
+\setlength{\parskip}{3pt}
+\setlist[enumerate]{label=\alph*),leftmargin=6mm,itemsep=2pt,topsep=3pt}
+\begin{center}{\Large\bfseries\textcolor{blu}{Ponti e domino: si può fare il percorso?}}\end{center}
+In questi problemi i lati non hanno un verso assegnato. Puoi visitare più volte un vertice, ma devi percorrere \textbf{ogni lato una e una sola volta}. Quando trovi un percorso, indica partenza e arrivo e segna il verso con frecce rosse.
+
+\ex{6}{Sette ponti, come a K\"onigsberg}
+La mappa schematica mostra quattro zone di terra e sette ponti numerati. All'interno di ciascuna zona puoi muoverti liberamente. Si può fare una passeggiata attraversando ogni ponte esattamente una volta?
+\begin{center}\begin{tikzpicture}[scale=.95]
+\fill[cyan!12] (0,0) rectangle (8,3.1);
+\draw[verde,fill=green!5] (0,2.4) rectangle (8,3.1);
+\draw[verde,fill=green!5] (0,0) rectangle (8,.6);
+\draw[verde,fill=green!5] (2.7,1.5) ellipse (1.2 and .42);
+\draw[verde,fill=green!5] (6.2,1.5) ellipse (.9 and .42);
+\node[blu] at (4,2.75) {Zona $A$};\node[blu] at (4,.27) {Zona $C$};
+\node[blu] at (2.7,1.5) {$B$};\node[blu] at (6.2,1.5) {$D$};
+\tikzset{ponte/.style={draw=rosso,line width=4pt,line cap=rect}}
+\draw[ponte] (2.1,2.4)--(2.1,1.86) node[midway,left=3pt,black] {\small 1};
+\draw[ponte] (3.3,2.4)--(3.3,1.86) node[midway,right=3pt,black] {\small 2};
+\draw[ponte] (2.1,.6)--(2.1,1.14) node[midway,left=3pt,black] {\small 3};
+\draw[ponte] (3.3,.6)--(3.3,1.14) node[midway,right=3pt,black] {\small 4};
+\draw[ponte] (6.2,2.4)--(6.2,1.92) node[midway,right=3pt,black] {\small 5};
+\draw[ponte] (6.2,.6)--(6.2,1.08) node[midway,right=3pt,black] {\small 6};
+\draw[ponte] (3.9,1.5)--(5.3,1.5) node[midway,above=3pt,black] {\small 7};
+\end{tikzpicture}\end{center}
+\begin{enumerate}
+\item Trasforma la mappa in un grafo: che cosa rappresentano i vertici? E i lati? Numera i lati come i ponti e calcola il grado di ogni vertice.
+\item Rispondi alla domanda iniziale usando il numero di vertici di grado dispari.
+\item Viene chiuso il ponte 7. È possibile percorrere tutti i sei ponti rimasti una sola volta? Se sì, scrivi una sequenza di zone e di numeri dei ponti.
+\item Riparti dalla mappa iniziale: tra quali due zone puoi costruire un nuovo ponte per rendere possibile la passeggiata? Scegli una possibilità e giustifica.
+\end{enumerate}
+
+\ex{7}{Domino: una catena e un anello}
+Usa tutte le tredici tessere mostrate, una sola volta ciascuna. Puoi ruotarle: due estremità a contatto devono avere lo stesso numero di pallini.
+\begin{center}
+\tessera{0}{1}\tessera{1}{2}\tessera{2}{0}\tessera{0}{3}\tessera{3}{4}\tessera{4}{0}\tessera{2}{2}\\[5pt]
+\tessera{1}{3}\tessera{1}{4}\tessera{2}{3}\tessera{2}{4}\tessera{0}{0}\tessera{4}{4}
+\end{center}
+\begin{enumerate}
+\item Costruisci un grafo con un vertice per ciascun numero. Che cosa rappresenta ogni tessera? Come rappresenti le tessere doppie, per esempio \tesserina{2}{2}? Calcola tutti i gradi: un cappio contribuisce 2 al grado.
+\item Puoi formare una catena con tutte le tessere? Puoi anche chiuderla ad anello? Giustifica con i gradi e scrivi un ordine possibile delle tessere.
+\item Togli la tessera \tesserina{4}{0}. Puoi usare tutte le altre in una sola catena? Da quale numero devi partire e a quale devi arrivare, a meno di invertire il percorso? Scrivi una catena possibile.
+\end{enumerate}
+
+\ex{8}{Domino: basta tentare?}
+\begin{center}
+\tessera{0}{1}\tessera{0}{2}\tessera{0}{3}\tessera{1}{2}\tessera{1}{3}\tessera{2}{3}
+\end{center}
+\begin{enumerate}
+\item Senza provare tutti gli ordini, stabilisci se puoi formare una sola catena con tutte le tessere. Disegna il grafo e usa i gradi per motivare.
+\item Elimina una sola tessera a tua scelta: ora è possibile? Indica la tessera eliminata, i nuovi gradi e una catena che usi tutte le cinque tessere rimaste.
+\item Riparti dalle sei tessere iniziali e aggiungi solo il doppio 2 \tesserina{2}{2}: il problema si risolve? Spiega che cosa cambia nei gradi.
+\end{enumerate}
+\endgroup
+\end{document}

@@ -1,0 +1,206 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage[margin=1.6cm,top=1.3cm,bottom=1.5cm]{geometry}
+\usepackage{amsmath,amssymb,tikz}
+\usepackage{fancyhdr}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\emergencystretch}{2em}
+\pagestyle{fancy}\fancyhf{}
+\fancyfoot[L]{\small 1SP -- Razionali e percentuali}
+\fancyfoot[R]{\small\thepage/2}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\newcommand{\blocco}[3]{\par\medskip\noindent\textbf{#1. #2}\hfill{\small #3 min}\par\nopagebreak}
+\newcommand{\terna}[3]{%
+\par\smallskip\noindent
+\begin{minipage}[t]{.323\textwidth}\raggedright
+\textbf{\small A -- Insieme alla lavagna}\par\smallskip #1
+\end{minipage}\hfill
+\begin{minipage}[t]{.323\textwidth}\raggedright
+\textbf{\small B -- Subito da solo}\par\smallskip #2
+\end{minipage}\hfill
+\begin{minipage}[t]{.323\textwidth}\raggedright
+\textbf{\small C -- Da solo}\par\smallskip #3
+\end{minipage}\par}
+\newcommand{\retta}{%
+\par\noindent\hfill
+\begin{tikzpicture}[x=4mm,y=4mm]
+\path[use as bounding box] (-13,-2) rectangle (25,2);
+\draw[step=1,gray!35,very thin] (-12,-1) grid (24,1);
+\draw[->,line width=.65pt] (-12.6,0)--(24.6,0);
+\foreach \x in {-12,...,24}{\draw[line width=.4pt] (\x,-.14)--(\x,.14);}
+\foreach \x/\n in {-12/-1,0/0,12/1,24/2}{
+\draw[line width=.7pt] (\x,-.3)--(\x,.3);
+\node[below,font=\small] at (\x,-1.05) {$\n$};}
+\end{tikzpicture}\hfill\mbox{}\par}
+\begin{document}
+
+\begin{center}
+{\Large\textbf{Razionali e percentuali}}\\[2pt]
+\textbf{1SP -- Esercizi guidati e autonomi -- 50 minuti}
+\end{center}
+\textbf{Nome e cognome:} \dotfill \quad \textbf{Data:} \dotfill
+
+\textbf{Come lavoriamo.} Per ogni blocco facciamo A insieme; subito dopo svolgi B e C da solo. Scrivi i calcoli sul quaderno e usa le rette della scheda. Senza calcolatrice.
+
+\blocco{1}{Somma algebrica: frazioni e parentesi}{8}
+Calcola e riduci ai minimi termini. Risolvi prima le parentesi interne e controlla i cambi di segno.
+\terna{
+\[
+\begin{aligned}
+&\frac56-\left[\frac34-\left(\frac23-\frac12\right)\right]\\[4pt]
+&\qquad+\frac15-\frac7{10}
+\end{aligned}
+\]
+}{
+\[
+\begin{aligned}
+&\frac76-\left[\frac54-\left(\frac23-\frac12\right)\right]\\[4pt]
+&\qquad+\frac25-\frac3{10}
+\end{aligned}
+\]
+}{
+\[
+\begin{aligned}
+&\frac{11}{12}-\left[\frac78-\left(\frac56-\frac34\right)\right]\\[4pt]
+&\qquad+\frac35-\frac1{10}
+\end{aligned}
+\]
+}
+
+\blocco{2}{Esponenti negativi e proprietà delle potenze}{9}
+Riduci prima prodotti, quozienti e potenze di potenze. Calcola poi gli inversi e la somma algebrica finale.
+\[
+\begin{aligned}
+\text{\small\bfseries A -- Insieme:}\quad&
+\left[\left(-\frac23\right)^{-2}\cdot\left(-\frac23\right)^3\right]
+:\left(-\frac23\right)^2+\left(\frac52\right)^{-1}\\[8pt]
+\text{\small\bfseries B -- Da solo:}\quad&
+\left[\left(-\frac23\right)^4:\left(-\frac23\right)^6\right]
+\cdot\left(-\frac23\right)^3-\left(\frac52\right)^{-1}\\[8pt]
+\text{\small\bfseries C -- Da solo:}\quad&
+\left[\left(-\frac23\right)^{-1}\right]^2
+:\left(-\frac23\right)^{-3}+\left(\frac53\right)^{-1}
+\end{aligned}
+\]
+
+\blocco{3}{Ordina e rappresenta sulla retta}{8}
+Ordina sul quaderno usando $<$ oppure $=$, poi rappresenta ogni numero sulla retta: frazioni equivalenti occupano lo stesso punto. Il m.c.m. dei denominatori è \textbf{12}: \textbf{1 unità = 12 quadretti}, un quadretto vale $1/12$.
+
+\textbf{A -- Insieme:}\quad
+$\displaystyle -\frac7{12},\quad\frac56,\quad-\frac34,\quad\frac76,\quad\frac23,\quad\frac8{12}$
+\retta
+\textbf{B -- Da solo:}\quad
+$\displaystyle -\frac56,\quad\frac7{12},\quad-\frac23,\quad\frac54,\quad\frac36,\quad\frac24$
+\retta
+\textbf{C -- Da solo:}\quad
+$\displaystyle -\frac{11}{12},\quad\frac76,\quad-\frac34,\quad\frac9{12},\quad\frac53,\quad\frac34$
+\retta
+
+\newpage
+
+\begin{center}
+{\large\textbf{Dalla virgola alle percentuali}}
+\end{center}
+
+\blocco{4}{Dalla virgola alla frazione}{6}
+Trasforma in frazioni ridotte ai minimi termini. La barretta indica le cifre che si ripetono.
+\terna{
+\[
+0{,}2 \qquad 0{,}\overline3
+\]
+}{
+\[
+0{,}4 \qquad 0{,}\overline6
+\]
+}{
+\[
+0{,}6 \quad 0{,}8 \quad 0{,}\overline2
+\]
+}
+
+\medskip
+\textbf{L'idea pratica.} $p\%$ significa $p$ su 100, cioè $\dfrac{p}{100}$.
+Per trovare una parte, moltiplica il totale per questa frazione; per trovare la percentuale, dividi la parte per il totale e moltiplica per 100.
+
+\blocco{5}{Frazioni note, decimali e percentuali}{4}
+Completa ogni catena. Cerca rappresentazioni equivalenti con denominatore 100.
+\terna{
+\[
+\frac15=\ldots=\ldots\%
+\]
+\[
+\frac12=\ldots=\ldots\%
+\]
+}{
+\[
+\frac25=\ldots=\ldots\%
+\]
+\[
+\frac14=\ldots=\ldots\%
+\]
+}{
+\[
+\frac35=\ldots=\ldots\%
+\]
+\[
+\frac45=\ldots=\ldots\%
+\]
+\[
+\frac34=\ldots=\ldots\%
+\]
+}
+
+\vspace{4mm}
+\blocco{6}{Calcolare una percentuale di un totale}{5}
+Scrivi la percentuale come frazione e calcola la parte richiesta.
+\terna{
+In un allenamento una squadra effettua \textbf{50 tiri} e ne realizza il \textbf{20\%}. Quanti canestri segna?
+}{
+In un allenamento una squadra effettua \textbf{50 tiri} e ne realizza il \textbf{40\%}. Quanti canestri segna?
+}{
+In un allenamento una squadra effettua \textbf{50 tiri} e ne realizza il \textbf{60\%}. Quanti canestri segna?
+}
+\par\medskip
+\textbf{Controllo:} la percentuale si riferisce a quale totale? La parte trovata è plausibile?
+
+\vspace{4mm}
+\blocco{7}{Trovare la percentuale conoscendo parte e totale}{4}
+Scrivi prima il rapporto \emph{canestri/tiri}, riducilo e trasformalo in percentuale.
+\terna{
+Una giocatrice segna \textbf{8 canestri su 20 tiri}. Qual è la percentuale di realizzazione?
+}{
+Una giocatrice segna \textbf{12 canestri su 20 tiri}. Qual è la percentuale di realizzazione?
+}{
+Una giocatrice segna \textbf{16 canestri su 20 tiri}. Qual è la percentuale di realizzazione?
+}
+
+\vspace{4mm}
+\blocco{8}{Uno sconto: dalla percentuale al prezzo finale}{4}
+Calcola prima lo sconto in euro, poi il prezzo da pagare.
+\terna{
+Una maglia costa \textbf{50 euro}. Lo sconto è del \textbf{20\%}. Quanto risparmi? Quanto paghi?
+}{
+Una maglia costa \textbf{50 euro}. Lo sconto è del \textbf{40\%}. Quanto risparmi? Quanto paghi?
+}{
+Una maglia costa \textbf{50 euro}. Lo sconto è del \textbf{60\%}. Quanto risparmi? Quanto paghi?
+}
+
+\vfill
+\textbf{Numeri da riconoscere al volo.} Ricostruisci senza calcolatrice:
+\[
+\frac15,\quad\frac25,\quad\frac35,\quad\frac45
+\quad\longleftrightarrow\quad
+\text{decimale finito}\quad\longleftrightarrow\quad\text{percentuale};
+\qquad
+0{,}\overline3=\frac13,\quad 0{,}\overline6=\frac23.
+\]
+\textbf{Controlla i quinti:} $3/5=0{,}6$ e $4/5=0{,}8$.
+
+\end{document}

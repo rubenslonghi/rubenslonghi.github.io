@@ -1,0 +1,377 @@
+[
+  {
+    "url": "/materiali/article-latex.pdf",
+    "bytes": 381596,
+    "sha256": "93a3023df67a626013243c5c844e6099cc76e992568eefd4485dc9406f838146"
+  },
+  {
+    "url": "/materiali/article-latex.tex",
+    "bytes": 39109,
+    "sha256": "3932e49244eb9e1cc606ab2f9e70227930b4d4c97e3ecf7aee59e78b5e2338ba"
+  },
+  {
+    "url": "/materiali/digitali/2BS_Compito_a_casa_Banchi.xlsx",
+    "bytes": 7275,
+    "sha256": "31a53dfb90f270b96bec00c82d3f3d227cc0f4ee1581c0bc6c00ce45cebc71c1"
+  },
+  {
+    "url": "/materiali/digitali/2BS_Compito_Google_Fogli_Altezze.xlsx",
+    "bytes": 6650,
+    "sha256": "a2a433717dcd5e94e1cca2b71a672219c27267b4622f9ac848c36b8e263edaa8"
+  },
+  {
+    "url": "/materiali/digitali/2BS_Compito_Proporzionalita.xlsx",
+    "bytes": 12603,
+    "sha256": "8172d1490f6d50c86740788b233ddbda36ef8f12010a38c07b4c75b5fb997b60"
+  },
+  {
+    "url": "/materiali/digitali/2BS_Laboratorio_conclusivo.xlsx",
+    "bytes": 8780,
+    "sha256": "31d118315b5b0abf60647088c41f085529ffdf78643491a2dcfdf8317c8f31a2"
+  },
+  {
+    "url": "/materiali/digitali/2BS_Quiz_disequazioni.html",
+    "bytes": 37253,
+    "sha256": "8771329db05e76aa5603e4bce73d916566311729f89a990a2c859730d46aacf9"
+  },
+  {
+    "url": "/materiali/digitali/2BS_Template_Statistica_Grafici.xlsx",
+    "bytes": 8162,
+    "sha256": "11abd524ecf37832dddcc8ccfaa587e5d5fef01e1eee0a568e860140c6a9aed8"
+  },
+  {
+    "url": "/materiali/digitali/2BS_Verifica_Google_Fogli.xlsx",
+    "bytes": 8178,
+    "sha256": "b7fcc270f9d3d3432a4f54ab1f878cbd4b4c2c26e64695dfa4665d6e4c9cef40"
+  },
+  {
+    "url": "/materiali/digitali/Compito_LaTeX_Gemini_2BS.pdf",
+    "bytes": 142530,
+    "sha256": "e5e1d9b3ffb13540e737bce958a7236f98913bea70c2a712170bafe43eca4a14"
+  },
+  {
+    "url": "/materiali/digitali/Modello_risposta_2BS.tex",
+    "bytes": 1002,
+    "sha256": "b616d2367ab9dad58647a3df1a9b7c77e504e97cf42da895ecaa5699b2651aec"
+  },
+  {
+    "url": "/materiali/digitali/Villa_Valnera_simulazione.html",
+    "bytes": 120081,
+    "sha256": "1758a088211a528d6e47b86b8e44c36c87232ef34dd0aff7f80c72dc6e009954"
+  },
+  {
+    "url": "/materiali/digitali/Villa_Valnera_stampa_fronte_retro.pdf",
+    "bytes": 554985,
+    "sha256": "5047ca62f6f5860126329d3e930d58714367c87a16cb148a088dc19a59e7d8eb"
+  },
+  {
+    "url": "/materiali/disequazioni-verifica-docente.pdf",
+    "bytes": 446028,
+    "sha256": "9f8a5283e0ec7756e13255c2f318bcfa32e5cc363381cd2c17853d9913551d32"
+  },
+  {
+    "url": "/materiali/disequazioni-verifica.pdf",
+    "bytes": 173490,
+    "sha256": "08060892a8969b811347c31d76120d2413b1fd3ab7bc08a47437d881bd344215"
+  },
+  {
+    "url": "/materiali/disequazioni-verifica.tex",
+    "bytes": 16978,
+    "sha256": "062d5d0f9b1436f4c3b379fe459020e79d48a0521cf369d1eb77e8b356462aa4"
+  },
+  {
+    "url": "/materiali/equazione-errori-latex.pdf",
+    "bytes": 101421,
+    "sha256": "d675150f422d051acc0e7d07578c8ddac085872bdb75083dd02a9196518e2f45"
+  },
+  {
+    "url": "/materiali/equazione-errori-latex.tex",
+    "bytes": 1533,
+    "sha256": "327a9dfcc4fa081e0652f676388067d61868bc2b14d34fb20ce958f3bce1cbdf"
+  },
+  {
+    "url": "/materiali/equazioni-verifica.pdf",
+    "bytes": 184002,
+    "sha256": "ba90064cc079f6543b129b211a995a67f85fb08eb6f14164fef40bc7aab6d269"
+  },
+  {
+    "url": "/materiali/equazioni-verifica.tex",
+    "bytes": 23459,
+    "sha256": "a4d9988f1e988ca3f26c59243c68072017ec9b866286c3dd8058c12e5f0101b1"
+  },
+  {
+    "url": "/materiali/errori-comuni.pdf",
+    "bytes": 131496,
+    "sha256": "d6a2ca459b427c1653b17de8f7e82fe9bd22ceca0443e9f63ac770fa8b61a143"
+  },
+  {
+    "url": "/materiali/errori-comuni.tex",
+    "bytes": 11446,
+    "sha256": "94fb6bf22e6d6443e7ea122505a4b2a189d64b569d48de26005260e01c817f2f"
+  },
+  {
+    "url": "/materiali/frazioni-coppie.pdf",
+    "bytes": 138244,
+    "sha256": "62b62b4a386eeff36d6b5b9417d9e720609b69a3fc2462e7b40bdcafd13fa299"
+  },
+  {
+    "url": "/materiali/frazioni-coppie.tex",
+    "bytes": 3045,
+    "sha256": "47426aa3b763233eb52ff26385ede223fb47707202d48003bdc3f04b66fe7c71"
+  },
+  {
+    "url": "/materiali/frazioni-variante.pdf",
+    "bytes": 184496,
+    "sha256": "f93078e917caadaa34f0e434a0e8c0b464e2d539c3cb85e86715ef303556356f"
+  },
+  {
+    "url": "/materiali/frazioni-variante.tex",
+    "bytes": 16029,
+    "sha256": "d8f0ca740482ff228b68551f9e5e20bd9d100666a26d40a60dc94ff0b082565b"
+  },
+  {
+    "url": "/materiali/frazioni-verifica-docente.pdf",
+    "bytes": 460153,
+    "sha256": "a997b6b98ef3c87aec42f96831bd369ad3b3ea476ae9837da876d934f973dbfc"
+  },
+  {
+    "url": "/materiali/frazioni-verifica.pdf",
+    "bytes": 192502,
+    "sha256": "ae9974aa97ed7015b538721e38ba9d0e8966378692271238408ca9a2723595a9"
+  },
+  {
+    "url": "/materiali/frazioni-verifica.tex",
+    "bytes": 22487,
+    "sha256": "ad938d1f3932d38cdf04feafddc420ad1f3e54c36753297fbafc61a33bcd56e9"
+  },
+  {
+    "url": "/materiali/gara-prime-soluzioni.pdf",
+    "bytes": 257501,
+    "sha256": "b27e21fd96c8568356491af5e0cd20d8202a54604773aeb96db2145e0f957957"
+  },
+  {
+    "url": "/materiali/gara-prime-testo.pdf",
+    "bytes": 229269,
+    "sha256": "1c92e68734fbebad6310e706103f6d0fb4a3b006c8f9db0397c18d7aec11332a"
+  },
+  {
+    "url": "/materiali/insiemi-schede.pdf",
+    "bytes": 231271,
+    "sha256": "b9ef0a6c309849c47f43031c35247c136ceb3ff7db1239a5ad2d0120d1c163e2"
+  },
+  {
+    "url": "/materiali/insiemi-schede.tex",
+    "bytes": 21556,
+    "sha256": "36fdb17fa683d9b9090b8134e10968734084eb50897617896f18c557c5d38de3"
+  },
+  {
+    "url": "/materiali/libro-docente.pdf",
+    "bytes": 2908873,
+    "sha256": "4fb4e730bd5e264a3baa9217885ef1838e11a81277f8c72925b64517e77f5838"
+  },
+  {
+    "url": "/materiali/libro-studente.pdf",
+    "bytes": 2475526,
+    "sha256": "a295088125633c453ea6147969d165c70f2813083eb1dc94ba01090c63b1bc95"
+  },
+  {
+    "url": "/materiali/mano-binaria.pdf",
+    "bytes": 67943,
+    "sha256": "476c75a75702708dc085290b830528c9b8a2c2d94e9f5680825ecf86c090b7e4"
+  },
+  {
+    "url": "/materiali/mano-binaria.tex",
+    "bytes": 7554,
+    "sha256": "9eb58c4e1cc2b86e76d89a5ab77614242330253a3386d1cb9273871f2aa71f34"
+  },
+  {
+    "url": "/materiali/naturali.pdf",
+    "bytes": 217638,
+    "sha256": "ea974d2f812ab736c9ecb101de839918e5bebf72ddad794fa10533f15056ea74"
+  },
+  {
+    "url": "/materiali/naturali.tex",
+    "bytes": 25989,
+    "sha256": "336eb4bee53312c8eef69acbf6fe13185d5545150e1d8bf7ce096c773111ee06"
+  },
+  {
+    "url": "/materiali/razionali-percentuali.pdf",
+    "bytes": 149089,
+    "sha256": "edcc1a42b2b4d1083bc7779bd8f748aaf259daebbef81bc0059b1acd913696e6"
+  },
+  {
+    "url": "/materiali/razionali-percentuali.tex",
+    "bytes": 6707,
+    "sha256": "b9a39fd8bea7746629baf0560c4eccd238085125c9f66bf8c562846bca03eb05"
+  },
+  {
+    "url": "/materiali/recupero-equazioni-studente.pdf",
+    "bytes": 204630,
+    "sha256": "7a000911afb9aa06db9193b225ec2a4e358ed0d4edb814186b625c485f24f357"
+  },
+  {
+    "url": "/materiali/recupero-equazioni.pdf",
+    "bytes": 220451,
+    "sha256": "50e375ec0b04386e7eeec51f7021b78c1224a6dd0f31868bb7412abdf614c094"
+  },
+  {
+    "url": "/materiali/recupero-equazioni.tex",
+    "bytes": 31658,
+    "sha256": "cc8e900a51cecd967271481efff8affaa416a97b1a9487af962aae63eccdfe9c"
+  },
+  {
+    "url": "/materiali/recupero-frazionarie-studente.pdf",
+    "bytes": 202001,
+    "sha256": "b26f212562d6a52863aa81528eaaff3f22af49fa5a9a58fedf7595774979f11b"
+  },
+  {
+    "url": "/materiali/recupero-frazionarie.pdf",
+    "bytes": 207249,
+    "sha256": "9ca6d06a13b6844a0c7823dd2482301ac87e436c6c6e62bb6d54cbc14c96a017"
+  },
+  {
+    "url": "/materiali/recupero-frazionarie.tex",
+    "bytes": 23721,
+    "sha256": "543c56599eddb9a05b97a31dc8ee820e0fd17a5208a6f08956e300228f1b55cd"
+  },
+  {
+    "url": "/materiali/relazioni-grafi-docente.pdf",
+    "bytes": 250429,
+    "sha256": "87f69642f9f91238a6fa193143e2491147665a4fec912e58f90af0b517e67a69"
+  },
+  {
+    "url": "/materiali/relazioni-grafi.pdf",
+    "bytes": 112027,
+    "sha256": "45f0a9cb24d473fc4b387f04c347298e43e3e4896867b03dc70ab7f81e733507"
+  },
+  {
+    "url": "/materiali/relazioni-grafi.tex",
+    "bytes": 10805,
+    "sha256": "68098a0323ee96428f68fdac0d564302d9f7eef0768558f1abee6f1b2ded4005"
+  },
+  {
+    "url": "/materiali/schede-orologi.pdf",
+    "bytes": 152712,
+    "sha256": "9d14763c24a3d27943a3afd60c3d222a69e104a7447db08cea857d72bdb1275c"
+  },
+  {
+    "url": "/materiali/sistemi-170-171.pdf",
+    "bytes": 139255,
+    "sha256": "ea744d2221aa023ab8fef23956c11f8e46b21c7d22c6e48fda4c29657b9f79c8"
+  },
+  {
+    "url": "/materiali/sistemi-170-171.tex",
+    "bytes": 5887,
+    "sha256": "e41f648893f5b1747c0153162a021ab8c506c66bab82369f815c1a865cdb3403"
+  },
+  {
+    "url": "/materiali/soccorso-latex.pdf",
+    "bytes": 95314,
+    "sha256": "a1d76ccc1f9cffbcfc8a5afc53397ed6b2bf40374a7058839683a135d697f0b2"
+  },
+  {
+    "url": "/materiali/soccorso-latex.tex",
+    "bytes": 758,
+    "sha256": "e2e3951e2eb2580126d72b91274a2798bfb21c12d1ce0ea3b6c7f0a25e6ff3b8"
+  },
+  {
+    "url": "/materiali/sorgenti-latex.zip",
+    "bytes": 8668591,
+    "sha256": "d423c0c75ef2f3312853e2a2dd8ed86c04cb79d00504094ee9a66767f28e3d93"
+  },
+  {
+    "url": "/materiali/striscioline-equazioni.pdf",
+    "bytes": 154390,
+    "sha256": "16a326f5abeaa7670cc8daf6be7e502b15fdf125d20c577c284b0fbbd0e80128"
+  },
+  {
+    "url": "/materiali/striscioline-equazioni.tex",
+    "bytes": 3578,
+    "sha256": "97c490345cf3a41f89c06ab9e177732595b433c313e435f4584ceb7e6076b41d"
+  },
+  {
+    "url": "/materiali/triangoli-gruppi.pdf",
+    "bytes": 176454,
+    "sha256": "cafb52725bc856f6d15c28e2bfb50665d304e7d37eeee045277539b13747c494"
+  },
+  {
+    "url": "/materiali/triangoli-gruppi.tex",
+    "bytes": 13303,
+    "sha256": "bd77d31c1efca8d8c13023b1d937b21ae66041989ceb2ac1c5803499d6e10903"
+  },
+  {
+    "url": "/materiali/trova-errori-docente.pdf",
+    "bytes": 285467,
+    "sha256": "62b915dadf3b9ad208273caa5e73e4160d4ea26b79366781ec76e8f52a960eba"
+  },
+  {
+    "url": "/materiali/trova-errori.pdf",
+    "bytes": 129274,
+    "sha256": "a8c46d862626bfe86f009c6b3d8352dba35b9dcb7125c5ed3bddc9567b163d84"
+  },
+  {
+    "url": "/materiali/trova-errori.tex",
+    "bytes": 5869,
+    "sha256": "11852a08ca3daa5e961f5c9f1aeb9dfd9d26b98298d47f1095913193a34ba984"
+  },
+  {
+    "url": "/materiali/villa-valnera-studente.pdf",
+    "bytes": 241495,
+    "sha256": "f22a1f87ca446e90c4c7ba43d58fadbcc769b29fb5b65d1ca4ab73b628606a78"
+  },
+  {
+    "url": "/materiali/villa-valnera.pdf",
+    "bytes": 235458,
+    "sha256": "d4ec991821d2a728eca8a410ef0f2d48584846e91d58433598bad9d5935e2093"
+  },
+  {
+    "url": "/materiali/zenone-infinitesimi.pdf",
+    "bytes": 994906,
+    "sha256": "faf1fedf17a5587796ef92c9780c73fe5d8029263d023254c69f7e80d0597733"
+  },
+  {
+    "url": "/materiali/zq-simulazione-classe-docente.pdf",
+    "bytes": 559778,
+    "sha256": "698b01d9a9702a57832e1d871c9ec65bdf3b1895bfe472ca40c35f959c8f2646"
+  },
+  {
+    "url": "/materiali/zq-simulazione-classe.pdf",
+    "bytes": 233137,
+    "sha256": "8b6a6eecb0568d3df7c64dfe0595c8f740418fc655d7a9591dfb1aa53b00098d"
+  },
+  {
+    "url": "/materiali/zq-simulazione-classe.tex",
+    "bytes": 31049,
+    "sha256": "1ae5ee2455dea3a8cbfe39374ff60181bf559cc7b9f57f352ddc56f7d3e5565a"
+  },
+  {
+    "url": "/materiali/zq-simulazione-docente.pdf",
+    "bytes": 463110,
+    "sha256": "95fccfc516963eb96a338765c993cc3d0de77bcb946096c0f01e3cb549f9198a"
+  },
+  {
+    "url": "/materiali/zq-simulazione.pdf",
+    "bytes": 195929,
+    "sha256": "d09e9bce82a5a923a675fc05c5a4407bc25fc061da24d58fb6a98129b38fd908"
+  },
+  {
+    "url": "/materiali/zq-simulazione.tex",
+    "bytes": 22359,
+    "sha256": "812dd450e85d971c56041fd6a20f4e6cf8a210d5c45d41096d14163b5e5912dd"
+  },
+  {
+    "url": "/materiali/zq-verifica-docente.pdf",
+    "bytes": 474372,
+    "sha256": "f4516ef255041d8ba959439becbf27ebbb78a767810c01165b76f94a2d47cacc"
+  },
+  {
+    "url": "/materiali/zq-verifica.pdf",
+    "bytes": 207319,
+    "sha256": "98021189a8e157068ccc0748d61f5804a7810a0818db43dd456c9a9beadd2217"
+  },
+  {
+    "url": "/materiali/zq-verifica.tex",
+    "bytes": 22351,
+    "sha256": "8bd651221d56b8cfd898ae7eb7a6239b5e3a93b1616871c2b98b1348847644ce"
+  }
+]

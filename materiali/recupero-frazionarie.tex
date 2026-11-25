@@ -1,0 +1,267 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern,amsmath,amssymb,microtype}
+\usepackage[a4paper,top=1.6cm,bottom=1.6cm,left=1.65cm,right=1.65cm]{geometry}
+\usepackage{xcolor,enumitem,array,tabularx,fancyhdr,needspace}
+\usepackage[hidelinks]{hyperref}
+\definecolor{blu}{RGB}{30,62,92}
+\definecolor{verde}{RGB}{34,93,76}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{3pt}
+\setlength{\headheight}{14pt}
+\setlength{\abovedisplayskip}{5pt}
+\setlength{\belowdisplayskip}{5pt}
+\setlength{\abovedisplayshortskip}{4pt}
+\setlength{\belowdisplayshortskip}{4pt}
+\everymath{\displaystyle}
+\everydisplay{\displaystyle}
+\setlist[enumerate,itemize]{leftmargin=*,itemsep=3pt,topsep=3pt}
+\pagestyle{fancy}\fancyhf{}
+\fancyhead[L]{\small Classe 2 BS | Frazioni algebriche ed equazioni frazionarie}
+\fancyhead[R]{\small Anno scolastico 2026/27}
+\fancyfoot[C]{\small\thepage}
+\renewcommand{\headrulewidth}{0.3pt}
+\newcommand{\R}{\mathbb R}
+\newcommand{\tit}[1]{\par{\Large\bfseries\color{blu}#1}\par\smallskip}
+\newcommand{\sott}[1]{\par\medskip{\large\bfseries\color{blu}#1}\par\smallskip}
+\newcommand{\mini}[1]{\par\smallskip\textbf{#1}\par}
+\newcommand{\nota}[1]{\par\smallskip\noindent\colorbox{blu!6}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{#1}}\par\smallskip}
+\newcommand{\es}[3]{\Needspace{4\baselineskip}\par\medskip\textbf{\color{blu}#1}\quad\textit{#2}\par\nopagebreak #3\par}
+\newcommand{\sol}[2]{\Needspace{3\baselineskip}\par\medskip\textbf{\color{verde}#1}\quad #2\par}
+\begin{document}
+
+\tit{A. Scomposizioni, prodotti notevoli e segni}
+\nota{Fascicolo di recupero della verifica del 24 ottobre. Le soluzioni iniziano a pagina \pageref{soluzioni}.}
+\sott{Ripasso mirato}
+Raccogli un fattore soltanto se compare in \emph{tutti} gli addendi. Con un trinomio che inizia con $-x^2$ raccogli prima $-1$; nel trinomio monico cerca due numeri con somma uguale al coefficiente di $x$ e prodotto uguale al termine noto. Rimoltiplica per verificare. Ricorda:
+\[ (a-b)^2=a^2-2ab+b^2,\qquad a^2-b^2=(a-b)(a+b),\qquad k-x=-(x-k). \]
+Raddoppiare significa moltiplicare per $2$; elevare al quadrato significa moltiplicare per se stesso. La legge di annullamento del prodotto vale dopo aver scritto un \textbf{prodotto uguale a zero}.
+\mini{Esempio svolto} $-x^2+6x-8=-(x^2-6x+8)=-(x-2)(x-4)$. Il prodotto interno ha somma $-6$ e prodotto $8$. Sviluppando e distribuendo il meno si torna al trinomio iniziale.
+\sott{Esercizi}
+\es{A1}{Doppio prodotto}{Sviluppa $(x-4)^2$ e $(2x+3)^2$; indica il doppio prodotto in ciascuno.}
+\es{A2}{Quadrato di una differenza}{Controlla in $x=1$ la scrittura $(3-x)^2=9+x^2$, poi correggila.}
+\es{A3}{Raddoppio e quadrato}{Calcola $2\cdot\frac35$, $\left(\frac35\right)^2$ e $\frac{2\cdot3}{2\cdot5}$. Spiega la differenza.}
+\es{A4}{Operazioni diverse su una frazione}{Per $x\ne1$, scrivi il doppio e il quadrato di $\frac{x+2}{x-1}$. Sviluppa il numeratore del quadrato.}
+\es{A5}{Polinomi opposti}{Raccogli $-1$ in $3-x$ e in $4-x$. Controlla le riscritture con $x=0$.}
+\es{A6}{Quoziente di opposti}{Semplifica $\frac{x-4}{4-x}$ e indica dove è definita.}
+\es{A7}{Basi dei quadrati}{Scomponi $9-x^2$ e $x^2-16$. Indica le basi e rimoltiplica.}
+\clearpage
+\tit{A. Scomposizioni, prodotti notevoli e segni}
+\sott{Esercizi 8--15}
+\es{A8}{Differenza di quadrati con segno}{Scomponi $16-x^2$ e semplifica $\frac{16-x^2}{x-4}$, per $x\ne4$.}
+\es{A9}{Somma e prodotto}{Scomponi $x^2-7x+12$ e $x^2+x-6$. Scrivi somma e prodotto per entrambi.}
+\es{A10}{Prima il segno del termine quadratico}{Scomponi $-x^2+7x-12$ e $-x^2-x+6$, poi controlla il segno rimoltiplicando.}
+\es{A11}{Fattori numerici}{Raccogli il massimo fattore comune in $28-7x$ e $6x^2+12x$. Rimoltiplica.}
+\es{A12}{Monomi di grado diverso}{Raccogli in $a^3-4a^2$ e $a^3+3a^2$. Spiega perché gli addendi non si sommano direttamente.}
+\es{A13}{Prodotto nullo e somma}{Risolvi $x^2-5x+6=0$ e spiega perché non si pongono a zero i singoli addendi.}
+\es{A14}{Alternative e radice ripetuta}{Risolvi $x(x-4)=0$ e $(x-2)^2=0$. Scrivi gli insiemi.}
+\es{A15}{Raccogli e poi scomponi}{Scomponi $-2x^2+10x-12$ e controlla rimoltiplicando.}
+\clearpage
+\tit{B. Operazioni con le frazioni algebriche}
+\sott{Ripasso mirato}
+Prima di semplificare, indica le condizioni di esistenza dell'espressione iniziale. Scomponi, poi cancella \emph{fattori comuni}, mai addendi isolati. Se tutti i fattori si cancellano resta $1$. Nelle somme usa il minimo comune denominatore e racchiudi i numeratori in parentesi. Nelle espressioni combinate esegui le divisioni alla loro precedenza: $A:B=A\cdot B^{-1}$, con $B$ definito e non nullo. Nelle potenze con esponente negativo inverti la base e mantieni l'esponente in valore assoluto.
+\mini{Esempio svolto} Con $x\ne-2,3$, si ha
+\[\frac{x^2-9}{x+2}:\frac{x-3}{x+2}=\frac{(x-3)(x+3)}{x+2}\cdot\frac{x+2}{x-3}=x+3.\]
+La forma finale è un'espressione: le esclusioni restano e non si scrive un insieme delle soluzioni.
+\sott{Esercizi}
+\es{B1}{Cancella prima di sviluppare}{Indica il dominio e semplifica $\frac{3(x-2)}{6(x-2)(x+1)}$.}
+\es{B2}{Riduci il grado prima di operare}{Indica il dominio e semplifica $\frac{a^3+4a^2}{a^3-4a^2}$.}
+\es{B3}{Addendi o fattori?}{Per $x\ne0$, spiega perché $\frac{x+5}{x}$ non è $5$. Scrivi una riscrittura valida.}
+\es{B4}{Una somma al denominatore}{Controlla con $x=1$ la scrittura $\frac5{x+2}=\frac5x+\frac52$ e spiega l’errore.}
+\es{B5}{Il fattore deve essere comune}{Per $x\ne0$, riscrivi $\frac{2x+3}{2x}$ dividendo entrambi gli addendi. Il $2$ è fattore comune del numeratore a coefficienti interi?}
+\es{B6}{Semplificazione totale}{Indica il dominio e riduci $\frac{x^2-16}{(x-4)(x+4)}$.}
+\es{B7}{Minimo comune denominatore}{Trova il minimo comune denominatore per $x$ e $x+1$, poi per $x$ e $x+2$. Giustifica.}
+\clearpage
+\tit{B. Operazioni con le frazioni algebriche}
+\sott{Esercizi 8--15}
+\es{B8}{Parentesi nel numeratore}{Indica il dominio e scrivi un’unica frazione: $\frac2x-\frac{x-1}{x+1}$.}
+\es{B9}{Fattore ripetuto nel denominatore}{Indica il dominio e somma $\frac1{(x-2)^2}+\frac3{(x-2)(x+1)}$.}
+\es{B10}{Reciproco con i quadrati}{Indica il dominio e calcola $\frac{(x+1)^2}{x-2}:\frac{(x+1)^2}{(x-2)^2}$. Mostra il prodotto.}
+\es{B11}{Potenza negativa}{Riscrivi $\left(\frac{a-3}{a+3}\right)^{-2}$ con esponente positivo e indica il dominio.}
+\es{B12}{Prima la divisione}{Indica il dominio e semplifica $\left[\frac1{x+1}:\frac2{x+1}\right]+\frac1x$.}
+\es{B13}{Espressione, non equazione}{Indica il dominio e somma $\frac1x+\frac1{x+2}$. Spiega perché non puoi scartare il denominatore.}
+\es{B14}{Dividi dopo aver scomposto}{Indica il dominio e semplifica $\frac{a^2-9}{a+3}:\frac{a-3}{2}$.}
+\es{B15}{Potenza, somma e divisione}{Indica il dominio e semplifica $\left[\left(\frac{a+2}{a-2}\right)^{-2}+2\frac{a-2}{a+2}+1\right]:\frac{2a}{(a+2)^2}$.}
+\clearpage
+\tit{C. Condizioni di esistenza ed equazioni frazionarie}
+\sott{Ripasso mirato}
+Scrivi le condizioni di esistenza prima di trasformare. Una frazione divisore deve avere sia il denominatore sia il numeratore non nulli. In un'equazione, sul dominio ammesso, puoi moltiplicare \emph{entrambi i membri} per il minimo comune denominatore. Se resta un'equazione di secondo grado, porta tutto a un membro, scomponi, applica la legge di annullamento del prodotto e confronta ogni candidato con il dominio. Se nessun candidato è ammesso, $S=\varnothing$; se ottieni un'identità, $S$ è tutto il dominio.
+\mini{Esempio svolto} Per $\frac{x^2-1}{x-1}=2$ il dominio esclude $1$. Moltiplicando per $x-1$ e portando a zero ottieni $(x-1)^2=0$. Il candidato $1$ è escluso: l'equazione è impossibile, $S=\varnothing$.
+\sott{Esercizi}
+\es{C1}{Dominio da più denominatori}{Trova il dominio di $\frac{x}{x^2-25}+\frac1{x-2}$.}
+\es{C2}{Divisore definito e non nullo}{Trova il dominio di $\frac{x+2}{x-1}:\frac{x-4}{x+1}$ senza svolgere la divisione.}
+\es{C3}{Condizioni prima del reciproco}{Indica il dominio e calcola $\frac{x^2-9}{x-3}:\frac{x+3}{x-2}$.}
+\es{C4}{Valore escluso e soluzione esclusa}{Semplifica $\frac{(x-4)(x+1)}{x-4}$ e spiega se ha valore in $x=4$. Poi risolvi $\frac{(x-4)(x+1)}{x-4}=5$.}
+\es{C5}{Candidato escluso}{Risolvi $\frac{x^2-4}{x-2}=4$ con il controllo finale.}
+\es{C6}{Identità sul dominio}{Risolvi e classifica $\frac{x^2-9}{x-3}=x+3$.}
+\es{C7}{Identità o contraddizione?}{Sul dominio $\R\setminus\{-2;1\}$, classifica $0x=0$ e $0x=4$ e scrivi i rispettivi insiemi.}
+\clearpage
+\tit{C. Condizioni di esistenza ed equazioni frazionarie}
+\sott{Esercizi 8--15}
+\es{C8}{Dal denominatore al trinomio}{Risolvi $\frac3x+\frac{x}{x+2}=\frac8{x+2}$, mostrando i passaggi.}
+\es{C9}{Due candidati, uno ammesso}{Risolvi $\frac{x^2-5x+4}{x-1}=\frac{2x-2}{x-1}$ e controlla i candidati.}
+\es{C10}{Porta tutti i termini a un membro}{Risolvi $\frac{x^2+3}{x-2}=\frac{4x}{x-2}$.}
+\es{C11}{Scomposizione e controllo}{Risolvi $\frac{x^2+2x-16}{x^2-16}=\frac1{x-4}$.}
+\es{C12}{Opposti nell’equazione}{Risolvi $\frac{2x+1}{x^2-4}+\frac1{2-x}=\frac3{x+2}$.}
+\es{C13}{Divisione prima del denominatore comune}{Risolvi $\frac2{x+1}:\frac{x}{x+1}+\frac1{x+2}=\frac4{x(x+2)}$.}
+\es{C14}{Una radice doppia}{Risolvi $\frac{x^2+4}{x+1}=\frac{4x}{x+1}$.}
+\es{C15}{Equazione con divisione e segni}{Risolvi $\left(\frac{2x+3}{x^2-4}+\frac1{2-x}\right):\frac2{4-x^2}=\frac{6-3x}{2x-4}$.}
+\clearpage
+\tit{D. Formule inverse e modelli di temperatura}
+\sott{Ripasso mirato}
+Mantieni le lettere fino a quando hai ricavato la formula. Elimina il denominatore, sviluppa, porta nello stesso membro i termini che contengono l'incognita, raccoglila e dividi per il suo coefficiente non nullo. Se è richiesta una soluzione positiva, controlla anche il segno. Per un modello di temperatura, distinguere fra \emph{valutare} $T(t)$ a un istante dato, risolvere $T(t)=T_0$ e risolvere $T_1(t)=T_2(t)$.
+\mini{Esempio svolto} Da $q=\frac{b}{a+b}$, con $a>0$ e $0<q<1$, ottieni $q(a+b)=b$, poi $qa=b(1-q)$, quindi $b=\frac{qa}{1-q}$. La sostituzione numerica viene dopo.
+\sott{Esercizi}
+\es{D1}{Ricavare la lettera richiesta}{Ricava $b$ da $q=\frac{2b}{a+b}$, con $a>0$ e $0<q<2$. Mostra la raccolta dei termini in $b$.}
+\es{D2}{Incognita sopra e sotto}{Ricava $b$ da $u=\frac{2ab}{a+b}$, con $a,b,u>0$ e $u<2a$.}
+\es{D3}{Cambia l’incognita}{Ricava $a$ da $u=\frac{2ab}{a+b}$, con $a,b,u>0$ e $u<2b$.}
+\es{D4}{Non perdere un termine}{Correggi $u(a+b)=2ab\Rightarrow ua=2ab$ e ricava $b$, assumendo $2a-u\ne0$.}
+\es{D5}{Esistenza e segno}{Con $v_m>0$ e $v_1>0$, per quale condizione $v_2=\frac{v_m v_1}{2v_1-v_m}$ è definita e positiva?}
+\es{D6}{Trasferimento a un’altra formula}{Ricava $R_2$ da $R=\frac{R_1R_2}{R_1+R_2}$ con $R_1>R>0$.}
+\es{D7}{Prima in lettere, poi con i dati}{Ricava $t$ da $h=\frac{Q-P}{kt}$, con $h,k,t$ non nulli. Poi usa $Q=17$, $P=5$, $k=3$, $h=2$.}
+\clearpage
+\tit{D. Formule inverse e modelli di temperatura}
+\sott{Esercizi 8--15}
+\es{D8}{Velocità simbolica e valore numerico}{Da $v_m=\frac{2v_1v_2}{v_1+v_2}$ ricava $v_2$ in lettere. Poi usa $v_m=24$ e $v_1=18$ (stessa unità).}
+\es{D9}{Raccogli un coefficiente intero}{Ricava $a$ da $c=\frac{ka}{b+a}$ con $k>c>0$ e $a,b>0$.}
+\es{D10}{Tutta la differenza al denominatore}{Uno studente passa da $v_mv_1=v_2(2v_1-v_m)$ a $v_2=\frac{v_mv_1}{2v_1}-v_m$. Correggi per $2v_1-v_m\ne0$.}
+\es{D11}{Temperature all’accensione}{Con $T_1(t)=\frac{48(t+1)}{t+3}$ e $T_2(t)=\frac{24(2t+1)}{t+2}$, trova le temperature a $t=0$ (in gradi Celsius).}
+\es{D12}{Tempo a temperatura assegnata}{Per $t\ge0$, quando $T(t)=\frac{60(t+1)}{t+2}$ raggiunge $45\,{}^\circ\mathrm C$? Imposta l’equazione.}
+\es{D13}{Confronto fra due temperature}{Per $t\ge0$, uguaglia $T_1(t)=\frac{48(t+1)}{t+3}$ e $T_2(t)=\frac{24(2t+1)}{t+2}$. Trova istante e temperatura.}
+\es{D14}{Controllo del tempo fisico}{Il modello $T(t)=\frac{30(t+1)}{t+2}$, con $t\ge0$, raggiunge $10\,{}^\circ\mathrm C$?}
+\es{D15}{Confronto con uguale denominatore}{Per $t\ge0$, confronta $\frac{36(t+1)}{t+3}$ e $\frac{18(t+4)}{t+3}$: quando coincidono e a quale temperatura?}
+\clearpage
+\tit{E. Ricopiatura, calcolo e conclusione}
+\sott{Ripasso mirato}
+Rileggi la richiesta: semplificare, risolvere e valutare sono azioni diverse. Prima di cambiare riga controlla segni, parentesi, costanti ed esponenti. Riduci solo termini simili e concludi con ciò che chiede il testo. Se ti fermi, torna al primo passaggio incerto e controlla il risultato con un valore ammesso: un controllo numerico può smentire una formula, ma da solo non dimostra un'identità.
+\mini{Esempio svolto} Per $x\ne-1$,
+\[2\frac{x-1}{x+1}+1=\frac{2(x-1)+(x+1)}{x+1}=\frac{3x-1}{x+1}.\]
+Il $+1$ diventa $\frac{x+1}{x+1}$, non sparisce. Con $x=1$ entrambe le forme danno $1$.
+\sott{Esercizi}
+\es{E1}{Controlla cosa è stato copiato}{Il testo è $(a-2)^2+2(a-2)+1$. In una riga compare $(a-2)+2(a-2)$. Indica le due omissioni, poi semplifica il testo originale.}
+\es{E2}{Il termine costante resta}{Per $x\ne-1$ scrivi in un’unica frazione $2\frac{x-2}{x+1}+1$. Controlla con $x=2$.}
+\es{E3}{Riconosci il quadrato senza perdere il più uno}{Per $x\ne-1$ semplifica $\left(\frac{x-2}{x+1}\right)^2+2\frac{x-2}{x+1}+1$.}
+\es{E4}{Controllo numerico breve}{Correggi $120\cdot1=121$, $-3+5=8$ e $8-(-2)=6$. Nomina l’operazione in ciascuno.}
+\es{E5}{Solo termini simili}{Riduci $a^3-4a^2+3a^2$ e raccogli il fattore comune.}
+\es{E6}{Ricopia e riduci}{Riduci $4x^2-3x+2-4x^2+5x-1$. Raggruppa per grado prima di sommare.}
+\es{E7}{Leggi il verbo della consegna}{Semplifica $\frac{x^2-1}{x-1}$ e, separatamente, risolvi $\frac{x^2-1}{x-1}=4$. Indica il dominio comune.}
+\clearpage
+\tit{E. Ricopiatura, calcolo e conclusione}
+\sott{Esercizi 8--15}
+\es{E8}{L’esponente sopravvive al reciproco}{Calcola $\frac2{x-1}:\frac3{(x+2)^2}$, dopo aver indicato il dominio. Evidenzia l’esponente nella nuova riga.}
+\es{E9}{Parentesi e segno della sottrazione}{Per $x\ne2,-1$, riduci a un’unica frazione $\frac{x+4}{x-2}-\frac{x-1}{x+1}$.}
+\es{E10}{Non fermarti al penultimo passaggio}{Per $a\ne1,-3$, completa $\frac{2(a+3)^2}{(a-1)^2}\cdot\frac{(a-1)^2}{2(a+3)}$ riducendo tutti i fattori comuni.}
+\es{E11}{Completa il calcolo con una sostituzione}{Con $r=\frac{x-1}{x+1}$ e $x\ne-1,0$, semplifica $[r^2+2r+1]\frac{(x+1)^2}{x^2}$.}
+\es{E12}{Un valore smaschera il calcolo}{Per $a=2$ confronta $a^3-4a^2$ e $-3a^3$. Poi raccogli correttamente nell’espressione iniziale.}
+\es{E13}{Controlla ordine e fine del calcolo}{Indica il dominio e completa $\left[\frac1x+\frac1{x+2}\right]:\frac1x$. Ricontrolla l’operazione fuori parentesi.}
+\es{E14}{Controllo del segno alla fine}{Indica il dominio e semplifica $\frac{4-x}{x^2-16}(x+4)$. Verifica con $x=1$.}
+\es{E15}{Dalla traccia alla conclusione}{Risolvi $\frac{2(x+1)}{x+3}+\frac{x+1}{x+3}=\frac6{x+3}$. Mostra la moltiplicazione dei due membri, poi controlla la soluzione.}
+\clearpage
+\tit{Soluzioni A. Scomposizioni, prodotti notevoli e segni}
+\label{soluzioni}\nota{Confronta i passaggi con il tuo tentativo. Sono possibili svolgimenti diversi, purché corretti e giustificati.}
+\sott{A1--A8}
+\sol{A1}{$x^2-8x+16$, doppio prodotto $-8x$; $4x^2+12x+9$, doppio prodotto $12x$.}
+\sol{A2}{In $x=1$ si ottengono $4$ e $10$. Corretto: $(3-x)^2=9-6x+x^2$.}
+\sol{A3}{Rispettivamente $\frac65$, $\frac9{25}$ e $\frac35$. Raddoppiare entrambi i termini della frazione non ne cambia il valore.}
+\sol{A4}{Doppio $\frac{2(x+2)}{x-1}$; quadrato $\frac{(x+2)^2}{(x-1)^2}=\frac{x^2+4x+4}{(x-1)^2}$.}
+\sol{A5}{$3-x=-(x-3)$ e $4-x=-(x-4)$. In $x=0$ i valori sono rispettivamente $3$ e $4$.}
+\sol{A6}{$4-x=-(x-4)$; la frazione vale $-1$ per $x\ne4$.}
+\sol{A7}{Basi $3,x$: $(3-x)(3+x)$. Basi $x,4$: $(x-4)(x+4)$. I prodotti restituiscono le rispettive differenze.}
+\sol{A8}{$16-x^2=(4-x)(4+x)=-(x-4)(x+4)$. Dopo la cancellazione resta $-(x+4)$.}
+\clearpage
+\tit{Soluzioni A. Scomposizioni, prodotti notevoli e segni}
+\sott{A9--A15}
+\sol{A9}{$-3,-4$: somma $-7$, prodotto $12$, fattori $(x-3)(x-4)$. $3,-2$: somma $1$, prodotto $-6$, fattori $(x+3)(x-2)$.}
+\sol{A10}{$-(x^2-7x+12)=-(x-3)(x-4)$; $-(x^2+x-6)=-(x+3)(x-2)$. Il segno esterno vale per tutto il prodotto.}
+\sol{A11}{$7(4-x)$ e $6x(x+2)$. La distributiva restituisce i due polinomi.}
+\sol{A12}{$a^2(a-4)$ e $a^2(a+3)$. Le potenze $a^3$ e $a^2$ hanno esponenti diversi.}
+\sol{A13}{$(x-2)(x-3)=0$: almeno un fattore è nullo, quindi $S=\{2;3\}$. Gli addendi di una somma possono compensarsi senza annullarsi singolarmente.}
+\sol{A14}{Nel primo $x=0$ oppure $x=4$, $S=\{0;4\}$. Nel secondo lo stesso fattore si ripete: $S=\{2\}$.}
+\sol{A15}{$-2(x^2-5x+6)=-2(x-2)(x-3)$. Il prodotto vale $-2(x^2-5x+6)$, come richiesto.}
+\clearpage
+\tit{Soluzioni B. Operazioni con le frazioni algebriche}
+\sott{B1--B8}
+\sol{B1}{$x\ne2,-1$. Cancella $x-2$ e riduci $\frac36$: $\frac1{2(x+1)}$.}
+\sol{B2}{$a\ne0,4$. Raccogli $a^2$ sopra e sotto: $\frac{a+4}{a-4}$.}
+\sol{B3}{$x$ non è fattore dell’intero numeratore: $\frac{x+5}{x}=1+\frac5x$.}
+\sol{B4}{In $x=1$ si ottengono $\frac53$ e $\frac{15}2$. La divisione per una somma non si distribuisce sul denominatore.}
+\sol{B5}{$1+\frac3{2x}$. Non si può cancellare il $2$ con il solo addendo $2x$ lasciando $3$ invariato.}
+\sol{B6}{$x\ne-4,4$. Numeratore e denominatore sono lo stesso prodotto non nullo: il risultato è $1$.}
+\sol{B7}{$x(x+1)$ e $x(x+2)$: i due fattori di ciascuna coppia sono distinti e nessuno contiene l’altro.}
+\sol{B8}{$x\ne0,-1$. Numeratore $2(x+1)-x(x-1)=-x^2+3x+2$; denominatore $x(x+1)$.}
+\clearpage
+\tit{Soluzioni B. Operazioni con le frazioni algebriche}
+\sott{B9--B15}
+\sol{B9}{$x\ne2,-1$. Denominatore $(x-2)^2(x+1)$; numeratore $(x+1)+3(x-2)=4x-5$.}
+\sol{B10}{$x\ne-1,2$. Il secondo fattore diventa $\frac{(x-2)^2}{(x+1)^2}$; cancellando resta $x-2$.}
+\sol{B11}{$a\ne-3,3$. Risultato $\frac{(a+3)^2}{(a-3)^2}$: si inverte la base, poi si eleva al quadrato.}
+\sol{B12}{$x\ne-1,0$. La divisione vale $\frac12$, quindi la somma è $\frac{x+2}{2x}$.}
+\sol{B13}{$x\ne0,-2$. Risultato $\frac{2x+2}{x(x+2)}$. Scartare il denominatore cambierebbe il valore dell’espressione.}
+\sol{B14}{$a\ne-3,3$. La prima frazione vale $a-3$; moltiplica per $\frac2{a-3}$ e ottieni $2$.}
+\sol{B15}{$a\ne-2,2,0$. Posto $r=\frac{a-2}{a+2}$, la parentesi è $(r+1)^2=\frac{4a^2}{(a+2)^2}$. Moltiplicando per $\frac{(a+2)^2}{2a}$ si ottiene $2a$.}
+\clearpage
+\tit{Soluzioni C. Condizioni di esistenza ed equazioni frazionarie}
+\sott{C1--C8}
+\sol{C1}{$x^2-25=(x-5)(x+5)$. Le esclusioni sono $-5,5,2$.}
+\sol{C2}{$x\ne1,-1$ per i denominatori; $x\ne4$ per il numeratore del divisore. $-2$ non va escluso.}
+\sol{C3}{$x\ne3,2,-3$. La prima frazione si riduce a $x+3$; il reciproco è $\frac{x-2}{x+3}$. Risultato $x-2$ sul dominio iniziale.}
+\sol{C4}{L’espressione vale $x+1$ solo per $x\ne4$; in $4$ non è definita. Nell’equazione il candidato $4$ è escluso: $S=\varnothing$.}
+\sol{C5}{$x\ne2$. La frazione vale $x+2$ sul dominio; $x+2=4$ dà $2$, escluso. Impossibile, $S=\varnothing$.}
+\sol{C6}{$x\ne3$. Semplificando, $x+3=x+3$. Indeterminata, $S=\R\setminus\{3\}$.}
+\sol{C7}{La prima vale su tutto il dominio, $S=\R\setminus\{-2;1\}$. La seconda non vale per nessun numero, $S=\varnothing$.}
+\sol{C8}{$x\ne0,-2$. Moltiplica per $x(x+2)$: $3(x+2)+x^2=8x$. Quindi $(x-2)(x-3)=0$, $S=\{2;3\}$.}
+\clearpage
+\tit{Soluzioni C. Condizioni di esistenza ed equazioni frazionarie}
+\sott{C9--C15}
+\sol{C9}{$x\ne1$. Eliminando i denominatori: $x^2-7x+6=(x-1)(x-6)=0$. Il candidato $1$ si scarta, $S=\{6\}$.}
+\sol{C10}{$x\ne2$. $x^2+3=4x\Rightarrow x^2-4x+3=(x-1)(x-3)=0$. Entrambi ammessi, $S=\{1;3\}$.}
+\sol{C11}{$x\ne-4,4$. Moltiplicando per $(x-4)(x+4)$ si ha $x^2+2x-16=x+4$, cioè $(x-4)(x+5)=0$. Resta $S=\{-5\}$.}
+\sol{C12}{$x\ne-2,2$. Usa $2-x=-(x-2)$ e moltiplica per $x^2-4$: $2x+1-(x+2)=3(x-2)$. Da $x-1=3x-6$ segue $S=\{\frac52\}$.}
+\sol{C13}{$x\ne-1,0,-2$. La divisione vale $\frac2x$. Moltiplicando per $x(x+2)$: $2(x+2)+x=4$, quindi $x=0$, escluso. $S=\varnothing$.}
+\sol{C14}{$x\ne-1$. Si ottiene $(x-2)^2=0$. Il candidato $2$ è ammesso e si scrive una sola volta: $S=\{2\}$.}
+\sol{C15}{$x\ne-2,2$. La parentesi vale $\frac{x+1}{x^2-4}$; il quoziente vale $-\frac{x+1}{2}$. A destra resta $-\frac32$. Si trova $x=2$, escluso: $S=\varnothing$.}
+\clearpage
+\tit{Soluzioni D. Formule inverse e modelli di temperatura}
+\sott{D1--D8}
+\sol{D1}{$q(a+b)=2b\Rightarrow qa=b(2-q)\Rightarrow b=\frac{qa}{2-q}$.}
+\sol{D2}{$u(a+b)=2ab\Rightarrow ua=b(2a-u)\Rightarrow b=\frac{ua}{2a-u}$.}
+\sol{D3}{$ua+ub=2ab\Rightarrow ub=a(2b-u)\Rightarrow a=\frac{ub}{2b-u}$.}
+\sol{D4}{Manca $ub$: $ua+ub=2ab$. Quindi $ua=b(2a-u)$ e $b=\frac{ua}{2a-u}$.}
+\sol{D5}{Il numeratore è positivo; occorre $2v_1-v_m>0$, ossia $v_m<2v_1$.}
+\sol{D6}{$RR_1+RR_2=R_1R_2\Rightarrow RR_1=R_2(R_1-R)\Rightarrow R_2=\frac{RR_1}{R_1-R}$.}
+\sol{D7}{$hkt=Q-P\Rightarrow t=\frac{Q-P}{hk}$. Con i dati, $t=\frac{12}{6}=2$.}
+\sol{D8}{$v_mv_1=v_2(2v_1-v_m)\Rightarrow v_2=\frac{v_mv_1}{2v_1-v_m}$. Con i dati vale $36$ nella stessa unità.}
+\clearpage
+\tit{Soluzioni D. Formule inverse e modelli di temperatura}
+\sott{D9--D15}
+\sol{D9}{$cb+ca=ka\Rightarrow cb=a(k-c)\Rightarrow a=\frac{cb}{k-c}$.}
+\sol{D10}{Si divide per l’intero coefficiente $2v_1-v_m$: $v_2=\frac{v_mv_1}{2v_1-v_m}$.}
+\sol{D11}{$T_1(0)=\frac{48}{3}=16\,{}^\circ\mathrm C$; $T_2(0)=\frac{24}{2}=12\,{}^\circ\mathrm C$.}
+\sol{D12}{$60(t+1)=45(t+2)\Rightarrow15t=30$. Dopo $2$ minuti; $T(2)=45\,{}^\circ\mathrm C$.}
+\sol{D13}{$2(t+1)(t+2)=(2t+1)(t+3)\Rightarrow 2t^2+6t+4=2t^2+7t+3$. Quindi $t=1$ minuto e la temperatura è $24\,{}^\circ\mathrm C$.}
+\sol{D14}{$30t+30=10t+20\Rightarrow t=-\frac12$. Il valore è fuori dal dominio fisico: la temperatura richiesta non è raggiunta.}
+\sol{D15}{$36(t+1)=18(t+4)\Rightarrow2t+2=t+4\Rightarrow t=2$. Entrambe valgono $\frac{108}{5}=21{,}6\,{}^\circ\mathrm C$.}
+\clearpage
+\tit{Soluzioni E. Ricopiatura, calcolo e conclusione}
+\sott{E1--E8}
+\sol{E1}{Mancano l’esponente $2$ e il termine $+1$. L’originale è $[(a-2)+1]^2=(a-1)^2$.}
+\sol{E2}{$\frac{2(x-2)+(x+1)}{x+1}=\frac{3x-3}{x+1}$. In $x=2$ entrambe le forme valgono $1$.}
+\sol{E3}{Con $r=\frac{x-2}{x+1}$ si ha $r^2+2r+1=(r+1)^2=\frac{(2x-1)^2}{(x+1)^2}$.}
+\sol{E4}{$120\cdot1=120$ (prodotto); $-3+5=2$ (somma con segno); $8-(-2)=10$ (sottrazione di un negativo).}
+\sol{E5}{$a^3-a^2=a^2(a-1)$. Si sommano solo i due termini in $a^2$.}
+\sol{E6}{$(4-4)x^2+(-3+5)x+(2-1)=2x+1$.}
+\sol{E7}{In entrambi $x\ne1$. Prima risposta: $x+1$ sul dominio. Seconda: $x+1=4\Rightarrow S=\{3\}$.}
+\sol{E8}{$x\ne1,-2$. Il prodotto è $\frac2{x-1}\cdot\frac{(x+2)^2}{3}=\frac{2(x+2)^2}{3(x-1)}$.}
+\clearpage
+\tit{Soluzioni E. Ricopiatura, calcolo e conclusione}
+\sott{E9--E15}
+\sol{E9}{Il numeratore è $(x+4)(x+1)-(x-1)(x-2)=8x+2$. Il denominatore è $(x-2)(x+1)$.}
+\sol{E10}{Cancella $2$, $(a-1)^2$ e un fattore $a+3$: resta $a+3$ sul dominio dato.}
+\sol{E11}{La parentesi è $(r+1)^2=\frac{4x^2}{(x+1)^2}$. Dopo la moltiplicazione il risultato è $4$.}
+\sol{E12}{I valori sono $8-16=-8$ e $-24$. La forma fattorizzata corretta è $a^2(a-4)$.}
+\sol{E13}{$x\ne0,-2$. La parentesi vale $\frac{2x+2}{x(x+2)}$; il reciproco del divisore è $x$. Risultato $\frac{2x+2}{x+2}$.}
+\sol{E14}{$x\ne-4,4$. Scomponi e usa $4-x=-(x-4)$: risultato $-1$. Nell’originale, $\frac3{-15}\cdot5=-1$.}
+\sol{E15}{$x\ne-3$. $2(x+1)+(x+1)=6\Rightarrow3(x+1)=6\Rightarrow x=1$. Nell’originale entrambi i membri valgono $\frac32$, quindi $S=\{1\}$.}
+\end{document}

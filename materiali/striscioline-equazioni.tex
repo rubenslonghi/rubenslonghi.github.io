@@ -1,0 +1,83 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath,amssymb}
+\usepackage[a4paper,margin=15mm]{geometry}
+\usepackage{tikz}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\newcommand{\taglio}{\par\noindent\tikz\draw[dashed,line width=.4pt] (0,0)--(\linewidth,0);\par}
+\newcommand{\striscia}[5]{%
+\taglio
+\begin{minipage}[t][34mm][t]{\linewidth}
+\vspace{2mm}\textbf{Scheda #1 -- #2}\hfill\textsf{#3}\par
+\vspace{1mm}#4\par\vfill
+{\small\textbf{Controllo precedente.} #5}\par\vspace{2mm}
+\end{minipage}\par}
+\newcommand{\inizio}[1]{%
+\textbf{Laboratorio di equazioni -- Scheda #1}\par
+{\small Lavora in coppia sul quaderno. Risolvi in $\mathbb R$; per A classifica l'equazione.
+Nei quesiti teorici indica V/F e motiva. Ricevi una striscia alla volta.}\par\vspace{2mm}}
+% Chiave docente: 1 indeterminata; 2 e 3 scomposizioni successive;
+% 4 raccoglimento dell'espressione ripetuta e differenze di quadrati.
+% I tagliandi finali non contengono esercizi e completano il controllo del n. 6.
+\begin{document}
+\inizio{1}
+\striscia{1}{1}{A}{
+\[\frac{3x-2}{\frac12+\frac14}-(x+1)=\frac{2x-1}{1-\frac13}-\frac{13}{6}\]
+}{Inizio del percorso: nessun esercizio precedente.}
+\striscia{1}{2}{B}{
+\[x^4-10x^2+9=0\]
+}{N. 1: $S=\mathbb{R}$; indeterminata.}
+\striscia{1}{3}{C}{
+\[x^5-2x^4-8x^3+16x^2+16x-32=0\]
+}{N. 2: $S=\{-3;\,-1;\,1;\,3\}$.}
+\striscia{1}{4}{D}{
+\[\bigl[(x-1)^2-4\bigr]^2-12\bigl[(x-1)^2-4\bigr]=0\]
+}{N. 3: $S=\{-2;\,2\}$.}
+\striscia{1}{5}{Teoria -- equivalenza}{
+\textbf{Vero o falso?} Aggiungendo $\frac1x$ a entrambi i membri di
+$2x=0$ si ottiene un'equazione equivalente nell'insieme $\mathbb R$.
+Motiva confrontando gli insiemi delle soluzioni.
+}{N. 4: $S=\{-3;\,-1;\,3;\,5\}$.}
+\striscia{1}{6}{Teoria -- classificazione}{
+\textbf{Vero o falso?} L'equazione $0\cdot x=0$ ammette un'unica soluzione,
+$x=0$. Motiva e indica la classificazione e l'insieme delle soluzioni.
+}{N. 5: falso. Prima $S=\{0\}$; dopo $S=\{\}$, poich\'e $x=0$ \`e escluso.}
+\taglio
+\begin{minipage}[t]{\linewidth}
+\vspace{2mm}{\small\textbf{Scheda 1 -- tagliando finale (consegnare dopo il n. 6).}\par
+N. 6: falso. Ogni reale soddisfa l'equazione: indeterminata, $S=\mathbb{R}$.}\par\vspace{2mm}
+\end{minipage}\par\taglio
+\newpage
+\inizio{2}
+\striscia{2}{1}{A}{
+\[\frac{3x-1}{\frac12+\frac14}-(x+2)=\frac{2x+1}{1-\frac13}-\frac{29}{6}\]
+}{Inizio del percorso: nessun esercizio precedente.}
+\striscia{2}{2}{B}{
+\[x^4-13x^2+36=0\]
+}{N. 1: $S=\mathbb{R}$; indeterminata.}
+\striscia{2}{3}{C}{
+\[x^5-3x^4-8x^3+24x^2+16x-48=0\]
+}{N. 2: $S=\{-3;\,-2;\,2;\,3\}$.}
+\striscia{2}{4}{D}{
+\[\bigl[(x-2)^2-4\bigr]^2-12\bigl[(x-2)^2-4\bigr]=0\]
+}{N. 3: $S=\{-2;\,2;\,3\}$.}
+\striscia{2}{5}{Teoria -- equivalenza}{
+\textbf{Vero o falso?} Sottraendo $\frac1{x-1}$ a entrambi i membri di
+$3x=3$ si ottiene un'equazione equivalente nell'insieme $\mathbb R$.
+Motiva confrontando gli insiemi delle soluzioni.
+}{N. 4: $S=\{-2;\,0;\,4;\,6\}$.}
+\striscia{2}{6}{Teoria -- classificazione}{
+\textbf{Vero o falso?} L'equazione $0\cdot x=0$ non ammette soluzioni reali.
+Motiva e indica la classificazione e l'insieme delle soluzioni.
+}{N. 5: falso. Prima $S=\{1\}$; dopo $S=\{\}$, poich\'e $x=1$ \`e escluso.}
+\taglio
+\begin{minipage}[t]{\linewidth}
+\vspace{2mm}{\small\textbf{Scheda 2 -- tagliando finale (consegnare dopo il n. 6).}\par
+N. 6: falso. Ogni reale soddisfa l'equazione: indeterminata, $S=\mathbb{R}$.}\par\vspace{2mm}
+\end{minipage}\par\taglio
+\end{document}

@@ -1,0 +1,639 @@
+% =====================================================================
+%  SIMULAZIONE DI MATEMATICA - 1SP -- IIS "David Maria Turoldo", Zogno (BG)
+%  Classe: exam  |  Compilazione: pdflatex (due passaggi)
+%  Soluzioni:        decommentare \printanswers
+%  Versione BES/DSA: impostare \versioneBEStrue
+%  Struttura:        \iniziofila{A} \begin{esercizi} ... \end{esercizi} \finefila
+%                    \iniziofila{B} \begin{esercizi} ... \end{esercizi} \finefila
+%  Ogni esercizio:   \begin{esercizio}
+	%                      \obiettivo{...}
+	%                      \question[punti]  (oppure \question + parts con \part[punti])
+	%                      testo ...
+	%                    \end{esercizio}
+%  Nessuno spazio per le risposte: gli studenti scrivono sul foglio a protocollo.
+% =====================================================================
+\documentclass[11pt,a4paper,addpoints]{exam}
+
+% ---------- Lingua e codifica ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ---------- Matematica, grafica, tabelle ----------
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker={,}, per-mode=symbol, group-separator={\,}}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,patterns,angles,quotes}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{array,tabularx,booktabs}
+\usepackage{xcolor}
+
+% ---------- Pagina ----------
+\usepackage[a4paper,top=2cm,bottom=2.2cm,left=2cm,right=2.2cm,
+headheight=30pt,headsep=12pt]{geometry}
+
+% ---------- Opzioni ----------
+%\printanswers              % Decommentare per mostrare le soluzioni.
+\ifdefined\CORRETTORE\printanswers\fi % Opzione per compilare il correttore.
+\newif\ifversioneBES
+\versioneBESfalse              % <-- \versioneBEStrue per la versione BES/DSA
+\newif\iftabellabonus
+\tabellabonusfalse
+
+% ---------- Interlinea ----------
+%  \interlinea      : testo normale
+%  \interlineaparts : sottopunti a), b), ... (piu' ariosa, separa le equazioni)
+\newcommand{\interlinea}{1.05}
+\newcommand{\interlineaparts}{1.05}
+\ifversioneBES
+\usepackage[scaled=1.05]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\interlinea}{1.5}
+\renewcommand{\interlineaparts}{1.7}
+\fi
+%\linespread{1.5}
+
+% ---------- Dati della prova (da compilare) ----------
+\newcommand{\materia}{Matematica}
+\newcommand{\classe}{1SP}
+\newcommand{\indirizzo}{Liceo Scientifico a indirizzo sportivo}
+%   Liceo Scientifico | Liceo Scientifico a indirizzo sportivo | Liceo delle Scienze Umane
+\newcommand{\tipoprova}{Simulazione di verifica - Raccolta di allenamento}
+\newcommand{\argomento}{Numeri interi e razionali}
+\newcommand{\durata}{vedi indicazioni}
+\newcommand{\annoscolastico}{2026/2027}
+\newcommand{\docente}{Prof. Rubens Longhi}
+\newcommand{\fila}{A}
+\newcommand{\indicazioni}{Svolgi sul foglio a protocollo. Mostra i passaggi essenziali e riduci i risultati. Nelle divisioni tra monomi considera le lettere al denominatore diverse da zero. \textbf{È consentito l'uso della calcolatrice.}\ifversioneBES\ Sono consentiti gli strumenti compensativi previsti dal PDP.\fi}
+% ---------- Intestazione e pie' di pagina ----------
+%  Ogni fila ricomincia da pagina 1: la sua prima pagina ha l'intestazione
+%  della scuola e la numerazione "Pagina x di y" e' calcolata sulla singola fila.
+\pagestyle{headandfoot}
+\firstpageheader
+{\scriptsize\textsc{IIS ``David Maria Turoldo''}\\[-1pt]
+	\scriptsize Via Ronco 11 -- 24019 Zogno (BG)}
+{}
+{\scriptsize A.S.\ \annoscolastico\\[-1pt]\scriptsize \docente}
+\firstpageheadrule
+\runningheader{\small\materia\ -- \classe}{\small\tipoprova}{\small Fila \fila}
+\runningheadrule
+\newcommand{\paginefila}{\pageref{fine@fila@\fila}}
+\firstpagefooter{}{\small Pagina \thepage\ di \paginefila}{}
+\runningfooter{}{\small Pagina \thepage\ di \paginefila}{}
+
+% ---------- Formato degli esercizi ----------
+%  Riga 1:  "1."  in grassetto + obiettivo in grigio ........ (n punti)
+%  Riga 2+: testo dell'esercizio
+% ---------- Formato degli esercizi ----------
+\newcommand{\obiettivocorrente}{}
+\newcommand{\obiettivo}[1]{%
+	\gdef\obiettivocorrente{#1}}
+\newcommand{\stampaobiettivo}{%
+	\ifx\obiettivocorrente\empty\else
+	{\footnotesize\color{black!55}\textit{Obiettivo: \obiettivocorrente}}%
+	\fi}
+\qformat{\textbf{\thequestion.}\enspace\stampaobiettivo\hfill\colonnapunti{(\totalpoints\ \points)}\gdef\obiettivocorrente{}}
+\bonusqformat{\textbf{\thequestion.}\enspace{\footnotesize\color{black!55}\textit{(facoltativo)}}\enspace\stampaobiettivo\hfill\colonnapunti{(+\totalbonuspoints\ bonus)}\gdef\obiettivocorrente{}}
+\renewcommand{\questionlabel}{}
+\renewcommand{\partlabel}{\thequestion\thepartno)}
+\renewcommand{\subpartlabel}{\thesubpart.}
+\renewcommand{\choicelabel}{\thechoice)}
+\pointpoints{punto}{punti}
+\bonuspointpoints{punto bonus}{punti bonus}
+\newcommand{\colonnapunti}[1]{{\small #1}}
+\pointformat{\small(\thepoints)}
+\bonuspointformat{\small(+\thepoints)}
+
+% Sottopunti con interlinea maggiore (le soluzioni tornano all'interlinea normale)
+\renewcommand{\partshook}{\linespread{\interlineaparts}\selectfont\setlength{\itemsep}{3pt}\setlength{\rightmargin}{1cm}}
+
+% Numerazione degli esercizi: ogni fila riparte da 1 (esercizio 1, 2, ...);
+% il contatore interno di exam prosegue da una fila all'altra, cosi' punti,
+% totali e tabelle restano corretti. Usare l'ambiente "esercizi" al posto di "questions".
+\newcounter{offsetfila}
+\renewcommand{\thequestion}{\number\numexpr\value{question}-\value{offsetfila}\relax}
+\newenvironment{esercizi}
+{\begin{questions}\setcounter{question}{\value{offsetfila}}}
+	{\end{questions}}
+
+% ---------- Esercizi non spezzati tra due pagine ----------
+%  \begin{esercizio} ... \end{esercizio} racchiude \obiettivo + \question + parts.
+%  Se non ci sta, l'esercizio passa intero alla pagina successiva.
+%  Nella versione con soluzioni l'esercizio puo' spezzarsi (i correttori sono lunghi).
+\cancelspace   % le soluzioni nascoste non lasciano spazio ne' punti di interruzione
+\newenvironment{esercizio}
+{\par\ifprintanswers\else\begin{samepage}\fi}
+	{\ifprintanswers\else\end{samepage}\fi\par\vspace{3pt}}
+
+% ---------- Soluzioni e scelte multiple ----------
+\renewcommand{\solutiontitle}{\noindent\textbf{Soluzione.}\enspace}
+\unframedsolutions
+\SolutionEmphasis{\color{blue!60!black}\linespread{\interlinea}\selectfont}
+\CorrectChoiceEmphasis{\color{blue!60!black}\bfseries}
+\checkboxchar{$\square$}
+\checkedchar{$\blacksquare$}
+
+% ---------- Tabella punteggi ----------
+\hqword{\textbf{Esercizio}}
+\hpword{\textbf{Punti massimi}}
+\hsword{\textbf{Punti ottenuti}}
+\htword{\textbf{Totale}}
+\chqword{\textbf{Esercizio}}
+\chpword{\textbf{Punti massimi}}
+\chbpword{\textbf{Bonus}}
+\chsword{\textbf{Punti ottenuti}}
+\chtword{\textbf{Totale}}
+
+% ---------- Macro utili ----------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% ---------- Inizio e fine di ogni fila ----------
+%  \iniziofila{A} ... \finefila   poi   \iniziofila{B} ... \finefila
+%  \iniziofila: nuova pagina 1, intestazione scuola, titolo, nome, indicazioni.
+%  \finefila:   tabella punteggi della sola fila, voto, firma.
+\newcommand{\iniziofila}[1]{%
+	\clearpage
+	\renewcommand{\fila}{#1}%
+	\setcounter{page}{1}%
+	\setcounter{offsetfila}{\value{totalq@fila}}%
+	\begin{center}
+		{\small\bfseries \tipoprova\ifprintanswers\ -- Soluzioni e criteri di correzione\fi}\\[3pt]
+		{\Large \argomento}\\[2pt]
+		{\small \indirizzo\ -- Classe \classe\ -- Durata: \durata\ -- \textbf{Fila #1}}
+	\end{center}
+	\vspace{4pt}
+	\noindent
+	\begin{tabularx}{\textwidth}{@{}l X l p{3.2cm}@{}}
+		\textbf{Nome e Cognome:} & \hrulefill & \textbf{Data:} & \hrulefill \\[8pt]
+	\end{tabularx}
+	\vspace{2pt}
+	\noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\small\linespread{1.2}\selectfont
+			\textbf{Indicazioni.} \indicazioni\ Punteggio totale: \pointsinrange{fila#1} punti.}}
+	\vspace{2pt}
+	\begingradingrange{fila#1}}
+\newcounter{totalq@fila}
+\newcommand{\finefila}{%
+	\setcounter{totalq@fila}{\value{question}}%
+	\endgradingrange{fila\fila}%
+	\vfill
+	\begin{center}\small
+		\iftabellabonus
+		\partialcombinedgradetable{fila\fila}[h][questions]%
+		\else
+		\partialgradetable{fila\fila}[h][questions]%
+		\fi
+	\end{center}
+	\vspace{6pt}
+	\noindent{\small\textbf{Voto:} \rule{3cm}{0.4pt}\hfill
+		\textbf{Firma del docente:} \rule{5cm}{0.4pt}}%
+	\label{fine@fila@\fila}}
+
+
+% Adattamenti per la simulazione: nessun punteggio, soluzioni attivabili.
+\renewcommand{\colonnapunti}[1]{}
+\qformat{\textbf{\thequestion.}\enspace\stampaobiettivo\hfill\gdef\obiettivocorrente{}}
+\runningheader{\small\materia\ -- \classe}{\small Simulazione}{\small $\Z$, $\Q$ e applicazioni}
+\renewcommand{\iniziofila}[1]{%
+\clearpage\renewcommand{\fila}{#1}\setcounter{page}{1}
+\begin{center}
+{\small\bfseries \tipoprova\ifprintanswers\ -- Soluzioni\fi}\\[3pt]
+{\Large \argomento}\\[2pt]
+{\small Valore assoluto, M.C.D. e m.c.m., proporzionalità e percentuali}\\[2pt]
+{\small \indirizzo\ -- Classe \classe}
+\end{center}
+\noindent\textbf{Nome e cognome:} \hrulefill\quad\textbf{Data:} \rule{2.3cm}{0.4pt}\par\medskip
+\noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\small
+\textbf{Indicazioni.} La raccolta è volutamente più ampia di una verifica di 60 minuti.
+Svolgi sul foglio a protocollo, mostrando i passaggi e riducendo le frazioni ai minimi termini.
+Lavora senza calcolatrice. Per ogni vero/falso, giustifica le affermazioni vere con un ragionamento generale e confuta quelle false con un controesempio.
+\textbf{Allenamento in 60 minuti:} svolgi 1a, 1b, 1e, 2c, 3a, 5a, 7a, 9a, 10a, 11b, 14a, 16, 18a e 22a.}}
+\medskip}
+\renewcommand{\finefila}{\label{fine@fila@\fila}}
+\newcommand{\sezione}[1]{\par\medskip\noindent{\large\bfseries #1}\par\smallskip}
+\begin{document}
+\linespread{\interlinea}\selectfont
+\iniziofila{S}
+\ifprintanswers\small\renewcommand{\partshook}{\setlength{\itemsep}{0pt}\setlength{\rightmargin}{1cm}}\fi
+\sezione{Ragionare sulle proprietà}
+\begin{esercizi}
+\begin{esercizio}
+\obiettivo{distinguere somme nulle e prodotti nulli}
+\question Stabilisci se ciascuna affermazione è vera o falsa.
+\begin{parts}
+\part Se $a,b\in\Z$ e $a+b=0$, allora $a=0$ e $b=0$.
+\begin{solution}
+\textbf{Falsa.} $a=3$, $b=-3$: la somma è zero, ma nessuno dei due numeri è zero.
+\end{solution}
+\part Se $a,b\in\Z$ e $|a|+|b|=0$, allora $a=0$ e $b=0$.
+\begin{solution}
+\textbf{Vera.} I due valori assoluti sono non negativi; se uno fosse positivo, anche la somma sarebbe positiva. Quindi entrambi sono zero e perciò $a=b=0$.
+\end{solution}
+\part Se $a,b\in\Q$ e $a^2+b^2=0$, allora $a=0$ e $b=0$.
+\begin{solution}
+\textbf{Vera.} I quadrati sono non negativi. Una loro somma nulla impone che siano entrambi nulli; il quadrato di un numero è zero soltanto quando il numero è zero.
+\end{solution}
+\part Se $a,b\in\Z$ e $a^2+b^2=0$, allora $a=0$ e $b=0$.
+\begin{solution}
+\textbf{Vera.} Vale lo stesso ragionamento del punto precedente, anche per gli interi.
+\end{solution}
+\part Se $a,b\in\Z$ e $|a|\cdot|b|=0$, allora $a=0$ e $b=0$.
+\begin{solution}
+\textbf{Falsa.} $a=0$, $b=5$. La legge di annullamento del prodotto impone che \emph{almeno uno} dei fattori sia nullo, non che lo siano entrambi.
+\end{solution}
+\part Se $a,b\in\Q$ e $ab=0$, allora almeno uno tra $a$ e $b$ è zero.
+\begin{solution}
+\textbf{Vera.} È la legge di annullamento del prodotto. Se entrambi fossero diversi da zero, anche il prodotto sarebbe diverso da zero.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\ifprintanswers\newpage\fi\obiettivo{argomentare su valore assoluto e numeri razionali}
+\question Stabilisci se ciascuna affermazione è vera o falsa.
+\begin{parts}
+\part Per ogni $a\in\Z$, il numero $-a$ è negativo.
+\begin{solution}
+\textbf{Falsa.} Con $a=-4$ si ha $-a=4>0$.
+\end{solution}
+\part Se $a,b\in\Q$ e $|a|=|b|$, allora $a=b$.
+\begin{solution}
+\textbf{Falsa.} $a=2$, $b=-2$: stesso valore assoluto ma numeri diversi.
+\end{solution}
+\part Per ogni $a,b\in\Q$ vale $|a+b|=|a|+|b|$.
+\begin{solution}
+\textbf{Falsa.} $a=2$, $b=-2$: a sinistra $0$, a destra $4$.
+\end{solution}
+\part Per ogni $a,b\in\Q$ vale $|ab|=|a|\cdot|b|$.
+\begin{solution}
+\textbf{Vera.} Il modulo del prodotto è il prodotto delle grandezze dei fattori: con segni concordi il prodotto è non negativo, con segni discordi è negativo ma il modulo ne cambia il segno; con un fattore nullo entrambi i membri sono zero.
+\end{solution}
+\part Fra due numeri razionali distinti esiste sempre un altro numero razionale.
+\begin{solution}
+\textbf{Vera.} Se $a<b$, il numero $(a+b)/2$ è razionale ed è strettamente compreso fra $a$ e $b$.
+\end{solution}
+\part Moltiplicando una frazione propria positiva per una frazione impropria positiva si ottiene sempre un numero maggiore di $1$.
+\begin{solution}
+\textbf{Falsa.} $\frac12\cdot\frac32=\frac34<1$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\newpage\sezione{Interi, segni e valore assoluto}
+
+\begin{esercizio}
+\obiettivo{confrontare numeri e valori assoluti}
+\question Inserisci $<$, $=$ o $>$ e mostra il calcolo quando necessario.
+\begin{parts}
+\part $|-8|\ \ldots\ |-11|$;\quad $-|-7|\ \ldots\ -6$;\quad $|-5+2|\ \ldots\ |-5|+|2|$.
+\begin{solution}
+$8<11$; $-7<-6$; $3<7$.
+\end{solution}
+\part $|18-|-10||\ \ldots\ \operatorname{mcm}(2,8)$;\quad $\operatorname{MCD}(12,18)\ \ldots\ |-3|$;\quad $-3^2\ \ldots\ (-3)^2$.
+\begin{solution}
+$8=8$; $6>3$; $-9<9$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{interpretare opposto, modulo e distanza}
+\question Rispondi motivando.
+\begin{parts}
+\part Sia $a$ un intero non nullo. Quando $-a$ è positivo? Quando $-|a|$ è positivo? Il numero $|-a|$ può essere negativo?
+\begin{solution}
+$-a>0$ se $a<0$; $-|a|$ non è mai positivo (è strettamente negativo); $|-a|$ non può essere negativo, anzi è positivo perché $a\ne0$.
+\end{solution}
+\part Siano $a<0$, $b>0$ e $|a|<|b|$. Confronta $a$ con $-b$, poi $-a$ con $b$. Quanto distano sulla retta i punti $-7$ e $4$? Scrivi un'espressione con il valore assoluto.
+\begin{solution}
+Da $|a|=-a$ e $|b|=b$ segue $-a<b$, quindi $a>-b$. La distanza è $|4-(-7)|=11$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{calcolare espressioni in interi}
+\question Calcola mostrando i passaggi.
+\begin{parts}
+\part $\displaystyle -18:\bigl[(-3)^2-12\bigr]+(-2)^3-|-7+3|\cdot(-2)$.
+\begin{solution}
+La parentesi è $9-12=-3$ e il modulo è $4$. Quindi $6-8+8=\boxed{6}$.
+\end{solution}
+\part $\displaystyle \bigl[(-2)^5:(-2)^3-3^2\bigr]^2-2\cdot|-8+3|-(-3)^3$.
+\begin{solution}
+$[4-9]^2-2\cdot5+27=25-10+27=\boxed{42}$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{usare le proprietà delle potenze}
+\question Semplifica applicando le proprietà delle potenze; esplicita almeno una proprietà usata.
+\begin{parts}
+\part $\displaystyle \frac{(-3)^4\cdot(-3)^3}{(-3)^5}-\bigl[(-2)^3\bigr]^2:2^4$.
+\begin{solution}
+Nel primo termine $(-3)^{4+3-5}=9$; nel secondo $(-2)^6:2^4=2^2=4$. Risultato $\boxed5$. Si usano prodotto e quoziente di potenze con la stessa base e potenza di potenza.
+\end{solution}
+\part $\displaystyle \bigl[(-5)^6:(-5)^4\bigr]:5^2+(-1)^{37}-(-1)^{24}+7^0$.
+\begin{solution}
+$25:25-1-1+1=\boxed0$. Gli esponenti pari danno una potenza positiva, quelli dispari conservano il segno della base; $7^0=1$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\newpage\sezione{Rappresentazioni e calcolo in $\Q$}
+
+\begin{esercizio}
+\obiettivo{passare fra frazioni, decimali e percentuali}
+\question Trasforma in frazioni ridotte ai minimi termini e ordina in senso crescente.
+\begin{parts}
+\part $-1{,}25;\quad -\frac76;\quad 0{,}\overline3;\quad 35\%;\quad \frac38$.
+\begin{solution}
+$-\frac54<-\frac76<\frac13<\frac7{20}<\frac38$. Si può usare il denominatore comune $120$: $-150,-140,40,42,45$.
+\end{solution}
+\part $-0{,}\overline6;\quad -65\%;\quad 0{,}1\overline6;\quad \frac15;\quad 0{,}2\overline3$.
+\begin{solution}
+$-\frac23<-\frac{13}{20}<\frac16<\frac15<\frac7{30}$. A denominatore $60$: $-40,-39,10,12,14$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{usare equivalenza e scrittura decimale}
+\question Completa e giustifica.
+\begin{parts}
+\part Riduci $\frac{84}{126}$, $\frac{45}{120}$, $\frac{42}{175}$. Stabilisci per ciascuna se la scrittura decimale è finita, periodica semplice o periodica mista.
+\begin{solution}
+$\frac23=0{,}\overline6$ (semplice); $\frac38=0{,}375$ (finita); $\frac6{25}=0{,}24$ (finita). Conta il denominatore della frazione \emph{ridotta}: soli fattori $2$ e $5$ danno una scrittura finita.
+\end{solution}
+\part Completa $\frac{-18}{24}=\frac{\square}{4}=\frac{15}{\square}$ e $\frac7{12}=\frac{\square}{60}$. Enuncia la proprietà invariantiva. Classifica poi la scrittura decimale di $\frac7{12}$.
+\begin{solution}
+I numeri mancanti sono $-3,-20,35$. Moltiplicando o dividendo numeratore e denominatore per uno stesso numero diverso da zero si ottiene una frazione equivalente. $\frac7{12}=0{,}58\overline3$: periodica mista.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{calcolare espressioni con frazioni}
+\question Calcola e riduci il risultato ai minimi termini.
+\begin{parts}
+\part $\displaystyle \left[\frac34-\left(\frac56-\frac13\right)\right]:\left(-\frac12\right)+\left(-\frac23\right)^2$.
+\begin{solution}
+La parentesi tonda vale $\frac12$, la quadra $\frac14$. Quindi $-\frac12+\frac49=\boxed{-\frac1{18}}$.
+\end{solution}
+\part $\displaystyle \left\{\frac56-\left[\frac34-\left(\frac12-\frac23\right)\right]\right\}:\left(-\frac16\right)+\frac25$.
+\begin{solution}
+Dall'interno: $-\frac16$, poi $\frac{11}{12}$, poi $-\frac1{12}$. Si ottiene $\frac12+\frac25=\boxed{\frac9{10}}$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{gestire potenze negative e frazioni complesse}
+\question Calcola mostrando i passaggi.
+\begin{parts}
+\part $\displaystyle \left[\left(-\frac23\right)^{-2}\cdot\left(\frac23\right)^3\right]:\left(-\frac49\right)+\left(\frac12\right)^{-1}$.
+\begin{solution}
+$\frac94\cdot\frac8{27}=\frac23$; quindi $\frac23:(-\frac49)+2=-\frac32+2=\boxed{\frac12}$.
+\end{solution}
+\part $\displaystyle \frac{1-\frac34}{\frac56-\frac12}+\left(-\frac12\right)^{-2}-\left(\frac32\right)^0$.
+\begin{solution}
+$\frac{1/4}{1/3}+4-1=\frac34+3=\boxed{\frac{15}4}$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\newpage\sezione{Dal linguaggio comune all'espressione}
+
+\begin{esercizio}
+\obiettivo{tradurre istruzioni verbali}
+\question Scrivi un'unica espressione che traduca le istruzioni, poi calcolane il valore.
+\begin{parts}
+\part Sottrai al quadrato della somma di $-3$ e $5$ il prodotto tra $-2$ e il valore assoluto di $-7$.
+\begin{solution}
+$(-3+5)^2-(-2)\cdot|-7|=4+14=\boxed{18}$.
+\end{solution}
+\part Dividi la differenza tra i tre quarti e i cinque sesti per l'opposto di un terzo; aggiungi poi il quadrato di meno un mezzo.
+\begin{solution}
+$\left(\frac34-\frac56\right):\left(-\frac13\right)+\left(-\frac12\right)^2=\frac14+\frac14=\boxed{\frac12}$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{modellizzare una successione di operazioni}
+\question Per ciascun problema scrivi un'unica espressione e calcolane il valore.
+\begin{parts}
+\part Giulia possiede $756$ figurine. Regala a un'amica un settimo del numero iniziale, poi ne dà altre $156$ al fratello. Infine regala un terzo delle figurine rimaste. Quante figurine conserva?
+\begin{solution}
+$\left[756\left(1-\frac17\right)-156\right]\left(1-\frac13\right)=(648-156)\frac23=\boxed{328}$. Il secondo regalo frazionario riguarda il numero rimasto, non quello iniziale.
+\end{solution}
+\part Un serbatoio contiene $180$ litri d'acqua. Si utilizza un quarto dell'acqua iniziale, poi si aggiungono $18$ litri. Infine si utilizzano i due noni dell'acqua presente in quel momento. Quanti litri rimangono?
+\begin{solution}
+$\left[180\left(1-\frac14\right)+18\right]\left(1-\frac29\right)=153\cdot\frac79=\boxed{119}\text{ litri}$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{distinguere oggetti e intervalli}
+\question Scrivi un'espressione e rispondi con l'unità di misura.
+\begin{parts}
+\part In una gara di $110$ m sono disposti $10$ ostacoli a intervalli uguali. Il primo è a $13{,}72$ m dalla partenza; l'ultimo è a $14{,}02$ m dal traguardo. Qual è la distanza fra due ostacoli consecutivi?
+\begin{solution}
+Fra $10$ ostacoli ci sono $9$ intervalli. $(110-13{,}72-14{,}02):9=\boxed{9{,}14\text{ m}}$.
+\end{solution}
+\part Su un percorso di $100$ m ci sono $10$ ostacoli. Il primo si trova a $13$ m dalla partenza e la distanza tra ostacoli consecutivi è $8{,}5$ m. Quanto misura il tratto dall'ultimo ostacolo al traguardo?
+\begin{solution}
+$100-13-9\cdot8{,}5=\boxed{10{,}5\text{ m}}$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\newpage\sezione{M.C.D., m.c.m. e coincidenze}
+
+\begin{esercizio}
+\obiettivo{calcolare M.C.D. e m.c.m.}
+\question Scomponi in fattori primi e calcola M.C.D. e m.c.m. di ciascun gruppo.
+\begin{parts}
+\part $84,\ 126,\ 210$.
+\begin{solution}
+$84=2^2\cdot3\cdot7$, $126=2\cdot3^2\cdot7$, $210=2\cdot3\cdot5\cdot7$. M.C.D. $=\boxed{42}$; m.c.m. $=\boxed{1260}$.
+\end{solution}
+\part $72,\ 108,\ 150$.
+\begin{solution}
+$72=2^3\cdot3^2$, $108=2^2\cdot3^3$, $150=2\cdot3\cdot5^2$. M.C.D. $=\boxed6$; m.c.m. $=\boxed{5400}$. Nel M.C.D. si prendono i fattori comuni con esponente minimo, nel m.c.m. tutti i fattori con esponente massimo.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{scegliere tra M.C.D. e m.c.m.}
+\question Risolvi e spiega perché usi M.C.D. oppure m.c.m.
+\begin{parts}
+\part Si vogliono distribuire $84$ barrette e $126$ succhi nel maggior numero possibile di sacchetti tutti uguali, senza avanzi. Quanti sacchetti si preparano e che cosa contiene ciascuno?
+\begin{solution}
+Il numero dei sacchetti deve dividere entrambe le quantità e deve essere massimo: $\operatorname{MCD}(84,126)=42$. Ogni sacchetto contiene $2$ barrette e $3$ succhi.
+\end{solution}
+\part Due autobus partono insieme dal capolinea alle 8:10. Uno riparte ogni $18$ minuti e l'altro ogni $24$ minuti. A che ora ripartono insieme per la prima volta dopo le 8:10?
+\begin{solution}
+Il tempo cercato è il minimo multiplo positivo comune: $\operatorname{mcm}(18,24)=72$ minuti. Ripartono insieme alle \textbf{9:22}.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{trovare coincidenze con tempi non interi}
+\question Due segnali luminosi si accendono insieme all'istante iniziale. Il primo si riaccende ogni $5{,}5$ s, il secondo ogni $12{,}1$ s. Dopo quanti secondi si riaccenderanno insieme per la prima volta? Quanti intervalli completi saranno trascorsi per ciascun segnale? Mostra come riconduci il problema a numeri interi.
+\begin{solution}
+Misurando il tempo in decimi di secondo i periodi diventano $55$ e $121$. Poiché $55=5\cdot11$ e $121=11^2$, il m.c.m. è $605$ decimi, cioè $\boxed{60{,}5\text{ s}}$. Sono trascorsi $605:55=11$ intervalli del primo e $605:121=5$ del secondo. Il m.c.m. assicura che questa sia la prima coincidenza positiva.
+\end{solution}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{ricavare periodi razionali e confrontare andature}
+\question Alice e Bob corrono sulla stessa pista, ad andatura costante. Alice compie $12$ giri in $8$ minuti, Bob $10$ giri in $6$ minuti. Partono insieme dalla linea di partenza.
+\begin{parts}
+\part Quanto dura un giro per ciascuno, in minuti e in secondi?
+\part Dopo quanto tempo si troveranno entrambi per la prima volta di nuovo sulla linea di partenza? Quanti giri avrà completato ciascuno?
+\part Chi è più veloce? Di quale percentuale la sua velocità supera quella dell'altro?
+\end{parts}
+\begin{solution}
+Alice: $\frac8{12}=\frac23$ min $=40$ s per giro. Bob: $\frac6{10}=\frac35$ min $=36$ s per giro. $\operatorname{mcm}(40,36)=360$ s $=\boxed{6\text{ min}}$: Alice ha completato $9$ giri e Bob $10$. Bob è più veloce: nello stesso tempo percorre $\frac{10}{9}$ della distanza di Alice. L'incremento rispetto alla velocità di Alice è $(\frac{10}{9}-1)\cdot100\%=\boxed{\frac{100}{9}\%=11{,}\overline1\%}$. Non si cercano gli eventuali incontri in altri punti della pista.
+\end{solution}
+\end{esercizio}
+
+\newpage\sezione{Rapporti, proporzioni e proporzionalità}
+
+\begin{esercizio}
+\obiettivo{risolvere e giustificare proporzioni}
+\question Trova il termine incognito e verifica il risultato.
+\begin{parts}
+\part $\displaystyle \frac34:\frac56=x:\frac{10}{9}$.
+\begin{solution}
+$x=(\frac34\cdot\frac{10}{9}):\frac56=\boxed1$. I due rapporti valgono $\frac9{10}$.
+\end{solution}
+\part $\displaystyle 2{,}4:x=0{,}6:1{,}5$. Spiega inoltre perché da $\frac ab=\frac cd$, con $b,d\ne0$, segue $ad=bc$, usando la proprietà invariantiva e un denominatore comune.
+\begin{solution}
+$x=(2{,}4\cdot1{,}5):0{,}6=\boxed6$. I rapporti valgono $0{,}4$. Per la proprietà invariantiva $\frac ab=\frac{ad}{bd}$ e $\frac cd=\frac{bc}{bd}$; frazioni uguali con lo stesso denominatore non nullo hanno numeratori uguali, quindi $ad=bc$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{riconoscere proporzionalità diretta e inversa}
+\question Risolvi e indica il tipo di proporzionalità e la quantità che resta costante.
+\begin{parts}
+\part Un tessuto costa $18$ euro per $2{,}4$ m. Il prezzo al metro è costante. Quanto costano $3{,}6$ m? Quanti metri si acquistano con $30$ euro?
+\begin{solution}
+Proporzionalità diretta; rapporto prezzo/lunghezza $=18:2{,}4=7{,}5$ euro/m. $3{,}6$ m costano $\boxed{27}$ euro; con $30$ euro si acquistano $\boxed4$ m.
+\end{solution}
+\part Sei rubinetti identici, aperti insieme, riempiono una vasca in $15$ ore. Quanto impiegano $10$ rubinetti identici? Quanti rubinetti occorrono per riempirla in $5$ ore? Supponi costanti la portata di ogni rubinetto e il volume della vasca.
+\begin{solution}
+Proporzionalità inversa; prodotto numero di rubinetti per tempo $=6\cdot15=90$. Con $10$ rubinetti servono $\boxed9$ ore; in $5$ ore occorrono $\boxed{18}$ rubinetti.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{riconoscere modelli in tabelle}
+\question Completa le tabelle e specifica se la proporzionalità è diretta o inversa. Scrivi la relazione fra $x$ e $y$.
+\begin{parts}
+\part $\begin{array}{c|rrrr}x&2&5&8&12\\\hline y&3&\square&12&\square\end{array}$
+\begin{solution}
+Diretta: $y/x=\frac32$, dunque $y=\frac32x$. Mancano $\boxed{7{,}5}$ e $\boxed{18}$.
+\end{solution}
+\part $\begin{array}{c|rrrr}x&2&3&6&12\\\hline y&18&\square&6&\square\end{array}$
+\begin{solution}
+Inversa: $xy=36$, dunque $y=36/x$. Mancano $\boxed{12}$ e $\boxed3$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{usare scale e rapporti}
+\question Risolvi mostrando l'impostazione.
+\begin{parts}
+\part Su una carta in scala $1:25\,000$ un sentiero misura $7{,}2$ cm. Quanto è lungo nella realtà, in km? Quanto misura sulla carta un tratto reale di $750$ m?
+\begin{solution}
+$7{,}2\cdot25\,000=180\,000$ cm $=\boxed{1{,}8\text{ km}}$. $750$ m $=75\,000$ cm: sulla carta $75\,000:25\,000=\boxed{3\text{ cm}}$.
+\end{solution}
+\part Per una bevanda si mescolano sciroppo e acqua nel rapporto $2:7$. Si vogliono preparare $1{,}8$ litri di bevanda, assumendo che i volumi si sommino. Quanto sciroppo e quanta acqua occorrono?
+\begin{solution}
+Le parti sono $2+7=9$; ciascuna vale $1{,}8:9=0{,}2$ litri. Sciroppo $\boxed{0{,}4\text{ L}}$, acqua $\boxed{1{,}4\text{ L}}$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\newpage\sezione{Percentuali e problemi a più passaggi}
+
+\begin{esercizio}
+\obiettivo{calcolare parte, percentuale e totale}
+\question Risolvi mostrando i calcoli.
+\begin{parts}
+\part In una scuola con $240$ studenti il $35\%$ partecipa a un torneo. Quanti sono i partecipanti? Fra questi, $21$ disputano la finale: quale percentuale dei partecipanti rappresentano?
+\begin{solution}
+$240\cdot\frac{35}{100}=\boxed{84}$ partecipanti; $\frac{21}{84}\cdot100\%=\boxed{25\%}$.
+\end{solution}
+\part Il $30\%$ degli iscritti a un corso corrisponde a $18$ persone. Quanti sono gli iscritti? Quale percentuale del totale rappresentano $27$ persone?
+\begin{solution}
+Totale $18:\frac{30}{100}=\boxed{60}$. Le $27$ persone sono $\frac{27}{60}\cdot100\%=\boxed{45\%}$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{gestire variazioni percentuali successive}
+\question Scrivi un'espressione e rispondi.
+\begin{parts}
+\part Una felpa costa $80$ euro. Il prezzo aumenta del $20\%$ e successivamente diminuisce del $20\%$ rispetto al prezzo aumentato. Qual è il prezzo finale? Qual è la variazione percentuale complessiva rispetto agli $80$ euro iniziali?
+\begin{solution}
+$80(1+\frac{20}{100})(1-\frac{20}{100})=80\cdot1{,}2\cdot0{,}8=\boxed{76{,}80\text{ euro}}$. La diminuzione è $3{,}20$ euro, cioè $\boxed{4\%}$ del prezzo iniziale. Le due percentuali hanno basi diverse.
+\end{solution}
+\part Dopo uno sconto del $25\%$ un articolo costa $63$ euro. Qual era il prezzo iniziale? Di quale percentuale dovrebbe aumentare il prezzo scontato per tornare a quello iniziale?
+\begin{solution}
+$63:(1-\frac{25}{100})=\boxed{84\text{ euro}}$. Per risalire da $63$ a $84$, l'aumento è $\frac{21}{63}\cdot100\%=\boxed{\frac{100}{3}\%=33{,}\overline3\%}$.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{calcolare percentuali riferite a gruppi diversi}
+\question In un istituto il $40\%$ degli studenti è costituito da ragazze e il restante $60\%$ da ragazzi. Vuole proseguire gli studi il $35\%$ delle ragazze e il $30\%$ dei ragazzi.
+\begin{parts}
+\part Quale percentuale di tutti gli studenti vuole proseguire gli studi?
+\part Le ragazze che vogliono proseguire sono $28$. Quanti sono in tutto gli studenti? Quanti ragazzi vogliono proseguire?
+\end{parts}
+\begin{solution}
+Su $100$ studenti, $40\cdot0{,}35=14$ ragazze e $60\cdot0{,}30=18$ ragazzi vogliono proseguire: totale $\boxed{32\%}$. Le ragazze totali sono $28:0{,}35=80$, dunque gli studenti sono $80:0{,}40=\boxed{200}$. I ragazzi sono $120$, dei quali $\boxed{36}$ vogliono proseguire. Non si fa la media semplice fra $35\%$ e $30\%$.
+\end{solution}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{individuare la base di una percentuale}
+\question In un gruppo sportivo di $80$ iscritti, il $60\%$ pratica atletica. Fra chi pratica atletica, il $25\%$ partecipa a una gara. Quanti iscritti partecipano alla gara? Quale percentuale degli $80$ iscritti rappresentano? Uno studente propone $60\%+25\%=85\%$: spiega l'errore.
+\begin{solution}
+Gli atleti sono $80\cdot0{,}60=48$; i partecipanti sono $48\cdot0{,}25=\boxed{12}$. Rispetto al gruppo iniziale sono $\frac{12}{80}\cdot100\%=\boxed{15\%}$. Il $25\%$ si riferisce solo al sottogruppo del $60\%$: le percentuali si moltiplicano, $0{,}60\cdot0{,}25=0{,}15$, e non si sommano.
+\end{solution}
+\end{esercizio}
+\end{esercizi}
+\finefila
+\end{document}
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,636 @@
+% =====================================================================
+%  TEMPLATE MATEMATICA -- IIS "David Maria Turoldo", Zogno (BG)
+%  Classe: exam  |  Compilazione: pdflatex (due passaggi)
+%  Soluzioni:        decommentare \printanswers
+%  Versione BES/DSA: impostare \versioneBEStrue
+%  Struttura:        \iniziofila{A} \begin{esercizi} ... \end{esercizi} \finefila
+%                    \iniziofila{B} \begin{esercizi} ... \end{esercizi} \finefila
+%  Ogni esercizio:   \begin{esercizio}
+	%                      \obiettivo{...}
+	%                      \question[punti]  (oppure \question + parts con \part[punti])
+	%                      testo ...
+	%                    \end{esercizio}
+%  Nessuno spazio per le risposte: gli studenti scrivono sul foglio a protocollo.
+% =====================================================================
+\documentclass[11pt,a4paper,addpoints]{exam}
+
+% ---------- Lingua e codifica ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ---------- Matematica, grafica, tabelle ----------
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker={,}, per-mode=symbol, group-separator={\,}}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,patterns,angles,quotes}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{array,tabularx,booktabs}
+\usepackage{xcolor}
+
+% ---------- Pagina ----------
+\usepackage[a4paper,top=2cm,bottom=2.2cm,left=2cm,right=2.2cm,
+headheight=30pt,headsep=12pt]{geometry}
+
+% ---------- Opzioni ----------
+%\printanswers                 % <-- decommentare per la versione con soluzioni
+\newif\ifversioneBES
+\versioneBESfalse              % <-- \versioneBEStrue per la versione BES/DSA
+\newif\iftabellabonus
+\tabellabonusfalse          % <-- true se c'e' un esercizio facoltativo (\bonusquestion): aggiunge la riga Bonus
+
+% ---------- Interlinea ----------
+%  \interlinea      : testo normale
+%  \interlineaparts : sottopunti a), b), ... (piu' ariosa, separa le equazioni)
+\newcommand{\interlinea}{1.3}
+\newcommand{\interlineaparts}{1.3}
+\ifversioneBES
+\usepackage[scaled=1.05]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\interlinea}{1.5}
+\renewcommand{\interlineaparts}{1.7}
+\fi
+%\linespread{1.5}
+
+% ---------- Dati della prova (da compilare) ----------
+\newcommand{\materia}{Matematica}
+\newcommand{\classe}{2 BS}
+\newcommand{\indirizzo}{Liceo Scientifico}
+%   Liceo Scientifico | Liceo Scientifico a indirizzo sportivo | Liceo delle Scienze Umane
+\newcommand{\tipoprova}{Verifica scritta}
+\newcommand{\argomento}{Equazioni di primo grado e scomposizione}
+\newcommand{\durata}{50 minuti}
+\newcommand{\annoscolastico}{2026/2027}
+\newcommand{\docente}{Prof. Rubens Longhi}
+\newcommand{\fila}{A}
+\newcommand{\indicazioni}{Svolgi gli esercizi sul foglio a protocollo motivando con chiarezza i passaggi algebrici.
+	Non \`e consentito l'uso della calcolatrice\ifversioneBES, salvo quanto previsto dal PDP. Sono consentiti gli strumenti compensativi previsti dal PDP\fi.}
+
+% ---------- Intestazione e pie' di pagina ----------
+%  Ogni fila ricomincia da pagina 1: la sua prima pagina ha l'intestazione
+%  della scuola e la numerazione "Pagina x di y" e' calcolata sulla singola fila.
+\pagestyle{headandfoot}
+\firstpageheader
+{\scriptsize\textsc{IIS ``David Maria Turoldo''}\\[-1pt]
+	\scriptsize Via Ronco 11 -- 24019 Zogno (BG)}
+{}
+{\scriptsize A.S.\ \annoscolastico\\[-1pt]\scriptsize \docente}
+\firstpageheadrule
+\runningheader{\small\materia\ -- \classe}{\small\tipoprova\ -- Fila \fila}{}
+\runningheadrule
+\newcommand{\paginefila}{\pageref{fine@fila@\fila}}
+\firstpagefooter{}{\small Pagina \thepage\ di \paginefila}{}
+\runningfooter{}{\small Pagina \thepage\ di \paginefila}{}
+
+% ---------- Formato degli esercizi ----------
+%  Riga 1:  "1."  in grassetto + obiettivo in grigio ........ (n punti)
+%  Riga 2+: testo dell'esercizio
+% ---------- Formato degli esercizi ----------
+\newcommand{\obiettivocorrente}{}
+\newcommand{\obiettivo}[1]{%
+	\gdef\obiettivocorrente{#1}}
+\newcommand{\stampaobiettivo}{%
+	\ifx\obiettivocorrente\empty\else
+	{\footnotesize\color{black!55}\textit{Obiettivo: \obiettivocorrente}}%
+	\fi}
+\qformat{\textbf{\thequestion.}\enspace\stampaobiettivo\hfill\colonnapunti{(\totalpoints\ \points)}\gdef\obiettivocorrente{}}
+\bonusqformat{\textbf{\thequestion.}\enspace{\footnotesize\color{black!55}\textit{(facoltativo)}}\enspace\stampaobiettivo\hfill\colonnapunti{(+\totalbonuspoints\ bonus)}\gdef\obiettivocorrente{}}
+\renewcommand{\questionlabel}{}
+\renewcommand{\partlabel}{\thepartno)}
+\renewcommand{\subpartlabel}{\thesubpart.}
+\renewcommand{\choicelabel}{\thechoice)}
+\pointpoints{punto}{punti}
+\bonuspointpoints{punto bonus}{punti bonus}
+\newcommand{\colonnapunti}[1]{{\small #1}}
+\pointformat{\small(\thepoints)}
+\bonuspointformat{\small(+\thepoints)}
+
+% Sottopunti con interlinea maggiore (le soluzioni tornano all'interlinea normale)
+\renewcommand{\partshook}{\linespread{\interlineaparts}\selectfont\setlength{\itemsep}{15pt}\setlength{\rightmargin}{2.2cm}}
+
+% Numerazione degli esercizi: ogni fila riparte da 1 (esercizio 1, 2, ...);
+% il contatore interno di exam prosegue da una fila all'altra, cosi' punti,
+% totali e tabelle restano corretti. Usare l'ambiente "esercizi" al posto di "questions".
+\newcounter{offsetfila}
+\renewcommand{\thequestion}{\number\numexpr\value{question}-\value{offsetfila}\relax}
+\newenvironment{esercizi}
+{\begin{questions}\setcounter{question}{\value{offsetfila}}}
+	{\end{questions}}
+
+% ---------- Esercizi non spezzati tra due pagine ----------
+%  \begin{esercizio} ... \end{esercizio} racchiude \obiettivo + \question + parts.
+%  Se non ci sta, l'esercizio passa intero alla pagina successiva.
+%  Nella versione con soluzioni l'esercizio puo' spezzarsi (i correttori sono lunghi).
+\cancelspace   % le soluzioni nascoste non lasciano spazio ne' punti di interruzione
+\newenvironment{esercizio}
+{\par\ifprintanswers\else\addpenalty{-100}\begin{samepage}\fi}
+	{\ifprintanswers\else\end{samepage}\fi\par\vspace{6pt}}
+
+% ---------- Soluzioni e scelte multiple ----------
+\renewcommand{\solutiontitle}{\noindent\textbf{Soluzione.}\enspace}
+\unframedsolutions
+\SolutionEmphasis{\color{blue!60!black}\linespread{\interlinea}\selectfont}
+\CorrectChoiceEmphasis{\color{blue!60!black}\bfseries}
+\checkboxchar{$\square$}
+\checkedchar{$\blacksquare$}
+
+% ---------- Tabella punteggi ----------
+\hqword{\textbf{Esercizio}}
+\hpword{\textbf{Punti massimi}}
+\hsword{\textbf{Punti ottenuti}}
+\htword{\textbf{Totale}}
+\chqword{\textbf{Esercizio}}
+\chpword{\textbf{Punti massimi}}
+\chbpword{\textbf{Bonus}}
+\chsword{\textbf{Punti ottenuti}}
+\chtword{\textbf{Totale}}
+
+% ---------- Macro utili ----------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% ---------- Inizio e fine di ogni fila ----------
+%  \iniziofila{A} ... \finefila   poi   \iniziofila{B} ... \finefila
+%  \iniziofila: nuova pagina 1, intestazione scuola, titolo, nome, indicazioni.
+%  \finefila:   tabella punteggi della sola fila, voto, firma.
+\newcommand{\iniziofila}[1]{%
+	\clearpage
+	\renewcommand{\fila}{#1}%
+	\setcounter{page}{1}%
+	\setcounter{offsetfila}{\value{totalq@fila}}%
+	\begin{center}
+		{\Large \argomento}\\[2pt]
+		{\small \indirizzo\ -- Classe \classe\ -- Fila \fila\ -- Durata: \durata}
+	\end{center}
+	\vspace{4pt}
+	\noindent
+	\begin{tabularx}{\textwidth}{@{}l X l p{3.2cm}@{}}
+		\textbf{Nome e Cognome:} & \hrulefill & \textbf{Data:} & \hrulefill \\[8pt]
+	\end{tabularx}
+	\vspace{2pt}
+	\noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\small\linespread{1.2}\selectfont
+			\textbf{Indicazioni.} \indicazioni\
+			Punteggio totale: \pointsinrange{fila#1} punti.}}
+	\vspace{2pt}
+	\begingradingrange{fila#1}}
+\newcounter{totalq@fila}
+\newcommand{\finefila}{%
+	\setcounter{totalq@fila}{\value{question}}%
+	\endgradingrange{fila\fila}%
+	\vfill
+	\begin{center}\small
+		\iftabellabonus
+		\partialcombinedgradetable{fila\fila}[h][questions]%
+		\else
+		\partialgradetable{fila\fila}[h][questions]%
+		\fi
+	\end{center}
+	\vspace{6pt}
+	\noindent{\small\textbf{Voto:} \rule{3cm}{0.4pt}\hfill
+		\textbf{Firma del docente:} \rule{5cm}{0.4pt}}%
+	\label{fine@fila@\fila}}
+
+% =====================================================================
+\begin{document}
+	
+	% =====================================================================
+	% FILA A
+	% =====================================================================
+	\iniziofila{A}
+	\begin{esercizi}
+		
+		% ---- ESERCIZIO 1 ----
+		\begin{esercizio}
+			\obiettivo{valutare trasformazioni equivalenti, soluzioni e propriet\`a delle equazioni}
+			\question
+			Stabilisci se ciascuna delle seguenti affermazioni \`e Vera (V) o Falsa (F), fornendo una breve motivazione concettuale.
+			\begin{parts}
+\part[1] Moltiplicare entrambi i membri di un'equazione intera per $x$ produce sempre un'equazione equivalente a quella iniziale.
+\begin{solution}
+\textbf{Falso.} Per esempio, $x-2=0$ ha $S=\{2\}$, mentre $x(x-2)=0$ ha $S=\{0;\,2\}$. Il fattore $x$ pu\`o introdurre la soluzione $x=0$.
+\end{solution}
+\part[1] Se, sostituendo $x=2$ in un'equazione, si ottiene $5=7$, allora $2$ non appartiene al suo insieme delle soluzioni.
+\begin{solution}
+\textbf{Vero.} Una soluzione deve rendere uguali i due membri. L'uguaglianza ottenuta \`e falsa, quindi $2\notin S$.
+\end{solution}
+\part[1] L'equazione $(x-2)^2=0$ ha una sola soluzione reale, pur essendo di secondo grado.
+\begin{solution}
+\textbf{Vero.} $(x-2)^2=(x-2)(x-2)$: entrambi i fattori si annullano soltanto per $x=2$. La radice ripetuta va scritta una sola volta nell'insieme $S=\{2\}$.
+\end{solution}
+\part[1] La presenza di coefficienti frazionari rende necessariamente frazionaria un'equazione.
+\begin{solution}
+\textbf{Falso.} Per esempio, $\frac{x}{2}+\frac13=1$ \`e intera: i denominatori sono numeri non nulli e non contengono l'incognita. Un coefficiente frazionario non rende l'equazione frazionaria.
+\end{solution}
+\end{parts}
+		\end{esercizio}
+		
+		% ---- ESERCIZIO 2 ----
+		\begin{esercizio}
+			\obiettivo{semplificare e classificare equazioni intere riconducibili a forme lineari}
+			\question
+			Risolvi in $\R$ le seguenti equazioni intere, semplificando i denominatori numerici e sviluppando o riconoscendo i prodotti notevoli. Specifica se ciascuna \`e determinata, indeterminata o impossibile e scrivi l'insieme $S$ delle soluzioni.
+			\begin{parts}
+\part[2]
+\[\frac{2x-1}{\frac12+\frac13}-\frac{x+2}{\frac34-\frac14}
+=\frac{x-4}{1-\frac16}\]
+\begin{solution}
+I denominatori numerici sono $\frac56$, $\frac12$, $\frac56$, tutti non nulli; il dominio \`e $\R$.
+\[
+\frac65(2x-1)-2(x+2)=\frac65(x-4)
+\]
+Moltiplicando per $5$:
+\[
+6(2x-1)-10(x+2)=6(x-4)
+\implies 2x-26=6x-24
+\implies -4x=2.
+\]
+Determinata: $S=\left\{-\frac12\right\}$.
+\end{solution}
+\part[1]
+\[(2x-1)^2-(x+2)(x-2)=3x(x-2)+2x+5\]
+\begin{solution}
+Sviluppando il quadrato e la differenza di quadrati:
+\[
+4x^2-4x+1-x^2+4=3x^2-6x+2x+5
+\]
+\[
+3x^2-4x+5=3x^2-4x+5\implies 0=0.
+\]
+Indeterminata: $S=\R$.
+\end{solution}
+\part[1]
+\[\frac{(3x-1)^2-(3x+1)(3x-1)}{2}=-3(x+1)+\frac52\]
+\begin{solution}
+Si pu\`o raccogliere $(3x-1)$ al numeratore:
+\[
+\frac{(3x-1)[(3x-1)-(3x+1)]}{2}=-3x-3+\frac52.
+\]
+Quindi $-3x+1=-3x-\frac12$, da cui $1=-\frac12$.
+Impossibile: $S=\varnothing$.
+\end{solution}
+\part[3]
+\[
+\begin{aligned}
+\left(2x-\frac13\right)^2+x^2\left(x^2+x-\frac5{12}\right)
+&=\left(2x-\frac13\right)\left(2x+\frac13\right)\\
+&\quad+\left(x^2+\frac{x}{2}-\frac13\right)^2.
+\end{aligned}
+\]
+\begin{solution}
+Sviluppando separatamente i due membri:
+\[
+\begin{aligned}
+\mathrm{I}&=4x^2-\frac43x+\frac19+x^4+x^3-\frac5{12}x^2,\\
+\mathrm{II}&=4x^2-\frac19+x^4+x^3-\frac5{12}x^2-\frac{x}{3}+\frac19.
+\end{aligned}
+\]
+Si cancellano i termini di quarto, terzo e secondo grado:
+\[
+-\frac43x+\frac19=-\frac{x}{3}
+\implies -x+\frac19=0.
+\]
+Determinata: $S=\left\{\frac19\right\}$.
+\end{solution}
+\end{parts}
+		\end{esercizio}
+		
+		% ---- ESERCIZIO 3 ----
+		\begin{esercizio}
+			\obiettivo{ricavare variabili da formule letterali della Fisica}
+			\question
+			Ricava la variabile indicata tra parentesi da ciascuna delle seguenti formule della Fisica, considerando tutte le grandezze coinvolte come ben definite e non nulle.
+			\begin{parts}
+				\part[1] Legge del moto rettilineo uniforme: $s = s_0 + v \cdot t \qquad [v]$
+				\begin{solution}
+					$v = \dfrac{s - s_0}{t}$.
+				\end{solution}
+				\part[1] Prima legge di Ohm: $V = R \cdot I \qquad [R]$
+				\begin{solution}
+					$R = \dfrac{V}{I}$.
+				\end{solution}
+				\part[1] Pressione sul fondo di un recipiente: $P=P_0+dgh \qquad [h]$
+				\begin{solution}
+					$h = \dfrac{P-P_0}{dg}$.
+				\end{solution}
+			\end{parts}
+		\end{esercizio}
+		
+		% ---- ESERCIZIO 4 ----
+		\begin{esercizio}
+			\obiettivo{risolvere equazioni di grado superiore mediante scomposizione e legge di annullamento}
+			\question
+			Risolvi in $\R$ le seguenti equazioni mediante scomposizione e legge di annullamento del prodotto. Scrivi l'insieme $S$ delle soluzioni.
+			\begin{parts}
+\part[1]
+\[x^2-7x+8=2\]
+\begin{solution}
+Si porta il termine del secondo membro a sinistra:
+\[
+x^2-7x+6=0.
+\]
+Si cercano due numeri di somma $-7$ e prodotto $6$: sono $-1$ e $-6$.
+\[
+(x-1)(x-6)=0,\qquad S=\{1;\,6\}.
+\]
+\end{solution}
+\part[2]
+\[\frac{(2x-3)^2}{1-\frac14}-\frac{(x+1)^2}{\frac12-\frac16}=0\]
+\begin{solution}
+I denominatori sono $\frac34$ e $\frac13$. Moltiplicando per $3$:
+\[
+4(2x-3)^2-9(x+1)^2=0.
+\]
+Differenza di quadrati:
+\[
+[2(2x-3)-3(x+1)][2(2x-3)+3(x+1)]=0
+\]
+\[
+(x-9)(7x-3)=0,\qquad S=\left\{\frac37;\,9\right\}.
+\]
+\end{solution}
+\part[4]
+\[x^5-2x^4-18x^3+36x^2+81x-162=0\]
+\begin{solution}
+Raggruppando le coppie di termini:
+\[
+x^4(x-2)-18x^2(x-2)+81(x-2)=0
+\]
+\[
+(x-2)(x^4-18x^2+81)=(x-2)(x^2-9)^2=0.
+\]
+Il trinomio in $x^2$ \`e un quadrato perfetto. Scomponendo ancora:
+\[
+(x-2)(x-3)^2(x+3)^2=0,\qquad S=\{-3;\,2;\,3\}.
+\]
+\end{solution}
+\end{parts}
+		\end{esercizio}
+		
+		% ---- ESERCIZIO 5 ----
+\begin{esercizio}
+\obiettivo{modellizzare una spesa con sconto parziale e costo fisso}
+\question
+Una studentessa acquista quattro quaderni e tre raccoglitori. Ogni raccoglitore costa $3$ euro pi\`u di un quaderno. Il negozio applica ai soli raccoglitori uno sconto pari a un quinto del loro prezzo. Aggiungendo $2$ euro di spedizione, la studentessa paga complessivamente \num{41,20} euro.
+\begin{parts}
+\part[1] Scegli l'incognita e imposta un'equazione per determinare il prezzo di un quaderno.
+\begin{solution}
+Si pone $x$ uguale al prezzo, in euro, di un quaderno, con $x>0$.
+Un raccoglitore costa $x+3$ euro; dopo lo sconto viene pagato $\frac45(x+3)$ euro.
+\[
+4x+3\cdot\frac45(x+3)+2=\num{41,20}.
+\]
+Lo sconto riguarda soltanto i raccoglitori: quaderni e spedizione si pagano interamente.
+\end{solution}
+\part[2] Calcola il prezzo di un quaderno e quello di un raccoglitore prima dello sconto.
+\begin{solution}
+Moltiplicando l'equazione per $5$:
+\[
+20x+12(x+3)+10=206
+\]
+\[
+32x+46=206\implies32x=160\implies x=5.
+\]
+L'equazione ha $S=\{5\}$: un quaderno costa $5$ euro e un raccoglitore costa $5+3=8$ euro prima dello sconto.
+Verifica della spesa:
+\[
+4\cdot5+3\cdot\frac45\cdot8+2=\num{41,20}.
+\]
+\end{solution}
+\part[1] Quanto avrebbe speso in pi\`u senza lo sconto, mantenendo le stesse spese di spedizione?
+\begin{solution}
+Senza sconto avrebbe pagato $4\cdot5+3\cdot8+2=46$ euro.
+La differenza \`e $46-\num{41,20}=\num{4,80}$ euro.
+Equivalentemente, lo sconto totale \`e $3\cdot\frac15\cdot8=\num{4,80}$ euro.
+\end{solution}
+\end{parts}
+\end{esercizio}
+		
+	\end{esercizi}
+	\finefila
+	
+	% =====================================================================
+	% FILA B
+	% =====================================================================
+	\iniziofila{B}
+	\begin{esercizi}
+		
+		% ---- ESERCIZIO 1 ----
+		\begin{esercizio}
+			\obiettivo{valutare trasformazioni equivalenti, soluzioni e propriet\`a delle equazioni}
+			\question
+			Stabilisci se ciascuna delle seguenti affermazioni \`e Vera (V) o Falsa (F), fornendo una breve motivazione concettuale.
+			\begin{parts}
+\part[1] Dividendo entrambi i membri di $x^2=4x$ per $x$, si ottiene un'equazione equivalente a quella iniziale.
+\begin{solution}
+\textbf{Falso.} L'equazione iniziale diventa $x(x-4)=0$ e ha $S=\{0;\,4\}$. La divisione per $x$ richiede $x\ne0$ e fa perdere la soluzione $x=0$.
+\end{solution}
+\part[1] Le equazioni $2(x-1)=6$ e $x+3=7$ sono equivalenti, anche se hanno forme diverse.
+\begin{solution}
+\textbf{Vero.} Entrambe sono definite in $\R$ e hanno lo stesso insieme delle soluzioni, $S=\{4\}$. L'equivalenza dipende dalle soluzioni, non dall'aspetto delle equazioni.
+\end{solution}
+\part[1] Per la legge di annullamento del prodotto, una soluzione di $(x-1)(x+2)=0$ deve annullare contemporaneamente entrambi i fattori.
+\begin{solution}
+\textbf{Falso.} Basta che sia nullo almeno uno dei fattori: $x-1=0$ \emph{oppure} $x+2=0$. Dunque $S=\{-2;\,1\}$; nessun numero annulla qui entrambi i fattori contemporaneamente.
+\end{solution}
+\part[1] Il passaggio da $3x-5=2x+7$ a $3x-2x=7+5$ conserva l'insieme delle soluzioni.
+\begin{solution}
+\textbf{Vero.} Si sottrae $2x$ e si aggiunge $5$ a entrambi i membri: sono trasformazioni equivalenti. Entrambe le equazioni hanno $S=\{12\}$.
+\end{solution}
+\end{parts}
+		\end{esercizio}
+		
+		% ---- ESERCIZIO 2 ----
+		\begin{esercizio}
+			\obiettivo{semplificare e classificare equazioni intere riconducibili a forme lineari}
+			\question
+			Risolvi in $\R$ le seguenti equazioni intere, semplificando i denominatori numerici e sviluppando o riconoscendo i prodotti notevoli. Specifica se ciascuna \`e determinata, indeterminata o impossibile e scrivi l'insieme $S$ delle soluzioni.
+			\begin{parts}
+\part[2]
+\[\frac{2x+1}{\frac12+\frac14}-\frac{x-1}{\frac56-\frac13}
+=\frac{x+2}{1-\frac14}\]
+\begin{solution}
+I denominatori numerici sono $\frac34$, $\frac12$, $\frac34$, tutti non nulli; il dominio \`e $\R$.
+\[
+\frac43(2x+1)-2(x-1)=\frac43(x+2).
+\]
+Moltiplicando per $3$:
+\[
+4(2x+1)-6(x-1)=4(x+2)
+\implies 2x+10=4x+8
+\implies -2x=-2.
+\]
+Determinata: $S=\{1\}$.
+\end{solution}
+\part[1]
+\[\frac{(3x+1)^2-(3x-1)(3x+1)}{2}=3(x-1)+\frac52\]
+\begin{solution}
+Si pu\`o raccogliere $(3x+1)$ al numeratore:
+\[
+\frac{(3x+1)[(3x+1)-(3x-1)]}{2}=3x-3+\frac52.
+\]
+Quindi $3x+1=3x-\frac12$, da cui $1=-\frac12$.
+Impossibile: $S=\varnothing$.
+\end{solution}
+\part[1]
+\[(2x+1)^2-(x+3)(x-3)=3x(x+2)-2x+10\]
+\begin{solution}
+Sviluppando il quadrato e la differenza di quadrati:
+\[
+4x^2+4x+1-x^2+9=3x^2+6x-2x+10
+\]
+\[
+3x^2+4x+10=3x^2+4x+10\implies 0=0.
+\]
+Indeterminata: $S=\R$.
+\end{solution}
+\part[3]
+\[
+\begin{aligned}
+\left(3x+\frac13\right)^2+x^2\left(x^2-x-\frac5{12}\right)
+&=\left(3x-\frac13\right)\left(3x+\frac13\right)\\
+&\quad+\left(x^2-\frac{x}{2}-\frac13\right)^2.
+\end{aligned}
+\]
+\begin{solution}
+Sviluppando separatamente i due membri:
+\[
+\begin{aligned}
+\mathrm{I}&=9x^2+2x+\frac19+x^4-x^3-\frac5{12}x^2,\\
+\mathrm{II}&=9x^2-\frac19+x^4-x^3-\frac5{12}x^2+\frac{x}{3}+\frac19.
+\end{aligned}
+\]
+Si cancellano i termini di quarto, terzo e secondo grado:
+\[
+2x+\frac19=\frac{x}{3}
+\implies \frac53x+\frac19=0
+\implies 15x+1=0.
+\]
+Determinata: $S=\left\{-\frac1{15}\right\}$.
+\end{solution}
+\end{parts}
+		\end{esercizio}
+		
+		% ---- ESERCIZIO 3 ----
+		\begin{esercizio}
+			\obiettivo{ricavare variabili da formule letterali della Fisica}
+			\question
+			Ricava la variabile indicata tra parentesi da ciascuna delle seguenti formule della Fisica, considerando tutte le grandezze coinvolte come ben definite e non nulle.
+			\begin{parts}
+				\part[1] Pressione: $P = \dfrac{F}{S} \qquad [S]$
+				\begin{solution}
+					$S = \dfrac{F}{P}$.
+				\end{solution}
+				\part[1] Accelerazione media: $a = \dfrac{v - v_0}{t} \qquad [v]$
+				\begin{solution}
+					$v = v_0 + a t$.
+				\end{solution}
+				\part[1] Pressione sul fondo di un recipiente: $P=P_0+dgh \qquad [h]$
+				\begin{solution}
+					$h = \dfrac{P-P_0}{dg}$.
+				\end{solution}
+			\end{parts}
+		\end{esercizio}
+		
+		% ---- ESERCIZIO 4 ----
+		\begin{esercizio}
+			\obiettivo{risolvere equazioni di grado superiore mediante scomposizione e legge di annullamento}
+			\question
+			Risolvi in $\R$ le seguenti equazioni mediante scomposizione e legge di annullamento del prodotto. Scrivi l'insieme $S$ delle soluzioni.
+			\begin{parts}
+\part[1]
+\[x^2+5x+3=-3\]
+\begin{solution}
+Si porta il termine del secondo membro a sinistra:
+\[
+x^2+5x+6=0.
+\]
+Si cercano due numeri di somma $5$ e prodotto $6$: sono $2$ e $3$.
+\[
+(x+2)(x+3)=0,\qquad S=\{-3;\,-2\}.
+\]
+\end{solution}
+\part[2]
+\[\frac{(2x+1)^2}{1-\frac14}-\frac{(x-2)^2}{\frac12-\frac16}=0\]
+\begin{solution}
+I denominatori sono $\frac34$ e $\frac13$. Moltiplicando per $3$:
+\[
+4(2x+1)^2-9(x-2)^2=0.
+\]
+Differenza di quadrati:
+\[
+[2(2x+1)-3(x-2)][2(2x+1)+3(x-2)]=0
+\]
+\[
+(x+8)(7x-4)=0,\qquad S=\left\{-8;\,\frac47\right\}.
+\]
+\end{solution}
+\part[4]
+\[x^5+3x^4-8x^3-24x^2+16x+48=0\]
+\begin{solution}
+Raggruppando le coppie di termini:
+\[
+x^4(x+3)-8x^2(x+3)+16(x+3)=0
+\]
+\[
+(x+3)(x^4-8x^2+16)=(x+3)(x^2-4)^2=0.
+\]
+Il trinomio in $x^2$ \`e un quadrato perfetto. Scomponendo ancora:
+\[
+(x+3)(x-2)^2(x+2)^2=0,\qquad S=\{-3;\,-2;\,2\}.
+\]
+\end{solution}
+\end{parts}
+		\end{esercizio}
+		
+		% ---- ESERCIZIO 5 ----
+\begin{esercizio}
+\obiettivo{modellizzare una spesa con sconto parziale e costo fisso}
+\question
+Uno studente acquista tre quaderni e quattro raccoglitori. Ogni raccoglitore costa $2$ euro pi\`u di un quaderno. Il negozio applica ai soli raccoglitori uno sconto pari a un quarto del loro prezzo. Aggiungendo $3$ euro di spedizione, lo studente paga complessivamente $45$ euro.
+\begin{parts}
+\part[1] Scegli l'incognita e imposta un'equazione per determinare il prezzo di un quaderno.
+\begin{solution}
+Si pone $x$ uguale al prezzo, in euro, di un quaderno, con $x>0$.
+Un raccoglitore costa $x+2$ euro; dopo lo sconto viene pagato $\frac34(x+2)$ euro.
+\[
+3x+4\cdot\frac34(x+2)+3=45.
+\]
+Lo sconto riguarda soltanto i raccoglitori: quaderni e spedizione si pagano interamente.
+\end{solution}
+\part[2] Calcola il prezzo di un quaderno e quello di un raccoglitore prima dello sconto.
+\begin{solution}
+Semplificando:
+\[
+3x+3(x+2)+3=45
+\]
+\[
+6x+9=45\implies6x=36\implies x=6.
+\]
+L'equazione ha $S=\{6\}$: un quaderno costa $6$ euro e un raccoglitore costa $6+2=8$ euro prima dello sconto.
+Verifica della spesa:
+\[
+3\cdot6+4\cdot\frac34\cdot8+3=45.
+\]
+\end{solution}
+\part[1] Quanto avrebbe speso in pi\`u senza lo sconto, mantenendo le stesse spese di spedizione?
+\begin{solution}
+Senza sconto avrebbe pagato $3\cdot6+4\cdot8+3=53$ euro.
+La differenza \`e $53-45=8$ euro.
+Equivalentemente, lo sconto totale \`e $4\cdot\frac14\cdot8=8$ euro.
+\end{solution}
+\end{parts}
+\end{esercizio}
+		
+	\end{esercizi}
+	\finefila
+	
+\end{document}

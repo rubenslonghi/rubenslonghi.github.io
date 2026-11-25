@@ -1,0 +1,660 @@
+% =====================================================================
+% VERIFICA DI MATEMATICA - 2BS
+% 60 minuti, 30 punti.
+% Punteggi: 4 + 8 + 10 + 3 + 5 = 30.
+% Compilare almeno due volte con pdfLaTeX.
+% Per mostrare le soluzioni: decommentare \printanswers.
+% =====================================================================
+
+\documentclass[11pt,a4paper,addpoints]{exam}
+
+% ---------- Lingua e codifica ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ---------- Matematica e impaginazione ----------
+\usepackage{amsmath,amssymb}
+\usepackage{xcolor}
+\usepackage{array,tabularx}
+\usepackage[
+  a4paper,
+  top=2cm,
+  bottom=2.2cm,
+  left=2cm,
+  right=2.2cm,
+  headheight=30pt,
+  headsep=12pt
+]{geometry}
+
+% ---------- Soluzioni ----------
+%\printanswers
+\ifdefined\CORRETTORE
+  \printanswers
+\fi
+\cancelspace
+\unframedsolutions
+\renewcommand{\solutiontitle}{%
+  \noindent\textbf{Soluzione.}\enspace
+}
+\SolutionEmphasis{\color{blue!60!black}}
+
+% ---------- Dati della prova ----------
+\newcommand{\materia}{Matematica}
+\newcommand{\classe}{2BS}
+\newcommand{\indirizzo}{Liceo Scientifico}
+\newcommand{\tipoprova}{Verifica di matematica}
+\newcommand{\argomento}{Frazioni algebriche ed equazioni frazionarie}
+\newcommand{\durata}{60 minuti}
+\newcommand{\annoscolastico}{2026/2027}
+\newcommand{\docente}{Prof. Rubens Longhi}
+\newcommand{\fila}{A}
+
+\newcommand{\indicazioni}{%
+  Svolgi sul foglio a protocollo e mostra i passaggi.
+  Indica sempre le condizioni di esistenza prima di semplificare.
+  Per le equazioni scrivi l'insieme delle soluzioni.
+  Lavora in $\mathbb{R}$, senza calcolatrice.
+}
+
+% ---------- Macro matematiche ----------
+\newcommand{\R}{\mathbb{R}}
+
+% ---------- Intestazioni e piè di pagina ----------
+\pagestyle{headandfoot}
+\firstpageheader
+  {%
+    \scriptsize\textsc{IIS David Maria Turoldo}\\[-1pt]
+    \scriptsize Via Ronco 11 -- 24019 Zogno (BG)
+  }
+  {}
+  {%
+    \scriptsize A.S.\ \annoscolastico\\[-1pt]
+    \scriptsize \docente
+  }
+\firstpageheadrule
+
+\runningheader
+  {\small\materia\ -- \classe}
+  {\small\tipoprova}
+  {\small Fila \fila}
+\runningheadrule
+
+\newcommand{\paginefila}{\pageref{fine@fila@\fila}}
+
+\firstpagefooter{}{\small Pagina \thepage\ di \paginefila}{}
+\runningfooter{}{\small Pagina \thepage\ di \paginefila}{}
+
+% ---------- Obiettivi e formato degli esercizi ----------
+\newcommand{\obiettivocorrente}{}
+
+\newcommand{\obiettivo}[1]{%
+  \gdef\obiettivocorrente{#1}%
+}
+
+\newcommand{\stampaobiettivo}{%
+  \ifx\obiettivocorrente\empty
+  \else
+    {\footnotesize\color{black!55}%
+      \textit{Obiettivo: \obiettivocorrente}}%
+  \fi
+}
+
+\qformat{%
+  \textbf{\thequestion.}\enspace
+  \stampaobiettivo
+  \hfill
+  {\small(\totalpoints\ \points)}%
+  \gdef\obiettivocorrente{}%
+}
+
+\renewcommand{\questionlabel}{}
+\renewcommand{\partlabel}{\thequestion\thepartno)}
+\renewcommand{\subpartlabel}{\thesubpart.}
+
+\pointpoints{punto}{punti}
+
+\renewcommand{\partshook}{%
+  \setlength{\itemsep}{4pt}%
+  \setlength{\rightmargin}{0.5cm}%
+}
+
+% ---------- Numerazione indipendente per ciascuna fila ----------
+\newcounter{offsetfila}
+\newcounter{totalqfila}
+
+\renewcommand{\thequestion}{%
+  \number\numexpr
+    \value{question}-\value{offsetfila}%
+  \relax
+}
+
+\newenvironment{esercizi}
+  {%
+    \begin{questions}
+    \setcounter{question}{\value{offsetfila}}%
+  }
+  {\end{questions}}
+
+% ---------- Esercizi non spezzati nella versione studenti ----------
+\newenvironment{esercizio}
+  {%
+    \par
+    \ifprintanswers\else\begin{samepage}\fi
+  }
+  {%
+    \ifprintanswers\else\end{samepage}\fi
+    \par\vspace{3pt}
+  }
+
+% ---------- Tabella dei punteggi ----------
+\hqword{\textbf{Esercizio}}
+\hpword{\textbf{Punti massimi}}
+\hsword{\textbf{Punti ottenuti}}
+\htword{\textbf{Totale}}
+
+% ---------- Inizio e fine di ciascuna fila ----------
+\newcommand{\iniziofila}[1]{%
+  \clearpage
+  \renewcommand{\fila}{#1}%
+  \setcounter{page}{1}%
+  \setcounter{offsetfila}{\value{totalqfila}}%
+
+  \begin{center}
+    {\small\bfseries
+      \tipoprova
+      \ifprintanswers
+        -- Soluzioni e criteri di correzione
+      \fi
+    }\\[3pt]
+    {\Large \argomento}\\[2pt]
+    {\small
+      \indirizzo\ -- Classe \classe\
+      -- Durata: \durata\
+      -- \textbf{Fila #1}
+    }
+  \end{center}
+
+  \vspace{4pt}
+  \noindent
+  \begin{tabularx}{\textwidth}{@{}l X l p{3cm}@{}}
+    \textbf{Nome e Cognome:} & \hrulefill
+    & \textbf{Data:} & \hrulefill\\[8pt]
+  \end{tabularx}
+
+  \noindent
+  \fbox{%
+    \parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{%
+      \small
+      \textbf{Indicazioni.} \indicazioni\space
+      Punteggio totale: \pointsinrange{fila#1} punti.
+    }%
+  }
+
+  \medskip
+  \begingradingrange{fila#1}%
+}
+
+\newcommand{\finefila}{%
+  \setcounter{totalqfila}{\value{question}}%
+  \endgradingrange{fila\fila}%
+
+  \ifprintanswers
+  \else
+    \vfill
+    \begin{center}
+      \small
+      \partialgradetable{fila\fila}[h][questions]
+    \end{center}
+
+    \vspace{6pt}
+    \noindent
+    {\small
+      \textbf{Voto:}\ \rule{3cm}{0.4pt}
+      \hfill
+      \textbf{Firma del docente:}\ \rule{5cm}{0.4pt}
+    }%
+  \fi
+
+  \label{fine@fila@\fila}%
+}
+
+% =====================================================================
+% DOCUMENTO
+% =====================================================================
+\begin{document}
+
+\linespread{1.05}\selectfont
+\ifprintanswers\small\fi
+
+\iniziofila{A}
+\begin{esercizi}
+
+% ---------------- ESERCIZIO 1: 4 punti ----------------
+\begin{esercizio}
+\obiettivo{riconoscere proprietà e condizioni di validità}
+\question
+Stabilisci se ciascuna affermazione è vera o falsa.
+Giustifica brevemente ogni risposta.
+
+\begin{parts}
+  \part[1]
+  Le frazioni algebriche
+  $\dfrac{x-4}{x+2}$ e $\dfrac{4-x}{-x-2}$
+  sono equivalenti per tutti i valori per cui esistono.
+
+  \begin{solution}
+    \textbf{Vera.} Le C.E. sono $x\ne-2$ per entrambe.
+    Cambiando segno sia al numeratore sia al denominatore
+    il valore della frazione non cambia:
+    \[
+      \frac{4-x}{-x-2}
+      =\frac{-(x-4)}{-(x+2)}
+      =\frac{x-4}{x+2}.
+    \]
+
+    \textit{Criteri:} scelta 0,5 punti;
+    giustificazione 0,5 punti.
+  \end{solution}
+
+  \part[1]
+  Per dividere due frazioni algebriche è sufficiente
+  imporre che i loro denominatori siano diversi da zero.
+
+  \begin{solution}
+    \textbf{Falsa.} Occorre anche che la frazione divisore
+    sia diversa da zero: il suo numeratore deve essere non nullo.
+    Per esempio, $\frac1x:\frac{x-1}{x+2}$ richiede
+    $x\ne0$, $x\ne-2$ e anche $x\ne1$.
+
+    \textit{Criteri:} scelta 0,5 punti;
+    condizione aggiuntiva corretta 0,5 punti.
+  \end{solution}
+
+  \part[1]
+  Nell'incognita $x$, l'equazione
+  $\dfrac{3x}{a+2}=\dfrac{a-1}{a}$
+  è frazionaria.
+
+  \begin{solution}
+    \textbf{Falsa.} È letterale e intera rispetto a $x$:
+    l'incognita non compare nei denominatori.
+    Il parametro deve soddisfare $a\ne-2$ e $a\ne0$.
+
+    \textit{Criteri:} scelta 0,5 punti;
+    spiegazione riferita all'incognita 0,5 punti.
+  \end{solution}
+
+  \part[1]
+  Se, dopo aver imposto le C.E. ed eliminato i denominatori,
+  un'equazione frazionaria si riduce a un'identità,
+  le sue soluzioni sono tutti e soli i valori ammessi dalle C.E.
+
+  \begin{solution}
+    \textbf{Vera.} Nel dominio di esistenza il denominatore
+    comune è non nullo, quindi la sua eliminazione è
+    un passaggio equivalente. L'identità è verificata da
+    ogni valore di tale dominio; i valori esclusi restano esclusi.
+
+    \textit{Criteri:} scelta 0,5 punti;
+    giustificazione 0,5 punti.
+  \end{solution}
+\end{parts}
+\end{esercizio}
+
+% ---------------- ESERCIZIO 2: 8 punti ----------------
+\begin{esercizio}
+\obiettivo{operare con frazioni algebriche e potenze negative}
+\question
+Determina le C.E. e semplifica le seguenti espressioni.
+
+\begin{parts}
+  \part[4]
+  \[
+    \left[
+      \frac{x}{x^2-5x+6}
+      +\frac{1}{x-2}
+      -\frac{1}{x-3}
+    \right]
+    :
+    \frac{2x-2}{x^2-4}.
+  \]
+
+  \begin{solution}
+    Scomponiamo:
+    \[
+      x^2-5x+6=(x-2)(x-3),\qquad
+      x^2-4=(x-2)(x+2).
+    \]
+
+    I denominatori devono essere non nulli e il divisore
+    deve essere diverso da zero. Pertanto
+    \[
+      \boxed{\text{C.E.: }x\ne-2,\ 1,\ 2,\ 3}.
+    \]
+
+    La parentesi quadra diventa
+    \[
+      \frac{x+(x-3)-(x-2)}{(x-2)(x-3)}
+      =\frac{x-1}{(x-2)(x-3)}.
+    \]
+
+    Quindi, mantenendo tutte le C.E. iniziali,
+    \[
+      \frac{x-1}{(x-2)(x-3)}
+      \cdot\frac{(x-2)(x+2)}{2(x-1)}
+      =\boxed{\frac{x+2}{2(x-3)}}.
+    \]
+
+    \textit{Criteri:} C.E. complete 1 punto;
+    somma algebrica 1 punto;
+    divisione e semplificazioni 1,5 punti;
+    risultato 0,5 punti.
+  \end{solution}
+
+  \part[4]
+  \[
+    \left[
+      \left(\frac{a^{-1}-3a^{-2}}{a^{-1}+3a^{-2}}\right)^2
+      +2\frac{a^{-1}-3a^{-2}}{a^{-1}+3a^{-2}}
+      +1
+    \right]
+    :
+    \frac{2a^2}{a^3+6a^2+9a}.
+  \]
+
+  \begin{solution}
+    Le potenze negative richiedono $a\ne0$. Inoltre
+    \[
+      a^{-1}+3a^{-2}=\frac{a+3}{a^2},\qquad
+      a^3+6a^2+9a=a(a+3)^2.
+    \]
+
+    Il divisore è non nullo per $a\ne0$; si ottiene
+    \[
+      \boxed{\text{C.E.: }a\ne0,\ -3}.
+    \]
+
+    Nel dominio ammesso,
+    \[
+      \frac{a^{-1}-3a^{-2}}{a^{-1}+3a^{-2}}
+      =\frac{(a-3)/a^2}{(a+3)/a^2}
+      =\frac{a-3}{a+3}.
+    \]
+
+    Riconosciamo il quadrato di un binomio:
+    \[
+      \left(\frac{a-3}{a+3}\right)^2
+      +2\frac{a-3}{a+3}+1
+      =\left(\frac{a-3}{a+3}+1\right)^2
+      =\frac{4a^2}{(a+3)^2}.
+    \]
+
+    Pertanto
+    \[
+      \frac{4a^2}{(a+3)^2}
+      \cdot\frac{a(a+3)^2}{2a^2}
+      =\boxed{2a}.
+    \]
+
+    Restano valide tutte le C.E. iniziali.
+
+    \textit{Criteri:} C.E. 1 punto;
+    gestione delle potenze negative 1 punto;
+    parentesi quadra 1 punto;
+    divisione e risultato 1 punto.
+  \end{solution}
+\end{parts}
+\end{esercizio}
+
+\ifprintanswers\else\newpage\fi
+
+% ---------------- ESERCIZIO 3: 10 punti ----------------
+\begin{esercizio}
+\obiettivo{risolvere equazioni e controllare l'ammissibilità}
+\question
+Risolvi le seguenti equazioni, indicando le C.E.
+e l'insieme delle soluzioni.
+
+\begin{parts}
+  \part[3]
+  \[
+    \frac{x^2+x-12}{x^2-9}=0.
+  \]
+
+  \begin{solution}
+    \[
+      x^2-9=(x-3)(x+3),\qquad
+      \boxed{\text{C.E.: }x\ne-3,\ 3}.
+    \]
+
+    Una frazione è nulla se il numeratore è nullo
+    e il denominatore è diverso da zero:
+    \[
+      x^2+x-12=(x+4)(x-3)=0.
+    \]
+
+    I candidati sono $x=-4$ e $x=3$.
+    Il secondo è escluso dalle C.E., dunque
+    \[
+      \boxed{S=\{-4\}}.
+    \]
+
+    \textit{Criteri:} C.E. 1 punto;
+    scomposizione e candidati 1 punto;
+    selezione e insieme delle soluzioni 1 punto.
+  \end{solution}
+
+  \part[3]
+  \[
+    -\frac2x+\frac6{x+1}=1.
+  \]
+
+  \begin{solution}
+    \[
+      \boxed{\text{C.E.: }x\ne0,\ -1}.
+    \]
+
+    Moltiplicando entrambi i membri per $x(x+1)$:
+    \[
+      -2(x+1)+6x=x(x+1).
+    \]
+
+    Quindi
+    \[
+      x^2-3x+2=0
+      \quad\Longleftrightarrow\quad
+      (x-1)(x-2)=0.
+    \]
+
+    Entrambi i valori ottenuti sono ammessi:
+    \[
+      \boxed{S=\{1,2\}}.
+    \]
+
+    \textit{Criteri:} C.E. 0,5 punti;
+    eliminazione dei denominatori e riduzione 1 punto;
+    scomposizione 1 punto;
+    insieme delle soluzioni 0,5 punti.
+  \end{solution}
+
+  \part[4]
+  \[
+    \left(
+      \frac{2x+5}{x^2-9}+\frac1{3-x}
+    \right)
+    :
+    \left(\frac2{9-x^2}\right)
+    =-\frac52.
+  \]
+
+  \begin{solution}
+    Tutti i denominatori devono essere non nulli.
+    Il divisore, quando esiste, non è mai zero:
+    \[
+      \boxed{\text{C.E.: }x\ne-3,\ 3}.
+    \]
+
+    Poiché $3-x=-(x-3)$,
+    \[
+      \frac{2x+5}{(x-3)(x+3)}-\frac1{x-3}
+      =\frac{2x+5-(x+3)}{(x-3)(x+3)}
+      =\frac{x+2}{(x-3)(x+3)}.
+    \]
+
+    Inoltre $9-x^2=-(x-3)(x+3)$, quindi
+    \[
+      \frac{x+2}{(x-3)(x+3)}
+      \cdot\frac{-(x-3)(x+3)}2
+      =-\frac52
+      \quad\Longleftrightarrow\quad
+      -\frac{x+2}{2}=-\frac52.
+    \]
+
+    Si ottiene $x=3$, escluso dalle C.E.
+    L'equazione è impossibile:
+    \[
+      \boxed{S=\varnothing}.
+    \]
+
+    \textit{Criteri:} C.E. 1 punto;
+    somma e gestione dei segni 1 punto;
+    divisione e riduzione 1 punto;
+    esclusione del candidato e conclusione 1 punto.
+  \end{solution}
+\end{parts}
+\end{esercizio}
+
+% ---------------- ESERCIZIO 4: 3 punti ----------------
+\begin{esercizio}
+\obiettivo{ricavare una formula inversa}
+\question[3]
+
+Un veicolo percorre due tratti di uguale lunghezza
+con velocità costanti positive $v_1$ e $v_2$.
+La velocità media sull'intero percorso è
+\[
+  v_m=\frac{2v_1v_2}{v_1+v_2}.
+\]
+
+Ricava $v_2$ in funzione di $v_m$ e $v_1$.
+Sapendo che $v_m>0$ e $v_1>0$, indica anche
+quale condizione devono soddisfare affinché
+il valore ricavato di $v_2$ sia positivo e finito.
+
+\begin{solution}
+  Poiché $v_1+v_2>0$, possiamo moltiplicare:
+  \[
+    v_m(v_1+v_2)=2v_1v_2
+    \quad\Longleftrightarrow\quad
+    v_mv_1=(2v_1-v_m)v_2.
+  \]
+
+  Se $2v_1-v_m\ne0$,
+  \[
+    \boxed{v_2=\frac{v_mv_1}{2v_1-v_m}}.
+  \]
+
+  Il numeratore è positivo. Per avere $v_2>0$ e finita
+  occorre e basta che il denominatore sia positivo:
+  \[
+    \boxed{0<v_m<2v_1}.
+  \]
+
+  Per $v_m=2v_1$ non esiste una $v_2$ finita
+  che soddisfi la relazione con $v_1>0$.
+
+  \textit{Criteri:} passaggi e formula inversa 2 punti;
+  condizione di validità fisica 1 punto.
+\end{solution}
+\end{esercizio}
+
+% ---------------- ESERCIZIO 5: 5 punti ----------------
+\begin{esercizio}
+\obiettivo{interpretare e confrontare modelli frazionari}
+\question
+
+Le temperature di due componenti di una macchina,
+in gradi Celsius, sono descritte dai modelli
+\[
+  T_1(t)=\frac{60(t+1)}{t+3},
+  \qquad
+  T_2(t)=\frac{30(2t+1)}{t+2},
+\]
+dove $t\ge0$ è il numero di minuti trascorsi dall'accensione.
+
+\begin{parts}
+  \part[1]
+  Quali sono le temperature dei due componenti
+  all'istante dell'accensione?
+
+  \begin{solution}
+    \[
+      T_1(0)=\frac{60}{3}=\boxed{20\,^\circ\mathrm{C}},
+      \qquad
+      T_2(0)=\frac{30}{2}=\boxed{15\,^\circ\mathrm{C}}.
+    \]
+
+    \textit{Criteri:} 0,5 punti per ciascuna temperatura.
+  \end{solution}
+
+  \part[2]
+  Dopo quanti minuti il primo componente
+  raggiunge la temperatura di $40\,^\circ\mathrm{C}$?
+  Imposta e risolvi un'equazione.
+
+  \begin{solution}
+    Nel contesto $t\ge0$, quindi $t+3\ne0$.
+    \[
+      \frac{60(t+1)}{t+3}=40
+      \quad\Longleftrightarrow\quad
+      60t+60=40t+120
+      \quad\Longleftrightarrow\quad
+      t=3.
+    \]
+
+    Il valore è ammissibile: la temperatura richiesta
+    si raggiunge dopo $\boxed{3\text{ minuti}}$.
+
+    \textit{Criteri:} equazione e dominio 1 punto;
+    risoluzione e risposta 1 punto.
+  \end{solution}
+
+  \part[2]
+  Dopo quanti minuti i due componenti hanno
+  la stessa temperatura? Qual è tale temperatura?
+  Imposta e risolvi un'equazione.
+
+  \begin{solution}
+    Per $t\ge0$ entrambi i denominatori sono non nulli.
+    \begin{align*}
+      \frac{60(t+1)}{t+3}
+      &=\frac{30(2t+1)}{t+2}\\
+      2(t+1)(t+2)&=(2t+1)(t+3)\\
+      2t^2+6t+4&=2t^2+7t+3\\
+      t&=1.
+    \end{align*}
+
+    Il valore è ammissibile e
+    \[
+      T_1(1)=\frac{60\cdot2}{4}=30,
+      \qquad
+      T_2(1)=\frac{30\cdot3}{3}=30.
+    \]
+
+    Le temperature coincidono dopo $\boxed{1\text{ minuto}}$
+    e valgono $\boxed{30\,^\circ\mathrm{C}}$.
+
+    \textit{Criteri:} equazione e passaggi equivalenti 1 punto;
+    tempo ammissibile 0,5 punti;
+    temperatura 0,5 punti.
+  \end{solution}
+\end{parts}
+\end{esercizio}
+
+\end{esercizi}
+\finefila
+
+\end{document}

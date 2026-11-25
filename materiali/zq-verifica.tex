@@ -1,0 +1,439 @@
+% =====================================================================
+%  SIMULAZIONE DI MATEMATICA - 1SP -- IIS "David Maria Turoldo", Zogno (BG)
+%  Classe: exam  |  Compilazione: pdflatex (due passaggi)
+%  Soluzioni:        decommentare \printanswers
+%  Versione BES/DSA: impostare \versioneBEStrue
+%  Struttura:        \iniziofila{A} \begin{esercizi} ... \end{esercizi} \finefila
+%                    \iniziofila{B} \begin{esercizi} ... \end{esercizi} \finefila
+%  Ogni esercizio:   \begin{esercizio}
+	%                      \obiettivo{...}
+	%                      \question[punti]  (oppure \question + parts con \part[punti])
+	%                      testo ...
+	%                    \end{esercizio}
+%  Nessuno spazio per le risposte: gli studenti scrivono sul foglio a protocollo.
+% =====================================================================
+\documentclass[11pt,a4paper,addpoints]{exam}
+
+% ---------- Lingua e codifica ----------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ---------- Matematica, grafica, tabelle ----------
+\usepackage{amsmath,amssymb}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker={,}, per-mode=symbol, group-separator={\,}}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc,patterns,angles,quotes}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage{graphicx}
+\usepackage{multicol}
+\usepackage{array,tabularx,booktabs}
+\usepackage{xcolor}
+
+% ---------- Pagina ----------
+\usepackage[a4paper,top=2cm,bottom=2.2cm,left=2cm,right=2.2cm,
+headheight=30pt,headsep=12pt]{geometry}
+
+% ---------- Opzioni ----------
+%\printanswers              % Decommentare per mostrare le soluzioni.
+\ifdefined\CORRETTORE\printanswers\fi % Opzione per compilare il correttore.
+\newif\ifversioneBES
+\versioneBESfalse              % <-- \versioneBEStrue per la versione BES/DSA
+\newif\iftabellabonus
+\tabellabonusfalse
+
+% ---------- Interlinea ----------
+%  \interlinea      : testo normale
+%  \interlineaparts : sottopunti a), b), ... (piu' ariosa, separa le equazioni)
+\newcommand{\interlinea}{1.05}
+\newcommand{\interlineaparts}{1.05}
+\ifversioneBES
+\usepackage[scaled=1.05]{helvet}
+\renewcommand{\familydefault}{\sfdefault}
+\renewcommand{\interlinea}{1.5}
+\renewcommand{\interlineaparts}{1.7}
+\fi
+%\linespread{1.5}
+
+% ---------- Dati della prova (da compilare) ----------
+\newcommand{\materia}{Matematica}
+\newcommand{\classe}{1SP}
+\newcommand{\indirizzo}{Liceo Scientifico a indirizzo sportivo}
+%   Liceo Scientifico | Liceo Scientifico a indirizzo sportivo | Liceo delle Scienze Umane
+\newcommand{\tipoprova}{Verifica di matematica}
+\newcommand{\argomento}{Numeri interi e razionali}
+\newcommand{\durata}{60 minuti}
+\newcommand{\annoscolastico}{2026/2027}
+\newcommand{\docente}{Prof. Rubens Longhi}
+\newcommand{\fila}{A}
+\newcommand{\indicazioni}{Svolgi sul foglio a protocollo. Mostra i passaggi e riduci le frazioni ai minimi termini. Lavora senza calcolatrice. Nei vero/falso, giustifica le affermazioni vere e fornisci un controesempio per quelle false.\ifversioneBES\ Sono consentiti gli strumenti compensativi previsti dal PDP.\fi}
+% ---------- Intestazione e pie' di pagina ----------
+%  Ogni fila ricomincia da pagina 1: la sua prima pagina ha l'intestazione
+%  della scuola e la numerazione "Pagina x di y" e' calcolata sulla singola fila.
+\pagestyle{headandfoot}
+\firstpageheader
+{\scriptsize\textsc{IIS ``David Maria Turoldo''}\\[-1pt]
+	\scriptsize Via Ronco 11 -- 24019 Zogno (BG)}
+{}
+{\scriptsize A.S.\ \annoscolastico\\[-1pt]\scriptsize \docente}
+\firstpageheadrule
+\runningheader{\small\materia\ -- \classe}{\small\tipoprova}{\small Fila \fila}
+\runningheadrule
+\newcommand{\paginefila}{\pageref{fine@fila@\fila}}
+\firstpagefooter{}{\small Pagina \thepage\ di \paginefila}{}
+\runningfooter{}{\small Pagina \thepage\ di \paginefila}{}
+
+% ---------- Formato degli esercizi ----------
+%  Riga 1:  "1."  in grassetto + obiettivo in grigio ........ (n punti)
+%  Riga 2+: testo dell'esercizio
+% ---------- Formato degli esercizi ----------
+\newcommand{\obiettivocorrente}{}
+\newcommand{\obiettivo}[1]{%
+	\gdef\obiettivocorrente{#1}}
+\newcommand{\stampaobiettivo}{%
+	\ifx\obiettivocorrente\empty\else
+	{\footnotesize\color{black!55}\textit{Obiettivo: \obiettivocorrente}}%
+	\fi}
+
+\bonusqformat{\textbf{\thequestion.}\enspace{\footnotesize\color{black!55}\textit{(facoltativo)}}\enspace\stampaobiettivo\hfill\colonnapunti{(+\totalbonuspoints\ bonus)}\gdef\obiettivocorrente{}}
+\renewcommand{\questionlabel}{}
+\renewcommand{\partlabel}{\thequestion\thepartno)}
+\renewcommand{\subpartlabel}{\thesubpart.}
+\renewcommand{\choicelabel}{\thechoice)}
+\pointpoints{punto}{punti}
+\bonuspointpoints{punto bonus}{punti bonus}
+\newcommand{\colonnapunti}[1]{{\small #1}}
+\pointformat{\small(\thepoints)}
+\bonuspointformat{\small(+\thepoints)}
+
+% Sottopunti con interlinea maggiore (le soluzioni tornano all'interlinea normale)
+\renewcommand{\partshook}{\linespread{\interlineaparts}\selectfont\setlength{\itemsep}{3pt}\setlength{\rightmargin}{1cm}}
+
+% Numerazione degli esercizi: ogni fila riparte da 1 (esercizio 1, 2, ...);
+% il contatore interno di exam prosegue da una fila all'altra, cosi' punti,
+% totali e tabelle restano corretti. Usare l'ambiente "esercizi" al posto di "questions".
+\newcounter{offsetfila}
+\renewcommand{\thequestion}{\number\numexpr\value{question}-\value{offsetfila}\relax}
+\newenvironment{esercizi}
+{\begin{questions}\setcounter{question}{\value{offsetfila}}}
+	{\end{questions}}
+
+% ---------- Esercizi non spezzati tra due pagine ----------
+%  \begin{esercizio} ... \end{esercizio} racchiude \obiettivo + \question + parts.
+%  Se non ci sta, l'esercizio passa intero alla pagina successiva.
+%  Nella versione con soluzioni l'esercizio puo' spezzarsi (i correttori sono lunghi).
+\cancelspace   % le soluzioni nascoste non lasciano spazio ne' punti di interruzione
+\newenvironment{esercizio}
+{\par\ifprintanswers\else\begin{samepage}\fi}
+	{\ifprintanswers\else\end{samepage}\fi\par\vspace{3pt}}
+
+% ---------- Soluzioni e scelte multiple ----------
+\renewcommand{\solutiontitle}{\noindent\textbf{Soluzione.}\enspace}
+\unframedsolutions
+\SolutionEmphasis{\color{blue!60!black}\linespread{\interlinea}\selectfont\ifprintanswers\small\fi}
+\CorrectChoiceEmphasis{\color{blue!60!black}\bfseries}
+\checkboxchar{$\square$}
+\checkedchar{$\blacksquare$}
+
+% ---------- Tabella punteggi ----------
+\hqword{\textbf{Esercizio}}
+\hpword{\textbf{Punti massimi}}
+\hsword{\textbf{Punti ottenuti}}
+\htword{\textbf{Totale}}
+\chqword{\textbf{Esercizio}}
+\chpword{\textbf{Punti massimi}}
+\chbpword{\textbf{Bonus}}
+\chsword{\textbf{Punti ottenuti}}
+\chtword{\textbf{Totale}}
+
+% ---------- Macro utili ----------
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\dd}{\,\mathrm{d}}
+
+% ---------- Inizio e fine di ogni fila ----------
+%  \iniziofila{A} ... \finefila   poi   \iniziofila{B} ... \finefila
+%  \iniziofila: nuova pagina 1, intestazione scuola, titolo, nome, indicazioni.
+%  \finefila:   tabella punteggi della sola fila, voto, firma.
+\newcommand{\iniziofila}[1]{%
+	\clearpage
+	\renewcommand{\fila}{#1}%
+	\setcounter{page}{1}%
+	\setcounter{offsetfila}{\value{totalq@fila}}%
+	\begin{center}
+		{\small\bfseries \tipoprova\ifprintanswers\ -- Soluzioni e criteri di correzione\fi}\\[3pt]
+		{\Large \argomento}\\[2pt]
+		{\small \indirizzo\ -- Classe \classe\ -- Durata: \durata\ -- \textbf{Fila #1}}
+	\end{center}
+	\vspace{4pt}
+	\noindent
+	\begin{tabularx}{\textwidth}{@{}l X l p{3.2cm}@{}}
+		\textbf{Nome e Cognome:} & \hrulefill & \textbf{Data:} & \hrulefill \\[8pt]
+	\end{tabularx}
+	\vspace{2pt}
+	\noindent\fbox{\parbox{\dimexpr\textwidth-2\fboxsep-2\fboxrule}{\small\linespread{1.2}\selectfont
+			\textbf{Indicazioni.} \indicazioni\ Punteggio totale: \pointsinrange{fila#1} punti.}}
+	\vspace{2pt}
+	\begingradingrange{fila#1}}
+\newcounter{totalq@fila}
+\newcommand{\finefila}{%
+	\setcounter{totalq@fila}{\value{question}}%
+	\endgradingrange{fila\fila}%
+	\vfill
+	\begin{center}\small
+		\iftabellabonus
+		\partialcombinedgradetable{fila\fila}[h][questions]%
+		\else
+		\partialgradetable{fila\fila}[h][questions]%
+		\fi
+	\end{center}
+	\vspace{6pt}
+	\noindent{\small\textbf{Voto:} \rule{3cm}{0.4pt}\hfill
+		\textbf{Firma del docente:} \rule{5cm}{0.4pt}}%
+	\label{fine@fila@\fila}}
+
+
+
+% Unica definizione attiva del formato: obiettivo sopra la consegna.
+\qformat{\textbf{\thequestion.}\enspace\stampaobiettivo\hfill
+\colonnapunti{(\totalpoints\ \points)}\gdef\obiettivocorrente{}}
+% Tempi stimati: E1 10'; E2 7'; E3 13'; E4 5'; E5 5'; E6 6'; E7 7'; controllo 7'.
+% Totale: 60 minuti. Punti: 6+4+7+3+3+3+4=30.
+% Criteri: valutare il procedimento e non penalizzare due volte lo stesso errore.
+% Accettare tutti i procedimenti corretti equivalenti.
+
+% Il correttore omette la tabella da compilare e la firma.
+\let\finefilastudenti\finefila
+\renewcommand{\finefila}{%
+  \ifprintanswers
+    \setcounter{totalq@fila}{\value{question}}%
+    \endgradingrange{fila\fila}%
+    \label{fine@fila@\fila}%
+  \else
+    \finefilastudenti
+  \fi}
+
+\begin{document}
+\linespread{\interlinea}\selectfont
+\iniziofila{A}
+\begin{esercizi}
+\begin{esercizio}
+\obiettivo{ragionare su segni, modulo e annullamento del prodotto}
+\question Vero o falso? Motiva ogni risposta secondo le indicazioni iniziali.
+\begin{parts}
+\part[1\half] Se $a,b\in\Q$, $a\ne0$ e $a+b=0$, allora $\dfrac{|a|}{|b|}=1$.
+\begin{solution}
+\textbf{Vera.} $b=-a\ne0$, quindi $|b|=|a|>0$ e il rapporto vale $1$. \textit{Criteri:} scelta 0,5; giustificazione generale 1.
+\end{solution}
+\part[1\half] Se $a,b\in\Q$ e $|a|>|b|$, allora $a>b$.
+\begin{solution}
+\textbf{Falsa.} Per esempio $a=-3$, $b=1$: $3>1$, ma $-3<1$. \textit{Criteri:} scelta 0,5; controesempio che soddisfa l'ipotesi e smentisce la conclusione 1.
+\end{solution}
+\part[1\half] Se $a,b\in\Q$ e $a^2b^2=0$, allora $a+b=0$.
+\begin{solution}
+\textbf{Falsa.} $a=0$, $b=2$: $a^2b^2=0$, ma $a+b=2$. Basta che uno dei fattori sia nullo. \textit{Criteri:} scelta 0,5; controesempio 1.
+\end{solution}
+\part[1\half] Se $a,b\in\Q$ e $a<0<b$, allora $|a-b|=|a|+|b|$.
+\begin{solution}
+\textbf{Vera.} $a-b<0$, perciò $|a-b|=-a+b$; inoltre $|a|=-a$ e $|b|=b$. I due membri coincidono. \textit{Criteri:} scelta 0,5; giustificazione generale 1.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{confrontare numeri e usare rappresentazioni equivalenti}
+\question 
+\begin{parts}
+\part[2] Inserisci $<$, $=$ o $>$. Mostra il calcolo di M.C.D. e m.c.m. mediante scomposizione in fattori primi.
+\[
+|-30|\ \ldots\ \operatorname{MCD}(72,108);
+\qquad \operatorname{mcm}(12,18)\ \ldots\ |-42+6|.
+\]
+\begin{solution}
+$72=2^3\cdot3^2$, $108=2^2\cdot3^3$: M.C.D. $=36$, quindi $30<36$. $12=2^2\cdot3$, $18=2\cdot3^2$: m.c.m. $=36$, quindi $36=36$. \textit{Criteri:} 1 punto per confronto, di cui 0,5 per il procedimento e 0,5 per la conclusione.
+\end{solution}
+\part[2] Trasforma in frazioni ridotte ai minimi termini e ordina in senso crescente:
+\[
+-0{,}75;\qquad -\frac7{10};\qquad -72\%.
+\]
+\begin{solution}
+$-0{,}75=-\frac34=-\frac{75}{100}$, $-72\%=-\frac{18}{25}=-\frac{72}{100}$. Ordine: $\boxed{-\frac34<-\frac{18}{25}<-\frac7{10}}$. \textit{Criteri:} conversioni 1 punto; ordinamento 1.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{calcolare in interi e razionali e usare le potenze}
+\question Calcola mostrando i passaggi e riduci i risultati ai minimi termini.
+\begin{parts}
+\part[3] $\displaystyle \bigl[(-2)^6\cdot(-2)^3:(-2)^7-3^2\bigr]^2-2\cdot|-9+4|-(-3)^3$.
+\begin{solution}
+$(-2)^{6+3-7}=4$, quindi $(4-9)^2-2\cdot5+27=25-10+27=\boxed{42}$. \textit{Criteri:} proprietà delle potenze 1; potenze esterne, segni e modulo 1; calcolo finale 1.
+\end{solution}
+\part[4] $\displaystyle \left[\left(-\frac23\right)^{-2}\cdot\frac49+\frac{1-\frac56}{\frac34-\frac12}\right]:\left[\left(\frac32\right)^{-1}-\frac14\right]$.
+\begin{solution}
+La potenza negativa è $\frac94$, quindi il prodotto è $1$. La frazione complessa vale $\frac{1/6}{1/4}=\frac23$. La prima quadra vale $\frac53$, la seconda $\frac23-\frac14=\frac5{12}$. Risultato $\frac53:\frac5{12}=\boxed4$. \textit{Criteri:} potenze negative e prodotto 1; frazione complessa 1; due parentesi 1; divisione e riduzione finale 1.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\ifprintanswers\else\newpage\fi
+
+\begin{esercizio}
+\obiettivo{tradurre istruzioni verbali in un'espressione}
+\question[3] Scrivi un'unica espressione che traduca le istruzioni e calcolane il valore.
+
+Dividi il quadrato della differenza tra meno un mezzo e un terzo per l'opposto di cinque sesti. Sottrai al risultato il valore assoluto di meno tre quarti.
+\begin{solution}
+$\left(-\frac12-\frac13\right)^2:\left(-\frac56\right)-\left|-\frac34\right|=\frac{25}{36}:(-\frac56)-\frac34=-\frac56-\frac34=\boxed{-\frac{19}{12}}$.
+\textit{Criteri:} espressione coerente 2 punti; calcolo 1. Se la traduzione è errata, valutare il calcolo coerente con l'espressione scritta.
+\end{solution}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{modellizzare una successione di operazioni}
+\question[3] Una squadra dispone di $360$ euro. Spende i due quinti della somma iniziale per l'iscrizione a un torneo e poi $36$ euro per il trasporto. Infine usa un quarto della somma rimasta per acquistare bevande. Quanti euro restano? \textbf{Scrivi un'unica espressione} e calcolane il valore.
+\begin{solution}
+$\left[360(1-\frac25)-36\right](1-\frac14)=(216-36)\frac34=\boxed{135\text{ euro}}$. \textit{Criteri:} espressione con corretta base delle frazioni 2 punti; calcolo 1.
+\end{solution}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{trovare coincidenze con tempi non interi}
+\question[3] Due segnali luminosi si accendono insieme all'istante iniziale. Il primo si riaccende ogni $3{,}6$ s, il secondo ogni $5{,}4$ s. Dopo quanti secondi si riaccenderanno insieme \textbf{per la prima volta dopo l'istante iniziale}? Mostra il procedimento e spiega perché il tempo trovato è il primo possibile.
+\begin{solution}
+In decimi di secondo i periodi sono $36=2^2\cdot3^2$ e $54=2\cdot3^3$. Il m.c.m. è $108$ decimi, cioè $\boxed{10{,}8\text{ s}}$. È il minimo multiplo positivo comune: ogni accensione simultanea richiede un numero intero di periodi di ciascun segnale. \textit{Criteri:} passaggio a unità con valori interi 1; m.c.m. e risultato con unità 1; spiegazione della prima coincidenza 1.
+\end{solution}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{usare rapporti e variazioni percentuali}
+\question Risolvi mostrando i calcoli.
+\begin{parts}
+\part[1\half] Una bevanda si prepara mescolando succo e acqua nel rapporto $2:3$. Quanti litri di succo e quanti d'acqua servono per ottenere $2{,}5$ litri di bevanda? Supponi che i volumi si sommino.
+\begin{solution}
+$2+3=5$ parti; ogni parte misura $2{,}5:5=0{,}5$ L. Servono $\boxed{1\text{ L}}$ di succo e $\boxed{1{,}5\text{ L}}$ d'acqua. \textit{Criteri:} divisione in parti 0,5; quantità 1.
+\end{solution}
+\part[2\half] Un articolo costa $80$ euro. Viene scontato prima del $25\%$ e poi di un ulteriore $10\%$ sul prezzo già scontato. Trova il prezzo finale e lo sconto percentuale complessivo rispetto al prezzo iniziale.
+\begin{solution}
+$80\cdot0{,}75\cdot0{,}90=\boxed{54\text{ euro}}$. Il prezzo rimasto è $0{,}675$ di quello iniziale, dunque lo sconto è $\boxed{32{,}5\%}$. \textit{Criteri:} primo sconto 0,5; applicazione del secondo alla base corretta e prezzo finale 1; sconto complessivo 1.
+\end{solution}
+\end{parts}
+\end{esercizio}
+\end{esercizi}
+\finefila
+\iniziofila{B}
+\begin{esercizi}
+\begin{esercizio}
+\obiettivo{ragionare su segni, modulo e annullamento del prodotto}
+\question Vero o falso? Motiva ogni risposta secondo le indicazioni iniziali.
+\begin{parts}
+\part[1\half] Se $a,b\in\Q$ e $a<0$, $b<0$, allora $|a+b|=|a|+|b|$.
+\begin{solution}
+\textbf{Vera.} $a+b<0$, dunque $|a+b|=-a-b$; anche $|a|+|b|=-a-b$. \textit{Criteri:} scelta 0,5; giustificazione generale 1.
+\end{solution}
+\part[1\half] Se $a,b\in\Q$ e $|a|<|b|$, allora $a<b$.
+\begin{solution}
+\textbf{Falsa.} $a=1$, $b=-3$: $1<3$, ma $1>-3$. \textit{Criteri:} scelta 0,5; controesempio valido 1.
+\end{solution}
+\part[1\half] Se $a,b\in\Q$ e $|ab|=0$, allora $|a|+|b|=0$.
+\begin{solution}
+\textbf{Falsa.} $a=0$, $b=2$: $|ab|=0$, ma $|a|+|b|=2$. \textit{Criteri:} scelta 0,5; controesempio 1.
+\end{solution}
+\part[1\half] Se $a,b\in\Q$, $a\ne0$ e $a-b=0$, allora $\dfrac{|a|}{|b|}=1$.
+\begin{solution}
+\textbf{Vera.} $b=a\ne0$, quindi $|a|=|b|>0$ e il rapporto è $1$. \textit{Criteri:} scelta 0,5; giustificazione generale 1.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{confrontare numeri e usare rappresentazioni equivalenti}
+\question 
+\begin{parts}
+\part[2] Inserisci $<$, $=$ o $>$. Mostra il calcolo di M.C.D. e m.c.m. mediante scomposizione in fattori primi.
+\[
+|-40|\ \ldots\ \operatorname{MCD}(84,126);
+\qquad \operatorname{mcm}(15,20)\ \ldots\ |-72+12|.
+\]
+\begin{solution}
+$84=2^2\cdot3\cdot7$, $126=2\cdot3^2\cdot7$: M.C.D. $=42$, quindi $40<42$. $15=3\cdot5$, $20=2^2\cdot5$: m.c.m. $=60$, quindi $60=60$. \textit{Criteri:} 1 punto per confronto, di cui 0,5 per il procedimento e 0,5 per la conclusione.
+\end{solution}
+\part[2] Trasforma in frazioni ridotte ai minimi termini e ordina in senso crescente:
+\[
+-0{,}65;\qquad -\frac35;\qquad -62\%.
+\]
+\begin{solution}
+$-0{,}65=-\frac{13}{20}=-\frac{65}{100}$, $-62\%=-\frac{31}{50}=-\frac{62}{100}$. Ordine: $\boxed{-\frac{13}{20}<-\frac{31}{50}<-\frac35}$. \textit{Criteri:} conversioni 1 punto; ordinamento 1.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{calcolare in interi e razionali e usare le potenze}
+\question Calcola mostrando i passaggi e riduci i risultati ai minimi termini.
+\begin{parts}
+\part[3] $\displaystyle \bigl[(-3)^5\cdot(-3)^3:(-3)^6-2^4\bigr]^2-2\cdot|-8+3|-(-2)^3$.
+\begin{solution}
+$(-3)^{5+3-6}=9$, quindi $(9-16)^2-2\cdot5+8=49-10+8=\boxed{47}$. \textit{Criteri:} proprietà delle potenze 1; potenze esterne, segni e modulo 1; calcolo finale 1.
+\end{solution}
+\part[4] $\displaystyle \left[\left(-\frac34\right)^{-2}\cdot\frac9{16}+\frac{1-\frac78}{\frac56-\frac23}\right]:\left[\left(\frac43\right)^{-1}-\frac16\right]$.
+\begin{solution}
+La potenza negativa è $\frac{16}9$, quindi il prodotto è $1$. La frazione complessa vale $\frac{1/8}{1/6}=\frac34$. La prima quadra vale $\frac74$, la seconda $\frac34-\frac16=\frac7{12}$. Risultato $\frac74:\frac7{12}=\boxed3$. \textit{Criteri:} potenze negative e prodotto 1; frazione complessa 1; due parentesi 1; divisione e riduzione finale 1.
+\end{solution}
+\end{parts}
+\end{esercizio}
+
+\ifprintanswers\else\newpage\fi
+
+\begin{esercizio}
+\obiettivo{tradurre istruzioni verbali in un'espressione}
+\question[3] Scrivi un'unica espressione che traduca le istruzioni e calcolane il valore.
+
+Dividi il quadrato della differenza tra meno un terzo e un quarto per l'opposto di sette dodicesimi. Sottrai al risultato il valore assoluto di meno due terzi.
+\begin{solution}
+$\left(-\frac13-\frac14\right)^2:\left(-\frac7{12}\right)-\left|-\frac23\right|=\frac{49}{144}:(-\frac7{12})-\frac23=-\frac7{12}-\frac23=\boxed{-\frac54}$.
+\textit{Criteri:} espressione coerente 2 punti; calcolo 1. Se la traduzione è errata, valutare il calcolo coerente con l'espressione scritta.
+\end{solution}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{modellizzare una successione di operazioni}
+\question[3] Una squadra dispone di $420$ euro. Spende i tre settimi della somma iniziale per l'iscrizione a un torneo e poi $60$ euro per il trasporto. Infine usa un sesto della somma rimasta per acquistare bevande. Quanti euro restano? \textbf{Scrivi un'unica espressione} e calcolane il valore.
+\begin{solution}
+$\left[420(1-\frac37)-60\right](1-\frac16)=(240-60)\frac56=\boxed{150\text{ euro}}$. \textit{Criteri:} espressione con corretta base delle frazioni 2 punti; calcolo 1.
+\end{solution}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{trovare coincidenze con tempi non interi}
+\question[3] Due segnali luminosi si accendono insieme all'istante iniziale. Il primo si riaccende ogni $4{,}8$ s, il secondo ogni $7{,}2$ s. Dopo quanti secondi si riaccenderanno insieme \textbf{per la prima volta dopo l'istante iniziale}? Mostra il procedimento e spiega perché il tempo trovato è il primo possibile.
+\begin{solution}
+In decimi di secondo i periodi sono $48=2^4\cdot3$ e $72=2^3\cdot3^2$. Il m.c.m. è $144$ decimi, cioè $\boxed{14{,}4\text{ s}}$. È il minimo multiplo positivo comune: ogni accensione simultanea richiede un numero intero di periodi di ciascun segnale. \textit{Criteri:} passaggio a unità con valori interi 1; m.c.m. e risultato con unità 1; spiegazione della prima coincidenza 1.
+\end{solution}
+\end{esercizio}
+
+\begin{esercizio}
+\obiettivo{usare rapporti e variazioni percentuali}
+\question Risolvi mostrando i calcoli.
+\begin{parts}
+\part[1\half] Una bevanda si prepara mescolando succo e acqua nel rapporto $3:2$. Quanti litri di succo e quanti d'acqua servono per ottenere $2{,}5$ litri di bevanda? Supponi che i volumi si sommino.
+\begin{solution}
+$3+2=5$ parti; ogni parte misura $2{,}5:5=0{,}5$ L. Servono $\boxed{1{,}5\text{ L}}$ di succo e $\boxed{1\text{ L}}$ d'acqua. \textit{Criteri:} divisione in parti 0,5; quantità 1.
+\end{solution}
+\part[2\half] Un articolo costa $120$ euro. Viene scontato prima del $20\%$ e poi di un ulteriore $15\%$ sul prezzo già scontato. Trova il prezzo finale e lo sconto percentuale complessivo rispetto al prezzo iniziale.
+\begin{solution}
+$120\cdot0{,}80\cdot0{,}85=\boxed{81{,}60\text{ euro}}$. Il prezzo rimasto è $0{,}68$ di quello iniziale, dunque lo sconto è $\boxed{32\%}$. \textit{Criteri:} primo sconto 0,5; applicazione del secondo alla base corretta e prezzo finale 1; sconto complessivo 1.
+\end{solution}
+\end{parts}
+\end{esercizio}
+\end{esercizi}
+\finefila
+\end{document}
+

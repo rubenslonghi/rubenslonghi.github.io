@@ -1,0 +1,1135 @@
+\documentclass[a4paper,11pt,oneside]{article}
+% Modifica le impostazioni qui e compila una prova alla volta.
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[a4paper,margin=2.5cm,headheight=15pt]{geometry}
+\usepackage{xcolor,graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,calc}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage{fancyhdr,multicol,listings}
+\usepackage{makeidx}
+\usepackage[hidelinks]{hyperref}
+\makeindex
+
+\definecolor{verde}{HTML}{176756}
+\definecolor{grigiochiaro}{HTML}{F2F5F4}
+\definecolor{blu}{HTML}{24598A}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Laboratorio \LaTeX}
+\fancyhead[R]{\small 2BS}
+\fancyfoot[C]{\thepage}
+\setlength{\parindent}{14pt}
+\setlength{\parskip}{3pt}
+\setcounter{tocdepth}{1}
+\lstset{
+ language=[LaTeX]TeX,
+ basicstyle=\small\ttfamily,
+ keywordstyle=\color{blu},
+ commentstyle=\color{verde},
+ backgroundcolor=\color{grigiochiaro},
+ frame=single,rulecolor=\color{gray},
+ breaklines=true,columns=fullflexible,
+ showstringspaces=false,keepspaces=true,
+ aboveskip=8pt,belowskip=8pt
+}
+% Contatore usato nella sezione dedicata.
+\newcounter{esempio}
+\newcommand{\esempio}{\refstepcounter{esempio}\par
+  \textbf{Esempio \theesempio}\quad}
+% Questi due comandi servono solo a rendere riconoscibili le attività.
+\newcommand{\prova}{\subsection*{Riproduci e modifica}}
+\newcommand{\controlla}{\paragraph{Controllo nel PDF}}
+\title{Scrivere e organizzare con \LaTeX\\
+\large Laboratorio guidato sulla classe article}
+\author{Nome e cognome}
+\date{\today}
+
+\begin{document}
+\maketitle
+\thispagestyle{plain}
+\section*{Come usare questo laboratorio}
+Questo file contiene esempi già funzionanti. Leggi una sezione,
+ritrova nel sorgente i comandi che producono il risultato e svolgi
+le richieste imitando il modello. Inserisci le tue prove subito dopo
+la consegna, lasciando visibile l'esempio. Compila dopo ogni modifica.
+
+Il percorso è diviso in argomenti brevi. Puoi riprenderlo in più lezioni.
+Per iniziare lavora su titolo, struttura, paragrafi, enfasi ed elenchi.
+Poi passa a indice, riferimenti e impostazioni della pagina.
+Tabelle, figure e strumenti avanzati completano il percorso.
+
+\begin{enumerate}
+ \item Sostituisci il nome dell'autore nel preambolo.
+ \item Salva una copia personale del progetto.
+ \item Per ogni argomento completa almeno la prima richiesta.
+ \item Usa il controllo finale per verificare il risultato.
+ \item Consegna il sorgente e il PDF aggiornati.
+\end{enumerate}
+Il sorgente contiene già i pacchetti necessari per gli esempi attivi.
+La sezione su \texttt{minted} contiene una prova facoltativa da attivare
+in un progetto separato. La prova sulle immagini permette di caricare
+un proprio file e mostra un riquadro finché il file manca.
+
+\tableofcontents
+\section{La classe article e il preambolo}\label{sec:article}
+\index{article}
+\subsection{Le parti del file}
+La prima riga sceglie la classe del documento e le sue opzioni.
+Il preambolo termina quando inizia il corpo del documento.
+I pacchetti aggiungono funzioni, come tabelle più comode, colori o disegni.
+
+\begin{lstlisting}
+\documentclass[a4paper,11pt,oneside]{article}
+\usepackage[italian]{babel}
+\begin{document}
+Il testo del documento.
+\end{document}
+\end{lstlisting}
+Questo blocco mostra un file minimo. Non incollarlo intero dentro il corpo
+del progetto che stai usando, perché il tuo documento ha già un inizio
+e una fine.
+
+\subsection{Commenti e impostazioni}
+Nel sorgente una riga che inizia con \texttt{\%} è un commento.
+L'opzione \texttt{11pt} stabilisce la dimensione base dei caratteri.
+Il formato A4 e i margini sono impostati anche nel pacchetto
+\texttt{geometry}, che userai più avanti.
+
+\prova
+\begin{enumerate}
+ \item Aggiungi nel preambolo un commento con il tuo nome e la classe.
+ \item Cambia \texttt{11pt} in \texttt{12pt}, compila e confronta una pagina.
+ \item Ripristina \texttt{11pt} e spiega in un commento che cosa è cambiato.
+\end{enumerate}
+\controlla Il commento non compare. Il cambiamento della dimensione base
+può modificare anche il numero delle righe e delle pagine.
+
+\clearpage
+\section{Titolo, autore e data}\label{sec:titolo}
+\subsection{Informazioni nel preambolo}
+Titolo, autore e data sono dichiarati prima del corpo.
+Il comando che stampa queste informazioni si trova all'inizio del testo.
+\begin{lstlisting}
+\title{Una relazione sui triangoli}
+\author{Nome Cognome}
+\date{\today}
+% Nel corpo del documento:
+\maketitle
+\end{lstlisting}
+Il titolo di questo laboratorio è costruito proprio così.
+La data può essere automatica, scritta per esteso oppure lasciata vuota
+con \verb|\date{}|.
+
+\subsection{Un sottotitolo}
+Un cambio di riga e un comando di dimensione permettono di aggiungere
+un sottotitolo. Nel preambolo del tuo file trovi già questo esempio.
+\begin{lstlisting}
+\title{Una relazione sui triangoli\\
+\large Esempi e costruzioni}
+\end{lstlisting}
+
+\prova
+\begin{enumerate}
+ \item Personalizza il titolo, il sottotitolo e l'autore del file.
+ \item Prova prima la data automatica e poi una data scritta da te.
+ \item Verifica l'effetto di una data vuota e scegli la versione finale.
+\end{enumerate}
+\controlla Le modifiche devono comparire nella pagina iniziale.
+Un solo comando per stampare il titolo è sufficiente.
+
+\clearpage
+\section{Sezioni, sottosezioni e titoli senza numero}\label{sec:gerarchia}
+\subsection{La gerarchia}
+Questa è una sottosezione della sezione sui titoli.
+\subsubsection{Un livello ulteriore}
+Una sottosottosezione approfondisce un punto.
+\paragraph{Un titolo nel paragrafo}
+Questo livello introduce una porzione breve di testo.
+
+\begin{lstlisting}
+\section{Triangoli}
+\subsection{Classificazione}
+\subsubsection{In base ai lati}
+\paragraph{Il triangolo isoscele}
+Un triangolo con due lati congruenti.
+\end{lstlisting}
+
+\subsection{La versione con asterisco}
+Il titolo seguente usa un asterisco.
+\subsection*{Una precisazione}
+Questo titolo non ha numero e non entra automaticamente nell'indice.
+\begin{lstlisting}
+\subsection*{Una precisazione}
+\end{lstlisting}
+In \texttt{article} i titoli principali sono le sezioni.
+Il comando \verb|\chapter| appartiene a classi come \texttt{report}
+e \texttt{book}.
+
+\prova
+\begin{enumerate}
+ \item Aggiungi una sottosezione su un argomento matematico.
+ \item Al suo interno inserisci due sottosottosezioni e un paragrafo titolato.
+ \item Aggiungi un titolo con asterisco e confrontane la numerazione.
+\end{enumerate}
+\controlla I numeri devono essere generati dai comandi.
+Non inserirli nel testo del titolo.
+
+\clearpage
+\section{Paragrafi, righe e spazi nel sorgente}\label{sec:paragrafi}
+\subsection{Due paragrafi}
+Questo primo paragrafo introduce una definizione.
+Nel sorgente continua sulla riga seguente, ma rimane lo stesso paragrafo.
+
+Questo secondo paragrafo contiene un esempio.
+La riga vuota nel sorgente separa le due idee.
+\begin{lstlisting}
+Questo e il primo paragrafo.
+Continua sulla riga seguente del sorgente.
+
+Questo e il secondo paragrafo.
+\end{lstlisting}
+La riga vuota può essere sostituita da \verb|\par|.
+Molti spazi consecutivi nel sorgente diventano normalmente uno spazio.
+
+\subsection{Un'interruzione di riga}
+\begin{flushleft}
+Istituto David Maria Turoldo\\
+Classe 2BS\\
+Laboratorio di informatica
+\end{flushleft}
+Nel blocco precedente le righe sono separate da \verb|\\|.
+Per iniziare un nuovo paragrafo usa una riga vuota.
+
+\prova
+\begin{enumerate}
+ \item Scrivi una definizione in un paragrafo e un esempio nel successivo.
+ \item Duplica l'intestazione e sostituiscila con i dati della tua relazione.
+ \item Aggiungi dieci spazi tra due parole nel sorgente e osserva il PDF.
+\end{enumerate}
+\controlla Verifica la differenza tra un nuovo paragrafo e una nuova riga.
+
+\clearpage
+\section{Grassetto, corsivo e sottolineatura}\label{sec:enfasi}
+\subsection{Esempi nel testo}
+La \textbf{condizione di esistenza} va controllata.
+Un \textit{fattore comune} può essere raccolto.
+Una parola \underline{importante} può essere sottolineata.
+Un termine può essere in \textbf{\textit{grassetto e corsivo}}.
+Un nome di comando può essere scritto in \texttt{carattere monospaziato}.
+\begin{lstlisting}
+\textbf{condizione di esistenza}
+\textit{fattore comune}
+\underline{importante}
+\textbf{\textit{grassetto e corsivo}}
+\texttt{carattere monospaziato}
+\end{lstlisting}
+
+\subsection{Una modifica locale}
+{\large Questa frase è più grande.}
+Questa frase torna alla dimensione normale.
+Le graffe delimitano l'effetto del comando di dimensione.
+
+\prova
+\begin{enumerate}
+ \item Scrivi una definizione con il termine definito in grassetto.
+ \item Metti una precisazione in corsivo e sottolinea una sola parola.
+ \item Aggiungi una frase con un termine in grassetto e corsivo.
+ \item Prova \verb|\small|, \verb|\large| e \verb|\Large| dentro gruppi di graffe.
+\end{enumerate}
+\controlla Il formato delle parole vicine deve restare quello previsto.
+Se tutta la pagina cambia dimensione, controlla i confini del gruppo.
+
+\clearpage
+\section{Elenchi puntati, numerati e descrittivi}\label{sec:elenchi}
+\subsection{Tre modelli}
+\begin{itemize}
+ \item Controllare i denominatori.
+ \item Verificare i segni.
+\end{itemize}
+\begin{enumerate}
+ \item Scomporre i polinomi.
+ \item Scrivere le condizioni.
+\end{enumerate}
+\begin{description}
+ \item[Monomio] Prodotto tra un coefficiente e potenze di lettere.
+ \item[Polinomio] Somma di monomi.
+\end{description}
+\begin{lstlisting}
+\begin{itemize}
+  \item Prima voce.
+  \item Seconda voce.
+\end{itemize}
+% Sostituisci itemize con enumerate per numerare.
+% In description scrivi una voce come:
+% \item[Termine] Spiegazione.
+\end{lstlisting}
+Un elenco può contenere un altro elenco dentro una delle sue voci.
+
+\prova
+\begin{enumerate}
+ \item Scrivi una procedura numerata per risolvere un'equazione frazionaria.
+ \item Dentro l'ultima voce aggiungi due controlli in un elenco puntato.
+ \item Crea un elenco descrittivo con tre termini di geometria.
+ \item Inserisci una nuova azione al secondo posto della procedura.
+\end{enumerate}
+\controlla I numeri si aggiornano. Le voci dell'elenco interno devono
+rientrare rispetto a quelle esterne.
+
+\clearpage
+\section{Indice generale e titoli nell'indice}\label{sec:indice}
+\index{indice!generale}
+L'indice iniziale nasce da \verb|\tableofcontents|.
+Raccoglie i titoli del documento e i numeri di pagina.
+Per aggiornarlo può servire una seconda compilazione.
+La profondità dell'indice è regolata da \texttt{tocdepth}.
+In questo file vale 1 e include solo le sezioni.
+\begin{lstlisting}
+% Nel corpo, nel punto in cui vuoi l'indice:
+\tableofcontents
+% Nel preambolo, per includere le sottosezioni:
+\setcounter{tocdepth}{2}
+\end{lstlisting}
+
+\subsection*{Nota sull'indice}
+\phantomsection
+\addcontentsline{toc}{subsection}{Nota sull'indice}
+Questo titolo senza numero è stato aggiunto esplicitamente all'indice.
+Il collegamento viene preparato da \verb|\phantomsection|.
+Il pacchetto \texttt{hyperref} gestisce i richiami cliccabili.
+\begin{lstlisting}
+\subsection*{Nota sull'indice}
+\phantomsection
+\addcontentsline{toc}{subsection}{Nota sull'indice}
+\end{lstlisting}
+\prova
+\begin{enumerate}
+ \item Includi nell'indice le sottosezioni cambiando la profondità.
+ \item Aggiungi una sottosezione e verifica che compaia.
+ \item Crea un titolo senza numero e inseriscilo nell'indice con il modello.
+\end{enumerate}
+\controlla Nome del titolo e numero di pagina devono corrispondere.
+Tieni presente che l'indice più lungo sposta le pagine successive.
+
+\clearpage
+\section{Riferimenti a sezioni ed equazioni}\label{sec:rimandi}
+\subsection{Etichette e richiami}
+Gli elenchi della sezione \ref{sec:elenchi} si trovano a pagina
+\pageref{sec:elenchi}. I numeri derivano dall'etichetta della sezione.
+\begin{lstlisting}
+\section{Elenchi}
+\label{sec:elenchi}
+% Nel testo:
+Vedi la sezione \ref{sec:elenchi}
+a pagina \pageref{sec:elenchi}.
+\end{lstlisting}
+
+\subsection{Un'equazione numerata}
+\begin{equation}
+(a-b)^2=a^2-2ab+b^2
+\label{eq:binomio}
+\end{equation}
+La formula \eqref{eq:binomio} è il quadrato di una differenza.
+\begin{lstlisting}
+\begin{equation}
+(a-b)^2=a^2-2ab+b^2
+\label{eq:binomio}
+\end{equation}
+La formula \eqref{eq:binomio}...
+\end{lstlisting}
+\prova
+\begin{enumerate}
+ \item Crea un'equazione numerata con una scomposizione.
+ \item Assegna un'etichetta nuova e richiamala in una frase.
+ \item Richiama anche una delle tue sezioni con il suo numero e la sua pagina.
+\end{enumerate}
+\controlla Ogni etichetta deve avere un nome unico.
+Un'etichetta incollata insieme a un esempio va rinominata anche nei richiami.
+
+\clearpage
+\section{Rientri e distanza tra paragrafi}\label{sec:rientri}
+La lunghezza \verb|\parindent| regola il rientro della prima riga.
+La lunghezza \verb|\parskip| regola lo spazio tra paragrafi.
+Un gruppo limita una modifica a una zona del testo.
+
+\begingroup
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{7pt}
+Questo paragrafo è scritto con rientro nullo e distanza aumentata.
+
+Questo secondo paragrafo permette di osservare la distanza.
+Il testo riempie una parte della riga per rendere visibile il confronto.
+\par
+\endgroup
+
+Questo testo è di nuovo fuori dal gruppo.
+\begin{lstlisting}
+\begingroup
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{7pt}
+Primo paragrafo.
+
+Secondo paragrafo.
+\par
+\endgroup
+\end{lstlisting}
+
+Il primo paragrafo dopo un titolo, nelle impostazioni usuali di
+\texttt{article}, comincia senza rientro.
+Il comando \verb|\noindent| elimina il rientro del paragrafo che segue.
+
+\prova
+\begin{enumerate}
+ \item Duplica il gruppo e usa un rientro di 8 mm e uno spazio di 2 pt.
+ \item Scrivi tre paragrafi per rendere visibile l'effetto.
+ \item Fai iniziare il terzo senza rientro usando \verb|\noindent|.
+\end{enumerate}
+\controlla Controlla il secondo paragrafo per valutare il rientro.
+Fuori dal gruppo le impostazioni originali devono tornare attive.
+
+\clearpage
+\section{Allineare il testo}\label{sec:allineamento}
+\begin{flushleft}
+Un testo allineato a sinistra può avere il bordo destro irregolare.
+Questo periodo è abbastanza lungo da occupare più di una riga.
+\end{flushleft}
+\begin{center}
+Un titolo o un breve messaggio\\
+può essere centrato.
+\end{center}
+\begin{flushright}
+Un nome e una firma\\
+possono essere allineati a destra.
+\end{flushright}
+
+\begin{lstlisting}
+\begin{flushleft}
+Testo a sinistra.
+\end{flushleft}
+\begin{center}
+Testo centrato.
+\end{center}
+\begin{flushright}
+Testo a destra.
+\end{flushright}
+\end{lstlisting}
+Il comando \verb|\centering| si usa spesso dentro una figura o
+una tabella. La sua azione va contenuta nel relativo ambiente o gruppo.
+
+\prova
+\begin{enumerate}
+ \item Prepara una breve convocazione con destinatario a sinistra,
+ titolo al centro e firma a destra.
+ \item Scrivi un paragrafo lungo e confronta la giustificazione normale
+ con \texttt{flushleft}.
+\end{enumerate}
+\controlla Il cambio di allineamento deve interessare il testo scelto.
+
+\clearpage
+\section{Lunghezze e spazi}\label{sec:lunghezze}
+\index{lunghezze}
+Una lunghezza può essere assoluta, come \texttt{1cm}, oppure riferita
+allo spazio disponibile, come \verb|0.5\linewidth|.
+\verb|\textwidth| è la larghezza del corpo principale della pagina.
+\verb|\linewidth| è la larghezza disponibile nel contesto corrente.
+
+\noindent Inizio\hspace{12mm}fine.
+
+\vspace{4mm}
+\noindent Questa frase segue uno spazio verticale.
+\begin{lstlisting}
+Inizio\hspace{12mm}fine.
+
+\vspace{4mm}
+Testo successivo.
+\end{lstlisting}
+
+\subsection{Due riquadri proporzionati}
+\noindent\fbox{\parbox{0.35\linewidth}{Un riquadro stretto.}}
+\hfill
+\fbox{\parbox{0.45\linewidth}{Un riquadro più largo, con testo che
+può andare a capo.}}
+
+\subsection{Tenere due elementi insieme}
+La scrittura \verb|pagina~12| usa uno spazio che impedisce di separare
+le due parole a fine riga. Il carattere \verb|~| è utile anche tra
+un'abbreviazione e il numero che segue.
+
+\prova
+\begin{enumerate}
+ \item Porta lo spazio orizzontale a 2 cm e quello verticale a 8 mm.
+ \item Duplica i riquadri e cambia le proporzioni mantenendoli sulla stessa riga.
+ \item Aggiungi una frase che usi uno spazio non separabile.
+\end{enumerate}
+\controlla La somma delle larghezze, degli spazi e dei bordi deve
+rientrare nella riga. Controlla eventuali avvisi \texttt{Overfull}.
+
+\clearpage
+\section{Formato del foglio e margini}\label{sec:margini}
+La classe usa A4. Il pacchetto \texttt{geometry} imposta margini e
+spazio per l'intestazione. Le misure modificano lo spazio utile
+e quindi il modo in cui il testo va a capo.
+\begin{lstlisting}
+% Questa riga sostituisce quella di geometry nel preambolo.
+\usepackage[
+  a4paper,
+  left=2.8cm,
+  right=2.8cm,
+  top=2.5cm,
+  bottom=2.5cm,
+  headheight=15pt
+]{geometry}
+\end{lstlisting}
+Sostituisci la riga già presente quando provi il modello.
+Caricare lo stesso pacchetto con opzioni incompatibili può causare un errore.
+
+\subsection{Un controllo delle misure}
+La larghezza corrente del testo è \the\textwidth.
+L'altezza corrente del testo è \the\textheight.
+Questi numeri sono stampati interrogando le lunghezze del documento.
+
+\prova
+\begin{enumerate}
+ \item Annota il numero di pagine della tua versione.
+ \item Imposta margini sinistro e destro di 3 cm.
+ \item Confronta una pagina con una tabella e annota che cosa cambia.
+ \item Scegli le misure finali controllando che nulla esca dai margini.
+\end{enumerate}
+\controlla Anche una tabella o un'immagine prima corretta può diventare
+troppo larga dopo una modifica dei margini.
+
+\clearpage
+\section{Intestazioni e piè di pagina}\label{sec:intestazioni}
+Questo documento usa \texttt{fancyhdr}. La sigla \texttt{L} indica
+la sinistra, \texttt{C} il centro e \texttt{R} la destra.
+\begin{lstlisting}
+% Impostazioni nel preambolo
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{Laboratorio}
+\fancyhead[R]{2BS}
+\fancyfoot[C]{\thepage}
+\end{lstlisting}
+\verb|\fancyhf{}| svuota i campi prima di impostarli.
+Il comando \verb|\thepage| stampa il numero corrente.
+
+\subsection{Lo stile di una singola pagina}
+La pagina iniziale usa \verb|\thispagestyle{plain}|.
+Puoi usare \verb|\thispagestyle{empty}| per togliere intestazione
+e piè di pagina solo dalla pagina corrente.
+
+\prova
+\begin{enumerate}
+ \item Sostituisci l'intestazione sinistra con il tuo cognome.
+ \item Sposta il numero di pagina a destra.
+ \item Inserisci la classe nel piè di pagina sinistro.
+ \item Prova lo stile \texttt{empty} su questa pagina, osserva l'effetto
+ e poi ripristina lo stile iniziale.
+\end{enumerate}
+\controlla La modifica di una singola pagina non deve cancellare
+le intestazioni di tutte le pagine.
+
+\clearpage
+\section{Numerazione e cambi di pagina}\label{sec:pagine}
+\subsection{Numeri arabi e romani}
+Le pagine di questo file sono numerate con cifre arabe.
+Il modello seguente si prova in un progetto separato perché cambia
+la numerazione durante il documento.
+\begin{lstlisting}
+\documentclass{article}
+\begin{document}
+\pagenumbering{roman}
+Introduzione.
+\clearpage
+\pagenumbering{arabic}
+Prima pagina del testo principale.
+\end{document}
+\end{lstlisting}
+\verb|\pagenumbering| cambia il formato e riporta il contatore a 1.
+\verb|\setcounter{page}{5}| assegna invece un valore preciso.
+
+\subsection{Nuova pagina e oggetti in attesa}
+\verb|\newpage| termina la pagina corrente.
+\verb|\clearpage| termina la pagina e fa uscire anche figure e tabelle
+che aspettano di essere collocate.
+
+\prova
+\begin{enumerate}
+ \item Esegui il modello in un progetto di prova e verifica i numeri.
+ \item Torna a questo file e trova i comandi tra una sezione e l'altra.
+ \item Inserisci un cambio pagina in una tua sezione e osserva lo spazio rimasto.
+\end{enumerate}
+\controlla Evita di riportare la numerazione a 1 più volte nella versione
+da consegnare. I riferimenti devono restare chiari.
+
+\clearpage
+\section{Una facciata e due facciate}\label{sec:facciate}
+La prima riga contiene l'opzione \texttt{oneside}.
+Per una prova fronte-retro puoi usare \texttt{twoside}.
+In quel caso il margine interno è quello rivolto alla rilegatura.
+\begin{lstlisting}
+\documentclass[a4paper,11pt,twoside]{article}
+% Nel pacchetto geometry sostituisci le misure con:
+% inner=3cm,outer=2cm,top=2.5cm,bottom=2.5cm
+% Per intestazioni alternate:
+\fancyhead[LE,RO]{2BS}
+\fancyhead[LO,RE]{Relazione}
+\end{lstlisting}
+Le lettere \texttt{E} e \texttt{O} indicano pagine pari e dispari.
+Questo esempio va provato dopo aver attivato \texttt{twoside}.
+
+\prova
+\begin{enumerate}
+ \item Salva una copia del progetto con un nome diverso.
+ \item Attiva \texttt{twoside} e imposta margini interno ed esterno diversi.
+ \item Svuota i campi delle intestazioni e usa il modello alternato.
+ \item Confronta due pagine consecutive a sinistra e a destra.
+\end{enumerate}
+\controlla Il margine interno cambia lato tra pagina pari e pagina dispari.
+Osserva il documento come se fosse già rilegato.
+
+\clearpage
+\section{Costruire una tabella}\label{sec:tabelle}
+\index{tabelle}
+Una tabella ha colonne allineate e righe di dati.
+In \texttt{tabular}, \texttt{l}, \texttt{c} e \texttt{r}
+indicano rispettivamente sinistra, centro e destra.
+\begin{center}
+\begin{tabular}{lcr}
+ \hline
+ Figura & Lati & Perimetro\\
+ \hline
+ Equilatero & $a,a,a$ & $3a$\\
+ Isoscele & $a,a,b$ & $2a+b$\\
+ \hline
+\end{tabular}
+\end{center}
+\begin{lstlisting}
+\begin{tabular}{lcr}
+\hline
+Figura & Lati & Perimetro\\
+\hline
+Equilatero & $a,a,a$ & $3a$\\
+Isoscele & $a,a,b$ & $2a+b$\\
+\hline
+\end{tabular}
+\end{lstlisting}
+Il simbolo \verb|&| separa le celle e \verb|\\| termina la riga.
+
+\subsection{Colonne che accolgono testo}
+\begin{tabularx}{\linewidth}{lX}
+\toprule
+Termine & Spiegazione\\
+\midrule
+Altezza & Segmento perpendicolare alla retta di un lato condotto
+dal vertice opposto.\\
+Mediana & Segmento che unisce un vertice con il punto medio del lato opposto.\\
+\bottomrule
+\end{tabularx}
+La colonna \texttt{X} di \texttt{tabularx} occupa lo spazio rimasto
+e permette al testo di andare a capo.
+
+\prova
+\begin{enumerate}
+ \item Aggiungi alla prima tabella un triangolo scaleno.
+ \item Duplica la seconda tabella e aggiungi la definizione di bisettrice.
+ \item Prova una tabella con quattro colonne e almeno tre righe di dati.
+\end{enumerate}
+\controlla Ogni riga deve avere il numero di celle previsto.
+
+\clearpage
+\section{Didascalie, posizione e riferimenti delle tabelle}\label{sec:float}
+L'ambiente \texttt{table} contiene la tabella e la sua didascalia.
+Il suo numero può essere richiamato dal testo.
+\begin{table}[htbp]
+\centering
+\caption{Un confronto tra due scomposizioni.}
+\label{tab:scomposizioni}
+\begin{tabular}{ll}
+\toprule
+Polinomio & Scomposizione\\
+\midrule
+$x^2-9$ & $(x-3)(x+3)$\\
+$x^2+4x+4$ & $(x+2)^2$\\
+\bottomrule
+\end{tabular}
+\end{table}
+La tabella \ref{tab:scomposizioni} usa la didascalia sopra i dati.
+\begin{lstlisting}
+\begin{table}[htbp]
+\centering
+\caption{Un titolo breve.}
+\label{tab:nuova}
+% Inserisci qui il tuo ambiente tabular.
+\end{table}
+\end{lstlisting}
+Le lettere suggeriscono collocazioni possibili.
+\texttt{h} indica qui, \texttt{t} in alto, \texttt{b} in basso e
+\texttt{p} una pagina dedicata agli oggetti.
+Sono preferenze che il sistema valuta insieme allo spazio disponibile.
+
+\prova
+\begin{enumerate}
+ \item Trasforma una tua tabella in un oggetto con didascalia ed etichetta.
+ \item Richiamala in una frase con \verb|\ref|.
+ \item Prova prima \texttt{[t]} e poi \texttt{[htbp]}.
+ \item Osserva dove compare rispetto al paragrafo che la precede.
+\end{enumerate}
+\controlla L'etichetta deve essere dopo la didascalia.
+Il numero nel richiamo deve coincidere con quello della tabella.
+
+\clearpage
+\section{Un disegno con TikZ}\label{sec:tikz}
+\index{TikZ}
+Con TikZ il disegno è descritto nel sorgente.
+Le coordinate fissano punti; le istruzioni tracciano segmenti e nomi.
+\begin{center}
+\begin{tikzpicture}[scale=0.8]
+ \coordinate (A) at (0,0);
+ \coordinate (B) at (6,0);
+ \coordinate (C) at (2,3);
+ \coordinate (H) at (2,0);
+ \draw[thick] (A)--(B)--(C)--cycle;
+ \draw[dashed,verde] (C)--(H);
+ \node[below left] at (A) {$A$};
+ \node[below right] at (B) {$B$};
+ \node[above] at (C) {$C$};
+ \node[below] at (H) {$H$};
+\end{tikzpicture}
+\end{center}
+\begin{lstlisting}
+\begin{tikzpicture}[scale=0.8]
+\coordinate (A) at (0,0);
+\coordinate (B) at (6,0);
+\coordinate (C) at (2,3);
+\draw[thick] (A)--(B)--(C)--cycle;
+\node[above] at (C) {$C$};
+\end{tikzpicture}
+\end{lstlisting}
+Il comando \texttt{cycle} chiude il percorso.
+Il punto e virgola conclude ogni istruzione TikZ.
+
+\prova
+\begin{enumerate}
+ \item Duplica il disegno e sposta $C$ in $(3,3)$.
+ \item Aggiorna anche $H$ e confronta i due triangoli.
+ \item Cambia colore e tratteggio dell'altezza.
+ \item Scrivi una frase che motivi perché il secondo triangolo è isoscele.
+\end{enumerate}
+\controlla L'altezza deve essere perpendicolare alla base.
+
+\clearpage
+\section{Figure, immagini e dimensioni}\label{sec:figure}
+L'ambiente \texttt{figure} aggiunge didascalia e numero a un disegno.
+L'esempio seguente funziona senza caricare file esterni.
+\begin{figure}[htbp]
+\centering
+\begin{tikzpicture}
+ \draw[thick,blu] (0,0) rectangle (4,2);
+ \draw[dashed] (0,0)--(4,2);
+ \node at (2,-0.4) {$b=4$};
+ \node[right] at (4,1) {$h=2$};
+\end{tikzpicture}
+\caption{Un rettangolo diviso dalla diagonale.}
+\label{fig:rettangolo}
+\end{figure}
+La figura \ref{fig:rettangolo} può essere richiamata come una tabella.
+
+\subsection{Caricare una propria immagine}
+Il blocco nel sorgente usa il file \texttt{immagine.png}, se presente.
+Finché non lo carichi mostra un riquadro.
+\begin{figure}[htbp]
+\centering
+\IfFileExists{immagine.png}{
+ \includegraphics[width=0.45\linewidth]{immagine.png}
+}{
+ \fbox{\parbox[c][18mm][c]{0.55\linewidth}{\centering
+ Carica una tua immagine chiamata \texttt{immagine.png}.}}
+}
+\caption{La mia immagine di prova.}
+\label{fig:immagine}
+\end{figure}
+\prova
+\begin{enumerate}
+ \item Carica un'immagine con il nome indicato e verifica che appaia.
+ \item Prova larghezze \texttt{0.3}, \texttt{0.5} e \texttt{0.7}.
+ \item Cambia la didascalia e aggiungi un riferimento alla figura nel testo.
+\end{enumerate}
+\controlla Rispetta maiuscole ed estensione del nome del file.
+
+\clearpage
+\section{Elenco delle figure e delle tabelle}\label{sec:elenchi-oggetti}
+Questi elenchi raccolgono le didascalie e i numeri di pagina.
+Dopo una modifica possono richiedere una nuova compilazione.
+\listoffigures
+\listoftables
+\begin{lstlisting}
+\listoffigures
+\listoftables
+\end{lstlisting}
+
+\subsection{Una didascalia breve per l'elenco}
+Puoi mostrare un titolo breve nell'elenco e una spiegazione più estesa
+sotto la figura usando un argomento opzionale.
+\begin{lstlisting}
+\caption[Triangolo isoscele]{
+Triangolo isoscele con l'altezza relativa alla base.}
+\end{lstlisting}
+
+\prova
+\begin{enumerate}
+ \item Aggiungi una figura o una tabella alla tua versione.
+ \item Imposta una didascalia estesa con un titolo breve per l'elenco.
+ \item Compila di nuovo e confronta l'elenco con l'oggetto nel testo.
+\end{enumerate}
+\controlla Il titolo breve compare nell'elenco, la didascalia estesa
+resta accanto alla figura o alla tabella.
+
+\clearpage
+\section{Scrivere in più colonne}\label{sec:colonne}
+L'ambiente \texttt{multicols} divide una zona del documento.
+Il numero tra graffe stabilisce quante colonne creare.
+\begin{multicols}{2}
+\textbf{Definizione.}
+Una mediana unisce un vertice del triangolo con il punto medio
+del lato opposto.
+\columnbreak
+\textbf{Osservazione.}
+Un triangolo ha tre mediane. La posizione del punto medio è
+decisiva per riconoscere il segmento.
+\end{multicols}
+\begin{lstlisting}
+\begin{multicols}{2}
+Testo nella prima colonna.
+\columnbreak
+Testo nella seconda colonna.
+\end{multicols}
+\end{lstlisting}
+Senza cambio forzato, il testo viene distribuito dal sistema.
+Nel preambolo puoi cambiare la distanza tra le colonne.
+\begin{lstlisting}
+\setlength{\columnsep}{8mm}
+\end{lstlisting}
+
+\prova
+\begin{enumerate}
+ \item Crea una scheda a due colonne con una definizione e un esempio.
+ \item Togli \verb|\columnbreak| e aggiungi testo per vedere la distribuzione.
+ \item Prova tre colonne con tre brevi definizioni.
+\end{enumerate}
+\controlla Le formule e le immagini devono stare nella colonna.
+Dentro una colonna usa \verb|\linewidth| per misurare la larghezza utile.
+
+\clearpage
+\section{Colori nel testo e nei riquadri}\label{sec:colori}
+Il pacchetto \texttt{xcolor} permette di definire colori e applicarli.
+Nel preambolo sono già definiti \texttt{verde}, \texttt{blu}
+e \texttt{grigiochiaro}.
+\begin{center}
+\textcolor{verde}{Condizione verificata}\qquad
+\textcolor{blu}{Controllo da eseguire}
+\end{center}
+\begin{center}
+\colorbox{grigiochiaro}{\strut Una precisazione.}
+\end{center}
+\begin{lstlisting}
+% Nel preambolo:
+\definecolor{verde}{HTML}{176756}
+% Nel testo:
+\textcolor{verde}{Condizione verificata}
+\colorbox{grigiochiaro}{Una precisazione.}
+\end{lstlisting}
+Il modello \texttt{HTML} usa una scrittura esadecimale.
+Il modello \texttt{RGB} usa tre interi tra 0 e 255.
+\begin{lstlisting}
+\definecolor{arancio}{RGB}{190,95,15}
+\end{lstlisting}
+
+\prova
+\begin{enumerate}
+ \item Definisci un nuovo colore e applicalo a un termine.
+ \item Inserisci un breve riquadro con un richiamo sulle condizioni di esistenza.
+ \item Prova una stampa in scala di grigi o osserva il PDF senza colore.
+\end{enumerate}
+\controlla Il testo deve restare leggibile e le informazioni importanti
+devono essere riconoscibili anche dalle parole usate.
+
+\clearpage
+\section{Note a piè di pagina e a margine}\label{sec:note}
+\subsection{Un approfondimento a fondo pagina}
+Una condizione di esistenza\footnote{Una frazione algebrica è definita
+per i valori che rendono il denominatore diverso da zero.}
+può essere spiegata in una nota.
+\begin{lstlisting}
+Una condizione di esistenza\footnote{
+Spiegazione della condizione.}
+\end{lstlisting}
+La nota viene numerata automaticamente.
+Inserire il comando in un normale paragrafo permette di osservarne
+il collegamento con il punto preciso del testo.
+
+\subsection{Un'annotazione laterale}
+Questa riga ha una nota a margine.
+\marginpar{\footnotesize Controlla il denominatore.}
+Il comando colloca una precisazione nel margine.
+Un testo troppo lungo può occupare molte righe.
+\begin{lstlisting}
+Testo principale.
+\marginpar{\footnotesize Una nota breve.}
+\end{lstlisting}
+
+\prova
+\begin{enumerate}
+ \item Aggiungi una nota a piè di pagina a una definizione.
+ \item Inserisci una nota laterale di tre o quattro parole.
+ \item Aggiungi una nota prima di quella esistente e osserva i numeri.
+\end{enumerate}
+\controlla La nota laterale deve restare dentro il foglio.
+Controlla il risultato anche dopo una modifica dei margini.
+
+\clearpage
+\section{Contatori e numerazione automatica}\label{sec:contatori}
+\index{contatori}
+Pagine, sezioni ed equazioni hanno contatori.
+Puoi anche crearne uno per una tua sequenza.
+Nel preambolo è definito il contatore \texttt{esempio}.
+\esempio Il quadrato di $x+1$ è $x^2+2x+1$.\par
+\esempio La differenza $x^2-1$ si scompone in $(x-1)(x+1)$.\par
+
+\begin{lstlisting}
+% Nel preambolo:
+\newcounter{esempio}
+\newcommand{\esempio}{\refstepcounter{esempio}\par
+\textbf{Esempio \theesempio}\quad}
+% Nel corpo:
+\esempio Un primo testo.\par
+\esempio Un secondo testo.\par
+\end{lstlisting}
+La definizione è già presente nel tuo preambolo.
+\verb|\refstepcounter| incrementa e rende disponibile il valore
+per un'etichetta.
+\verb|\setcounter| assegna un valore;
+\verb|\addtocounter| aggiunge una quantità.
+
+\prova
+\begin{enumerate}
+ \item Aggiungi tre esempi con il comando predisposto.
+ \item Assegna un'etichetta a un esempio e richiamalo con \verb|\ref|.
+ \item Nella copia di prova imposta il contatore a 9 prima di un nuovo esempio.
+\end{enumerate}
+\controlla Il successivo esempio deve essere il numero 10.
+Il richiamo deve usare il numero dell'esempio, non quello della sezione.
+
+\clearpage
+\section{Mostrare codice con verbatim e listings}\label{sec:codice}
+Per stampare un breve comando puoi usare \verb|\verb|.
+Per un blocco intero puoi usare \texttt{verbatim} oppure
+\texttt{lstlisting}. Gli esempi di questo laboratorio usano il secondo.
+\begin{verbatim}
+\textbf{Qui vedo il comando completo.}
+\end{verbatim}
+
+\begin{lstlisting}[numbers=left]
+% Questo commento compare nel PDF.
+\begin{enumerate}
+  \item Prima voce.
+  \item Seconda voce.
+\end{enumerate}
+\end{lstlisting}
+Il contenuto viene mostrato come codice.
+Le impostazioni di \texttt{listings} nel preambolo scelgono caratteri,
+bordi e colori.
+\begin{lstlisting}
+\lstset{
+  language=[LaTeX]TeX,
+  basicstyle=\small\ttfamily,
+  keywordstyle=\color{blu},
+  frame=single,
+  breaklines=true
+}
+\end{lstlisting}
+
+\prova
+\begin{enumerate}
+ \item Mostra il codice di una tua tabella in un nuovo blocco.
+ \item Aggiungi \texttt{numbers=left} al blocco per numerarne le righe.
+ \item Cambia colore delle parole chiave e dimensione del carattere.
+\end{enumerate}
+\controlla Nel blocco deve comparire il codice.
+La tabella effettiva può stare sotto per confrontare sorgente e risultato.
+
+\clearpage
+\section{Approfondimento sul pacchetto minted}\label{sec:minted}
+Il pacchetto \texttt{minted} evidenzia il codice usando un elaboratore
+esterno. La disponibilità dipende dall'ambiente di compilazione.
+Questa prova si esegue in un progetto separato.
+Il file principale continua a usare \texttt{listings}.
+
+\subsection{Il modello da provare}
+\begin{lstlisting}
+\documentclass{article}
+\usepackage[T1]{fontenc}
+\usepackage{minted}
+\begin{document}
+\begin{minted}[linenos,breaklines,frame=single]{latex}
+\section{Prodotti notevoli}
+\[
+(a+b)^2=a^2+2ab+b^2
+\]
+\end{minted}
+\end{document}
+\end{lstlisting}
+Il linguaggio indicato è \texttt{latex}.
+L'opzione \texttt{linenos} numera le righe;
+\texttt{breaklines} permette di spezzare quelle lunghe.
+
+\prova
+\begin{enumerate}
+ \item Crea un progetto di prova e compila il modello.
+ \item Sostituisci il contenuto con il codice di una tua equazione.
+ \item Confronta il risultato con un blocco \texttt{lstlisting}.
+\end{enumerate}
+\controlla Se l'ambiente segnala un problema relativo all'elaboratore
+esterno, conserva il messaggio e mostra il codice con \texttt{listings}.
+Annota che cosa è riuscito a compilare nel tuo progetto.
+
+\clearpage
+\section{Indice analitico}\label{sec:analitico}
+\index{indice!analitico}
+L'indice analitico raccoglie parole e numeri di pagina.
+L'indice generale raccoglie i titoli.
+Alcune parole del laboratorio sono già marcate nel sorgente.
+\begin{lstlisting}
+% Nel preambolo:
+\usepackage{makeidx}
+\makeindex
+% Nel corpo:
+Un termine importante.\index{termine}
+% Alla fine:
+\printindex
+\end{lstlisting}
+La scrittura \verb|\index{indice!analitico}| crea una sottovoce.
+Il passaggio di compilazione \texttt{makeindex} elabora il file
+\texttt{.idx}; la successiva compilazione inserisce l'indice nel PDF.
+
+\prova
+\begin{enumerate}
+ \item Trova nel sorgente le voci già inserite.
+ \item Marca tre nuovi termini nei rispettivi paragrafi.
+ \item Aggiungi due sottovoci sotto un termine comune.
+ \item Aggiorna l'indice con il sistema di compilazione disponibile.
+\end{enumerate}
+\controlla Confronta ogni numero con la pagina in cui hai inserito
+il comando. Se l'indice non appare, verifica il passaggio
+\texttt{makeindex} nel registro di compilazione.
+
+\clearpage
+\section{Caratteri speciali, errori e avvisi}\label{sec:errori}
+\subsection{Caratteri da scrivere esplicitamente}
+\begin{center}
+\begin{tabular}{cc}
+\toprule
+Risultato & Codice\\
+\midrule
+\% & \verb|\%|\\
+\& & \verb|\&|\\
+\_ & \verb|\_|\\
+\# & \verb|\#|\\
+\$ & \verb|\$|\\
+\{ \} & \verb|\{ \}|\\
+\textbackslash & \verb|\textbackslash|\\
+\bottomrule
+\end{tabular}
+\end{center}
+Questi caratteri svolgono funzioni particolari nel sorgente.
+Per stamparli nel testo occorre usare una scrittura appropriata.
+
+\subsection{Prove controllate}
+\prova
+\begin{enumerate}
+ \item Scrivi una frase con una percentuale e un nome contenente un trattino basso.
+ \item In una copia del progetto togli la graffa finale da
+ \verb|\textbf{prova}|. Compila, leggi il primo errore e ripristina il comando.
+ \item Cambia il nome di un richiamo senza cambiare l'etichetta.
+ Osserva l'avviso e ripristina il riferimento.
+ \item Allunga una parola in una cella finché supera il margine.
+ Osserva l'avviso e rendi la colonna adatta al testo.
+\end{enumerate}
+\controlla Un PDF prodotto può ancora avere avvisi o riferimenti incompleti.
+Correggi la causa e compila nuovamente.
+
+\clearpage
+\section{Progetto finale e controllo del lavoro}\label{sec:finale}
+Prepara dentro la tua copia una breve relazione intitolata
+\emph{Tre modi di studiare un triangolo}.
+Scegli esempi dal laboratorio e adattali alla tua spiegazione.
+
+\begin{enumerate}
+ \item Organizza il testo in tre sottosezioni su lati, altezze e area.
+ \item Inserisci due paragrafi, un elenco e una nota.
+ \item Prepara una tabella con dati numerici di due triangoli.
+ \item Disegna un triangolo, aggiungi didascalia e richiamalo nel testo.
+ \item Inserisci una formula numerata per il calcolo dell'area e richiamala.
+ \item Aggiungi un termine all'indice analitico.
+\end{enumerate}
+
+\subsection{Controllo prima della consegna}
+\begin{itemize}
+ \item Titolo, autore e indice sono aggiornati.
+ \item Titoli ed elenchi hanno numerazione automatica.
+ \item Le etichette hanno nomi unici e i richiami funzionano.
+ \item Tabelle e figure stanno nei margini e hanno didascalie pertinenti.
+ \item Le formule corrispondono ai dati delle figure.
+ \item Hai ricompilato dopo l'ultima modifica.
+\end{itemize}
+
+\subsection{Una breve nota personale}
+Scrivi quali esempi hai riutilizzato, che cosa hai cambiato
+e un problema che hai risolto.
+Se hai usato Gemini, indica una domanda precisa che gli hai posto
+e una verifica che hai effettuato sul suggerimento.
+La consegna comprende il sorgente e il PDF della tua versione.
+
+\clearpage
+\section*{Riferimenti per approfondire}
+\phantomsection
+\addcontentsline{toc}{section}{Riferimenti per approfondire}
+Le spiegazioni, gli esempi matematici e le attività di questo laboratorio
+sono stati preparati per la 2BS seguendo gli argomenti del centro
+di apprendimento Overleaf.
+Le guide originali permettono di approfondire i singoli comandi.
+
+\begin{itemize}
+ \item Indice degli argomenti\\
+ \url{https://www.overleaf.com/learn/latex/Contents}
+ \item Struttura\\
+ \url{https://www.overleaf.com/learn/latex/Sections_and_chapters}
+ \item Paragrafi e righe\\
+ \url{https://www.overleaf.com/learn/latex/Paragraphs_and_new_lines}
+ \item Elenchi\\
+ \url{https://www.overleaf.com/learn/latex/Lists}
+ \item Tabelle\\
+ \url{https://www.overleaf.com/learn/latex/Tables}
+ \item Posizione di figure e tabelle\\
+ \url{https://www.overleaf.com/learn/latex/Positioning_images_and_tables}
+ \item Intestazioni e piè di pagina\\
+ \url{https://www.overleaf.com/learn/latex/Headers_and_footers}
+ \item Contatori\\
+ \url{https://www.overleaf.com/learn/latex/Counters}
+ \item Indici analitici\\
+ \url{https://www.overleaf.com/learn/latex/Indices}
+ \item Evidenziazione del codice con minted\\
+ \url{https://www.overleaf.com/learn/latex/Code_Highlighting_with_minted}
+\end{itemize}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{section}{Indice analitico}
+\printindex
+\end{document}
+

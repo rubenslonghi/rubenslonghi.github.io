@@ -1,0 +1,158 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[margin=20mm]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern,amsmath,amssymb,tikz,xcolor}
+\definecolor{ink}{HTML}{182536}
+\definecolor{accent}{HTML}{085872}
+\definecolor{rulecolor}{HTML}{7C8B95}
+\definecolor{light}{HTML}{EEF4F6}
+\setlength{\parindent}{0pt}
+\pagestyle{empty}
+\color{ink}
+\newcommand{\heading}[1]{%
+  {\large\sffamily\bfseries\color{accent} MATEMATICA}\par\vspace{2mm}
+  {\Huge\sffamily\bfseries Sistema n.~#1}\par\vspace{3mm}
+  {\color{accent}\rule{\linewidth}{1pt}}\par}
+\newcommand{\step}[1]{\par\vspace{3mm}{\large\sffamily\bfseries\color{accent}#1}\par\vspace{1mm}}
+\newcommand{\dotat}[3]{\draw[ink,fill=#3,line width=.8pt] (#1,#2) circle[radius=2.5pt];}
+\newcommand{\circledsign}[3]{\node[draw=accent,fill=light,circle,line width=1pt,minimum size=5.5mm,inner sep=0pt] at (#1,#2) {$#3$};}
+\newcommand{\plain}[3]{\node at (#1,#2) {$#3$};}
+\newcommand{\signframe}[2]{%
+  \draw[fill=light,draw=none] (0,-2.75) rectangle (14,-1.95);
+  \foreach \y in {-.4,-1.17,-1.95,-2.75}
+    \draw[rulecolor,thin] (0,\y)--(14,\y);
+  \foreach \x in {3,6,10}
+    \draw[rulecolor,thin,densely dotted] (\x,-.4)--(\x,-2.75);
+  \node[anchor=west] at (.2,0) {$x$};
+  \plain{6}{0}{#1}
+  \plain{10}{0}{#2}
+  \node[anchor=west] at (.25,-.79) {$A$};
+  \node[anchor=west] at (.25,-1.56) {$B$};
+  \node[anchor=west,align=left] at (.25,-2.35) {$A/B$};
+
+}
+\newcommand{\systems}[3]{%
+  \draw[->,rulecolor] (3,0)--(14,0);
+  \foreach \x/\labelx in {5/#1,8/#2,11/#3} {
+    \draw[rulecolor,thin,densely dotted] (\x,-.07)--(\x,-2.98);
+    \node[above] at (\x,0) {$\labelx$};
+  }
+  \node[anchor=west] at (.15,-.76) {$S_1$};
+  \node[anchor=west] at (.15,-1.60) {$S_2$};
+  \node[anchor=west] at (.15,-2.56) {$S_1\cap S_2$};
+}
+\newcommand{\on}[3]{\draw[ink,line width=1.35pt] (#1,#3)--(#2,#3);}
+\newcommand{\off}[3]{\draw[rulecolor,line width=.8pt,dash pattern=on 3pt off 2.5pt] (#1,#3)--(#2,#3);}
+\newcommand{\legend}{\par\smallskip{\small Linea continua per le soluzioni, tratteggiata per il complementare.}\par}
+\newcommand{\sol}[2]{%
+  \par\vspace{3mm}\noindent\colorbox{light}{\parbox{\dimexpr\linewidth-2\fboxsep}{%
+  \centering\vspace{1mm}{\sffamily\bfseries\color{accent} Soluzione del sistema}\hspace{8mm}%
+  $\displaystyle S=#1\quad\Longleftrightarrow\quad #2$\par\vspace{1mm}}}}
+\begin{document}
+\heading{170}
+\[
+\begin{cases}
+\dfrac{x-4}{x+1}\ge 0\\[3pt]
+-4(2-x)\le 0
+\end{cases}
+\]
+\step{Prima disequazione}
+Poniamo $A=x-4$ e $B=x+1$. La condizione di esistenza è $x\ne -1$.
+Per lo studio dei segni poniamo $A\ge 0$ e $B>0$.
+\[
+\begin{aligned}
+A\ge 0 &\quad\Longleftrightarrow\quad x-4\ge 0\quad\Longleftrightarrow\quad x\ge 4,\\
+B>0 &\quad\Longleftrightarrow\quad x+1>0\quad\Longleftrightarrow\quad x>-1.
+\end{aligned}
+\]
+\begin{center}
+\begin{tikzpicture}[x=1.03cm,y=.83cm]
+  \signframe{-1}{4}
+  \plain{4.5}{-.79}{-}\plain{8}{-.79}{-}\plain{12}{-.79}{+}
+  \plain{4.5}{-1.56}{-}\plain{8}{-1.56}{+}\plain{12}{-1.56}{+}
+  \dotat{10}{-.79}{ink}\dotat{6}{-1.56}{white}
+  \circledsign{4.5}{-2.35}{+}\plain{8}{-2.35}{-}\circledsign{12}{-2.35}{+}
+  \circledsign{10}{-2.35}{0}
+  \node[font=\scriptsize\sffamily,fill=light,inner sep=1pt] at (6,-2.35) {escluso};
+\end{tikzpicture}
+\end{center}
+Cerchiamo i $+$ e lo $0$, perché il quoziente deve essere $\ge 0$.
+Il valore $-1$ è escluso perché annulla il denominatore.
+\[
+S_1=(-\infty,-1)\cup[4,+\infty).
+\]
+\step{Seconda disequazione}
+Dividendo per $-4$, si inverte il verso della disequazione.
+\[
+-4(2-x)\le 0\quad\Longleftrightarrow\quad 2-x\ge 0
+\quad\Longleftrightarrow\quad x\le 2,
+\qquad S_2=(-\infty,2].
+\]
+\step{Intersezione delle soluzioni}
+\legend
+\begin{center}
+\begin{tikzpicture}[x=1.03cm,y=.83cm]
+  \systems{-1}{2}{4}
+  \on{3}{5}{-.76}\off{5}{11}{-.76}\on{11}{14}{-.76}
+  \dotat{5}{-.76}{white}\dotat{11}{-.76}{ink}
+  \on{3}{8}{-1.60}\off{8}{14}{-1.60}\dotat{8}{-1.60}{ink}
+  \on{3}{5}{-2.56}\off{5}{14}{-2.56}\dotat{5}{-2.56}{white}
+\end{tikzpicture}
+\end{center}
+\sol{(-\infty,-1)}{x<-1}
+\newpage
+\heading{171}
+\[
+\begin{cases}
+\dfrac{x-1}{4-x}\le 0\\[6pt]
+\dfrac{x-3}{4}<\dfrac{x}{6}
+\end{cases}
+\]
+\step{Prima disequazione}
+Poniamo $A=x-1$ e $B=4-x$. La condizione di esistenza è $x\ne 4$.
+Per il denominatore usiamo $B>0$ e invertiamo il verso quando isoliamo $x$.
+\[
+\begin{aligned}
+A\ge 0 &\quad\Longleftrightarrow\quad x-1\ge 0\quad\Longleftrightarrow\quad x\ge 1,\\
+B>0 &\quad\Longleftrightarrow\quad 4-x>0\quad\Longleftrightarrow\quad x<4.
+\end{aligned}
+\]
+\begin{center}
+\begin{tikzpicture}[x=1.03cm,y=.83cm]
+  \signframe{1}{4}
+  \plain{4.5}{-.79}{-}\plain{8}{-.79}{+}\plain{12}{-.79}{+}
+  \plain{4.5}{-1.56}{+}\plain{8}{-1.56}{+}\plain{12}{-1.56}{-}
+  \dotat{6}{-.79}{ink}\dotat{10}{-1.56}{white}
+  \circledsign{4.5}{-2.35}{-}\plain{8}{-2.35}{+}\circledsign{12}{-2.35}{-}
+  \circledsign{6}{-2.35}{0}
+  \node[font=\scriptsize\sffamily,fill=light,inner sep=1pt] at (10,-2.35) {escluso};
+\end{tikzpicture}
+\end{center}
+Cerchiamo i $-$ e lo $0$, perché il quoziente deve essere $\le 0$.
+Il valore $4$ è escluso perché annulla il denominatore.
+\[
+S_1=(-\infty,1]\cup(4,+\infty).
+\]
+\step{Seconda disequazione}
+Moltiplichiamo entrambi i membri per $12$, il minimo comune multiplo dei denominatori.
+\[
+\dfrac{x-3}{4}<\dfrac{x}{6}
+\quad\Longleftrightarrow\quad 3(x-3)<2x
+\quad\Longleftrightarrow\quad x<9,
+\qquad S_2=(-\infty,9).
+\]
+\step{Intersezione delle soluzioni}
+\legend
+\begin{center}
+\begin{tikzpicture}[x=1.03cm,y=.83cm]
+  \systems{1}{4}{9}
+  \on{3}{5}{-.76}\off{5}{8}{-.76}\on{8}{14}{-.76}
+  \dotat{5}{-.76}{ink}\dotat{8}{-.76}{white}
+  \on{3}{11}{-1.60}\off{11}{14}{-1.60}\dotat{11}{-1.60}{white}
+  \on{3}{5}{-2.56}\off{5}{8}{-2.56}\on{8}{11}{-2.56}\off{11}{14}{-2.56}
+  \dotat{5}{-2.56}{ink}\dotat{8}{-2.56}{white}\dotat{11}{-2.56}{white}
+\end{tikzpicture}
+\end{center}
+\sol{(-\infty,1]\cup(4,9)}{x\le 1\ \lor\ 4<x<9}
+\end{document}

@@ -1,0 +1,671 @@
+\documentclass[9pt,a4paper]{extarticle}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[italian]{babel}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb}
+\usepackage[a4paper,top=1.05cm,bottom=1.05cm,left=1.1cm,right=1.1cm]{geometry}
+\usepackage{xcolor}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{microtype}
+
+% ------------------------------------------------------------
+% Impaginazione compatta
+% ------------------------------------------------------------
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1.5pt}
+\setlength{\columnsep}{0.55cm}
+\setlength{\columnseprule}{0.2pt}
+
+\setlength{\abovedisplayskip}{3pt}
+\setlength{\belowdisplayskip}{3pt}
+\setlength{\abovedisplayshortskip}{2pt}
+\setlength{\belowdisplayshortskip}{2pt}
+
+\pagestyle{empty}
+
+% ------------------------------------------------------------
+% Colori e comandi
+% ------------------------------------------------------------
+\definecolor{errore}{RGB}{150,30,30}
+\definecolor{corretto}{RGB}{20,100,45}
+\definecolor{titolo}{RGB}{40,60,105}
+
+\newcommand{\R}{\mathbb{R}}
+
+\newcommand{\err}[1]{%
+	{\color{errore}\textbf{Errore:}} #1
+}
+
+\newcommand{\corr}[1]{%
+	{\color{corretto}\textbf{Corretto:}} #1
+}
+
+\newcommand{\regola}[1]{%
+	{\color{titolo}\textbf{Da ricordare:}} #1
+}
+
+\newcommand{\voce}[1]{%
+	\vspace{3pt}
+	{\color{titolo}\textbf{#1}}\par
+	\vspace{1pt}
+}
+
+% ============================================================
+\begin{document}
+
+\begin{center}
+	{\Large\bfseries Errori ricorrenti nel calcolo algebrico e nelle equazioni}\\[-1pt]
+	{\small Classe 2BS -- Scheda di recupero e autocorrezione}
+\end{center}
+
+\vspace{-2mm}
+
+{\small
+Questa scheda raccoglie alcuni errori comparsi frequentemente.
+L'obiettivo non è imparare divieti a memoria, ma capire
+\textbf{che cosa stiamo facendo e perché}.
+}
+
+\vspace{1mm}
+
+% ============================================================
+% PAGINA 1
+% ============================================================
+
+\begin{multicols}{2}
+\small
+
+% ------------------------------------------------------------
+\voce{1. Ridurre subito i termini simili}
+
+Portarsi dietro termini già sommabili rende i calcoli più lunghi
+e aumenta la probabilità di errore.
+
+\err{
+\[
+3x-2+5x+7-4x
+\]
+e continuare così nei passaggi successivi.
+}
+
+\corr{
+\[
+3x+5x-4x-2+7=4x+5.
+\]
+}
+
+\regola{Semplificare presto significa fare meno conti.}
+
+% ------------------------------------------------------------
+\voce{2. Eliminare presto i denominatori numerici}
+
+\err{Portarsi dietro inutilmente le frazioni fino alla fine.}
+
+Per esempio:
+\[
+\frac{x}{6}-\frac{x-1}{4}=\frac13.
+\]
+
+Il m.c.m. di $6,4,3$ è $12$.
+
+\corr{Moltiplichiamo \textbf{entrambi i membri} per $12$:}
+\[
+2x-3(x-1)=4,
+\]
+\[
+2x-3x+3=4,
+\qquad
+x=-1.
+\]
+
+\regola{Se possiamo liberarci facilmente delle frazioni,
+conviene farlo subito.}
+
+% ------------------------------------------------------------
+\voce{3. Non usare due volte lo stesso fattore}
+
+\err{
+\[
+2\cdot6(2x+1)
+\longrightarrow
+12(4x+2).
+\]
+}
+
+Il fattore $2$ è stato utilizzato due volte.
+
+\corr{
+\[
+2\cdot6(2x+1)=12(2x+1),
+\]
+oppure
+\[
+2\cdot6(2x+1)=6(4x+2).
+\]
+}
+
+Entrambe danno:
+\[
+24x+12.
+\]
+
+% ------------------------------------------------------------
+\voce{4. Segno meno davanti a una parentesi}
+
+\err{
+\[
+-(2x-3+5x)=-2x-3+5x.
+\]
+}
+
+\corr{
+\[
+-(2x-3+5x)=-2x+3-5x.
+\]
+}
+
+Il meno equivale a moltiplicare \textbf{tutta la parentesi} per $-1$.
+
+% ------------------------------------------------------------
+\voce{5. Proprietà distributiva}
+
+\err{
+\[
+3x(2x-5)=6x^2-5.
+\]
+}
+
+\corr{
+\[
+3x(2x-5)
+=6x^2-15x.
+\]
+}
+
+Con due polinomi:
+\[
+(x+2)(x-3)
+=x^2-3x+2x-6
+=x^2-x-6.
+\]
+
+\regola{Ogni termine deve essere moltiplicato correttamente
+per tutti i termini necessari.}
+
+% ------------------------------------------------------------
+\voce{6. Prodotti notevoli}
+
+\err{
+\[
+(x-3)^2=x^2-9.
+\]
+}
+
+\corr{
+\[
+(x-3)^2=x^2-6x+9.
+\]
+}
+
+Invece:
+\[
+x^2-9=(x-3)(x+3)
+\]
+è una \textbf{differenza di quadrati}.
+
+% ------------------------------------------------------------
+\voce{7. Scomporre il trinomio speciale}
+
+Per
+\[
+x^2+sx+p
+\]
+cerchiamo due numeri $a,b$ tali che
+
+\[
+a+b=s,
+\qquad
+ab=p.
+\]
+
+\err{Scambiare somma e prodotto, pensando che
+\[
+a+b=p,
+\qquad
+ab=s.
+\]
+}
+
+Per esempio, davanti a
+\[
+x^2-5x+6
+\]
+cercare due numeri con prodotto $-5$ e somma $6$.
+
+\corr{Bisogna invece cercare due numeri che abbiano}
+
+\[
+\text{somma}=-5,
+\qquad
+\text{prodotto}=6.
+\]
+
+Sono:
+\[
+-2,\,-3.
+\]
+
+Quindi:
+\[
+x^2-5x+6=(x-2)(x-3).
+\]
+
+\regola{Se hai un dubbio, \textbf{rimoltiplica} i fattori:}
+\[
+(x-2)(x-3)
+=
+x^2-3x-2x+6
+=
+x^2-5x+6.
+\]
+
+Se non riottieni il trinomio iniziale, la scomposizione è sbagliata.
+
+% ------------------------------------------------------------
+\voce{8. La legge di annullamento vale per il prodotto}
+
+La legge di annullamento si usa quando abbiamo un
+\textbf{prodotto uguale a zero}.
+
+\[
+(x-2)(x+5)=0
+\]
+
+significa:
+\[
+x-2=0
+\qquad\text{oppure}\qquad
+x+5=0.
+\]
+
+Quindi:
+\[
+S=\{-5;\,2\}.
+\]
+
+\regola{
+\[
+A\cdot B=0
+\quad\Longrightarrow\quad
+A=0 \ \text{oppure}\ B=0.
+\]
+}
+
+% ------------------------------------------------------------
+\voce{9. Non esiste la ``legge di annullamento della somma''}
+
+\err{Da
+\[
+x^2-5x+6=0
+\]
+scrivere
+\[
+x^2=0,\qquad -5x=0,\qquad 6=0.
+\]
+}
+
+Questo procedimento \textbf{non ha alcun significato}.
+
+\corr{Prima bisogna scomporre:}
+\[
+x^2-5x+6
+=
+(x-2)(x-3).
+\]
+
+Poi:
+\[
+(x-2)(x-3)=0
+\]
+e quindi
+\[
+x=2
+\qquad\text{oppure}\qquad
+x=3.
+\]
+
+\[
+S=\{2;\,3\}.
+\]
+
+\regola{Da $A+B=0$ non segue che $A=0$ e $B=0$.}
+
+% ------------------------------------------------------------
+\voce{10. ``Trasportare'' un termine}
+
+\err{
+\[
+3x+5=11
+\quad\Rightarrow\quad
+3x=11+5.
+\]
+}
+
+\corr{Sottraiamo $5$ da entrambi i membri:}
+\[
+3x+5-5=11-5,
+\]
+quindi
+\[
+3x=6.
+\]
+
+\regola{Il cambio di segno deriva dal fare la stessa
+operazione sui due membri: non è una regola magica.}
+
+\end{multicols}
+
+% ============================================================
+% PAGINA 2
+% ============================================================
+
+\newpage
+
+\begin{center}
+	{\large\bfseries Errori ricorrenti -- seconda parte}
+\end{center}
+
+\vspace{-2mm}
+
+\begin{multicols}{2}
+\small
+
+% ------------------------------------------------------------
+\voce{11. Grado dell'equazione e numero di soluzioni}
+
+\err{Dire che
+\[
+(x-2)^2=0
+\]
+ha due soluzioni perché è di secondo grado.}
+
+\corr{
+\[
+(x-2)(x-2)=0.
+\]
+}
+
+Entrambi i fattori si annullano per lo stesso valore:
+\[
+x=2.
+\]
+
+Quindi:
+\[
+S=\{2\}.
+\]
+
+% ------------------------------------------------------------
+\voce{12. Principi di equivalenza}
+
+Non basta dire: ``faccio la stessa cosa ai due membri''.
+
+\err{Da
+\[
+x^2=4x
+\]
+dividere immediatamente per $x$:
+\[
+x=4.
+\]
+}
+
+Così si perde la possibile soluzione $x=0$.
+
+\corr{
+\[
+x^2-4x=0,
+\]
+\[
+x(x-4)=0,
+\]
+\[
+x=0
+\quad\text{oppure}\quad
+x=4.
+\]
+}
+
+Quindi:
+\[
+S=\{0;\,4\}.
+\]
+
+\regola{Prima di moltiplicare o dividere per un'espressione
+contenente l'incognita bisogna chiedersi se può valere zero.}
+
+% ------------------------------------------------------------
+\voce{13. Dominio e insieme delle soluzioni}
+
+Il \textbf{dominio} indica i valori per cui le espressioni hanno senso.
+
+L'\textbf{insieme delle soluzioni} contiene i valori del dominio
+che rendono vera l'equazione.
+
+Per esempio:
+\[
+\frac1{x-2}=1.
+\]
+
+Dominio:
+\[
+D=\R\setminus\{2\}.
+\]
+
+Soluzione:
+\[
+x=3,
+\qquad
+S=\{3\}.
+\]
+
+% ------------------------------------------------------------
+\voce{14. Scrivere correttamente l'insieme delle soluzioni}
+
+\err{
+\[
+S=\{\varnothing\},
+\qquad
+S=\{\R\}.
+\]
+}
+
+\corr{Se non ci sono soluzioni:}
+\[
+S=\varnothing.
+\]
+
+Se tutti i reali sono soluzioni:
+\[
+S=\R.
+\]
+
+Se le soluzioni sono $2$ e $5$:
+\[
+S=\{2;\,5\}.
+\]
+
+\regola{
+\[
+\varnothing\neq\{\varnothing\},
+\qquad
+\R\neq\{\R\}.
+\]
+}
+
+Le parentesi graffe significano che ciò che è scritto dentro
+è un \textbf{elemento} dell'insieme.
+
+% ------------------------------------------------------------
+\voce{15. Coefficienti frazionari ed equazioni frazionarie}
+
+\err{Dire che
+\[
+\frac12x+\frac13=2
+\]
+è un'equazione frazionaria soltanto perché compaiono frazioni.}
+
+\corr{È \textbf{intera rispetto a $x$}, perché l'incognita
+non compare nei denominatori.}
+
+Invece:
+\[
+\frac1{x-2}=3
+\]
+è frazionaria rispetto a $x$.
+
+% ------------------------------------------------------------
+\voce{16. Ricavare una grandezza da una formula}
+
+Consideriamo:
+\[
+P=\frac{F}{S}.
+\]
+
+Vogliamo isolare $S$.
+
+\err{Scambiare le lettere a intuito, per esempio:
+\[
+S=\frac{P}{F}.
+\]
+}
+
+\corr{Moltiplichiamo entrambi i membri per $S$:}
+\[
+PS=F.
+\]
+
+Poi dividiamo entrambi i membri per $P$:
+\[
+S=\frac{F}{P}.
+\]
+
+\regola{Una formula è un'equazione:
+si usano operazioni inverse su \textbf{entrambi i membri}.}
+
+% ------------------------------------------------------------
+\voce{17. ``Una frazione di una quantità''}
+
+\err{Interpretare ``un quinto di $P$'' come
+\[
+P:\frac15.
+\]
+}
+
+\corr{
+\[
+\frac15P=P:5.
+\]
+}
+
+Per esempio:
+\[
+\frac15\cdot50=10.
+\]
+
+% ------------------------------------------------------------
+\voce{18. Sconto e prezzo finale}
+
+Se un oggetto costa $P$ e lo sconto è di un quinto:
+
+\[
+\text{sconto}=\frac15P.
+\]
+
+\err{Scrivere che il prezzo finale è
+\[
+\frac15P.
+\]
+}
+
+\corr{Lo sconto deve essere sottratto:}
+\[
+P-\frac15P
+=
+\frac45P.
+\]
+
+Se il prezzo è $50$ euro:
+\[
+\frac15\cdot50=10
+\]
+è lo sconto,
+
+\[
+50-10=40
+\]
+è il prezzo pagato.
+
+% ------------------------------------------------------------
+\voce{19. Tradurre il linguaggio in matematica}
+
+La matematica non consiste soltanto nel manipolare simboli.
+
+Bisogna saper interpretare, per esempio:
+
+\[
+\text{``un quinto di }x\text{''}
+\longrightarrow
+\frac{x}{5},
+\]
+
+\[
+\text{``il doppio di }x+3\text{''}
+\longrightarrow
+2(x+3),
+\]
+
+\[
+\text{``la metà della differenza tra }x\text{ e }4\text{''}
+\longrightarrow
+\frac{x-4}{2}.
+\]
+
+% ------------------------------------------------------------
+\voce{20. Prima di continuare, fermati e chiediti}
+
+\begin{enumerate}[
+	leftmargin=*,
+	itemsep=0.5pt,
+	topsep=1pt,
+	parsep=0pt
+]
+	\item Posso \textbf{semplificare} qualcosa?
+	\item Posso eliminare subito dei \textbf{denominatori numerici}?
+	\item Ho sviluppato correttamente parentesi e prodotti?
+	\item Posso o devo \textbf{scomporre}?
+	\item Se ho scomposto, posso \textbf{rimoltiplicare per controllare}?
+	\item Ho davvero un \textbf{prodotto uguale a zero} prima di usare la LAP?
+	\item Sto applicando la stessa operazione ai \textbf{due membri}?
+	\item Il passaggio conserva davvero le \textbf{soluzioni}?
+	\item Quello che ho scritto ha \textbf{senso matematico}?
+\end{enumerate}
+
+\vspace{2mm}
+
+\begin{center}
+\fbox{
+	\parbox{0.91\columnwidth}{
+		\centering
+		\textbf{L'obiettivo non è fare tanti passaggi.}\\
+		È fare pochi passaggi, corretti, semplici e consapevoli.
+	}
+}
+\end{center}
+
+\end{multicols}
+
+\end{document}
